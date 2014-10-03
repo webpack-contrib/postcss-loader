@@ -1,4 +1,5 @@
 var blue = require('./processors/blue');
+var red  = require('./processors/red');
 
 module.exports = {
     target: 'node',
@@ -8,5 +9,8 @@ module.exports = {
         path: __dirname + '/../build/',
         filename: "test.js",
     },
-    postcss: [blue]
+    postcss: {
+        defaults: [blue, red],
+        blues:    [blue]
+    }
 };
