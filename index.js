@@ -7,6 +7,8 @@ module.exports = function (source) {
     var file    = loaderUtils.getRemainingRequest(this);
     var options = { from: file, to: file };
 
-    var processed = postcss().process(source, options);
+    var processors = this.options.postcss;
+
+    var processed = postcss.apply(postcss, processors).process(source, options);
     this.callback(null, processed.css, processed.map);
 };
