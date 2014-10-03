@@ -7,4 +7,9 @@ describe('postcss-loader', function() {
         css.should.containEql('a { color: blue }');
     });
 
+    it('processes CSS in safe mode', function () {
+        var css = require('!raw-loader!../?safe=1!./cases/broken.css');
+        css.should.containEql('a { color: blue}');
+    });
+
 });
