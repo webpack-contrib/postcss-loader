@@ -36,15 +36,6 @@ var css = require('./file.css');
 // => CSS after Autoprefixer and CSSWring
 ```
 
-## Safe Mode
-
-If you add `?safe=1` to requirement, PostCSS will try to correct any syntax
-error that it finds in the CSS. For example, it will parse `a {` as `a {}`.
-
-```js
-var css = require('postcss?safe=1!./broken')
-```
-
 ## Plugins Packs
 
 If you want to process different styles by different PostCSS plugins you can
@@ -69,4 +60,14 @@ module.exports = {
         cleaner:  [autoprefixer({ browsers: [] })]
     }
 }
+```
+
+
+## Safe Mode
+
+If you add `?safe=1` to requirement, PostCSS will try to correct any syntax
+error that it finds in the CSS. For example, it will parse `a {` as `a {}`.
+
+```js
+var css = require('postcss?safe=1!./broken')
 ```
