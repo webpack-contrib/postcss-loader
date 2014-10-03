@@ -1,0 +1,23 @@
+{
+    "name": "postcss-loader",
+    "version": "0.0.1",
+    "description": "PostCSS loader for webpack",
+    "keywords": ["webpack", "postcss", "loader", "css", "postproccessor"],
+    "author": "Andrey Sitnik <andrey@sitnik.ru>",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url":  "https://github.com/postcss/postcss-loader.git"
+    },
+    "dependencies": {
+        "postcss": "^2.2.5"
+    },
+    "devDependencies": {
+        "jshint-stylish": "1.0.0",
+        "gulp-jshint":    "1.8.4",
+        "gulp":           "3.8.8"
+    },
+    "scripts": {
+        "test": "gulp"
+    }
+}
