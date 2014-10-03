@@ -65,8 +65,8 @@ module.exports = {
         ]
     },
     postcss: {
-        default: [autoprefixer, csswring],
-        cleaner: [autoprefixer({ browsers: [] })]
+        defaults: [autoprefixer, csswring],
+        cleaner:  [autoprefixer({ browsers: [] })]
     }
 }
 ```
