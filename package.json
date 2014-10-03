@@ -10,11 +10,17 @@
         "url":  "https://github.com/postcss/postcss-loader.git"
     },
     "dependencies": {
-        "postcss": "^2.2.5"
+        "loader-utils": "^0.2.4",
+        "postcss":      "^2.2.5"
     },
     "devDependencies": {
         "jshint-stylish": "1.0.0",
+        "gulp-webpack":   "0.4.1",
         "gulp-jshint":    "1.8.4",
+        "gulp-mocha":     "1.1.0",
+        "raw-loader":     "0.5.0",
+        "fs-extra":       "0.12.0",
+        "should":         "4.0.4",
         "gulp":           "3.8.8"
     },
     "scripts": {
