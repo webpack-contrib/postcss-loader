@@ -12,7 +12,7 @@
 
 Set `postcss` section in webpack config:
 
-```
+```js
 var autoprefixer = require('autoprefixer-core');
 var csswring     = require('csswring');
 
@@ -29,9 +29,9 @@ module.exports = {
 }
 ```
 
-Now your CSS file requirements will be processed by selected PostCSS plugins:
+Now your CSS files requirements will be processed by selected PostCSS plugins:
 
-```
+```js
 var css = require('./file.css');
 // => CSS after Autoprefixer and CSSWring
 ```
@@ -39,18 +39,18 @@ var css = require('./file.css');
 ## Safe Mode
 
 If you add `?safe=1` to requirement, PostCSS will try to correct any syntax
-error that it finds in the CSS. For example, it will parse `a {` as `a {}`.
+error that it finds in the CSS. For example, it will parse `a {` as `a {}`.
 
-```
+```js
 var css = require('postcss?safe=1!./broken')
 ```
 
 ## Plugins Packs
 
 If you want to process different styles by different PostCSS plugins you can
-define plugin packs in `postcss` section and use them by `?pack=name` parameter.
+define plugin packs in `postcss` section and use them by `?pack=name` parameter.
 
-```
+```js
 module.exports = {
     module: {
         loaders: [
