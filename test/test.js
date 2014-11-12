@@ -14,7 +14,7 @@ describe('postcss-loader', function() {
 
     it('processes CSS in safe mode', function () {
         var css = require('!raw-loader!../?safe=1!./cases/broken.css');
-        css.should.containEql('a { color: red}');
+        css.should.containEql('a { color: red\n}');
     });
 
 });
