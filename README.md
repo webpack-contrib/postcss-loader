@@ -4,6 +4,10 @@
 
 [PostCSS] loader for [webpack] to postprocesses your CSS with [PostCSS plugins].
 
+<a href="https://evilmartians.com/?utm_source=postcss-loader">
+<img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
+</a>
+
 [PostCSS plugins]: https://github.com/postcss/postcss#built-with-postcss
 [PostCSS]:         https://github.com/postcss/postcss
 [webpack]:         http://webpack.github.io/
