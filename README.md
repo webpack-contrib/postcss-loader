@@ -1,6 +1,6 @@
 # PostCSS for Webpack [![Build Status](https://travis-ci.org/postcss/postcss-loader.svg)](https://travis-ci.org/postcss/postcss-loader)
 
-<img align="right" width="95" height="95" src="http://postcss.github.io/postcss/logo.png" title="Philosopher’s stone, logo of PostCSS">
+<img align="right" width="95" height="95" src="http://postcss.github.io/postcss/logo.svg" title="Philosopher’s stone, logo of PostCSS">
 
 [PostCSS] loader for [webpack] to postprocesses your CSS with [PostCSS plugins].
 
