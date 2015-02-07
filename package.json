@@ -11,15 +11,15 @@
     },
     "dependencies": {
         "loader-utils": "^0.2.5",
-        "postcss":      "^4.0.0"
+        "postcss":      "^4.0.3"
     },
     "devDependencies": {
         "jshint-stylish": "1.0.0",
-        "gulp-webpack":   "1.1.2",
-        "gulp-jshint":    "1.9.0",
+        "gulp-webpack":   "1.2.0",
+        "gulp-jshint":    "1.9.2",
         "gulp-mocha":     "2.0.0",
         "raw-loader":     "0.5.1",
-        "fs-extra":       "0.13.0",
+        "fs-extra":       "0.16.3",
         "chai":           "1.10.0",
         "gulp":           "3.8.10"
     },
