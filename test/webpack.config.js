@@ -1,3 +1,5 @@
+var path = require('path');
+
 var blue = require('./processors/blue');
 var red  = require('./processors/red');
 
@@ -6,8 +8,8 @@ module.exports = {
     context: __dirname,
     entry: './test.js',
     output: {
-        path: __dirname + '/../build/',
-        filename: "test.js",
+        path: path.join(__dirname, '..', 'build'),
+        filename: 'test.js'
     },
     postcss: {
         defaults: [blue, red],
