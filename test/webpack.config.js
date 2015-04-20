@@ -1,7 +1,7 @@
 var path = require('path');
 
-var blue = require('./processors/blue');
-var red  = require('./processors/red');
+var blue = require('./plugins/blue');
+var red  = require('./plugins/red');
 
 module.exports = {
     target: 'node',

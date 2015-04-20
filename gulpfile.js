@@ -8,7 +8,7 @@ gulp.task('clean', function (done) {
 
 gulp.task('lint', function () {
     var eslint = require('gulp-eslint');
-    return gulp.src(['index.js', 'test/*.js', 'gulpfile.js'])
+    return gulp.src(['index.js', 'test/**/*.js', 'gulpfile.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());

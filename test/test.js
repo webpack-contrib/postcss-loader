@@ -12,6 +12,10 @@ describe('postcss-loader', function() {
         expect(css).to.eql('a { color: blue }\n');
     });
 
+    it('prints syntax errors without JS stacktrace', function () {
+        require('!raw-loader!../!./cases/broken.css');
+    });
+
     it('processes CSS in safe mode', function () {
         var css = require('!raw-loader!../?safe=1!./cases/broken.css');
         expect(css).to.eql('a { one color: red }\n');
