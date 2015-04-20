@@ -1,6 +1,6 @@
 {
     "name": "postcss-loader",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "description": "PostCSS loader for webpack",
     "keywords": ["webpack", "loader", "css", "postcss", "postcssrunner"],
     "author": "Andrey Sitnik <andrey@sitnik.ru>",
