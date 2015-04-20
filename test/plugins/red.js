@@ -11,4 +11,4 @@ module.exports = {
             if ( decl.value === 'blue' ) decl.value = 'red';
         });
     }
-}
+};
