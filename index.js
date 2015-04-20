@@ -24,6 +24,12 @@ module.exports = function (source, map) {
         plugins = plugins.defaults;
     }
 
-    var processed = postcss.apply(postcss, plugins).process(source, opts);
-    this.callback(null, processed.css, processed.map);
+    var callback  = this.async();
+    var processor = postcss.apply(postcss, plugins);
+
+    processor.process(source, opts).then(function (result) {
+        callback(null, result.css, result.map);
+    }).catch(function (error) {
+        callback(error);
+    });
 };
