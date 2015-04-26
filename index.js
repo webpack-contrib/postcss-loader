@@ -27,32 +27,20 @@ module.exports = function (source, map) {
 
     var loader    = this;
     var callback  = this.async();
-    var processor = postcss.apply(postcss, plugins);
 
-    var handleError = function (error) {
-        if ( error instanceof CssSyntaxError ) {
-            loader.emitError(error.message + error.showSourceCode());
-            callback();
-        } else {
-            callback(error);
-        }
-    };
-
-    var promise;
-    try {
-        promise = processor.process(source, opts);
-    } catch (error) {
-        handleError(error);
-    }
-
-    if ( promise ) {
-        promise.then(function (result) {
+    postcss(plugins)
+        .process(source, opts).then(function (result) {
             result.warnings().forEach(function (msg) {
                 loader.emitWarning(msg.toString());
             });
             callback(null, result.css, result.map);
-        }).catch(function (error) {
-            handleError(error);
+        })
+        .catch(function (error) {
+            if ( error instanceof CssSyntaxError ) {
+                loader.emitError(error.message + error.showSourceCode());
+                callback();
+            } else {
+                callback(error);
+            }
         });
-    }
 };

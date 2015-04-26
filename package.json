@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "loader-utils": "^0.2.7",
-        "postcss":      "^4.1.5"
+        "postcss":      "^4.1.6"
     },
     "devDependencies": {
         "gulp-webpack": "1.4.0",
