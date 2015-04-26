@@ -1,3 +1,6 @@
+## 0.4.1
+* Use only Promise API to catch PostCSS errors.
+
 ## 0.4
 * Add PostCSS asynchronous API support.
 * Fix source map support (by Richard Willis).
