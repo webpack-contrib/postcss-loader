@@ -1,3 +1,6 @@
+## 0.4.2
+* Fixed invalid sourcemap exception (by Richard Willis).
+
 ## 0.4.1
 * Use only Promise API to catch PostCSS errors.
 
