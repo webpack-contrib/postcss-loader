@@ -2,7 +2,7 @@
     "name": "postcss-loader",
     "version": "0.4.1",
     "description": "PostCSS loader for webpack",
-    "keywords": ["webpack", "loader", "css", "postcss", "postcssrunner"],
+    "keywords": ["webpack", "loader", "css", "postcss", "postcss-runner"],
     "author": "Andrey Sitnik <andrey@sitnik.ru>",
     "license": "MIT",
     "repository": {
