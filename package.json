@@ -11,15 +11,15 @@
     },
     "dependencies": {
         "loader-utils": "^0.2.7",
-        "postcss":      "^4.1.6"
+        "postcss":      "^4.1.8"
     },
     "devDependencies": {
         "gulp-webpack": "1.4.0",
-        "gulp-eslint":  "0.11.0",
+        "gulp-eslint":  "0.11.1",
         "gulp-mocha":   "2.0.1",
         "raw-loader":   "0.5.1",
         "fs-extra":     "0.18.2",
-        "chai":         "2.2.0",
+        "chai":         "2.3.0",
         "gulp":         "3.8.11"
     },
     "scripts": {
