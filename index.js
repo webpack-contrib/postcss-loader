@@ -15,7 +15,7 @@ module.exports = function (source, map) {
             annotation: false
         }
     };
-    if ( map ) opts.map.prev     = map;
+    if ( map && map.mappings ) opts.map.prev = map;
     if ( params.safe ) opts.safe = true;
 
     var plugins = this.options.postcss;
