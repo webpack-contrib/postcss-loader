@@ -1,6 +1,5 @@
-var CssSyntaxError = require('postcss/lib/css-syntax-error');
-var loaderUtils    = require('loader-utils');
-var postcss        = require('postcss');
+var loaderUtils = require('loader-utils');
+var postcss     = require('postcss');
 
 module.exports = function (source, map) {
     if ( this.cacheable ) this.cacheable();
@@ -36,7 +35,7 @@ module.exports = function (source, map) {
             callback(null, result.css, result.map);
         })
         .catch(function (error) {
-            if ( error instanceof CssSyntaxError ) {
+            if ( error.name === 'CssSyntaxError' ) {
                 loader.emitError(error.message + error.showSourceCode());
                 callback();
             } else {
