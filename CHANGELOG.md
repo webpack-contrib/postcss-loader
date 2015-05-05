@@ -1,3 +1,6 @@
+## 0.4.3
+* Better check for `CssSyntaxError`.
+
 ## 0.4.2
 * Fixed invalid sourcemap exception (by Richard Willis).
 
