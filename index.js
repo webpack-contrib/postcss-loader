@@ -26,8 +26,8 @@ module.exports = function (source, map) {
         plugins = plugins.defaults;
     }
 
-    var loader    = this;
-    var callback  = this.async();
+    var loader   = this;
+    var callback = this.async();
 
     postcss(plugins)
         .process(source, opts).then(function (result) {
