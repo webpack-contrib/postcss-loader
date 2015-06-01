@@ -18,7 +18,9 @@ module.exports = function (source, map) {
     if ( params.safe ) opts.safe = true;
 
     var plugins = this.options.postcss;
-    if ( params.pack ) {
+    if ( typeof plugins === 'undefined' ) {
+        plugins = [];
+    } else if ( params.pack ) {
         plugins = plugins[params.pack];
     } else if ( !Array.isArray(plugins) ) {
         plugins = plugins.defaults;
