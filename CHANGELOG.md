@@ -1,3 +1,6 @@
+## 0.4.4
+* Fix error on empty PostCSS config.
+
 ## 0.4.3
 * Better check for `CssSyntaxError`.
 
