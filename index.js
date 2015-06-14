@@ -18,6 +18,10 @@ module.exports = function (source, map) {
     if ( params.safe ) opts.safe = true;
 
     var plugins = this.options.postcss;
+    if ( typeof plugins === 'function' ) {
+        plugins = plugins.call(this);
+    }
+
     if ( typeof plugins === 'undefined' ) {
         plugins = [];
     } else if ( params.pack ) {

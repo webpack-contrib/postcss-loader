@@ -11,8 +11,10 @@ module.exports = {
         path: path.join(__dirname, '..', 'build'),
         filename: 'test.js'
     },
-    postcss: {
-        defaults: [blue, red],
-        blues:    [blue]
+    postcss: function () {
+        return {
+            defaults: [blue, red],
+            blues:    [blue]
+        };
     }
 };

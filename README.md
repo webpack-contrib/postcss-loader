@@ -70,6 +70,43 @@ module.exports = {
 }
 ```
 
+## Plugins Function
+
+If you need to link any of the postcss plugins to the webpack context, you can
+define a function that returns your plugins. The function is executed with the
+same context provided to postcss-loader, allowing access to webpack loader API
+
+```js
+var cssimport = require('postcss-import');
+var autoprefixer = require('autoprefixer-core');
+
+module.exports = {
+    module: {
+        loaders: [
+            {
+                test:   /\.css$/,
+                loader: "style-loader!css-loader!postcss-loader"
+            }
+        ]
+    },
+    postcss: function () {
+        // The context of this function is the same provided to postcss-loader
+        // see: http://webpack.github.io/docs/loaders.html
+
+        return [
+            cssimport({
+                // see postcss-import docs to learn about onImport param
+                // https://github.com/postcss/postcss-import
+
+                onImport: function (files) {
+                    files.forEach(this.addDependency);
+                }.bind(this)
+            }),
+            autoprefixer
+        ];
+    }
+}
+```
 
 ## Safe Mode
 
