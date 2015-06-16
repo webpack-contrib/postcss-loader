@@ -57,8 +57,10 @@ module.exports = {
 }
 ```
 
-will be set to the [webpack loader-context](http://webpack.github.io/docs/loaders.html#loader-context).
+will be set to the [webpack loader-context].
 If there is the need, this will let you access to webpack loaders API.
+
+[webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
 
 ## Plugins Packs
 
@@ -90,13 +92,13 @@ module.exports = {
 
 ## Integration with postcss-import
 
-When using [postcss-import](https://github.com/postcss/postcss-import) plugin, you may want to tell webpack about
+When using [postcss-import] plugin, you may want to tell webpack about
 dependencies coming from your `@import` directives.
 For example: in watch mode, to enable recompile on change.
 
-Since the function in postcss section is executed with the [webpack loader-context](http://webpack.github.io/docs/loaders.html#loader-context),
-we can use the postcss-import callback [onImport](https://github.com/postcss/postcss-import#onimport) to tell webpack what files
-need to be watched.
+Since the function in postcss section is executed with
+the [webpack loader-context], we can use the postcss-import callback
+[onImport] to tell webpack what files need to be watched.
 
 ```js
 var cssimport = require('postcss-import');
@@ -129,6 +131,10 @@ module.exports = {
     }
 }
 ```
+
+[webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
+[postcss-import]:         https://github.com/postcss/postcss-import
+[onImport]:               https://github.com/postcss/postcss-import#onimport
 
 ## Safe Mode
 
