@@ -93,11 +93,11 @@ module.exports = {
 ## Integration with postcss-import
 
 When using [postcss-import] plugin, you may want to tell webpack about
-dependencies coming from your `@import` directives.
+dependencies coming from your `@import` directives.
 For example: in watch mode, to enable recompile on change.
 
 Since the function in postcss section is executed with
-the [webpack loader-context], we can use the postcss-import callback
+the [webpack loader-context], we can use the postcss-import callback
 [onImport] to tell webpack what files need to be watched.
 
 ```js
