@@ -1,3 +1,6 @@
+## 0.5.0
+* Set plugins by function for hot reload support (by Stefano Brilli).
+
 ## 0.4.4
 * Fix error on empty PostCSS config.
 
