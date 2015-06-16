@@ -33,7 +33,9 @@ module.exports = {
             }
         ]
     },
-    postcss: [autoprefixer, csswring]
+    postcss: function {
+        return [autoprefixer, csswring];
+    }
 }
 ```
 
@@ -43,6 +45,20 @@ Now your CSS files requirements will be processed by selected PostCSS plugins:
 var css = require('./file.css');
 // => CSS after Autoprefixer and CSSWring
 ```
+
+Note that the context of this function
+
+```js
+module.exports = {
+    ...
+    postcss: function {
+        return [autoprefixer, csswring];
+    }
+}
+```
+
+will be set to the [webpack loader-context](http://webpack.github.io/docs/loaders.html#loader-context).
+If there is the need, this will let you access to webpack loaders API.
 
 ## Plugins Packs
 
@@ -63,18 +79,24 @@ module.exports = {
             }
         ]
     },
-    postcss: {
-        defaults: [autoprefixer, csswring],
-        cleaner:  [autoprefixer({ browsers: [] })]
+    postcss: function () {
+        return {
+            defaults: [autoprefixer, csswring],
+            cleaner:  [autoprefixer({ browsers: [] })]
+        };
     }
 }
 ```
 
-## Plugins Function
+## Integration with postcss-import
 
-If you need to link any of the postcss plugins to the webpack context, you can
-define a function that returns your plugins. The function is executed with the
-same context provided to postcss-loader, allowing access to webpack loader API
+When using [postcss-import](https://github.com/postcss/postcss-import) plugin, you may want to tell webpack about
+dependencies coming from your `@import` directives.
+For example: in watch mode, to enable recompile on change.
+
+Since the function in postcss section is executed with the [webpack loader-context](http://webpack.github.io/docs/loaders.html#loader-context),
+we can use the postcss-import callback [onImport](https://github.com/postcss/postcss-import#onimport) to tell webpack what files
+need to be watched.
 
 ```js
 var cssimport = require('postcss-import');
@@ -90,12 +112,12 @@ module.exports = {
         ]
     },
     postcss: function () {
-        // The context of this function is the same provided to postcss-loader
-        // see: http://webpack.github.io/docs/loaders.html
+        // The context of this function is the webpack loader-context
+        // see: http://webpack.github.io/docs/loaders.html#loader-context
 
         return [
             cssimport({
-                // see postcss-import docs to learn about onImport param
+                // see postcss-import docs to learn about onImport callback
                 // https://github.com/postcss/postcss-import
 
                 onImport: function (files) {
