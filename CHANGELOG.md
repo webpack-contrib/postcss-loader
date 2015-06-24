@@ -1,3 +1,6 @@
+## 0.5.1
+* Fix string source map support (by Jan Nicklas).
+
 ## 0.5.0
 * Set plugins by function for hot reload support (by Stefano Brilli).
 
