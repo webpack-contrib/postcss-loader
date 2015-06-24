@@ -14,11 +14,11 @@ module.exports = function (source, map) {
             annotation: false
         }
     };
-    
-    if (typeof map === 'string') {
+
+    if ( typeof map === 'string' ) {
         map = JSON.parse(map);
     }
-    
+
     if ( map && map.mappings ) opts.map.prev = map;
     if ( params.safe ) opts.safe = true;
 
