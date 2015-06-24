@@ -33,7 +33,7 @@ module.exports = {
             }
         ]
     },
-    postcss: function {
+    postcss: function () {
         return [autoprefixer, csswring];
     }
 }
