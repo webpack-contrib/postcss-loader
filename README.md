@@ -51,7 +51,7 @@ Note that the context of this function
 ```js
 module.exports = {
     ...
-    postcss: function {
+    postcss: function () {
         return [autoprefixer, csswring];
     }
 }
