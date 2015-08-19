@@ -16,10 +16,7 @@ module.exports = function (source, map) {
         }
     };
 
-    if ( typeof map === 'string' ) {
-        map = JSON.parse(map);
-    }
-
+    if ( typeof map === 'string' ) map = JSON.parse(map);
     if ( map && map.mappings ) opts.map.prev = map;
 
     if ( params.syntax )      opts.syntax      = require(params.syntax);
