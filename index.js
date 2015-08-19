@@ -21,7 +21,9 @@ module.exports = function (source, map) {
     }
 
     if ( map && map.mappings ) opts.map.prev = map;
-    if ( params.safe ) opts.safe = true;
+    if ( params.syntax ) opts.syntax = require(params.syntax);
+    if ( params.parser ) opts.parser = require(params.parser);
+    if ( params.stringifier ) opts.stringifier = require(params.stringifier);
 
     var plugins = this.options.postcss;
     if ( typeof plugins === 'function' ) {

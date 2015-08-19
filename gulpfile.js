@@ -15,7 +15,7 @@ gulp.task('lint', function () {
 });
 
 gulp.task('build', ['clean'], function () {
-    var webpack = require('gulp-webpack');
+    var webpack = require('webpack-stream');
     return gulp.src('')
         .pipe(webpack(require('./test/webpack.config')))
         .pipe(gulp.dest('build/'));

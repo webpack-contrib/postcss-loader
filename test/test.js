@@ -17,7 +17,9 @@ describe('postcss-loader', function () {
     });
 
     it('processes CSS in safe mode', function () {
-        var css = require('!raw-loader!../?safe=1!./cases/broken.css');
+        var css = require('!raw-loader!' +
+                          '../?parser=postcss-safe-parser!' +
+                          './cases/broken.css');
         expect(css).to.eql('a { one color: red }\n');
     });
 
