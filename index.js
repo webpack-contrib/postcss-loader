@@ -8,9 +8,10 @@ module.exports = function (source, map) {
     var params  = loaderUtils.parseQuery(this.query);
 
     var opts = {
-        from: file, to: file,
-        map: {
-            inline: false,
+        from: file,
+        to:   file,
+        map:  {
+            inline:     false,
             annotation: false
         }
     };
