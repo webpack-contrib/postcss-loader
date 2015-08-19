@@ -1,3 +1,8 @@
+## 0.6
+* Use PostCSS 5.0.
+* Remove `safe` parameter. Use Safe Parser.
+* Add `syntax`, `parser` and `stringifier` parameters.
+
 ## 0.5.1
 * Fix string source map support (by Jan Nicklas).
 
