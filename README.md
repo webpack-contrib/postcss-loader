@@ -10,7 +10,7 @@
 <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg" alt="Sponsored by Evil Martians" width="236" height="54">
 </a>
 
-[PostCSS plugins]: https://github.com/postcss/postcss#built-with-postcss
+[PostCSS plugins]: https://github.com/postcss/postcss#plugins
 [PostCSS]:         https://github.com/postcss/postcss
 [webpack]:         http://webpack.github.io/
 [ci-img]:          https://travis-ci.org/postcss/postcss-loader.svg
@@ -21,8 +21,8 @@
 Set `postcss` section in webpack config:
 
 ```js
-var autoprefixer = require('autoprefixer-core');
-var csswring     = require('csswring');
+var autoprefixer = require('autoprefixer');
+var cssnext      = require('cssnext');
 
 module.exports = {
     module: {
@@ -34,7 +34,7 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [autoprefixer, csswring];
+        return [autoprefixer, cssnext];
     }
 }
 ```
@@ -52,7 +52,7 @@ Note that the context of this function
 module.exports = {
     ...
     postcss: function () {
-        return [autoprefixer, csswring];
+        return [autoprefixer, cssnext];
     }
 }
 ```
@@ -83,7 +83,7 @@ module.exports = {
     },
     postcss: function () {
         return {
-            defaults: [autoprefixer, csswring],
+            defaults: [autoprefixer, cssnext],
             cleaner:  [autoprefixer({ browsers: [] })]
         };
     }
@@ -136,11 +136,19 @@ module.exports = {
 [postcss-import]:         https://github.com/postcss/postcss-import
 [onImport]:               https://github.com/postcss/postcss-import#onimport
 
-## Safe Mode
+## Custom Syntaxes
 
-If you add `?safe=1` to requirement, PostCSS will try to correct any syntax
-error that it finds in the CSS. For example, it will parse `a {` as `a {}`.
+PostCSS can transforms styles in any syntax, not only in CSS.
+There are 3 parameters to control syntax:
+
+* `syntax` accepts module name with `parse` and `stringify` function.
+* `parser` accepts module name with input parser function.
+* `stringifier` accepts module name with output stringifier function.
+
+For example, you can use [Safe Parser] to find and fix any CSS errors:
 
 ```js
-var css = require('postcss?safe=1!./broken')
+var css = require('postcss?parser=postcss-safe-parser!./broken')
 ```
+
+[Safe Parser]: https://github.com/postcss/postcss-safe-parser
