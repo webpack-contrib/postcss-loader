@@ -7,7 +7,7 @@ module.exports = {
             warning = true;
         }
 
-        css.eachDecl(function (decl) {
+        css.walkDecls(function (decl) {
             if ( decl.value === 'blue' ) decl.value = 'red';
         });
     }
