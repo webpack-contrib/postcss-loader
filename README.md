@@ -34,7 +34,7 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [autoprefixer, cssnext];
+        return [autoprefixer, cssnext()];
     }
 }
 ```
@@ -52,7 +52,7 @@ Note that the context of this function
 module.exports = {
     ...
     postcss: function () {
-        return [autoprefixer, cssnext];
+        return [autoprefixer, cssnext()];
     }
 }
 ```
@@ -83,7 +83,7 @@ module.exports = {
     },
     postcss: function () {
         return {
-            defaults: [autoprefixer, cssnext],
+            defaults: [autoprefixer, cssnext()],
             cleaner:  [autoprefixer({ browsers: [] })]
         };
     }
