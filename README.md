@@ -22,7 +22,7 @@ Set `postcss` section in webpack config:
 
 ```js
 var autoprefixer = require('autoprefixer');
-var cssnext      = require('cssnext');
+var precs s      = require('precss');
 
 module.exports = {
     module: {
@@ -34,7 +34,7 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [autoprefixer, cssnext()];
+        return [autoprefixer, precss];
     }
 }
 ```
@@ -52,7 +52,7 @@ Note that the context of this function
 module.exports = {
     ...
     postcss: function () {
-        return [autoprefixer, cssnext()];
+        return [autoprefixer, precss];
     }
 }
 ```
@@ -83,7 +83,7 @@ module.exports = {
     },
     postcss: function () {
         return {
-            defaults: [autoprefixer, cssnext()],
+            defaults: [autoprefixer, precss],
             cleaner:  [autoprefixer({ browsers: [] })]
         };
     }
@@ -101,8 +101,7 @@ the [webpack loader-context], we can use the postcss-import callback
 [onImport] to tell webpack what files need to be watched.
 
 ```js
-var cssimport = require('postcss-import');
-var autoprefixer = require('autoprefixer-core');
+var postcssImport = require('postcss-import');
 
 module.exports = {
     module: {
@@ -118,15 +117,14 @@ module.exports = {
         // see: http://webpack.github.io/docs/loaders.html#loader-context
 
         return [
-            cssimport({
+            postcssImport({
                 // see postcss-import docs to learn about onImport callback
                 // https://github.com/postcss/postcss-import
 
                 onImport: function (files) {
                     files.forEach(this.addDependency);
                 }.bind(this)
-            }),
-            autoprefixer
+            })
         ];
     }
 }
