@@ -1,3 +1,5 @@
+* Added new API to facilitate postcss-import dependencies tracking with webpack
+
 ## 0.6
 * Use PostCSS 5.0.
 * Remove `safe` parameter. Use Safe Parser.
