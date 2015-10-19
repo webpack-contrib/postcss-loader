@@ -1,4 +1,5 @@
-* Added new API to facilitate postcss-import dependencies tracking with webpack
+## 0.7
+* Added argument with webpack instance to plugins callback (by Maxime Thirouin).
 
 ## 0.6
 * Use PostCSS 5.0.
