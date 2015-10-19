@@ -96,9 +96,7 @@ When using [postcss-import] plugin, you may want to tell webpack about
 dependencies coming from your `@import` directives.
 For example: in watch mode, to enable recompile on change.
 
-Since the function in postcss section is executed with
-the [webpack loader-context], we can use the postcss-import callback
-[onImport] to tell webpack what files need to be watched.
+Here is a simple way to let know postcss-import to pass files to webpack:
 
 ```js
 var postcssImport = require('postcss-import');
@@ -112,18 +110,10 @@ module.exports = {
             }
         ]
     },
-    postcss: function () {
-        // The context of this function is the webpack loader-context
-        // see: http://webpack.github.io/docs/loaders.html#loader-context
-
+    postcss: function (webpack) {
         return [
             postcssImport({
-                // see postcss-import docs to learn about onImport callback
-                // https://github.com/postcss/postcss-import
-
-                onImport: function (files) {
-                    files.forEach(this.addDependency);
-                }.bind(this)
+                addDependencyTo: webpack
             })
         ];
     }
@@ -132,7 +122,6 @@ module.exports = {
 
 [webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
 [postcss-import]:         https://github.com/postcss/postcss-import
-[onImport]:               https://github.com/postcss/postcss-import#onimport
 
 ## Custom Syntaxes
 

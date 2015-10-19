@@ -25,7 +25,7 @@ module.exports = function (source, map) {
 
     var plugins = this.options.postcss;
     if ( typeof plugins === 'function' ) {
-        plugins = plugins.call(this);
+        plugins = plugins.call(this, this);
     }
 
     if ( typeof plugins === 'undefined' ) {
