@@ -123,34 +123,30 @@ module.exports = {
 [webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
 [postcss-import]:         https://github.com/postcss/postcss-import
 
-## Integration with postcss-js
+## JS Styles
 
-If you want to process styles written in Javascript you can use the [postcss-js] parser.
+If you want to process styles written in JavaScript
+you can use the [postcss-js] parser.
 
 ```js
-module.exports = {
-    module: {
-        loaders: [
-            {
-                test:   /\.style.js$/,
-                loader: "style-loader!css-loader!postcss-loader?parser=postcss-js"
-                // Or using Babel
-                // loader: "style-loader!css-loader!postcss-loader?parser=postcss-js!babel"
-            }
-        ]
-    },
-    postcss: function (webpack) {
-        return [
-            postcssImport({
-                addDependencyTo: webpack
-            })
-        ];
-    }
+{
+    test:   /\.style.js$/,
+    loader: "style-loader!css-loader!postcss-loader?parser=postcss-js"
+    // Or using Babel
+    // loader: "style-loader!css-loader!postcss-loader?parser=postcss-js!babel"
+}
+```
+
+Or use can use even ES6 in JS styles by Babel:
+
+```js
+{
+    test:   /\.style.js$/,
+    loader: "style-loader!css-loader!postcss-loader?parser=postcss-js!babel"
 }
 ```
 
 [postcss-js]: https://github.com/postcss/postcss-js
-
 
 ## Custom Syntaxes
 
