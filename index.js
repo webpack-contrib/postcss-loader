@@ -39,6 +39,10 @@ module.exports = function (source, map) {
     var loader   = this;
     var callback = this.async();
 
+    if (params.parser === 'postcss-js') {
+        source = this.exec(source, this.resource);
+    }
+
     postcss(plugins)
         .process(source, opts).then(function (result) {
             result.warnings().forEach(function (msg) {

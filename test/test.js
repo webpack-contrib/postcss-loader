@@ -23,4 +23,11 @@ describe('postcss-loader', function () {
         expect(css).to.eql('a { one color: red }\n');
     });
 
+    it('processes CSS-in-JS', function () {
+        var css = require('!raw-loader!' +
+                          '../?parser=postcss-js!' +
+                          './cases/style.js');
+        expect(css).to.eql('a {\n    color: red\n}');
+    });
+
 });
