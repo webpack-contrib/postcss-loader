@@ -1,3 +1,6 @@
+## 0.8
+* Add postcss-js support (by Simon Degraeve).
+
 ## 0.7
 * Added argument with webpack instance to plugins callback (by Maxime Thirouin).
 
