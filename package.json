@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "postcss-safe-parser": "1.0.1",
+    "postcss-js":          "0.1.0",
     "webpack-stream":      "2.1.1",
     "gulp-eslint":         "1.0.0",
     "gulp-mocha":          "2.1.3",
