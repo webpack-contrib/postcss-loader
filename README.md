@@ -132,8 +132,6 @@ you can use the [postcss-js] parser.
 {
     test:   /\.style.js$/,
     loader: "style-loader!css-loader!postcss-loader?parser=postcss-js"
-    // Or using Babel
-    // loader: "style-loader!css-loader!postcss-loader?parser=postcss-js!babel"
 }
 ```
 
@@ -143,6 +141,22 @@ Or use can use even ES6 in JS styles by Babel:
 {
     test:   /\.style.js$/,
     loader: "style-loader!css-loader!postcss-loader?parser=postcss-js!babel"
+}
+```
+
+As result you will be able to write styles as:
+
+```js
+import colors from '../config/colors';
+
+export default {
+    '.menu': {
+        color: colors.main,
+        height: 25,
+        '&_link': {
+            color: 'white'
+        }
+    }
 }
 ```
 
