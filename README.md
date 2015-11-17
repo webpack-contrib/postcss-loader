@@ -22,7 +22,7 @@ Set `postcss` section in webpack config:
 
 ```js
 var autoprefixer = require('autoprefixer');
-var precss      = require('precss');
+var precss       = require('precss');
 
 module.exports = {
     module: {
