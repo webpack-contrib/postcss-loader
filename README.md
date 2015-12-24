@@ -123,6 +123,24 @@ module.exports = {
 [webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
 [postcss-import]:         https://github.com/postcss/postcss-import
 
+## Integration with CSS Modules
+
+postcss-loader [cannot be used] with [CSS Modules] out of the box due to the way css-loader processes file imports. To make them work property, either add the css-loader’s [`importLoaders` option]:
+
+```js
+{
+    test:   /\.css$/,
+    loader: "style-loader!css-loader?modules&importLoaders=1!postcss-loader"
+}
+```
+
+or replace css-loader with [postcss-modules] plugin.
+
+[cannot be used]:         https://github.com/webpack/css-loader/issues/137
+[CSS Modules]:            https://github.com/webpack/css-loader#css-modules
+[`importLoaders` option]: github.com/webpack/css-loader#importing-and-chained-loaders
+[postcss-modules]:        https://github.com/outpunk/postcss-modules
+
 ## JS Styles
 
 If you want to process styles written in JavaScript
