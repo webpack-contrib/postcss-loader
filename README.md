@@ -125,7 +125,9 @@ module.exports = {
 
 ## Integration with CSS Modules
 
-postcss-loader [cannot be used] with [CSS Modules] out of the box due to the way css-loader processes file imports. To make them work property, either add the css-loader’s [`importLoaders` option]:
+`postcss-loader` [cannot be used] with [CSS Modules] out of the box due
+to the way `css-loader` processes file imports. To make them work property,
+either add the css-loader’s [`importLoaders` option]:
 
 ```js
 {
@@ -134,12 +136,12 @@ postcss-loader [cannot be used] with [CSS Modules] out of the box due to the way
 }
 ```
 
-or replace css-loader with [postcss-modules] plugin.
+or replace `css-loader` with [postcss-modules] plugin.
 
-[cannot be used]:         https://github.com/webpack/css-loader/issues/137
-[CSS Modules]:            https://github.com/webpack/css-loader#css-modules
 [`importLoaders` option]: github.com/webpack/css-loader#importing-and-chained-loaders
 [postcss-modules]:        https://github.com/outpunk/postcss-modules
+[cannot be used]:         https://github.com/webpack/css-loader/issues/137
+[CSS Modules]:            https://github.com/webpack/css-loader#css-modules
 
 ## JS Styles
 
