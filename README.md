@@ -126,7 +126,7 @@ module.exports = {
 ## Integration with CSS Modules
 
 `postcss-loader` [cannot be used] with [CSS Modules] out of the box due
-to the way `css-loader` processes file imports. To make them work property,
+to the way `css-loader` processes file imports. To make them work properly,
 either add the css-loader’s [`importLoaders` option]:
 
 ```js
