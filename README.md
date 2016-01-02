@@ -138,7 +138,7 @@ either add the css-loader’s [`importLoaders` option]:
 
 or replace `css-loader` with [postcss-modules] plugin.
 
-[`importLoaders` option]: github.com/webpack/css-loader#importing-and-chained-loaders
+[`importLoaders` option]: https://github.com/webpack/css-loader#importing-and-chained-loaders
 [postcss-modules]:        https://github.com/outpunk/postcss-modules
 [cannot be used]:         https://github.com/webpack/css-loader/issues/137
 [CSS Modules]:            https://github.com/webpack/css-loader#css-modules
