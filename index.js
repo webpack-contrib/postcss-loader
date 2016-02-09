@@ -4,8 +4,8 @@ var postcss     = require('postcss');
 module.exports = function (source, map) {
     if ( this.cacheable ) this.cacheable();
 
-    var file    = loaderUtils.getRemainingRequest(this);
-    var params  = loaderUtils.parseQuery(this.query);
+    var file   = loaderUtils.getRemainingRequest(this);
+    var params = loaderUtils.parseQuery(this.query);
 
     var opts = {
         from: file,
