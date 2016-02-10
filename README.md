@@ -96,7 +96,13 @@ When using [postcss-import] plugin, you may want to tell webpack about
 dependencies coming from your `@import` directives.
 For example: in watch mode, to enable recompile on change.
 
-Here is a simple way to let know postcss-import to pass files to webpack:
+You may want to allow [postcss-import] to resolve packages using
+your webpack configuration.
+For example: to use aliases or module paths already configured in
+your webpack configuration.
+
+Here is a simple way to let postcss-import know how to pass files to webpack
+and use webpack's resolver.
 
 ```js
 var postcssImport = require('postcss-import');
@@ -113,9 +119,23 @@ module.exports = {
     postcss: function (webpack) {
         return [
             postcssImport({
-                addDependencyTo: webpack
+                addDependencyTo: webpack,
+                resolve: function(id, basedir) {
+                    return new Promise(function (resolve, reject) {
+                        webpack.resolve(basedir, id, function(err, result) {
+                            if(err) {
+                                reject(err);
+                            }
+                            resolve(result);
+                        });
+                    });
+                }
             })
         ];
+    },
+    resolve: {
+        extensions: ['.css'], // Include your other extensions here as well
+        mainFields: ['style'] // mainFields for webpack 2, 1.x uses packageMains
     }
 }
 ```
