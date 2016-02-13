@@ -1,3 +1,6 @@
+## 0.8.1
+* Fix resource path.
+
 ## 0.8
 * Add postcss-js support (by Simon Degraeve).
 
