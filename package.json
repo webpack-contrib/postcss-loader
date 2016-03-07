@@ -5,7 +5,7 @@
   "keywords": ["webpack", "loader", "css", "postcss", "postcss-runner"],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
-  "repository": "postcss-loader",
+  "repository": "postcss/postcss-loader",
   "dependencies": {
     "loader-utils": "^0.2.12",
     "postcss":      "^5.0.15"
