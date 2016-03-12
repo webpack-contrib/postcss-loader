@@ -48,7 +48,7 @@ module.exports = function (source, map) {
             result.warnings().forEach(function (msg) {
                 loader.emitWarning(msg.toString());
             });
-            callback(null, result.css, result.map);
+            callback(null, result.css, result.map.toJSON());
         })
         .catch(function (error) {
             if ( error.name === 'CssSyntaxError' ) {
