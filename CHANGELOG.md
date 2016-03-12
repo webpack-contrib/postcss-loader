@@ -1,3 +1,6 @@
+## 0.8.2
+* Fix source map support (by Andrew Bradley).
+
 ## 0.8.1
 * Fix resource path.
 
