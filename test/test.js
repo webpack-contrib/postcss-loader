@@ -16,7 +16,7 @@ describe('postcss-loader', function () {
         var css = require('!raw-loader!' +
                           '../?parser=postcss-safe-parser!' +
                           './cases/broken.css');
-        expect(css).to.eql('a { one color: red }\n');
+        expect(css).to.eql('a { color:\n}');
     });
 
     it('processes CSS-in-JS', function () {
