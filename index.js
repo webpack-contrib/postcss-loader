@@ -43,8 +43,8 @@ module.exports = function (source, map) {
         source = this.exec(source, this.resource);
     }
 
-    postcss(plugins)
-        .process(source, opts).then(function (result) {
+    postcss(plugins).process(source, opts)
+        .then(function (result) {
             result.warnings().forEach(function (msg) {
                 loader.emitWarning(msg.toString());
             });
