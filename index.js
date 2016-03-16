@@ -19,21 +19,31 @@ module.exports = function (source, map) {
     if ( typeof map === 'string' ) map = JSON.parse(map);
     if ( map && map.mappings ) opts.map.prev = map;
 
-    if ( params.syntax )      opts.syntax      = require(params.syntax);
-    if ( params.parser )      opts.parser      = require(params.parser);
-    if ( params.stringifier ) opts.stringifier = require(params.stringifier);
-
-    var plugins = this.options.postcss;
-    if ( typeof plugins === 'function' ) {
-        plugins = plugins.call(this, this);
+    var plugins;
+    var options = this.options.postcss;
+    if ( typeof options === 'function' ) {
+        options = options.call(this, this);
     }
 
-    if ( typeof plugins === 'undefined' ) {
+    if ( typeof options === 'undefined' ) {
         plugins = [];
     } else if ( params.pack ) {
-        plugins = plugins[params.pack];
-    } else if ( !Array.isArray(plugins) ) {
-        plugins = plugins.defaults;
+        plugins = options[params.pack];
+    } else if ( !Array.isArray(options) ) {
+        plugins = options.plugins || options.defaults;
+        opts.syntax = options.syntax;
+        opts.parser = options.parser;
+        opts.stringifier = options.stringifier;
+    }
+
+    if ( params.syntax && !opts.syntax ) {
+        opts.syntax = require(params.syntax);
+    }
+    if ( params.parser && !opts.parser ) {
+        opts.parser = require(params.parser);
+    }
+    if ( params.stringifier && !opts.stringifier ) {
+        opts.stringifier = require(params.stringifier);
     }
 
     var loader   = this;
