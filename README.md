@@ -18,6 +18,12 @@
 
 ## Usage
 
+Install `postcss-loader`:
+
+```js
+npm install postcss-loader --save-dev
+```
+
 Set `postcss` section in webpack config:
 
 ```js
@@ -38,6 +44,12 @@ module.exports = {
     }
 }
 ```
+
+> This example implementation uses two plugins that may need to be installed:
+> ```
+> npm install autoprefixer --save-dev
+> npm install precss --save-dev
+> ```
 
 Now your CSS files requirements will be processed by selected PostCSS plugins:
 
@@ -65,7 +77,7 @@ If there is the need, this will let you access to webpack loaders API.
 ## Plugins Packs
 
 If you want to process different styles by different PostCSS plugins you can
-define plugin packs in `postcss` section and use them by `?pack=name` parameter.
+define plugin packs in `postcss` section and use them by `?pack=name` parameter.
 
 ```js
 module.exports = {
@@ -93,7 +105,7 @@ module.exports = {
 ## Integration with postcss-import
 
 When using [postcss-import] plugin, you may want to tell webpack about
-dependencies coming from your `@import` directives.
+dependencies coming from your `@import` directives.
 For example: in watch mode, to enable recompile on change.
 
 Here is a simple way to let know postcss-import to pass files to webpack:
