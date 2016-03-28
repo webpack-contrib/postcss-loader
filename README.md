@@ -20,15 +20,15 @@
 
 Install `postcss-loader`:
 
-```js
+```console
 npm install postcss-loader --save-dev
 ```
 
 Set `postcss` section in webpack config:
 
 ```js
-var autoprefixer = require('autoprefixer');
 var precss       = require('precss');
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     module: {
@@ -40,15 +40,16 @@ module.exports = {
         ]
     },
     postcss: function () {
-        return [autoprefixer, precss];
+        return [precss, autoprefixer];
     }
 }
 ```
 
 > This example implementation uses two plugins that may need to be installed:
-> ```
-> npm install autoprefixer --save-dev
+>
+> ```console
 > npm install precss --save-dev
+> npm install autoprefixer --save-dev
 > ```
 
 Now your CSS files requirements will be processed by selected PostCSS plugins:
@@ -95,7 +96,7 @@ module.exports = {
     },
     postcss: function () {
         return {
-            defaults: [autoprefixer, precss],
+            defaults: [precss, autoprefixer],
             cleaner:  [autoprefixer({ browsers: [] })]
         };
     }
