@@ -149,7 +149,7 @@ either add the css-loader’s [`importLoaders` option]:
 }
 ```
 
-or replace `css-loader` with [postcss-modules] plugin.
+or use [postcss-modules] plugin instead of `css-loader`.
 
 [`importLoaders` option]: https://github.com/webpack/css-loader#importing-and-chained-loaders
 [postcss-modules]:        https://github.com/outpunk/postcss-modules
