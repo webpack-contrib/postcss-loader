@@ -7,19 +7,19 @@
   "license": "MIT",
   "repository": "postcss/postcss-loader",
   "dependencies": {
-    "loader-utils": "^0.2.12",
+    "loader-utils": "^0.2.14",
     "postcss":      "^5.0.19"
   },
   "devDependencies": {
     "eslint-config-postcss": "2.0.2",
     "postcss-safe-parser":   "1.0.7",
-    "webpack-stream":        "3.1.0",
+    "webpack-stream":        "3.2.0",
     "gulp-eslint":           "2.0.0",
     "json-loader":           "0.5.4",
     "raw-loader":            "0.5.1",
     "postcss-js":            "0.1.2",
     "gulp-mocha":            "2.2.0",
-    "fs-extra":              "0.26.5",
+    "fs-extra":              "0.28.0",
     "chai":                  "3.5.0",
     "gulp":                  "3.9.1"
   },
