@@ -211,3 +211,25 @@ var css = require('postcss?parser=postcss-safe-parser!./broken')
 ```
 
 [Safe Parser]: https://github.com/postcss/postcss-safe-parser
+
+If you need to pass the function directly instead of a module name, you can do so through the webpack postcss option, as such:
+
+```js
+var sugarss = require('sugarss')
+module.exports = {
+    module: {
+        loaders: [
+            {
+                test:   /\.css$/,
+                loader: "style-loader!css-loader!postcss-loader"
+            }
+        ]
+    },
+    postcss: function () {
+        return {
+            plugins: [autoprefixer, precss],
+            syntax: sugarss
+        };
+    }
+}
+```
