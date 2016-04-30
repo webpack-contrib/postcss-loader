@@ -19,7 +19,7 @@
     "raw-loader":            "0.5.1",
     "postcss-js":            "0.1.2",
     "gulp-mocha":            "2.2.0",
-    "fs-extra":              "0.28.0",
+    "fs-extra":              "0.30.0",
     "chai":                  "3.5.0",
     "gulp":                  "3.9.1"
   },
