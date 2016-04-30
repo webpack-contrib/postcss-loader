@@ -19,30 +19,31 @@ module.exports = function (source, map) {
     if ( typeof map === 'string' ) map = JSON.parse(map);
     if ( map && map.mappings ) opts.map.prev = map;
 
-    var plugins;
     var options = this.options.postcss;
     if ( typeof options === 'function' ) {
         options = options.call(this, this);
     }
 
+    var plugins;
     if ( typeof options === 'undefined' ) {
         plugins = [];
-    } else if ( params.pack ) {
-        plugins = options[params.pack];
     } else if ( !Array.isArray(options) ) {
         plugins = options.plugins || options.defaults;
-        opts.syntax = options.syntax;
-        opts.parser = options.parser;
         opts.stringifier = options.stringifier;
+        opts.parser      = options.parser;
+        opts.syntax      = options.syntax;
+    }
+    if ( params.pack ) {
+        plugins = options[params.pack];
     }
 
-    if ( params.syntax && !opts.syntax ) {
+    if ( params.syntax ) {
         opts.syntax = require(params.syntax);
     }
-    if ( params.parser && !opts.parser ) {
+    if ( params.parser ) {
         opts.parser = require(params.parser);
     }
-    if ( params.stringifier && !opts.stringifier ) {
+    if ( params.stringifier ) {
         opts.stringifier = require(params.stringifier);
     }
 
