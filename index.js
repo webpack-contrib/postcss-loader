@@ -27,7 +27,9 @@ module.exports = function (source, map) {
     var plugins;
     if ( typeof options === 'undefined' ) {
         plugins = [];
-    } else if ( !Array.isArray(options) ) {
+    } else if ( Array.isArray(options) ) {
+        plugins = options;
+    } else {
         plugins = options.plugins || options.defaults;
         opts.stringifier = options.stringifier;
         opts.parser      = options.parser;
@@ -35,6 +37,9 @@ module.exports = function (source, map) {
     }
     if ( params.pack ) {
         plugins = options[params.pack];
+        if ( !plugins ) {
+            throw new Error('PostCSS plugin pack is not defined in options');
+        }
     }
 
     if ( params.syntax ) {
