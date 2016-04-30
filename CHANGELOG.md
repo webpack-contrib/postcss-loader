@@ -1,3 +1,6 @@
+## 0.9
+* Allow to pass syntax, parser or stringifier as function (by Jeff Escalante).
+
 ## 0.8.2
 * Fix source map support (by Andrew Bradley).
 
