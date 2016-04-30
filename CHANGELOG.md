@@ -1,3 +1,6 @@
+## 0.9.1
+* Fix plugin in simple array config.
+
 ## 0.9
 * Allow to pass syntax, parser or stringifier as function (by Jeff Escalante).
 
