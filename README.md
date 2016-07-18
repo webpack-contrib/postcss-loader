@@ -56,7 +56,7 @@ Now your CSS files requirements will be processed by selected PostCSS plugins:
 
 ```js
 var css = require('./file.css');
-// => CSS after Autoprefixer and CSSWring
+// => CSS after PreCSS and Autoprefixer
 ```
 
 Note that the context of this function
