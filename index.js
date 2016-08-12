@@ -11,7 +11,7 @@ module.exports = function (source, map) {
         from: file,
         to:   file,
         map:  {
-            inline:     params.sourceMap === 'inline',
+            inline:     params.inlineMap,
             annotation: false
         }
     };
