@@ -7,6 +7,9 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('lint', function () {
+    if ( parseInt(process.versions.node) < 4 ) {
+        return;
+    }
     var eslint = require('gulp-eslint');
     return gulp.src(['index.js', 'test/**/*.js', 'gulpfile.js'])
         .pipe(eslint())
