@@ -26,4 +26,9 @@ describe('postcss-loader', function () {
         expect(css).to.eql('a {\n    color: red\n}');
     });
 
+    it('inlines map', function () {
+        var css = require('!raw-loader!../?sourceMap=inline!./cases/style.css');
+        expect(css).to.include('/*# sourceMappingURL=');
+    });
+
 });
