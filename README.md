@@ -75,13 +75,17 @@ If there is the need, this will let you access to webpack loaders API.
 
 [webpack loader-context]: http://webpack.github.io/docs/loaders.html#loader-context
 
-Loader accepts `inlineMap` parameter to put source maps
+## Source Maps
+
+Loader will use source map settings from previous loader.
+
+You can set this `sourceMap` parameter to `inline` value to put source maps
 into CSS annotation comment:
 
 ```js
 module.exports = {
     module: {
-        loader: "style-loader!css-loader!postcss-loader?inlineMap=true"
+        loader: "style-loader!css-loader!postcss-loader?sourceMap=inline"
     }
 }
 ```
