@@ -1,3 +1,6 @@
+## 0.10.0
+* Add `sourceMap` parameter to force inline maps (by 雪狼).
+
 ## 0.9.1
 * Fix plugin in simple array config.
 
