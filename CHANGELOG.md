@@ -1,3 +1,6 @@
+## 0.10.1
+* Better syntax error message (by Andrey Popp).
+
 ## 0.10.0
 * Add `sourceMap` parameter to force inline maps (by 雪狼).
 
