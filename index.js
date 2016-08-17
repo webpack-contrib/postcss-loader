@@ -1,5 +1,31 @@
-var loaderUtils = require('loader-utils');
-var postcss     = require('postcss');
+var formatCodeFrame = require('babel-code-frame');
+var loaderUtils     = require('loader-utils');
+var postcss         = require('postcss');
+
+function formatMessage(message, loc, source) {
+    var formatted = message;
+    if (loc) {
+        formatted = formatted +
+            ' (' + loc.line + ':' + loc.column + ')';
+    }
+    if (loc && source) {
+        formatted = formatted +
+            '\n\n' + formatCodeFrame(source, loc.line, loc.column) + '\n';
+    }
+    return formatted;
+}
+
+function PostCSSLoaderError(name, message, loc, source, error) {
+    Error.call(this);
+    Error.captureStackTrace(this, PostCSSLoaderError);
+    this.name = name;
+    this.error = error;
+    this.message = formatMessage(message, loc, source);
+    this.hideStack = true;
+}
+
+PostCSSLoaderError.prototype = Object.create(Error.prototype);
+PostCSSLoaderError.prototype.constructor = PostCSSLoaderError;
 
 module.exports = function (source, map) {
     if ( this.cacheable ) this.cacheable();
@@ -68,8 +94,11 @@ module.exports = function (source, map) {
         })
         .catch(function (error) {
             if ( error.name === 'CssSyntaxError' ) {
-                loader.emitError(error.message + error.showSourceCode());
-                callback();
+                callback(new PostCSSLoaderError(
+                    'Syntax Error',
+                    error.reason,
+                    { line: error.line, column: error.column },
+                    error.input.source));
             } else {
                 callback(error);
             }
