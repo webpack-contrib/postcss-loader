@@ -85,6 +85,13 @@ module.exports = function (source, map) {
         source = this.exec(source, this.resource);
     }
 
+    // Allow plugins to add or remove postcss plugins
+    plugins = this._compilation.applyPluginsWaterfall(
+        'postcss-loader-before-processing',
+        [].concat(plugins),
+        params
+    );
+
     postcss(plugins).process(source, opts)
         .then(function (result) {
             result.warnings().forEach(function (msg) {
