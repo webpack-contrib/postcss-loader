@@ -1,3 +1,6 @@
+## 0.11
+* Add `postcss-loader-before-processing` webpack event (by Jan Nicklas).
+
 ## 0.10.1
 * Better syntax error message (by Andrey Popp).
 
