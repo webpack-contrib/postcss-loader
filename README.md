@@ -212,6 +212,7 @@ or use [postcss-modules] plugin instead of `css-loader`.
 [postcss-modules]:        https://github.com/outpunk/postcss-modules
 [cannot be used]:         https://github.com/webpack/css-loader/issues/137
 [CSS Modules]:            https://github.com/webpack/css-loader#css-modules
+
 ## Custom Syntaxes
 
 PostCSS can transforms styles in any syntax, not only in CSS.
@@ -252,7 +253,6 @@ module.exports = {
 }
 ```
 
-
 ### JS Styles
 
 If you want to process styles written in JavaScript
@@ -290,15 +290,16 @@ export default {
 }
 ```
 
+## Webpack Events
 
-### Webpack Events
+Webpack provides webpack-plugin developers a convenient way
+to hook into the build pipeline. The postcss-loader makes us
+of this event system to allow building integrated postcss-webpack tools.
 
-Webpack provides webpack-plugin developers a convenient way to hook into the build pipeline.
-The postcss-loader makes us of this event system to allow building integrated postcss-webpack tools.
-
-See the [example implementation](https://github.com/postcss/postcss-loader/blob/master/test/webpack-plugins/rewrite.js)
+See the [example implementation].
 
 * `postcss-loader-before-processing`  
   is fired before processing and allows to add or remove postcss plugins
 
-[postcss-js]: https://github.com/postcss/postcss-js
+[example implementation]: https://github.com/postcss/postcss-loader/blob/master/test/webpack-plugins/rewrite.js
+[postcss-js]:             https://github.com/postcss/postcss-js
