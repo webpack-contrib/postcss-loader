@@ -290,4 +290,15 @@ export default {
 }
 ```
 
+
+### Webpack Events
+
+Webpack provides webpack-plugin developers a convenient way to hook into the build pipeline.
+The postcss-loader makes us of this event system to allow building integrated postcss-webpack tools.
+
+See the [example implementation](https://github.com/postcss/postcss-loader/blob/master/test/webpack-plugins/rewrite.js)
+
+* `postcss-loader-before-processing`  
+  is fired before processing and allows to add or remove postcss plugins
+
 [postcss-js]: https://github.com/postcss/postcss-js

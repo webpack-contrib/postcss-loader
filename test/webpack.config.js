@@ -2,6 +2,7 @@ var path = require('path');
 
 var blue = require('./plugins/blue');
 var red  = require('./plugins/red');
+var RewritePlugin = require('./webpack-plugins/rewrite.js');
 
 module.exports = {
     target:  'node',
@@ -16,5 +17,8 @@ module.exports = {
             defaults: [blue, red],
             blues:    [blue]
         };
-    }
+    },
+    plugins: [
+        new RewritePlugin()
+    ]
 };

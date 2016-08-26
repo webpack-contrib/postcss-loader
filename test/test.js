@@ -19,6 +19,11 @@ describe('postcss-loader', function () {
         expect(css).to.eql('a { color:\n}');
     });
 
+    it('lets other plugins alter the used plugins', function () {
+        var css = require('!raw-loader!../?rewrite=true!./cases/style.css');
+        expect(css).to.eql('a { color: black }\n');
+    });
+
     it('processes CSS-in-JS', function () {
         var css = require('!raw-loader!' +
                           '../?parser=postcss-js!' +
