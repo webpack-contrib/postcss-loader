@@ -1,3 +1,6 @@
+## 0.11.1
+* Fix Promise API (by Daniel Haus).
+
 ## 0.11
 * Add `postcss-loader-before-processing` webpack event (by Jan Nicklas).
 
