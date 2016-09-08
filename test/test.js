@@ -31,6 +31,13 @@ describe('postcss-loader', function () {
         expect(css).to.eql('a {\n    color: red\n}');
     });
 
+    it('processes CSS with exec', function () {
+        var css = require('!raw-loader!' +
+                          '../?exec!' +
+                          './cases/exec.js');
+        expect(css).to.eql('a {\n    color: green\n}');
+    });
+
     it('inlines map', function () {
         var css = require('!raw-loader!../?sourceMap=inline!./cases/style.css');
         expect(css).to.include('/*# sourceMappingURL=');

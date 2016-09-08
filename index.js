@@ -43,6 +43,7 @@ module.exports = function (source, map) {
     }
 
     var plugins;
+    var exec;
     if ( typeof options === 'undefined' ) {
         plugins = [];
     } else if ( Array.isArray(options) ) {
@@ -52,6 +53,7 @@ module.exports = function (source, map) {
         opts.stringifier = options.stringifier;
         opts.parser      = options.parser;
         opts.syntax      = options.syntax;
+        exec             = options.exec;
     }
     if ( params.pack ) {
         plugins = options[params.pack];
@@ -69,11 +71,14 @@ module.exports = function (source, map) {
     if ( params.stringifier ) {
         opts.stringifier = require(params.stringifier);
     }
+    if ( params.exec ) {
+        exec = params.exec;
+    }
 
     var loader   = this;
     var callback = this.async();
 
-    if ( params.parser === 'postcss-js' ) {
+    if ( params.parser === 'postcss-js' || exec ) {
         source = this.exec(source, this.resource);
     }
 
