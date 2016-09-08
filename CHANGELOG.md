@@ -1,3 +1,6 @@
+## 0.13
+* Add `exec` parameter (by Neal Granger).
+
 ## 0.12
 * Add CSS syntax highlight to syntax error code frame.
 
