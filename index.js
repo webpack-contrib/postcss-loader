@@ -1,26 +1,18 @@
-var formatCodeFrame = require('babel-code-frame');
-var loaderUtils     = require('loader-utils');
-var postcss         = require('postcss');
+var loaderUtils = require('loader-utils');
+var postcss     = require('postcss');
 
-function formatMessage(message, loc, source) {
-    var formatted = message;
-    if (loc) {
-        formatted = formatted +
-            ' (' + loc.line + ':' + loc.column + ')';
-    }
-    if (loc && source) {
-        formatted = formatted +
-            '\n\n' + formatCodeFrame(source, loc.line, loc.column) + '\n';
-    }
-    return formatted;
-}
-
-function PostCSSLoaderError(name, message, loc, source, error) {
+function PostCSSLoaderError(error) {
     Error.call(this);
     Error.captureStackTrace(this, PostCSSLoaderError);
-    this.name = name;
-    this.error = error;
-    this.message = formatMessage(message, loc, source);
+    this.name = 'Syntax Error';
+    this.error = error.input.source;
+    this.message = error.reason;
+    if ( error.line ) {
+        this.message += ' (' + error.line + ':' + error.column + ')';
+    }
+    if ( error.line && error.input.source ) {
+        this.message += '\n\n' + error.showSourceCode() + '\n';
+    }
     this.hideStack = true;
 }
 
@@ -102,11 +94,7 @@ module.exports = function (source, map) {
         })
         .catch(function (error) {
             if ( error.name === 'CssSyntaxError' ) {
-                callback(new PostCSSLoaderError(
-                    'Syntax Error',
-                    error.reason,
-                    { line: error.line, column: error.column },
-                    error.input.source));
+                callback(new PostCSSLoaderError(error));
             } else {
                 callback(error);
             }
