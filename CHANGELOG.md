@@ -1,3 +1,6 @@
+## 0.12
+* Add CSS syntax highlight to syntax error code frame.
+
 ## 0.11.1
 * Fix Promise API (by Daniel Haus).
 
