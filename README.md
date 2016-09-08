@@ -290,6 +290,15 @@ export default {
 }
 ```
 
+If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
+
+```js
+{
+    test:   /\.style.xyz$/,
+    loader: "style-loader!css-loader!postcss-loader?parser=custom-parser&exec"
+}
+```
+
 ## Webpack Events
 
 Webpack provides webpack-plugin developers a convenient way
