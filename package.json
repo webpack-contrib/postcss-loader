@@ -8,7 +8,8 @@
   "repository": "postcss/postcss-loader",
   "dependencies": {
     "loader-utils": "^0.2.16",
-    "postcss":      "^5.2.0"
+    "postcss": "^5.2.0",
+    "postcss-load-config": "^1.0.0-alpha4"
   },
   "devDependencies": {
     "eslint-config-postcss": "2.0.2",
@@ -21,7 +22,8 @@
     "gulp-mocha":            "3.0.1",
     "fs-extra":              "0.30.0",
     "chai":                  "3.5.0",
-    "gulp":                  "3.9.1"
+    "gulp":                  "3.9.1",
+    "sugarss":               "^0.1.6"
   },
   "scripts": {
     "test": "gulp"

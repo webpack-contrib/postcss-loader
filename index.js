@@ -1,5 +1,7 @@
 var loaderUtils = require('loader-utils');
 var postcss     = require('postcss');
+var assign = require('./lib/assign');
+var getConfiguration = require('./lib/configuration');
 
 function PostCSSLoaderError(error) {
     Error.call(this);
@@ -25,90 +27,79 @@ module.exports = function (source, map) {
     var file   = this.resourcePath;
     var params = loaderUtils.parseQuery(this.query);
 
-    var opts = {
-        from: file,
-        to:   file,
-        map:  {
-            inline:     params.sourceMap === 'inline',
-            annotation: false
-        }
-    };
-
-    if ( typeof map === 'string' ) map = JSON.parse(map);
-    if ( map && map.mappings ) opts.map.prev = map;
-
-    var options = this.options.postcss;
-    if ( typeof options === 'function' ) {
-        options = options.call(this, this);
-    }
-
-    var plugins;
-    var exec;
-    if ( typeof options === 'undefined' ) {
-        plugins = [];
-    } else if ( Array.isArray(options) ) {
-        plugins = options;
-    } else {
-        plugins = options.plugins || options.defaults;
-        opts.stringifier = options.stringifier;
-        opts.parser      = options.parser;
-        opts.syntax      = options.syntax;
-        exec             = options.exec;
-    }
-    if ( params.pack ) {
-        plugins = options[params.pack];
-        if ( !plugins ) {
-            throw new Error('PostCSS plugin pack is not defined in options');
-        }
-    }
-
-    if ( params.syntax ) {
-        opts.syntax = require(params.syntax);
-    }
-    if ( params.parser ) {
-        opts.parser = require(params.parser);
-    }
-    if ( params.stringifier ) {
-        opts.stringifier = require(params.stringifier);
-    }
-    if ( params.exec ) {
-        exec = params.exec;
-    }
-
+    var options  = this.options.postcss;
+    var pack = params.pack;
     var loader   = this;
     var callback = this.async();
 
-    if ( params.parser === 'postcss-js' || exec ) {
-        source = this.exec(source, this.resource);
-    }
+    getConfiguration(options, pack, function (err, config) {
+        if (err) {
+            callback(err);
+            return;
+        }
 
-    // Allow plugins to add or remove postcss plugins
-    if ( this._compilation ) {
-        plugins = this._compilation.applyPluginsWaterfall(
-          'postcss-loader-before-processing',
-          [].concat(plugins),
-          params
-        );
-    } else {
-        loader.emitWarning(
-          'this._compilation is not available thus ' +
-          '`postcss-loader-before-processing` is not supported'
-        );
-    }
+        var plugins = config.plugins;
+        var exec = config.exec;
 
-    postcss(plugins).process(source, opts)
-        .then(function (result) {
-            result.warnings().forEach(function (msg) {
-                loader.emitWarning(msg.toString());
-            });
-            callback(null, result.css, result.map ? result.map.toJSON() : null);
-            return null;
-        })
-        .catch(function (error) {
-            if ( error.name === 'CssSyntaxError' ) {
-                callback(new PostCSSLoaderError(error));
-            } else {
-                callback(error);
+        var opts  = assign({}, config.options, {
+            from: file,
+            to  : file,
+            map:  {
+                inline:     params.sourceMap === 'inline',
+                annotation: false
             }
         });
+
+        if ( typeof map === 'string' ) map = JSON.parse(map);
+        if ( map && map.mappings ) opts.map.prev = map;
+
+        if ( params.syntax ) {
+            opts.syntax = require(params.syntax);
+        }
+        if ( params.parser ) {
+            opts.parser = require(params.parser);
+        }
+        if ( params.stringifier ) {
+            opts.stringifier = require(params.stringifier);
+        }
+        if ( params.exec ) {
+            exec = params.exec;
+        }
+
+        if ( params.parser === 'postcss-js' || exec ) {
+            source = loader.exec(source, loader.resource);
+        }
+
+        // Allow plugins to add or remove postcss plugins
+        if ( loader._compilation ) {
+            plugins = loader._compilation.applyPluginsWaterfall(
+              'postcss-loader-before-processing',
+              [].concat(plugins),
+              params
+            );
+        } else {
+            loader.emitWarning(
+              'this._compilation is not available thus ' +
+              '`postcss-loader-before-processing` is not supported'
+            );
+        }
+
+        postcss(plugins).process(source, opts)
+          .then(function (result) {
+              result.warnings().forEach(function (msg) {
+                  loader.emitWarning(msg.toString());
+              });
+
+              var resultMap = result.map ? result.map.toJSON() : null;
+              callback(null, result.css, resultMap);
+              return null;
+          })
+          .catch(function (error) {
+              if ( error.name === 'CssSyntaxError' ) {
+                  callback(new PostCSSLoaderError(error));
+              } else {
+                  callback(error);
+              }
+          });
+    });
 };
