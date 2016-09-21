@@ -83,11 +83,18 @@ module.exports = function (source, map) {
     }
 
     // Allow plugins to add or remove postcss plugins
-    plugins = this._compilation.applyPluginsWaterfall(
-        'postcss-loader-before-processing',
-        [].concat(plugins),
-        params
-    );
+    if ( this._compilation ) {
+        plugins = this._compilation.applyPluginsWaterfall(
+          'postcss-loader-before-processing',
+          [].concat(plugins),
+          params
+        );
+    } else {
+        loader.emitWarning(
+          'this._compilation is not available thus ' +
+          '`postcss-loader-before-processing` is not supported'
+        );
+    }
 
     postcss(plugins).process(source, opts)
         .then(function (result) {
