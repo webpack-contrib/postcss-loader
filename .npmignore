@@ -7,3 +7,7 @@ test/
 .travis.yml
 
 gulpfile.js
+
+.editorconfig
+.eslintrc
+.npmignore
