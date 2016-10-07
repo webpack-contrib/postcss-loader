@@ -8,7 +8,7 @@
   "repository": "postcss/postcss-loader",
   "dependencies": {
     "loader-utils": "^0.2.16",
-    "postcss":      "^5.2.0"
+    "postcss":      "^5.2.4"
   },
   "devDependencies": {
     "eslint-config-postcss": "2.0.2",
