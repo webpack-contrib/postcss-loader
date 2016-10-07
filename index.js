@@ -37,7 +37,7 @@ module.exports = function (source, map) {
     if ( typeof map === 'string' ) map = JSON.parse(map);
     if ( map && map.mappings ) opts.map.prev = map;
 
-    var options = this.options.postcss;
+    var options = params.options || this.options.postcss;
     if ( typeof options === 'function' ) {
         options = options.call(this, this);
     }
