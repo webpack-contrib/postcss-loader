@@ -79,16 +79,15 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader', {
+          'style-loader',
+          {
             loader: 'css-loader',
             options: { importLoaders: 1 }
-          }, {
+          },
+          {
             loader: 'postcss-loader',
             plugins: function () {
-              return [
-                require('precss'),
-                require('autoprefixer')
-              ];
+              return [ require('precss'), require('autoprefixer')];
             }
           }
         ]
@@ -203,7 +202,7 @@ or use [postcss-modules] plugin instead of `css-loader`.
 [cannot be used]: https://github.com/webpack/css-loader/issues/137
 [CSS Modules]: https://github.com/webpack/css-loader#css-modules
 
-#### JS Styles
+### JS Styles
 
 If you want to process styles written in JavaScript
 you can use the [postcss-js] parser.
