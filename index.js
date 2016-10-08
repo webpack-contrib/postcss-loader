@@ -40,13 +40,13 @@ function parseOptions(options, pack) {
 module.exports = function (source, map) {
     if ( this.cacheable ) this.cacheable();
 
-    var file   = this.resourcePath;
-    var params = loaderUtils.parseQuery(this.query);
+    var loader = this;
+    var file   = loader.resourcePath;
+    var params = loaderUtils.parseQuery(loader.query);
 
-    var options  = params.plugins || this.options.postcss;
+    var options  = params.plugins || loader.options.postcss;
     var pack     = params.pack;
-    var loader   = this;
-    var callback = this.async();
+    var callback = loader.async();
 
     Promise.resolve().then(function () {
         if ( typeof options !== 'undefined' ) {
@@ -105,6 +105,12 @@ module.exports = function (source, map) {
         return postcss(plugins).process(source, opts).then(function (result) {
             result.warnings().forEach(function (msg) {
                 loader.emitWarning(msg.toString());
+            });
+
+            result.messages.forEach(function (msg) {
+                if ( msg.type === 'dependency' ) {
+                    loader.addDependency(msg.file);
+                }
             });
 
             var resultMap = result.map ? result.map.toJSON() : null;
