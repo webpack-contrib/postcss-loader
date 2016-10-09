@@ -25,7 +25,7 @@ npm install postcss-loader --save-dev
 
 ## Usage
 
-You can configure PostCSS Loader in common PostCSS config on directly
+You can configure PostCSS Loader in common PostCSS config or directly
 in Webpack config. Common PostCSS config is recommended way, because
 many PostCSS tools will be able to share it.
 
@@ -262,12 +262,12 @@ If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 ### Webpack Events
 
 Webpack provides webpack plugin developers a convenient way
-to hook into the build pipeline. The postcss-loader makes us
+to hook into the build pipeline. The postcss-loader makes use
 of this event system to allow building integrated postcss-webpack tools.
 
 See the [example] implementation.
 
 Event `postcss-loader-before-processing` is fired before processing and allows
-to add or remove postcss plugins
+to add or remove postcss plugins.
 
 [example]: https://github.com/postcss/postcss-loader/blob/master/test/webpack-plugins/rewrite.js
