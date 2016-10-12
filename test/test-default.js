@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 
-describe('postcss-loader', function () {
+describe('default', function () {
 
     it('processes CSS with default plugins', function () {
         var css = require('!raw-loader!../!./support/cases/style.css');
