@@ -18,7 +18,7 @@ gulp.task('lint', function () {
         return false;
     }
     var eslint = require('gulp-eslint');
-    return gulp.src(['index.js', 'test/**/*.js', 'gulpfile.js'])
+    return gulp.src(['index.js', 'test/**/*.js', '*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
         .pipe(eslint.failAfterError());
