@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": "postcss/postcss-loader",
   "dependencies": {
-    "postcss-load-config": "^1.0.0-alpha4",
+    "postcss-load-config": "^1.0.0-beta",
     "object-assign":       "^4.1.0",
     "loader-utils":        "^0.2.16",
     "postcss":             "^5.2.4"
