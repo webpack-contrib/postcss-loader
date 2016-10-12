@@ -1,16 +1,15 @@
 var gulp = require('gulp');
 var path = require('path');
+var fs   = require('fs-extra');
 
-var BUILD_CONFIGS = [
-    './test/webpack-default.config',
-    './test/webpack-explicit-plugins.config',
-    './test/webpack-with-packs.config',
-    './test/webpack-incorrect-using-packs.config',
-    './test/webpack-custom-parser.config'
-];
+var BUILD_CONFIGS = fs.readdirSync(path.join(__dirname, 'test'))
+                      .filter(function (file) {
+                          return file.indexOf('.config.') !== -1;
+                      }).map(function (file) {
+                          return file.replace('.config.js', '');
+                      });
 
 gulp.task('clean', function (done) {
-    var fs = require('fs-extra');
     fs.remove(path.join(__dirname, 'build'), done);
 });
 
@@ -25,15 +24,15 @@ gulp.task('lint', function () {
         .pipe(eslint.failAfterError());
 });
 
-BUILD_CONFIGS
-    .forEach(function (configFile) {
-        gulp.task(configFile, ['clean'], function () {
-            var webpack = require('webpack-stream');
-            return gulp.src('')
-              .pipe(webpack(require(configFile)))
-              .pipe(gulp.dest('build/'));
-        });
+BUILD_CONFIGS.forEach(function (config) {
+    gulp.task(config, ['clean'], function () {
+        var webpack = require('webpack-stream');
+        var file = path.join(__dirname, 'test', config + '.config.js');
+        return gulp.src('')
+          .pipe(webpack(require(file)))
+          .pipe(gulp.dest('build/'));
     });
+});
 
 gulp.task('build', BUILD_CONFIGS);
 
