@@ -59,7 +59,8 @@ module.exports = function (source, map) {
             return loadConfig(pack);
         }
     }).then(function (config) {
-        var plugins = config.plugins;
+        if ( !config ) config = { };
+        var plugins = config.plugins || [];
 
         var opts  = assign({}, config.options, {
             from: file,
