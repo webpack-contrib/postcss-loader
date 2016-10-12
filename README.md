@@ -56,8 +56,8 @@ Then create `postcss.config.js`:
 ```js
 module.exports = {
   plugins: {
-    'precss': false,
-    'autoprefixer': false
+    require('precss'),
+    require('autoprefixer')
   }
 }
 ```
