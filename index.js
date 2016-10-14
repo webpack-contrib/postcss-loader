@@ -54,7 +54,7 @@ module.exports = function (source, map) {
         } else {
             if ( pack ) {
                 throw new Error('PostCSS plugin pack is supported ' +
-                                'only when config is passed explicitly');
+                                'only when use plugins in webpack config');
             }
             return loadConfig(pack);
         }
