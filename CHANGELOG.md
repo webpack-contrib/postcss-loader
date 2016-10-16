@@ -1,3 +1,9 @@
+## 1.0
+* Add common PostCSS config support (by Mateusz Derks).
+* Add Webpack 2 support with `plugins` query option (by Izaak Schroeder).
+* Add `dependency` message support.
+* Rewite docs (by Michael Ciniawsky).
+
 ## 0.13
 * Add `exec` parameter (by Neal Granger).
 
