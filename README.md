@@ -39,8 +39,8 @@ module.exports = {
   module: {
     loaders: [
       {
-        test:   /\.css$/,
-        loader: [
+        test: /\.css$/,
+        loaders: [
           'style-loader',
           'css-loader?importLoaders=1',
           'postcss-loader'
@@ -110,7 +110,7 @@ module.exports = {
     loaders: [
       {
         test:   /\.css$/,
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?importLoaders=1',
           'postcss-loader'
@@ -166,7 +166,7 @@ module.exports = {
     loaders: [
       {
         test:   /\.sss/,
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?importLoaders=1',
           'postcss-loader?parser=sugarss'
@@ -190,7 +190,7 @@ module.exports = {
     loaders: [
       {
         test: '\/.css',
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?importLoaders=1',
           'postcss-loader?sourceMap=inline'
@@ -213,7 +213,7 @@ either add the css-loader’s [`importLoaders`] option
 …
       {
         test: /\.css$/,
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?modules&importLoaders=1',
           'postcss-loader'
@@ -238,7 +238,7 @@ you can use the [postcss-js] parser.
 …
       {
         test: /\.style.js$/,
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?modules&importLoaders=1',
           'postcss-loader?parser=postcss-js',
@@ -270,7 +270,7 @@ If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 …
       {
         test:   /\.style.xyz$/,
-        loader: [
+        loaders: [
           'style-loader',
           'css-loader?modules&importLoaders=1',
           'postcss-loader?parser=custom-parser&exec'
