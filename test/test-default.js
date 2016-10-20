@@ -7,6 +7,16 @@ describe('default', function () {
         expect(css).to.eql('a { color: blue }\n');
     });
 
+    it('overrides default config by subdir config', function () {
+        var css = require('!raw-loader!../!./cases/config/style.css');
+        expect(css).to.eql('a { color: black }\n');
+    });
+
+    it('send webpack instance to config', function () {
+        var css = require('!raw-loader!../!./cases/env/style.css');
+        expect(css).to.eql('a::before { content: "style.css" }\n');
+    });
+
     it('processes CSS in safe mode', function () {
         var css = require('!raw-loader!' +
                           '../?parser=postcss-safe-parser!' +

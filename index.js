@@ -2,6 +2,7 @@ var loaderUtils = require('loader-utils');
 var loadConfig  = require('postcss-load-config');
 var postcss     = require('postcss');
 var assign      = require('object-assign');
+var path        = require('path');
 
 var PostCSSLoaderError = require('./error');
 
@@ -56,7 +57,7 @@ module.exports = function (source, map) {
                 throw new Error('PostCSS plugin pack is supported ' +
                                 'only when use plugins in webpack config');
             }
-            return loadConfig(pack);
+            return loadConfig({ webpack: loader }, path.dirname(file));
         }
     }).then(function (config) {
         if ( !config ) config = { };

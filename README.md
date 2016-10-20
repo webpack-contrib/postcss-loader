@@ -281,6 +281,21 @@ If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 
 [postcss-js]: https://github.com/postcss/postcss-js
 
+### Dymaic Config
+
+PostCSS loader sends a loaded instance to PostCSS common config.
+You can use it to do some real magic:
+
+```js
+module.exports = function (ctx) {
+    if (check(ctx.webpack.resourcePath)) {
+        return plugins1;
+    } else {
+        return plugins2;
+    }
+}
+```
+
 ### Webpack Events
 
 Webpack provides webpack plugin developers a convenient way
