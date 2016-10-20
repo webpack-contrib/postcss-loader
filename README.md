@@ -292,4 +292,4 @@ See the [example] implementation.
 Event `postcss-loader-before-processing` is fired before processing and allows
 to add or remove postcss plugins.
 
-[example]: https://github.com/postcss/postcss-loader/blob/master/test/support/webpack-plugins/rewrite.js
+[example]: https://github.com/postcss/postcss-loader/blob/master/test/webpack-plugins/rewrite.js

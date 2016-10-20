@@ -6,7 +6,7 @@ describe('incorrect using packs', function () {
         var error;
         try {
             require('!raw-loader!../?pack=blues!' +
-                    './support/cases/style.css');
+                    './cases/style.css');
         } catch (err) {
             error = err;
         }

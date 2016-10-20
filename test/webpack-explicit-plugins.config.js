@@ -1,8 +1,8 @@
 var path = require('path');
 
-var blue = require('./support/plugins/blue');
-var red = require('./support/plugins/red');
-var RewritePlugin = require('./support/webpack-plugins/rewrite.js');
+var blue = require('./plugins/blue');
+var red = require('./plugins/red');
+var RewritePlugin = require('./webpack-plugins/rewrite.js');
 
 module.exports = {
     target:  'node',

@@ -1,6 +1,6 @@
 var path = require('path');
 
-var RewritePlugin = require('./support/webpack-plugins/rewrite.js');
+var RewritePlugin = require('./webpack-plugins/rewrite.js');
 
 module.exports = {
     target:  'node',
