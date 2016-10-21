@@ -56,9 +56,9 @@ Then create `postcss.config.js`:
 ```js
 module.exports = {
   plugins: [
-    require('postcss-smart-import')({ skipDuplicates: true }),
-    require('precss'),
-    require('autoprefixer')
+    require('postcss-smart-import')({ /* ...options */ }),
+    require('precss')({ /* ...options */ }),
+    require('autoprefixer')({ /* ...options */ })
   ]
 }
 ```
@@ -90,9 +90,9 @@ module.exports = {
             options: {
               plugins: function () {
                 return [
-                  require('postcss-smart-import')({ skipDuplicates: true }),
-                  require('precss'),
-                  require('autoprefixer')
+                  require('postcss-smart-import')({ /* ...options */ }),
+                  require('precss')({ /* ...options */ }),
+                  require('autoprefixer')({ /* ...options */ })
                 ];
               }
             }
@@ -122,9 +122,9 @@ module.exports = {
   },
   postcss: function () {
     return [
-      require('postcss-smart-import')({ skipDuplicates: true }),
-      require('precss'),
-      require('autoprefixer')
+      require('postcss-smart-import')({ /* ...options */ }),
+      require('precss')({ /* ...options */ }),
+      require('autoprefixer')({ /* ...options */ })
     ];
   }
 }
