@@ -56,6 +56,7 @@ Then create `postcss.config.js`:
 ```js
 module.exports = {
   plugins: [
+    require('postcss-smart-import')({ skipDuplicates: true }),
     require('precss'),
     require('autoprefixer')
   ]
@@ -89,6 +90,7 @@ module.exports = {
             options: {
               plugins: function () {
                 return [
+                  require('postcss-smart-import')({ skipDuplicates: true }),
                   require('precss'),
                   require('autoprefixer')
                 ];
@@ -120,34 +122,13 @@ module.exports = {
   },
   postcss: function () {
     return [
+      require('postcss-smart-import')({ skipDuplicates: true }),
       require('precss'),
       require('autoprefixer')
     ];
   }
 }
 ```
-
-### Autoprefixer
-
-We don’t recommend to put Autoprefixer’s browsers to plugin options.
-Webpack `css-loader` contains `cssnano`. It uses Autoprefixer too.
-
-As result you will have different browsers in Autoprefixer
-and CSS minification. At result, `css-loader` could clean some prefixes
-in production.
-
-We recommend to put browsers in `browserslist` config in project root:
-
-```
-last 2 versions
-ie 11
-```
-
-As result other tools (for example, Stylelint) will use same browsers settings.
-
-Also, [please vote] for disable second Autoprefixer in `css-loader`.
-
-[please vote]: https://github.com/webpack/css-loader/issues/281
 
 ## Options
 
