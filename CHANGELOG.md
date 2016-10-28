@@ -1,3 +1,7 @@
+## 1.1
+* PostCSS common config could be placed to subdirs.
+* Add webpack instance to PostCSS common config context.
+
 ## 1.0
 * Add common PostCSS config support (by Mateusz Derks).
 * Add Webpack 2 support with `plugins` query option (by Izaak Schroeder).
