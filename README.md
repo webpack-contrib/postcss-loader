@@ -31,8 +31,8 @@ many PostCSS tools will be able to share it.
 
 ### PostCSS Config
 
-Add PostCSS Loader to `webpack.config.js`. Put it before `css-loader`
-and `style-loader`. But after `sass-loader`, if you use it.
+Add PostCSS Loader to `webpack.config.js`. Put it after `css-loader`
+and `style-loader`. But before `sass-loader`, if you use it.
 
 ```js
 module.exports = {
