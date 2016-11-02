@@ -262,7 +262,7 @@ If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 
 [postcss-js]: https://github.com/postcss/postcss-js
 
-### Dymaic Config
+### Dynamic Config
 
 PostCSS loader sends a loaded instance to PostCSS common config.
 You can use it to do some real magic:
