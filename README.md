@@ -25,12 +25,6 @@ npm install postcss-loader --save-dev
 
 ## Usage
 
-You can configure PostCSS Loader in common PostCSS config or directly
-in Webpack config. Common PostCSS config is recommended way, because
-many PostCSS tools will be able to share it.
-
-### PostCSS Config
-
 Add PostCSS Loader to `webpack.config.js`. Put it after `css-loader`
 and `style-loader`. But before `sass-loader`, if you use it.
 
@@ -70,65 +64,6 @@ in `project/src/legacy/postcss.config.js`.
 You can read more about common PostCSS config in [postcss-load-config].
 
 [postcss-load-config]: https://github.com/michael-ciniawsky/postcss-load-config
-
-### Webpack 2.x Config
-
-```js
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: { importLoaders: 1 }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: function () {
-                return [
-                  require('postcss-smart-import')({ /* ...options */ }),
-                  require('precss')({ /* ...options */ }),
-                  require('autoprefixer')({ /* ...options */ })
-                ];
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-### Webpack 1.x Config
-
-```js
-module.exports = {
-  module: {
-    loaders: [
-      {
-        test:   /\.css$/,
-        loaders: [
-          'style-loader',
-          'css-loader?importLoaders=1',
-          'postcss-loader'
-        ]
-      }
-    ]
-  },
-  postcss: function () {
-    return [
-      require('postcss-smart-import')({ /* ...options */ }),
-      require('precss')({ /* ...options */ }),
-      require('autoprefixer')({ /* ...options */ })
-    ];
-  }
-}
-```
 
 ## Options
 
