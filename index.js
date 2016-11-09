@@ -51,7 +51,7 @@ module.exports = function (source, map) {
 
     Promise.resolve().then(function () {
         if ( typeof options !== 'undefined' ) {
-            return parseOptions(options, pack);
+            return parseOptions.call(loader, options, pack);
         } else {
             if ( pack ) {
                 throw new Error('PostCSS plugin pack is supported ' +
