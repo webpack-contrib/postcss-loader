@@ -1,3 +1,6 @@
+## 1.1.1
+* Fix `this` in options function (by Jeff Escalante).
+
 ## 1.1
 * PostCSS common config could be placed to subdirs.
 * Add webpack instance to PostCSS common config context.
