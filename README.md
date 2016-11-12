@@ -205,9 +205,9 @@ You can use it to do some real magic:
 ```js
 module.exports = function (ctx) {
     if (check(ctx.webpack.resourcePath)) {
-        return plugins1;
+        return { plugins: plugins1 };
     } else {
-        return plugins2;
+        return { plugins: plugins2 };
     }
 }
 ```
