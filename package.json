@@ -2,6 +2,7 @@
   "name": "postcss-loader",
   "version": "1.1.1",
   "description": "PostCSS loader for webpack",
+  "engines": { "node": ">=0.12", "npm": ">=3" },
   "keywords": ["webpack", "loader", "css", "postcss", "postcss-runner"],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
   "license": "MIT",
