@@ -50,4 +50,11 @@ describe('default', function () {
         expect(css).to.include('/*# sourceMappingURL=');
     });
 
+    it('allows to change config path', function () {
+        var css = require('!raw-loader!' +
+                          '../?config=test/cases/config/postcss.config.js' +
+                          '!./cases/style.css');
+        expect(css).to.eql('a { color: black }\n');
+    });
+
 });
