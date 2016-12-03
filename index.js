@@ -48,8 +48,8 @@ module.exports = function (source, map) {
     var options  = params.plugins || loader.options.postcss;
     var pack     = params.pack;
     var callback = loader.async();
-    var configPath = params.config ? 
-        path.join(process.cwd(), params.config) : path.dirname(file)
+    var configPath = params.config ?
+        path.join(process.cwd(), params.config) : path.dirname(file);
 
     Promise.resolve().then(function () {
         if ( typeof options !== 'undefined' ) {
