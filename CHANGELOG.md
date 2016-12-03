@@ -1,3 +1,6 @@
+## 1.2
+* Add `config` parameter (by sainthkh).
+
 ## 1.1.1
 * Fix `this` in options function (by Jeff Escalante).
 
