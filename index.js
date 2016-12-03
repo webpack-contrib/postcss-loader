@@ -48,7 +48,8 @@ module.exports = function (source, map) {
     var options  = params.plugins || loader.options.postcss;
     var pack     = params.pack;
     var callback = loader.async();
-    var config_path = params.config ? path.join(process.cwd(), params.config) : path.dirname(file)
+    var configPath = params.config ? 
+        path.join(process.cwd(), params.config) : path.dirname(file)
 
     Promise.resolve().then(function () {
         if ( typeof options !== 'undefined' ) {
@@ -58,7 +59,7 @@ module.exports = function (source, map) {
                 throw new Error('PostCSS plugin pack is supported ' +
                                 'only when use plugins in webpack config');
             }
-            return loadConfig({ webpack: loader }, config_path);
+            return loadConfig({ webpack: loader }, configPath);
         }
     }).then(function (config) {
         if ( !config ) config = { };
