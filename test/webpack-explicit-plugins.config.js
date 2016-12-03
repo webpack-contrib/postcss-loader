@@ -9,6 +9,7 @@ module.exports = {
     context: __dirname,
     entry:   './test-explicit-plugins.js',
     output: {
+        filename: 'test-explicit-plugins.test.js',
         path: path.join(__dirname, '..', 'build')
     },
     postcss: function () {

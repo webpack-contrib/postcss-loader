@@ -10,6 +10,7 @@ module.exports = {
     context: __dirname,
     entry:   './test-custom-parser.js',
     output: {
+        filename: 'test-custom-parser.test.js',
         path: path.join(__dirname, '..', 'build')
     },
     postcss: function () {

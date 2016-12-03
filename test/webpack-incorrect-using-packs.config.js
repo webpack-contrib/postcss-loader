@@ -7,6 +7,7 @@ module.exports = {
     context: __dirname,
     entry:   './test-incorrect-using-packs.js',
     output:  {
+        filename: 'test-incorrect-using-packs.test.js',
         path: path.join(__dirname, '..', 'build')
     },
     plugins: [

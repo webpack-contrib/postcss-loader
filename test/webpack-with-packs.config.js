@@ -9,6 +9,7 @@ module.exports = {
     context: __dirname,
     entry:   './test-with-packs.js',
     output: {
+        filename: 'test-with-packs.test.js',
         path: path.join(__dirname, '..', 'build')
     },
     postcss: function () {

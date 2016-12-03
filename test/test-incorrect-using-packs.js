@@ -1,5 +1,3 @@
-var expect = require('chai').expect;
-
 describe('incorrect using packs', function () {
 
     it('fails to load specific pack', function () {
@@ -10,7 +8,7 @@ describe('incorrect using packs', function () {
         } catch (err) {
             error = err;
         }
-        expect(error.message).to.match(/find module/);
+        expect(error.message).toMatch(/find module/);
     });
 
 });

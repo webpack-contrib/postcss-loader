@@ -37,8 +37,8 @@ BUILD_CONFIGS.forEach(function (config) {
 gulp.task('build', BUILD_CONFIGS);
 
 gulp.task('test', ['build'], function () {
-    var mocha = require('gulp-mocha');
-    return gulp.src('build/*.js', { read: false }).pipe(mocha());
+    var jest = require('gulp-jest').default;
+    return gulp.src('build').pipe(jest());
 });
 
 gulp.task('default', ['lint', 'test']);
