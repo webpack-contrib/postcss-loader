@@ -1,3 +1,6 @@
+## 1.2.1
+* Fix relative `config` parameter resolving (by Simen Bekkhus).
+
 ## 1.2
 * Add `config` parameter (by sainthkh).
 
