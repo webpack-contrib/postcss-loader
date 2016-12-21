@@ -180,6 +180,11 @@ export default {
 }
 ```
 
+> If you are using Babel >= v6 you need to do the following in order for the setup to work
+
+> 1. Add [babel-plugin-add-module-exports] to your configuration
+> 2. You need to have only one **default** export per style module
+
 If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 
 ```js
@@ -196,6 +201,7 @@ If you use JS styles without `postcss-js` parser, you can add `exec` parameter:
 ```
 
 [postcss-js]: https://github.com/postcss/postcss-js
+[babel-plugin-add-module-exports]: https://github.com/59naga/babel-plugin-add-module-exports
 
 ### Dynamic Config
 
