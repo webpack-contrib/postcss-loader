@@ -1,8 +1,5 @@
 var path = require('path');
-var sugarss = require('sugarss');
 
-var blue = require('./plugins/blue');
-var red = require('./plugins/red');
 var RewritePlugin = require('./webpack-plugins/rewrite.js');
 
 module.exports = {
@@ -12,12 +9,6 @@ module.exports = {
     output: {
         filename: 'test-custom-parser.test.js',
         path: path.join(__dirname, '..', 'build')
-    },
-    postcss: function () {
-        return {
-            syntax: sugarss,
-            plugins: [blue, red({ alpha: 0.1 })]
-        };
     },
     plugins: [
         new RewritePlugin()
