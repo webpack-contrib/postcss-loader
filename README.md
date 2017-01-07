@@ -28,6 +28,27 @@ npm install postcss-loader --save-dev
 Add PostCSS Loader to `webpack.config.js`. Put it after `css-loader`
 and `style-loader`. But before `sass-loader`, if you use it.
 
+Webpack 2:
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader?importLoaders=1',
+          'postcss-loader'
+        ]
+      }
+    ]
+  }
+}
+```
+
+Webpack 1:
+
 ```js
 module.exports = {
   module: {
@@ -66,6 +87,63 @@ You can read more about common PostCSS config in [postcss-load-config].
 [postcss-load-config]: https://github.com/michael-ciniawsky/postcss-load-config
 
 ## Options
+
+### Plugins
+
+We recommend to use `postcss.config.js`, but also you can specify plugins
+directly in webpack config.
+
+#### Webpack 2
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css/,
+        use: [
+          …
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('precss'),
+                  require('autoprefixer')
+                ];
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+#### Webpack 1
+
+```js
+module.exports = {
+  module: {
+    loaders: [
+      {
+        test: /\.css$/,
+        loaders: [
+          …
+          'postcss-loader'
+        ]
+      }
+    ]
+  },
+  postcss: () => {
+    return [
+      require('precss'),
+      require('autoprefixer')
+    ];
+  }
+}
+```
 
 ### Syntaxes
 
