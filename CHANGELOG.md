@@ -1,3 +1,6 @@
+## 1.2.2
+* Watch `postcss.config.js` for changes (by Michael Ciniawsky).
+
 ## 1.2.1
 * Fix relative `config` parameter resolving (by Simen Bekkhus).
 
