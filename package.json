@@ -2,10 +2,7 @@
   "name": "postcss-loader",
   "version": "1.2.1",
   "description": "PostCSS loader for webpack",
-  "engines": {
-    "node": ">=0.12",
-    "npm": ">=3"
-  },
+  "engines": { "node": ">=0.12" },
   "keywords": [
     "webpack",
     "loader",
@@ -19,8 +16,8 @@
   "dependencies": {
     "loader-utils": "^0.2.16",
     "object-assign": "^4.1.0",
-    "postcss": "^5.2.8",
-    "postcss-load-config": "^1.0.0"
+    "postcss": "^5.2.9",
+    "postcss-load-config": "^1.1.0"
   },
   "devDependencies": {
     "eslint": "^3.12.2",
