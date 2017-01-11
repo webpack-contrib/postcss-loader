@@ -2,7 +2,9 @@
   "name": "postcss-loader",
   "version": "1.2.1",
   "description": "PostCSS loader for webpack",
-  "engines": { "node": ">=0.12" },
+  "engines": {
+    "node": ">=0.12"
+  },
   "keywords": [
     "webpack",
     "loader",
@@ -20,14 +22,15 @@
     "postcss-load-config": "^1.1.0"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
+    "eslint": "^3.13.1",
     "eslint-config-postcss": "^2.0.2",
     "fs-extra": "^1.0.0",
     "gulp": "^3.9.1",
     "gulp-eslint": "^3.0.1",
-    "gulp-jest": "^0.6.3",
+    "gulp-jest": "^1.0.0",
+    "jest-cli": "^18.1.0",
     "json-loader": "^0.5.4",
-    "lint-staged": "^3.2.5",
+    "lint-staged": "^3.2.6",
     "postcss-js": "^0.2.0",
     "postcss-safe-parser": "^2.0.0",
     "pre-commit": "^1.2.2",
