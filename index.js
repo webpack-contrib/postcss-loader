@@ -48,6 +48,7 @@ module.exports = function (source, map) {
     var options  = params.plugins || loader.options.postcss;
     var pack     = params.pack;
     var callback = loader.async();
+
     var configPath;
 
     if (params.config) {
@@ -72,6 +73,9 @@ module.exports = function (source, map) {
         }
     }).then(function (config) {
         if ( !config ) config = { };
+
+        if ( config.file ) loader.addDependency(config.file);
+
         var plugins = config.plugins || [];
 
         var opts  = assign({}, config.options, {
