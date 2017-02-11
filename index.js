@@ -91,13 +91,25 @@ module.exports = function (source, map) {
         if ( map && map.mappings ) opts.map.prev = map;
 
         if ( params.syntax ) {
-            opts.syntax = require(params.syntax);
+            if ( typeof params.syntax === 'string' ) {
+                opts.syntax = require(params.syntax);
+            } else {
+                opts.syntax = params.syntax;
+            }
         }
         if ( params.parser ) {
-            opts.parser = require(params.parser);
+            if ( typeof params.parser === 'string' ) {
+                opts.parser = require(params.parser);
+            } else {
+                opts.parser = params.parser;
+            }
         }
         if ( params.stringifier ) {
-            opts.stringifier = require(params.stringifier);
+            if ( typeof params.stringifier === 'string' ) {
+                opts.stringifier = require(params.stringifier);
+            } else {
+                opts.stringifier = params.stringifier;
+            }
         }
 
         var exec = params.exec || config.exec;
