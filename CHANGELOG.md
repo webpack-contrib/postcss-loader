@@ -1,3 +1,6 @@
+## 1.3
+* Allow object in syntax options, not only path for require (by Jeff Escalante).
+
 ## 1.2.2
 * Watch `postcss.config.js` for changes (by Michael Ciniawsky).
 
