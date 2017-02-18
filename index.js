@@ -69,7 +69,7 @@ module.exports = function (source, map) {
                 throw new Error('PostCSS plugin pack is supported ' +
                                 'only when use plugins in webpack config');
             }
-            return loadConfig({ webpack: loader }, configPath, {argv: false});
+            return loadConfig({ webpack: loader }, configPath, { argv: false });
         }
     }).then(function (config) {
         if ( !config ) config = { };
