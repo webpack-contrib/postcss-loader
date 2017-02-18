@@ -1,3 +1,6 @@
+## 1.3.1
+* Fix conflict with CLI `--config` argument (by EGOIST).
+
 ## 1.3
 * Allow object in syntax options, not only path for require (by Jeff Escalante).
 
