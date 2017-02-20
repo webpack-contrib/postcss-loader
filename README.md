@@ -158,7 +158,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test:   /\.sss/,
+        test:   /\.css/,
         loaders: [
           'style-loader',
           'css-loader?importLoaders=1',
