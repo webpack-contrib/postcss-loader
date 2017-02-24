@@ -1,3 +1,6 @@
+## 1.3.2
+* Fix deprecated warning (by Xiaoyu Zhai).
+
 ## 1.3.1
 * Fix conflict with CLI `--config` argument (by EGOIST).
 
