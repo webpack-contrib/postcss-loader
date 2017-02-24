@@ -43,7 +43,7 @@ module.exports = function (source, map) {
 
     var loader = this;
     var file   = loader.resourcePath;
-    var params = loaderUtils.parseQuery(loader.query);
+    var params = loaderUtils.getOptions(loader) || {}
 
     var options  = params.plugins || loader.options.postcss;
     var pack     = params.pack;
