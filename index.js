@@ -1,120 +1,119 @@
-var loaderUtils = require('loader-utils');
-var loadConfig  = require('postcss-load-config');
-var postcss     = require('postcss');
-var assign      = require('object-assign');
-var path        = require('path');
+const path = require('path');
+const loaderUtils = require('loader-utils');
 
-var PostCSSLoaderError = require('./error');
+const postcss = require('postcss');
+const postcssrc = require('postcss-load-config');
 
-function parseOptions(options, pack) {
-    if ( typeof options === 'function' ) {
-        options = options.call(this, this);
+const PostCSSLoaderError = require('./error');
+
+function parseOptions(params) {
+    if (typeof params === 'function') {
+        params = params.call(this, this);
     }
 
-    var plugins;
-    if ( typeof options === 'undefined') {
+    console.log('params', params);
+
+    let plugins;
+
+    if (typeof params === 'undefined') {
         plugins = [];
-    } else if ( Array.isArray(options) ) {
-        plugins = options;
+    } else if (Array.isArray(params)) {
+        plugins = params;
     } else {
-        plugins = options.plugins || options.defaults;
+        plugins = params.plugins || params.defaults;
     }
 
-    if ( pack ) {
-        plugins = options[pack];
-        if ( !plugins ) {
-            throw new Error('PostCSS plugin pack is not defined in options');
-        }
+    console.log('plugins', plugins);
+
+    let options = {};
+
+    if (typeof params !== 'undefined') {
+        options.parser = params.parser;
+        options.syntax = params.syntax;
+        options.stringifier = params.stringifier;
     }
 
-    var opts = { };
-    if ( typeof options !== 'undefined' ) {
-        opts.stringifier = options.stringifier;
-        opts.parser      = options.parser;
-        opts.syntax      = options.syntax;
-    }
+    // console.log('options', options);
 
-    var exec = options && options.exec;
-    return Promise.resolve({ options: opts, plugins: plugins, exec: exec });
+    let exec = params && params.exec;
+
+    // console.log('exec', exec);
+
+    return Promise.resolve({ options: options, plugins: plugins, exec: exec });
 }
 
-module.exports = function (source, map) {
-    if ( this.cacheable ) this.cacheable();
+module.exports = function (css, map) {
+    if (this.cacheable) this.cacheable();
 
-    var loader = this;
-    var file   = loader.resourcePath;
-    var params = loaderUtils.getOptions(loader) || {};
+    const loader = this;
 
-    var options  = params.plugins || loader.options.postcss;
-    var pack     = params.pack;
-    var callback = loader.async();
+    const file = loader.resourcePath;
+    const params = loaderUtils.getOptions(loader) || {};
 
-    var configPath;
+    const settings = params.plugins || loader.options.postcss;
 
-    if (params.config) {
-        if (path.isAbsolute(params.config)) {
-            configPath = params.config;
-        } else {
-            configPath = path.join(process.cwd(), params.config);
+    const callback = loader.async();
+
+    let rc;
+    let context = {
+        extname: path.extname(file),
+        dirname: path.dirname(file),
+        basename: path.basename(file),
+        webpack: { watch: loader.addDependency }
+    };
+
+    params.config ?
+      rc = path.resolve(params.config) :
+      rc = path.dirname(file);
+
+    Promise.resolve().then(() => {
+        if (typeof settings !== 'undefined') {
+            return parseOptions.call(loader, settings);
         }
-    } else {
-        configPath = path.dirname(file);
-    }
 
-    Promise.resolve().then(function () {
-        if ( typeof options !== 'undefined' ) {
-            return parseOptions.call(loader, options, pack);
-        } else {
-            if ( pack ) {
-                throw new Error('PostCSS plugin pack is supported ' +
-                                'only when use plugins in webpack config');
-            }
-            return loadConfig({ webpack: loader }, configPath, { argv: false });
-        }
-    }).then(function (config) {
-        if ( !config ) config = { };
+        return postcssrc(context, rc, { argv: false });
+    }).then((config) => {
+        if (!config) config = {};
 
-        if ( config.file ) loader.addDependency(config.file);
+        if (config.file) loader.addDependency(config.file);
 
-        var plugins = config.plugins || [];
+        console.log('Config Plugins', config.plugins);
 
-        var opts  = assign({}, config.options, {
+        let plugins = config.plugins || [];
+
+        console.log('Plugins', plugins);
+        console.log('webpack Version', process.env.WEBPACK_VERSION);
+
+        let options = Object.assign({}, config.options, {
             from: file,
-            to:   file,
+            to: file,
             map:  {
-                inline:     params.sourceMap === 'inline',
+                inline: params.sourceMap === 'inline',
                 annotation: false
             }
         });
 
-        if ( typeof map === 'string' ) map = JSON.parse(map);
-        if ( map && map.mappings ) opts.map.prev = map;
+        if (typeof map === 'string') map = JSON.parse(map);
+        if (map && map.mappings) options.map.prev = map;
 
-        if ( params.syntax ) {
-            if ( typeof params.syntax === 'string' ) {
-                opts.syntax = require(params.syntax);
-            } else {
-                opts.syntax = params.syntax;
-            }
-        }
-        if ( params.parser ) {
-            if ( typeof params.parser === 'string' ) {
-                opts.parser = require(params.parser);
-            } else {
-                opts.parser = params.parser;
-            }
-        }
-        if ( params.stringifier ) {
-            if ( typeof params.stringifier === 'string' ) {
-                opts.stringifier = require(params.stringifier);
-            } else {
-                opts.stringifier = params.stringifier;
-            }
+        if (typeof options.syntax === 'string') {
+            options.syntax = require(options.syntax);
         }
 
-        var exec = params.exec || config.exec;
-        if ( params.parser === 'postcss-js' || exec ) {
-            source = loader.exec(source, loader.resource);
+        if (typeof options.parser === 'string') {
+            options.parser = require(options.parser);
+        }
+
+        if (typeof options.stringifier === 'string') {
+            options.stringifier = require(options.stringifier);
+        }
+
+        // console.log('Options', options);
+
+        let exec = options.exec || config.exec;
+
+        if (options.parser === 'postcss-js' || exec) {
+            css = loader.exec(css, loader.resource);
         }
 
         // Allow plugins to add or remove postcss plugins
@@ -122,30 +121,34 @@ module.exports = function (source, map) {
             plugins = loader._compilation.applyPluginsWaterfall(
               'postcss-loader-before-processing',
               [].concat(plugins),
-              params
+              options
             );
         }
 
-        return postcss(plugins).process(source, opts).then(function (result) {
-            result.warnings().forEach(function (msg) {
-                loader.emitWarning(msg.toString());
-            });
+        return postcss(plugins)
+          .process(css, options)
+          .then((result) => {
+              result.warnings().forEach((msg) => {
+                  loader.emitWarning(msg.toString());
+              });
 
-            result.messages.forEach(function (msg) {
-                if ( msg.type === 'dependency' ) {
-                    loader.addDependency(msg.file);
-                }
-            });
+              result.messages.forEach((msg) => {
+                  if (msg.type === 'dependency') {
+                      loader.addDependency(msg.file);
+                  }
+              });
 
-            var resultMap = result.map ? result.map.toJSON() : null;
-            callback(null, result.css, resultMap);
-            return null;
-        });
-    }).catch(function (error) {
-        if ( error.name === 'CssSyntaxError' ) {
-            callback(new PostCSSLoaderError(error));
-        } else {
+              callback(
+                null, result.css, result.map ? result.map.toJSON() : null
+              );
+
+              // console.log('Index', loader.loaderIndex);
+
+              return null;
+          });
+    }).catch((error) => {
+        return error.name === 'CssSyntaxError' ?
+            callback(new PostCSSLoaderError(error)) :
             callback(error);
-        }
     });
 };
