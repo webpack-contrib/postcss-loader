@@ -124,11 +124,6 @@ module.exports = function (source, map) {
               [].concat(plugins),
               params
             );
-        } else {
-            loader.emitWarning(
-              'this._compilation is not available thus ' +
-              '`postcss-loader-before-processing` is not supported'
-            );
         }
 
         return postcss(plugins).process(source, opts).then(function (result) {
