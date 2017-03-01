@@ -1,0 +1,9 @@
+{
+  "file": "sourceMap",
+  "options": {
+    "config": {
+      "path": "test/fixtures/config/postcss.config.js"
+    },
+    "sourceMap": true
+  }
+}

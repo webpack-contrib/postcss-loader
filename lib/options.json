@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "config": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "ctx": {
+          "type": "object"
+        }
+      },
+      "additionalProperties": false
+    },
+    "parser": {
+      "type": "string"
+    },
+    "syntax": {
+      "type": "string"
+    },
+    "stringifier": {
+      "type": "string"
+    },
+    "sourceMap": {
+      "type": [ "string", "boolean" ]
+    },
+    "exec": {
+      "type": "boolean"
+    },
+    "rewrite": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": true
+}

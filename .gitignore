@@ -1,4 +1,15 @@
-node_modules/
+# OS
+
+.DS_Store
+._*
+
+# NODEJS
+
 npm-debug.log
 yarn-error.log
-build/
+
+dmd
+jest
+coverage
+jsdoc-api
+node_modules
