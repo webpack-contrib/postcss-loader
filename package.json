@@ -1,6 +1,6 @@
 {
   "name": "postcss-loader",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "PostCSS loader for webpack",
   "engines": {
     "node": ">=0.12"

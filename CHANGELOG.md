@@ -1,3 +1,6 @@
+## 1.3.3
+* Remove `postcss-loader-before-processing` warning (by Michael Ciniawsky).
+
 ## 1.3.2
 * Fix deprecated warning (by Xiaoyu Zhai).
 
