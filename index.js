@@ -61,7 +61,7 @@ module.exports = function (source, map) {
         configPath = path.dirname(file);
     }
 
-    Promise.resolve().then(function () {
+    return Promise.resolve(function () {
         if ( typeof options !== 'undefined' ) {
             return parseOptions.call(loader, options, pack);
         } else {
