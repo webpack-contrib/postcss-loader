@@ -1,3 +1,18 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/postcss/postcss-loader/compare/1.2.2...v2.0.0) (2017-05-08)
+
+
+### Features
+
+* **index:** add ctx, ctx.file, ctx.options ([0dceb2c](https://github.com/postcss/postcss-loader/commit/0dceb2c))
+* **index:** add options validation ([2b76df8](https://github.com/postcss/postcss-loader/commit/2b76df8))
+
+
+
 ## 1.3.3
 * Remove `postcss-loader-before-processing` warning (by Michael Ciniawsky).
 
