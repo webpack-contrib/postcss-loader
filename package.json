@@ -23,6 +23,7 @@
     "jsdoc-to-markdown": "^3.x",
     "postcss-js": "^0.x",
     "standard": "^10.x",
+    "standard-version": "^4.0.0",
     "sugarss": "^1.x",
     "webpack": "^2.x"
   },
