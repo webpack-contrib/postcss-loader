@@ -228,7 +228,7 @@ module.exports = ({ file, options, env }) => ({
   test: /\.sss$/,
   use: [
     ...,
-    { loader: 'postcss-loader' options: { parser: 'sugarss' } }
+    { loader: 'postcss-loader', options: { parser: 'sugarss' } }
   ]
 }
 ```
@@ -241,7 +241,7 @@ module.exports = ({ file, options, env }) => ({
   test: /\.css$/,
   use: [
     ...,
-    { loader: 'postcss-loader' options: { syntax: 'sugarss' } }
+    { loader: 'postcss-loader', options: { syntax: 'sugarss' } }
   ]
 }
 ```
@@ -254,7 +254,7 @@ module.exports = ({ file, options, env }) => ({
   test: /\.css$/,
   use: [
     ...,
-    { loader: 'postcss-loader' options: { stringifier: 'midas' } }
+    { loader: 'postcss-loader', options: { stringifier: 'midas' } }
   ]
 }
 ```
@@ -271,9 +271,9 @@ Enables source map support, `postcss-loader` will use the previous source map gi
   test: /\.css/,
   use: [
     { loader: 'style-loader', options: { sourceMap: true } },
-    { loader: 'css-loader' options: { sourceMap: true } },
-    { loader: 'postcss-loader' options: { sourceMap: true } },
-    { loader: 'sass-loader' options: { sourceMap: true } }
+    { loader: 'css-loader', options: { sourceMap: true } },
+    { loader: 'postcss-loader', options: { sourceMap: true } },
+    { loader: 'sass-loader', options: { sourceMap: true } }
   ]
 }
 ```
@@ -360,7 +360,7 @@ If you want to process styles written in JavaScript, use the [postcss-js] parser
   test: /\.style.js$/,
   use: [
     'style-loader',
-    { loader: 'css-loader' options: { importLoaders: 2 } },
+    { loader: 'css-loader', options: { importLoaders: 2 } },
     { loader: 'postcss-loader', options: { parser: 'postcss-js' } },
     'babel-loader'
   ]
@@ -406,7 +406,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [
-            { loader: 'css-loader' options: { importLoaders: 1 } },
+            { loader: 'css-loader', options: { importLoaders: 1 } },
             'postcss-loader'
           ]
         })
