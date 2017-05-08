@@ -1,0 +1,6 @@
+{
+  "file": "stringifier",
+  "options": {
+    "stringifier": "sugarss"
+  }
+}
