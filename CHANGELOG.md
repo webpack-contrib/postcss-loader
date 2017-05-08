@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/postcss/postcss-loader/compare/v2.0.0...v2.0.1) (2017-05-08)
+
+
+### Bug Fixes
+
+* **index:** 'Cannot create property `prev` on boolean `false`' (`options.sourceMap`) ([c4f0064](https://github.com/postcss/postcss-loader/commit/c4f0064))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/postcss/postcss-loader/compare/1.2.2...v2.0.0) (2017-05-08)
 
