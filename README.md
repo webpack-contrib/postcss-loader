@@ -169,7 +169,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 **postcss.config.js**
 ```js
 module.exports = ({ file, options, env }) => ({
-  parser: file.extname === '.sss' ? 'sugarss' : false
+  parser: file.extname === '.sss' ? 'sugarss' : false,
   plugins: {
     'postcss-import': { root: file.dirname },
     'cssnext': options.cssnext ? options.cssnext : false,
