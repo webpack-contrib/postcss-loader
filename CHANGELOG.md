@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.3"></a>
+## [2.0.3](https://github.com/postcss/postcss-loader/compare/v2.0.2...v2.0.3) (2017-05-09)
+
+
+### Bug Fixes
+
+* **index:** don't fail on 'sourceMap: false' && emit a warning instead, when previous map found (`options.sourceMap`) ([159b66a](https://github.com/postcss/postcss-loader/commit/159b66a))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/postcss/postcss-loader/compare/v2.0.1...v2.0.2) (2017-05-09)
 
