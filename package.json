@@ -1,57 +1,58 @@
 {
   "name": "postcss-loader",
-  "version": "1.3.3",
+  "version": "2.0.2",
   "description": "PostCSS loader for webpack",
+  "main": "lib/index.js",
   "engines": {
-    "node": ">=0.12"
+    "node": ">=4"
   },
-  "keywords": [
-    "webpack",
-    "loader",
-    "css",
-    "postcss",
-    "postcss-runner"
+  "files": [
+    "lib",
+    "index.js"
   ],
-  "author": "Andrey Sitnik <andrey@sitnik.ru>",
-  "license": "MIT",
-  "repository": "postcss/postcss-loader",
   "dependencies": {
-    "loader-utils": "^1.0.2",
-    "object-assign": "^4.1.1",
-    "postcss": "^5.2.15",
-    "postcss-load-config": "^1.2.0"
+    "loader-utils": "^1.x",
+    "postcss": "^6.x",
+    "postcss-load-config": "^1.x",
+    "schema-utils": "^0.x"
   },
   "devDependencies": {
-    "eslint": "^3.16.1",
-    "eslint-config-postcss": "^2.0.2",
-    "fs-extra": "^2.0.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^3.0.1",
-    "gulp-jest": "^1.0.0",
-    "jest-cli": "^19.0.2",
-    "json-loader": "^0.5.4",
-    "lint-staged": "^3.3.1",
-    "postcss-js": "^0.3.0",
-    "postcss-safe-parser": "^2.0.0",
-    "pre-commit": "^1.2.2",
-    "raw-loader": "^0.5.1",
-    "sugarss": "^0.2.0",
-    "webpack-stream": "^3.2.0"
+    "coveralls": "^2.x",
+    "fs-extra": "^3.x",
+    "jest": "^20.x",
+    "jsdoc-to-markdown": "^3.x",
+    "postcss-js": "^0.x",
+    "standard": "^10.x",
+    "standard-version": "^4.0.0",
+    "sugarss": "^1.x",
+    "webpack": "^2.x"
   },
   "scripts": {
-    "lint-staged": "lint-staged",
-    "test": "gulp"
+    "clean": "rm -rf dmd jsdoc-api jest_0 coverage test/builds",
+    "lint": "standard",
+    "docs": "jsdoc2md lib/index.js > LOADER.md",
+    "pretest": "npm run lint && npm run test:build",
+    "test": "jest",
+    "test:build": "node test/webpack.build.js",
+    "posttest": "npm run clean",
+    "release": "standard-version"
   },
-  "eslintConfig": {
-    "extends": "eslint-config-postcss/es5",
+  "standard": {
     "env": {
       "jest": true
-    }
+    },
+    "ignore": [
+      "*.test.js"
+    ]
   },
-  "lint-staged": {
-    "*.js": "eslint"
-  },
-  "pre-commit": [
-    "lint-staged"
-  ]
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-runner",
+    "webpack",
+    "webpack-loader"
+  ],
+  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "repository": "postcss/postcss-loader",
+  "license": "MIT"
 }

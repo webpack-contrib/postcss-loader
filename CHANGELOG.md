@@ -1,3 +1,38 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/postcss/postcss-loader/compare/v2.0.1...v2.0.2) (2017-05-09)
+
+
+### Bug Fixes
+
+* **index:** 'No PostCSS Config found' (`options.config`) (#215) ([e764761](https://github.com/postcss/postcss-loader/commit/e764761))
+
+
+
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/postcss/postcss-loader/compare/v2.0.0...v2.0.1) (2017-05-08)
+
+
+### Bug Fixes
+
+* **index:** 'Cannot create property `prev` on boolean `false`' (`options.sourceMap`) ([c4f0064](https://github.com/postcss/postcss-loader/commit/c4f0064))
+
+
+
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/postcss/postcss-loader/compare/1.2.2...v2.0.0) (2017-05-08)
+
+
+### Features
+
+* **index:** add ctx, ctx.file, ctx.options ([0dceb2c](https://github.com/postcss/postcss-loader/commit/0dceb2c))
+* **index:** add options validation ([2b76df8](https://github.com/postcss/postcss-loader/commit/2b76df8))
+
+
+
 ## 1.3.3
 * Remove `postcss-loader-before-processing` warning (by Michael Ciniawsky).
 

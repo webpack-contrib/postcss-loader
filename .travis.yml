@@ -1,6 +1,13 @@
+cache:
+  yarn: true
+  directories:
+    - node_modules
+
 language: node_js
-cache: yarn
 node_js:
-  - stable
-  - "6"
-  - "4"
+  - "node"
+  - 6
+  - 4
+
+notifications:
+  email: false
