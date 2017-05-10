@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/postcss/postcss-loader/compare/v2.0.3...v2.0.4) (2017-05-10)
+
+
+### Bug Fixes
+
+* **index:** `postcss.config.js` not resolved correctly (`options.config`) ([faaeee4](https://github.com/postcss/postcss-loader/commit/faaeee4))
+* **index:** update validation schema, better warning message ([4f20c99](https://github.com/postcss/postcss-loader/commit/4f20c99))
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/postcss/postcss-loader/compare/v2.0.2...v2.0.3) (2017-05-09)
 
