@@ -3,12 +3,6 @@
 const path = require('path')
 
 module.exports = (config) => {
-  config = JSON.parse(config)
-
-  if (config.options && config.options.plugins) {
-    config.options.plugins = [ require('./plugin')() ]
-  }
-
   return {
     target: 'node',
     devtool: 'source-map',

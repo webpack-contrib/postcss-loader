@@ -10,9 +10,9 @@ const builds = path.join(__dirname, 'builds')
 if (fs.existsSync(builds)) fs.remove(builds)
 
 fs.readdirSync(path.join(__dirname, 'configs'))
-  .filter((file) => path.extname(file) === '.json')
+  .filter((file) => path.extname(file) === '.js' && path.extname(path.basename(file, '.js')) === '.config')
   .forEach((config) => {
-    config = fs.readFileSync(path.join(__dirname, 'configs', config), 'utf8')
+    config = require(path.join(__dirname, 'configs', config))
     config = require(path.join(__dirname, 'webpack.config.js'))(config)
 
     webpack(config, () => {})
