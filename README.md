@@ -286,7 +286,7 @@ within the CSS directly as an annotation comment.
 **webpack.config.js**
 ```js
 {
-  loader: 'postcss-loader'
+  loader: 'postcss-loader',
   options: {
     sourceMap: 'inline'
   }
