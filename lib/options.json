@@ -13,6 +13,9 @@
       },
       "additionalProperties": false
     },
+    "exec": {
+      "type": "boolean"
+    },
     "parser": {
       "type": "string"
     },
@@ -24,12 +27,6 @@
     },
     "sourceMap": {
       "type": [ "string", "boolean" ]
-    },
-    "exec": {
-      "type": "boolean"
-    },
-    "rewrite": {
-      "type": "boolean"
     }
   },
   "additionalProperties": true
