@@ -1,6 +1,0 @@
-{
-  "file": "jss",
-  "options": {
-    "parser": "postcss-js"
-  }
-}
