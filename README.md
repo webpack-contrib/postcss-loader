@@ -336,7 +336,7 @@ either add the css-loader’s [`importLoaders`] option.
   test: /\.css$/,
   use: [
     'style-loader',
-    { loader: 'css-loader' options: { modules: true, importLoaders: 1 } },
+    { loader: 'css-loader', options: { modules: true, importLoaders: 1 } },
     'postcss-loader'
   ]
 }
