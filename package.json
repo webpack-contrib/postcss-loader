@@ -32,6 +32,7 @@
     "docs": "jsdoc2md lib/index.js > LOADER.md",
     "pretest": "npm run lint && npm run test:build",
     "test": "jest",
+    "test-only": "npm run test:build && jest && npm run clean",
     "test:build": "node test/webpack.build.js",
     "posttest": "npm run clean",
     "release": "standard-version"
