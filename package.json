@@ -13,6 +13,8 @@
   "dependencies": {
     "loader-utils": "^1.x",
     "postcss": "^6.x",
+    "postcss-icss-import": "^0.x",
+    "postcss-icss-url": "^0.x",
     "postcss-load-config": "^1.x",
     "schema-utils": "^0.x"
   },
@@ -23,7 +25,7 @@
     "jsdoc-to-markdown": "^3.x",
     "postcss-js": "^0.x",
     "standard": "^10.x",
-    "standard-version": "^4.0.0",
+    "standard-version": "^4.x",
     "sugarss": "^1.x",
     "webpack": "^2.x"
   },
