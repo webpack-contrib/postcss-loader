@@ -41,7 +41,7 @@ module.exports = {
   parser: 'sugarss',
   plugins: {
     'postcss-import': {},
-    'cssnext': {},
+    'postcss-cssnext': {},
     'autoprefixer': {},
     'cssnano': {}
   }
@@ -204,7 +204,7 @@ module.exports = ({ file, options, env }) => ({
   options: {
     plugins: (loader) => [
       require('postcss-import')({ root: loader.resourcePath }),
-      require('cssnext')(),
+      require('postcss-cssnext')(),
       require('autoprefixer')(),
       require('cssnano')()
     ]
