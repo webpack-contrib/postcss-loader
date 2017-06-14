@@ -1,5 +1,5 @@
 module.exports = {
-  file: 'parser',
+  file: 'parser-string',
   options: {
     parser: 'sugarss'
   }

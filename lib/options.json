@@ -17,7 +17,7 @@
       "type": "boolean"
     },
     "parser": {
-      "type": "string"
+      "type": [ "string", "object" ]
     },
     "syntax": {
       "type": "string"
