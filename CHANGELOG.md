@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.6"></a>
+## [2.0.6](https://github.com/postcss/postcss-loader/compare/v2.0.5...v2.0.6) (2017-06-14)
+
+
+### Bug Fixes
+
+* allow to pass an `{Object}` (`options.parser`) ([#257](https://github.com/postcss/postcss-loader/issues/257)) ([4974607](https://github.com/postcss/postcss-loader/commit/4974607))
+* misspelling in warnings ([#237](https://github.com/postcss/postcss-loader/issues/237)) ([adcbb2e](https://github.com/postcss/postcss-loader/commit/adcbb2e))
+* **index:** simplify config loading behaviour ([#259](https://github.com/postcss/postcss-loader/issues/259)) ([b313478](https://github.com/postcss/postcss-loader/commit/b313478))
+
+
+
 <a name="2.0.5"></a>
 ## [2.0.5](https://github.com/postcss/postcss-loader/compare/v2.0.4...v2.0.5) (2017-05-10)
 
