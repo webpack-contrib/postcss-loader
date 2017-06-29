@@ -24,7 +24,7 @@
     "standard": "^10.0.2",
     "standard-version": "^4.1.0",
     "sugarss": "^1.0.0",
-    "webpack": "^2.6.1"
+    "webpack": "^3.0.0"
   },
   "scripts": {
     "clean": "rm -rf dmd jsdoc-api jest_0 coverage test/builds",
