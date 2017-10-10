@@ -31,8 +31,8 @@
     "lint": "standard",
     "docs": "jsdoc2md lib/index.js > LOADER.md",
     "postdocs": "npm run clean",
+    "pretest": "npm run clean",
     "test": "jest --verbose --coverage",
-    "posttest": "npm run clean",
     "release": "standard-version"
   },
   "jest": {
