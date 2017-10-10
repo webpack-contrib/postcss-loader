@@ -2,9 +2,8 @@
 [![node][node]][node-url]
 [![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
+[![coverage][cover]][cover-url]
 [![chat][chat]][chat-url]
-
-<!-- [![coverage][cover]][cover-url] -->
 
 <div align="center">
   <img width="180" height="180" hspace="10"
