@@ -21,9 +21,8 @@
     </a>
   </div>
   <h1>PostCSS Loader</h1>
+  <p>Loader for <a href="http://webpack.js.org/">webpack</a> to process CSS with <a href="http://postcss.org/">PostCSS</a></p>
 </div>
-
-<!-- <p>Loader for <a href="http://webpack.js.org/">webpack</a> to process CSS with <a href="http://postcss.org/">PostCSS</a></p> -->
 
 <h2 align="center">Install</h2>
 
