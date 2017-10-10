@@ -1,0 +1,41 @@
+'use strict'
+
+const webpack = require('../helpers/compiler')
+const { loader } = require('../helpers/compilation')
+
+describe('Options', () => {
+  test('Stringifier - {String}', () => {
+    const config = {
+      loader: {
+        options: {
+          stringifier: 'sugarss'
+        }
+      }
+    }
+
+    return webpack('css/index.js', config).then((stats) => {
+        const src = loader(stats).src
+
+        expect(src).toEqual("module.exports = \"a  color: black\\n\"")
+        expect(src).toMatchSnapshot()
+      })
+  })
+  // TODO fix schema
+  test.skip('Stringifier - {Function}', () => {
+    const config = {
+      loader: {
+        options: {
+          ident: 'postcss',
+          stringifier: require('sugarss')
+        }
+      }
+    }
+
+    return webpack('css/index.js', config).then((stats) => {
+        const src = loader(stats).src
+
+        expect(src).toEqual("module.exports = \"a  color: black\\n\"")
+        expect(src).toMatchSnapshot()
+      })
+  })
+})

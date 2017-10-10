@@ -17,9 +17,9 @@
   },
   "devDependencies": {
     "coveralls": "^2.0.0",
-    "fs-extra": "^3.0.0",
     "jest": "^21.0.0",
     "jsdoc-to-markdown": "^3.0.0",
+    "memory-fs": "^0.4.0",
     "postcss-js": "^1.0.0",
     "standard": "^10.0.0",
     "standard-version": "^4.0.0",
@@ -27,14 +27,18 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "clean": "rm -rf dmd jsdoc-api jest* coverage test/builds",
+    "clean": "rm -rf dmd jest* coverage jsdoc-api test/results",
     "lint": "standard",
     "docs": "jsdoc2md lib/index.js > LOADER.md",
-    "pretest": "npm run lint && npm run test:build",
-    "test": "jest",
-    "test:build": "node test/webpack.build.js",
-    "posttest": "npm run clean",
+    "postdocs": "npm run clean",
+    "pretest": "npm run clean",
+    "test": "jest --verbose --coverage",
     "release": "standard-version"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "lib/*.js"
+    ]
   },
   "standard": {
     "env": {

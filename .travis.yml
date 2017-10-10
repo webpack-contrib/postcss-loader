@@ -1,12 +1,12 @@
-cache:
-  directories:
-    - node_modules
-
 language: node_js
+
 node_js:
   - "node"
   - 6
-  - 4
+
+after_success:
+  - npm i coveralls
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 
 notifications:
   email: false

@@ -1,5 +1,5 @@
 module.exports = {
   plugins: [
-    require('../plugin')()
+    require('./config/plugin')()
   ]
 }

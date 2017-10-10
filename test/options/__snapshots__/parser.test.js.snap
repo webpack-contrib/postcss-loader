@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Options Parser - {Function} 1`] = `"module.exports = \\"a {\\\\n  color: black\\\\n}\\\\n\\""`;
+
+exports[`Options Parser - {String} 1`] = `"module.exports = \\"a {\\\\n  color: black\\\\n}\\\\n\\""`;
