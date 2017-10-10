@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.7"></a>
+## [2.0.7](https://github.com/postcss/postcss-loader/compare/v2.0.6...v2.0.7) (2017-10-10)
+
+
+### Bug Fixes
+
+* sanitizing `from` and `to` options (`postcss.config.js`) ([#260](https://github.com/postcss/postcss-loader/issues/260)) ([753dea7](https://github.com/postcss/postcss-loader/commit/753dea7))
+* **index:** runaway promise ([#269](https://github.com/postcss/postcss-loader/issues/269)) ([8df20ce](https://github.com/postcss/postcss-loader/commit/8df20ce))
+
+
+
 <a name="2.0.6"></a>
 ## [2.0.6](https://github.com/postcss/postcss-loader/compare/v2.0.5...v2.0.6) (2017-06-14)
 
