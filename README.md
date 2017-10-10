@@ -28,7 +28,7 @@
 <h2 align="center">Install</h2>
 
 ```bash
-npm i -D  postcss-loader
+npm i -D postcss-loader
 ```
 
 <h2 align="center">Usage</h2>
@@ -201,6 +201,7 @@ module.exports = ({ file, options, env }) => ({
 {
   loader: 'postcss-loader',
   options: {
+    ident: 'postcss',
     plugins: (loader) => [
       require('postcss-import')({ root: loader.resourcePath }),
       require('postcss-cssnext')(),
@@ -210,6 +211,8 @@ module.exports = ({ file, options, env }) => ({
   }
 }
 ```
+
+> ⚠️  webpack requires an identifier (`ident`) in `options` when `{Function}/require` is used (Complex Options). The `ident` can be freely named as long as it is unique. It's recommended to name it (`ident: 'postcss'`)
 
 ### `Syntaxes`
 
@@ -312,6 +315,7 @@ within the CSS directly as an annotation comment.
     {
       loader: 'postcss-loader',
       options: {
+        ident: 'postcss',
         plugins: [
           require('postcss-import')(),
           require('stylelint')(),
