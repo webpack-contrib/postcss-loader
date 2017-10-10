@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Options Plugins - {Array} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+
+exports[`Options Plugins - {Function} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;

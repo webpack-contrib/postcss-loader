@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Options Exec - {Boolean} 1`] = `"module.exports = \\"a {\\\\n    color: green\\\\n}\\""`;
+
+exports[`Options JSS - {String} 1`] = `
+"module.exports = { a: { color: 'yellow' } }
+"
+`;
