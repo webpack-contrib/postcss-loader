@@ -11,23 +11,23 @@
   ],
   "dependencies": {
     "loader-utils": "^1.1.0",
-    "postcss": "^6.0.2",
+    "postcss": "^6.0.0",
     "postcss-load-config": "^1.2.0",
     "schema-utils": "^0.3.0"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
-    "fs-extra": "^3.0.1",
-    "jest": "^20.0.4",
+    "coveralls": "^2.0.0",
+    "fs-extra": "^3.0.0",
+    "jest": "^21.0.0",
     "jsdoc-to-markdown": "^3.0.0",
     "postcss-js": "^1.0.0",
-    "standard": "^10.0.2",
-    "standard-version": "^4.1.0",
+    "standard": "^10.0.0",
+    "standard-version": "^4.0.0",
     "sugarss": "^1.0.0",
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "clean": "rm -rf dmd jsdoc-api jest_0 coverage test/builds",
+    "clean": "rm -rf dmd jsdoc-api jest* coverage test/builds",
     "lint": "standard",
     "docs": "jsdoc2md lib/index.js > LOADER.md",
     "pretest": "npm run lint && npm run test:build",
@@ -52,13 +52,8 @@
     "webpack-loader"
   ],
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/postcss/postcss-loader.git"
-  },
-  "bugs": {
-    "url": "https://github.com/postcss/postcss-loader/issues"
-  },
+  "repository": "https://github.com/postcss/postcss-loader.git",
+  "bugs": "https://github.com/postcss/postcss-loader/issues",
   "homepage": "https://github.com/postcss/postcss-loader#readme",
   "license": "MIT"
 }
