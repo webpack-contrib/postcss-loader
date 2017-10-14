@@ -5,7 +5,6 @@ const { loader } = require('./helpers/compilation')
 
 describe('Loader', () => {
   test('Default', () => {
-    const _ = /style\.(exec\.js|js)$/
     const config = {
       loader: {
         options: {

@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Options Syntax - {Object} 1`] = `"module.exports = \\"a\\\\n  color: black\\\\n\\""`;
+
 exports[`Options Syntax - {String} 1`] = `"module.exports = \\"a\\\\n  color: black\\\\n\\""`;

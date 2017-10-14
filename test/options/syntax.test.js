@@ -20,8 +20,8 @@ describe('Options', () => {
         expect(src).toMatchSnapshot()
       })
   })
-  // TODO fix schema 
-  test.skip('Syntax - {Function}', () => {
+
+  test('Syntax - {Object}', () => {
     const config = {
       loader: {
         options: {

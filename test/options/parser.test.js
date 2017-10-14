@@ -21,7 +21,7 @@ describe('Options', () => {
       })
   })
 
-  test('Parser - {Function}', () => {
+  test('Parser - {Object}', () => {
     const config = {
       loader: {
         options: {
