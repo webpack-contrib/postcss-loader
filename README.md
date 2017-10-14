@@ -31,7 +31,7 @@ npm i -D postcss-loader
 
 <h2 align="center">Usage</h2>
 
-### `Config`
+### `Configuration`
 
 **postcss.config.js**
 ```js
@@ -108,15 +108,15 @@ module.exports = {
 
 <h2 align="center">Options</h2>
 
-|Name|Default|Description|
-|:--:|:-----:|:----------|
-|`exec`|`undefined`|Enable PostCSS Parser support in `CSS-in-JS`|
-|`parser`|`undefined`|Set PostCSS Parser|
-|`syntax`|`undefined`|Set PostCSS Syntax|
-|`stringifier`|`undefined`|Set PostCSS Stringifier|
-|`config`|`undefined`|Set `postcss.config.js` config path && `ctx`|
-|`plugins`|`[]`|Set PostCSS Plugins|
-|`sourceMap`|`false`|Enable Source Maps|
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|[`exec`](#exec)|`{Boolean}`|`undefined`|Enable PostCSS Parser support in `CSS-in-JS`|
+|[`parser`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Parser|
+|[`syntax`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Syntax|
+|[`stringifier`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Stringifier|
+|[`config`](#config)|`{Object}`|`undefined`|Set `postcss.config.js` config path && `ctx`|
+|[`plugins`](#plugins)|`{Array\|Function}`|`[]`|Set PostCSS Plugins|
+|[`sourceMap`](#sourceMap)|`{String\|Boolean}`|`false`|Enable Source Maps|
 
 ### `Exec`
 
@@ -134,6 +134,11 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 ```
 
 ### `Config`
+
+|Name|Type|Default|Description|
+|:--:|:--:|:-----:|:----------|
+|[`path`](#path)|`{String}`|`undefined`|PostCSS Config Path|
+|[`context`](#context)|`{Object}`|`undefined`|PostCSS Config Context|
 
 #### `Path`
 
@@ -216,9 +221,9 @@ module.exports = ({ file, options, env }) => ({
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|`syntax`|`{String\|Function}`|`undefined`|Custom PostCSS Syntax|
-|`parser`|`{String\|Function}`|`undefined`|Custom PostCSS Parser|
-|`stringifier`|`{String\|Function}`|`undefined`|Custom PostCSS Stringifier|
+|[`parser`](#parser)|`{String\|Function}`|`undefined`|Custom PostCSS Parser|
+|[`syntax`](#syntax)|`{String\|Function}`|`undefined`|Custom PostCSS Syntax|
+|[`stringifier`](#stringifier)|`{String\|Function}`|`undefined`|Custom PostCSS Stringifier|
 
 #### `Parser`
 
