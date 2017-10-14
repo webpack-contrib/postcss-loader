@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.8"></a>
+## [2.0.8](https://github.com/postcss/postcss-loader/compare/v2.0.6...v2.0.8) (2017-10-14)
+
+
+### Bug Fixes
+
+* **lib/options:** handle `{Object}` return (`options.plugins`) ([#301](https://github.com/postcss/postcss-loader/issues/301)) ([df010a7](https://github.com/postcss/postcss-loader/commit/df010a7))
+* **schema:** allow to pass an `{Object}` (`options.syntax/options.stringifier`) ([#300](https://github.com/postcss/postcss-loader/issues/300)) ([58e9996](https://github.com/postcss/postcss-loader/commit/58e9996))
+
+
+
 <a name="2.0.7"></a>
 ## [2.0.7](https://github.com/postcss/postcss-loader/compare/v2.0.6...v2.0.7) (2017-10-10)
 
