@@ -20,8 +20,8 @@ describe('Options', () => {
         expect(src).toMatchSnapshot()
       })
   })
-  // TODO fix schema
-  test.skip('Stringifier - {Function}', () => {
+
+  test('Stringifier - {Object}', () => {
     const config = {
       loader: {
         options: {

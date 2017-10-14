@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Options Stringifier - {Object} 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
+
 exports[`Options Stringifier - {String} 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
