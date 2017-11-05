@@ -350,7 +350,7 @@ either add the css-loader’s [`importLoaders`] option.
 
 or use [postcss-modules] instead of `css-loader`.
 
-[`importLoaders`]: https://github.com/webpack-contrib/css-loader#importing-and-chained-loaders
+[`importLoaders`]: https://github.com/webpack-contrib/css-loader#importloaders
 [cannot be used]: https://github.com/webpack/css-loader/issues/137
 [CSS Modules]: https://github.com/webpack/css-loader#css-modules
 [postcss-modules]: https://github.com/outpunk/postcss-modules
