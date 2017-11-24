@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.9"></a>
+## [2.0.9](https://github.com/postcss/postcss-loader/compare/v2.0.8...v2.0.9) (2017-11-24)
+
+
+### Bug Fixes
+
+* **index:** filter `ident` (`options.ident`) ([#315](https://github.com/postcss/postcss-loader/issues/315)) ([3e1c7fa](https://github.com/postcss/postcss-loader/commit/3e1c7fa))
+
+
+
 <a name="2.0.8"></a>
 ## [2.0.8](https://github.com/postcss/postcss-loader/compare/v2.0.6...v2.0.8) (2017-10-14)
 
