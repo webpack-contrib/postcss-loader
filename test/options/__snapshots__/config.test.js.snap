@@ -2,6 +2,8 @@
 
 exports[`Options Config - {Object} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
 
+exports[`Options Config - Context - {Object} - with ident 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+
 exports[`Options Config - Context - {Object} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
 
 exports[`Options Config - Path - {String} 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
