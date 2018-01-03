@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.10"></a>
+## [2.0.10](https://github.com/postcss/postcss-loader/compare/v2.0.9...v2.0.10) (2018-01-03)
+
+
+### Bug Fixes
+
+* **index:** copy loader `options` before modifying ([#326](https://github.com/postcss/postcss-loader/issues/326)) ([61ff03c](https://github.com/postcss/postcss-loader/commit/61ff03c))
+
+
+
 <a name="2.0.9"></a>
 ## [2.0.9](https://github.com/postcss/postcss-loader/compare/v2.0.8...v2.0.9) (2017-11-24)
 
