@@ -2,8 +2,8 @@
 
 exports[`Loader Default 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
 
-exports[`Loader Watching Default 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`Loader Watching Dependencies Error 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
 
-exports[`Loader Watching Default 2`] = `"throw new Error(\\"Module build failed: Syntax Error \\\\n\\\\n(1:5) Unknown word\\\\n\\\\n\\\\u001b[31m\\\\u001b[1m>\\\\u001b[22m\\\\u001b[39m\\\\u001b[90m 1 | \\\\u001b[39ma \\\\u001b[33m{\\\\u001b[39m color black \\\\u001b[33m}\\\\u001b[39m\\\\n \\\\u001b[90m   | \\\\u001b[39m    \\\\u001b[31m\\\\u001b[1m^\\\\u001b[22m\\\\u001b[39m\\\\n \\\\u001b[90m 2 | \\\\u001b[39m\\\\n\\");"`;
+exports[`Loader Watching Dependencies Error 2`] = `"throw new Error(\\"Module build failed: Syntax Error \\\\n\\\\n(1:5) Unknown word\\\\n\\\\n\\\\u001b[31m\\\\u001b[1m>\\\\u001b[22m\\\\u001b[39m\\\\u001b[90m 1 | \\\\u001b[39ma \\\\u001b[33m{\\\\u001b[39m color black \\\\u001b[33m}\\\\u001b[39m\\\\n \\\\u001b[90m   | \\\\u001b[39m    \\\\u001b[31m\\\\u001b[1m^\\\\u001b[22m\\\\u001b[39m\\\\n \\\\u001b[90m 2 | \\\\u001b[39m\\\\n\\");"`;
 
-exports[`Loader Watching Default 3`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`Loader Watching Dependencies Error 3`] = `"module.exports = \\"a { color: black }\\\\n\\""`;

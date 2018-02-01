@@ -23,63 +23,65 @@ describe('Loader', () => {
   })
 
   describe('Watching', () => {
-    const files = {
-      syntaxError: "watch/watching/syntaxError.css",
-      noSyntaxError: "watch/watching/noSyntaxError.css",
-      changingFile: "watch/watching/styleDep.css"
-    }
+    describe('Dependencies', () => {
+      const files = {
+        syntaxError: "watch/watching/syntaxError.css",
+        noSyntaxError: "watch/watching/noSyntaxError.css",
+        changingFile: "watch/watching/styleDep.css"
+      }
 
-    beforeAll(() => copyFile(files.noSyntaxError, files.changingFile))
+      beforeEach(() => copyFile(files.noSyntaxError, files.changingFile))
 
-    afterAll(() => deleteFile(files.changingFile))
+      afterEach(() => deleteFile(files.changingFile))
 
-    test('Default', () => {
-      const config = {
-        loader: {
-          options: {
-            plugins: [require("postcss-import")],
+      test('Error', () => {
+        const config = {
+          loader: {
+            options: {
+              plugins: [require("postcss-import")],
+            }
           }
         }
-      }
 
-      const steps = [
-        (stats) => {
-          const { err, src } = loader(stats)
+        const steps = [
+          (stats) => {
+            const { err, src } = loader(stats)
 
-          expect(src).toMatchSnapshot()
-          expect(err.length).toEqual(0)
+            expect(src).toMatchSnapshot()
+            expect(err.length).toEqual(0)
 
-          return copyFile(files.syntaxError, files.changingFile)
-        },
-        (stats) => {
-          const { err, src } = loader(stats)
+            return copyFile(files.syntaxError, files.changingFile)
+          },
+          (stats) => {
+            const { err, src } = loader(stats)
 
-          expect(src).toMatchSnapshot()
-          expect(err.length).toEqual(1)
+            expect(src).toMatchSnapshot()
+            expect(err.length).toEqual(1)
 
-          return copyFile(files.noSyntaxError, files.changingFile)
-        },
-        (stats, close) => {
-          const { err, src } = loader(stats)
+            return copyFile(files.noSyntaxError, files.changingFile)
+          },
+          (stats, close) => {
+            const { err, src } = loader(stats)
 
-          expect(src).toMatchSnapshot()
-          expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
-          expect(err.length).toEqual(0)
+            expect(src).toMatchSnapshot()
+            expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
+            expect(err.length).toEqual(0)
 
-          return close()
+            return close()
+          }
+        ];
+
+        var currentStep = 0
+
+        const options = {
+          watch (err, stats, close) {
+            steps[currentStep](stats, close)
+            currentStep++
+          }
         }
-      ];
 
-      var currentStep = 0
-
-      const options = {
-        watch (err, stats, close) {
-          steps[currentStep](stats, close)
-          currentStep++
-        }
-      }
-
-      return webpack('watch/watching/index.js', config, options)
+        return webpack('watch/watching/index.js', config, options)
+      })
     })
   })
 })
