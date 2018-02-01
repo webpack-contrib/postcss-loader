@@ -1,6 +1,6 @@
 const path = require('path')
 const { readFile, writeFile, unlink } = require('fs')
-const { promisify } = require('util')
+const promisify = require('util.promisify')
 
 const rf = promisify(readFile)
 const wf = promisify(writeFile)
