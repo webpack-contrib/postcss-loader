@@ -1,31 +1,33 @@
 const path = require('path')
-const { readFile, writeFile, unlink } = require('fs')
+const { readFile: _readFile, writeFile: _writeFile, unlink: _unlink } = require('fs')
 const promisify = require('util.promisify')
 
-const rf = promisify(readFile)
-const wf = promisify(writeFile)
-const rm = promisify(unlink)
-
-function readCssFile (name) {
-  const fileName = path.join(__dirname, '../fixtures', name)
-
-  return rf(fileName)
-    .then(c => c.toString())
+const fs = {
+  readFile: promisify(_readFile),
+  writeFile: promisify(_writeFile),
+  unlink: promisify(_unlink)
 }
 
-function writeCssFile (name, contents) {
-  const fileName = path.join(__dirname, '../fixtures', name)
+function readFile (name) {
+  const file = path.join(__dirname, '../fixtures', name)
 
-  return wf(fileName, contents)
+  return fs.readFile(file)
+    .then(data => data.toString())
 }
 
-module.exports.copyCssFile = function copyCssFile (src, dest) {
-  return readCssFile(src)
-    .then(contents => writeCssFile(dest, contents))
+function writeFile (name, contents) {
+  const file = path.join(__dirname, '../fixtures', name)
+
+  return fs.writeFile(file, contents)
 }
 
-module.exports.deleteCssFile = function deleteCssFile (name) {
-  const fileName = path.join(__dirname, '../fixtures', name)
+module.exports.copyFile = function copyFile (src, dest) {
+  return readFile(src)
+    .then(contents => writeFile(dest, contents))
+}
 
-  return rm(fileName)
+module.exports.deleteFile = function deleteFile (name) {
+  const file = path.join(__dirname, '../fixtures', name)
+
+  return fs.unlink(file)
 }
