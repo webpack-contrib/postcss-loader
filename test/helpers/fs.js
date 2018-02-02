@@ -1,6 +1,11 @@
 const path = require('path')
-const { readFile: _readFile, writeFile: _writeFile, unlink: _unlink } = require('fs')
 const promisify = require('util.promisify')
+
+const {
+  unlink: _unlink,
+  readFile: _readFile,
+  writeFile: _writeFile
+} = require('fs')
 
 const fs = {
   readFile: promisify(_readFile),
@@ -12,18 +17,18 @@ function readFile (name) {
   const file = path.join(__dirname, '../fixtures', name)
 
   return fs.readFile(file)
-    .then(data => data.toString())
+    .then((data) => data.toString())
 }
 
-function writeFile (name, contents) {
+function writeFile (name, data) {
   const file = path.join(__dirname, '../fixtures', name)
 
-  return fs.writeFile(file, contents)
+  return fs.writeFile(file, data)
 }
 
 module.exports.copyFile = function copyFile (src, dest) {
   return readFile(src)
-    .then(contents => writeFile(dest, contents))
+    .then((data) => writeFile(dest, data))
 }
 
 module.exports.deleteFile = function deleteFile (name) {

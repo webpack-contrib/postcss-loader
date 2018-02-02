@@ -31,7 +31,7 @@ module.exports = function compiler (fixture, config, options) {
     },
     plugins: [
       new webpack.optimize.CommonsChunkPlugin({
-        name: ['runtime'],
+        name: [ 'runtime' ],
         minChunks: Infinity
       })
     ].concat(config.plugins || [])
@@ -46,7 +46,7 @@ module.exports = function compiler (fixture, config, options) {
   if (options.watch) {
     return new Promise((resolve, reject) => {
       const watcher = compiler.watch({}, (err, stats) => {
-        options.watch(err, stats, (s) => {
+        options.watch(err, stats, () => {
           watcher.close(resolve)
         })
       })

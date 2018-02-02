@@ -25,20 +25,22 @@ describe('Loader', () => {
   describe('Watching', () => {
     describe('Dependencies', () => {
       const files = {
-        syntaxError: "watch/watching/syntaxError.css",
-        noSyntaxError: "watch/watching/noSyntaxError.css",
-        changingFile: "watch/watching/styleDep.css"
+        css: 'watch/index.css',
+        error: 'watch/error.css',
+        changed: 'watch/import.css'
       }
 
-      beforeEach(() => copyFile(files.noSyntaxError, files.changingFile))
+      beforeEach(() => copyFile(files.css, files.changed))
 
-      afterEach(() => deleteFile(files.changingFile))
+      afterEach(() => deleteFile(files.changed))
 
       test('Error', () => {
         const config = {
           loader: {
             options: {
-              plugins: [require("postcss-import")],
+              plugins: [
+                require('postcss-import')
+              ],
             }
           }
         }
@@ -50,7 +52,7 @@ describe('Loader', () => {
             expect(src).toMatchSnapshot()
             expect(err.length).toEqual(0)
 
-            return copyFile(files.syntaxError, files.changingFile)
+            return copyFile(files.error, files.changed)
           },
           (stats) => {
             const { err, src } = loader(stats)
@@ -58,7 +60,7 @@ describe('Loader', () => {
             expect(src).toMatchSnapshot()
             expect(err.length).toEqual(1)
 
-            return copyFile(files.noSyntaxError, files.changingFile)
+            return copyFile(files.css, files.changed)
           },
           (stats, close) => {
             const { err, src } = loader(stats)
@@ -69,18 +71,19 @@ describe('Loader', () => {
 
             return close()
           }
-        ];
+        ]
 
-        var currentStep = 0
+        let step = 0
 
         const options = {
           watch (err, stats, close) {
-            steps[currentStep](stats, close)
-            currentStep++
+            steps[step](stats, close)
+
+            step++
           }
         }
 
-        return webpack('watch/watching/index.js', config, options)
+        return webpack('watch/index.js', config, options)
       })
     })
   })
