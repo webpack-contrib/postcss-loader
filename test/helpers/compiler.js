@@ -12,7 +12,7 @@ module.exports = function compiler (fixture, config, options) {
     output: {
       path: path.resolve(
         __dirname,
-        `../results/${config.path ? config.path : ''}`
+        `../outputs/${config.path ? config.path : ''}`
       ),
       filename: '[name].bundle.js'
     },

@@ -12,9 +12,7 @@ exports[`Errors Syntax Error 1`] = `
 `;
 
 exports[`Errors Validation Error 1`] = `
-"Validation Error
-
-PostCSS Loader Invalid Options
+"PostCSS Loader Invalid Options
 
 options.sourceMap should be string,boolean
 "
