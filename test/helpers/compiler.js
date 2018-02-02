@@ -43,11 +43,21 @@ module.exports = function compiler (fixture, config, options) {
 
   if (!options.emit) compiler.outputFileSystem = new MemoryFS()
 
-  return new Promise((resolve, reject) => {
-    return compiler.run((err, stats) => {
-      if (err) reject(err)
-
-      resolve(stats)
+  if (options.watch) {
+    return new Promise((resolve, reject) => {
+      const watcher = compiler.watch({}, (err, stats) => {
+        options.watch(err, stats, (s) => {
+          watcher.close(resolve)
+        })
+      })
     })
-  })
+  } else {
+    return new Promise((resolve, reject) => {
+      return compiler.run((err, stats) => {
+        if (err) reject(err)
+
+        resolve(stats)
+      })
+    })
+  }
 }

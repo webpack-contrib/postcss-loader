@@ -20,10 +20,12 @@
     "jest": "^21.0.0",
     "jsdoc-to-markdown": "^3.0.0",
     "memory-fs": "^0.4.0",
+    "postcss-import": "^11.0.0",
     "postcss-js": "^1.0.0",
     "standard": "^10.0.0",
     "standard-version": "^4.0.0",
     "sugarss": "^1.0.0",
+    "util.promisify": "^1.0.0",
     "webpack": "^3.0.0"
   },
   "scripts": {
