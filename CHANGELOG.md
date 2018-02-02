@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/postcss/postcss-loader/compare/v2.0.10...v2.1.0) (2018-02-02)
+
+
+### Bug Fixes
+
+* **index:** continue watching after dependency `{Error}` ([#332](https://github.com/postcss/postcss-loader/issues/332)) ([a8921cc](https://github.com/postcss/postcss-loader/commit/a8921cc))
+
+
+### Features
+
+* **index:** pass AST (`result.root`) && Messages (`result.messages`) as metadata to other loaders ([#322](https://github.com/postcss/postcss-loader/issues/322)) ([56232e7](https://github.com/postcss/postcss-loader/commit/56232e7))
+
+
+
 <a name="2.0.10"></a>
 ## [2.0.10](https://github.com/postcss/postcss-loader/compare/v2.0.9...v2.0.10) (2018-01-03)
 
