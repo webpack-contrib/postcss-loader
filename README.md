@@ -116,7 +116,7 @@ module.exports = {
 |[`stringifier`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Stringifier|
 |[`config`](#config)|`{Object}`|`undefined`|Set `postcss.config.js` config path && `ctx`|
 |[`plugins`](#plugins)|`{Array\|Function}`|`[]`|Set PostCSS Plugins|
-|[`sourceMap`](#sourceMap)|`{String\|Boolean}`|`false`|Enable Source Maps|
+|[`sourceMap`](#sourcemap)|`{String\|Boolean}`|`false`|Enable Source Maps|
 
 ### `Exec`
 
