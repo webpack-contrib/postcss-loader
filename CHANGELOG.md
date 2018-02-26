@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://github.com/postcss/postcss-loader/compare/v2.1.0...v2.1.1) (2018-02-26)
+
+
+### Bug Fixes
+
+* **index:** don't set `to` value (`options`) ([#339](https://github.com/postcss/postcss-loader/issues/339)) ([cdbb8b6](https://github.com/postcss/postcss-loader/commit/cdbb8b6))
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://github.com/postcss/postcss-loader/compare/v2.0.10...v2.1.0) (2018-02-02)
 
