@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/postcss/postcss-loader/compare/v2.1.1...v2.1.2) (2018-03-17)
+
+
+### Bug Fixes
+
+* **options:** disallow additional properties and add `ident` to validation ([#346](https://github.com/postcss/postcss-loader/issues/346)) ([82ef553](https://github.com/postcss/postcss-loader/commit/82ef553))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/postcss/postcss-loader/compare/v2.1.0...v2.1.1) (2018-02-26)
 
