@@ -16,6 +16,9 @@
     "exec": {
       "type": "boolean"
     },
+    "ident": {
+      "type": "string"
+    },
     "parser": {
       "type": [ "string", "object" ]
     },
@@ -36,5 +39,5 @@
       "type": [ "string", "boolean" ]
     }
   },
-  "additionalProperties": true
+  "additionalProperties": false
 }
