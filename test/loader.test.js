@@ -9,7 +9,8 @@ describe('Loader', () => {
     const config = {
       loader: {
         options: {
-          plugins: []
+          plugins: [],
+          postcssrc: false
         }
       }
     }

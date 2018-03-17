@@ -8,7 +8,8 @@ describe('Options', () => {
     const config = {
       loader: {
         options: {
-          stringifier: 'sugarss'
+          stringifier: 'sugarss',
+          postcssrc: false
         }
       }
     }
@@ -26,7 +27,8 @@ describe('Options', () => {
       loader: {
         options: {
           ident: 'postcss',
-          stringifier: require('sugarss')
+          stringifier: require('sugarss'),
+          postcssrc: false
         }
       }
     }

@@ -32,6 +32,9 @@
         { "instanceof": "Function" }
       ]
     },
+    "postcssrc": {
+      "type": "boolean"
+    },
     "sourceMap": {
       "type": [ "string", "boolean" ]
     }
