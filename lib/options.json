@@ -39,5 +39,5 @@
       "type": [ "string", "boolean" ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": true
 }
