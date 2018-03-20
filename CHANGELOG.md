@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.3"></a>
+## [2.1.3](https://github.com/postcss/postcss-loader/compare/v2.1.2...v2.1.3) (2018-03-20)
+
+
+### Bug Fixes
+
+* **options:** revert additionalProperties changes to keep SemVer ([bd7fc38](https://github.com/postcss/postcss-loader/commit/bd7fc38))
+
+
+
 <a name="2.1.2"></a>
 ## [2.1.2](https://github.com/postcss/postcss-loader/compare/v2.1.1...v2.1.2) (2018-03-17)
 
