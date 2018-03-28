@@ -20,7 +20,11 @@
       "type": "string"
     },
     "parser": {
-      "type": [ "string", "object" ]
+      "anyOf": [
+        { "type": "string" },
+        { "type": "object" },
+        { "instanceof": "Function" }
+      ]
     },
     "syntax": {
       "type": [ "string", "object" ]
