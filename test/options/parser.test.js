@@ -39,3 +39,30 @@ describe('Options', () => {
       })
   })
 })
+
+test('Parser - {Function}', () => {
+  const config = {
+    loader: {
+      options: {
+        ident: 'postcss',
+        parser: (css, opts) => opts.from.match(/\.sss$/)
+          ? require('sugarss').parse(css)
+          : require('postcss').parse(css)
+      }
+    }
+  }
+
+  return webpack('sss/index.js', config).then((stats) => {
+      const src = loader(stats).src
+
+      expect(src).toEqual("module.exports = \"a {\\n  color: black\\n}\\n\"")
+      expect(src).toMatchSnapshot()
+
+      return webpack('css/index.js', config).then((stats) => {
+        const src = loader(stats).src
+  
+        expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
+        expect(src).toMatchSnapshot()
+      })
+    })
+})

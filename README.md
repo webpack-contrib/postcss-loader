@@ -246,7 +246,7 @@ You can use a dynamic setup similar to the one listed in the [`ctx` section](#co
   test: /\.[cs]ss$/,
   use: [
     ...,
-    { loader: 'postcss-loader', options: { parser: (css, opts) => opts.from.match(/\.sss$/) ? sugarss.parse(css) : css } }
+    { loader: 'postcss-loader', options: { parser: (css, opts) => opts.from.match(/\.sss$/) ? sugarss.parse(css) : postcss.parse(css) } }
   ]
 }
 ```
