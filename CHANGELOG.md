@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.4"></a>
+## [2.1.4](https://github.com/postcss/postcss-loader/compare/v2.1.3...v2.1.4) (2018-04-16)
+
+
+### Bug Fixes
+
+* restore loader object in postcss config context ([#355](https://github.com/postcss/postcss-loader/issues/355)) ([2ff1735](https://github.com/postcss/postcss-loader/commit/2ff1735))
+
+
+
 <a name="2.1.3"></a>
 ## [2.1.3](https://github.com/postcss/postcss-loader/compare/v2.1.2...v2.1.3) (2018-03-20)
 
