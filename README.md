@@ -230,7 +230,7 @@ module.exports = ({ file, options, env }) => ({
 **webpack.config.js**
 ```js
 {
-  test: /\.sss$/,
+  test: /\.css$/,
   use: [
     ...,
     { loader: 'postcss-loader', options: { parser: 'sugarss' } }
