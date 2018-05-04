@@ -268,8 +268,6 @@ module.exports = ({ file, options, env }) => ({
 
 Enables source map support, `postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
 
-> :warning: If a previous loader like e.g `sass-loader` is applied and it's `sourceMap` option is set, but the `sourceMap` option in `postcss-loader` is omitted, previous source maps will be discarded by `postcss-loader` **entirely**.
-
 **webpack.config.js**
 ```js
 {
