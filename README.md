@@ -111,7 +111,7 @@ module.exports = {
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[`exec`](#exec)|`{Boolean}`|`undefined`|Enable PostCSS Parser support in `CSS-in-JS`|
-|[`parser`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Parser|
+|[`parser`](#syntaxes)|`{String\|Object|Function}`|`undefined`|Set PostCSS Parser|
 |[`syntax`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Syntax|
 |[`stringifier`](#syntaxes)|`{String\|Object}`|`undefined`|Set PostCSS Stringifier|
 |[`config`](#config)|`{Object}`|`undefined`|Set `postcss.config.js` config path && `ctx`|
@@ -234,6 +234,19 @@ module.exports = ({ file, options, env }) => ({
   use: [
     ...,
     { loader: 'postcss-loader', options: { parser: 'sugarss' } }
+  ]
+}
+```
+
+You can use a dynamic setup similar to the one listed in the [`ctx` section](#context-ctx) by passing a function
+
+**webpack.config.js**
+```js
+{
+  test: /\.[cs]ss$/,
+  use: [
+    ...,
+    { loader: 'postcss-loader', options: { parser: (css, opts) => opts.from.match(/\.sss$/) ? sugarss.parse(css) : postcss.parse(css) } }
   ]
 }
 ```
