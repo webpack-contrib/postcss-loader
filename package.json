@@ -1,6 +1,6 @@
 {
   "name": "postcss-loader",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "PostCSS loader for webpack",
   "main": "lib/index.js",
   "files": [
