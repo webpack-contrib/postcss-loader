@@ -12,7 +12,7 @@
   "dependencies": {
     "loader-utils": "^1.1.0",
     "postcss": "^6.0.0",
-    "postcss-load-config": "^1.2.0",
+    "postcss-load-config": "^2.0.0",
     "schema-utils": "^0.4.0"
   },
   "devDependencies": {
