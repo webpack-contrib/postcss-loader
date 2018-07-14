@@ -137,14 +137,14 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[`path`](#path)|`{String}`|`undefined`|PostCSS Config Path|
+|[`path`](#path)|`{String}`|`undefined`|PostCSS Config Directory|
 |[`context`](#context)|`{Object}`|`undefined`|PostCSS Config Context|
 
 #### `Path`
 
 You can manually specify the path to search for your config (`postcss.config.js`) with the `config.path` option. This is needed if you store your config  in a separate e.g `./config || ./.config` folder.
 
-> ⚠️  Otherwise it is **unnecessary** to set this option and is **not** recommended
+> ⚠️  Otherwise it is **unnecessary** to set this option and is **not** recommended. You **can't** set other name for **postcss.config.js**, this option only allows you to specify the folder where it will be looked for.
 
 **webpack.config.js**
 ```js
