@@ -137,7 +137,7 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
-|[`path`](#path)|`{String}`|`undefined`|PostCSS Config Path|
+|[`path`](#path)|`{String}`|`undefined`|PostCSS Config Directory|
 |[`context`](#context)|`{Object}`|`undefined`|PostCSS Config Context|
 
 #### `Path`
@@ -146,17 +146,22 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 > ⚠️  Otherwise it is **unnecessary** to set this option and is **not** recommended
 
+> ⚠️  Note that you **can't** use a **filename** other than the [supported config formats] (e.g `.postcssrc.js`, `postcss.config.js`), this option only allows you to manually specify the **directory** where config lookup should **start** from
+
 **webpack.config.js**
 ```js
 {
   loader: 'postcss-loader',
   options: {
     config: {
-      path: 'path/to/postcss.config.js'
+      path: 'path/to/.config/' ✅
+      path: 'path/to/.config/css.config.js' ❌
     }
   }
 }
 ```
+
+[supported config formats]: https://github.com/michael-ciniawsky/postcss-load-config#usage
 
 #### `Context (ctx)`
 
