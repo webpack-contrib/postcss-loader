@@ -7,7 +7,7 @@
     "lib"
   ],
   "engines": {
-    "node": ">= 4"
+    "node": ">= 5"
   },
   "dependencies": {
     "loader-utils": "^1.1.0",
