@@ -8,7 +8,7 @@
 <div align="center">
   <img width="180" height="180" hspace="10"
     alt="PostCSS Logo"
-    src="http://postcss.github.io/postcss/logo.svg">
+    src="https://api.postcss.org/logo.svg">
   <a href="https://github.com/webpack/webpack">
     <img width="200" height="200" hspace="10"
       src="https://cdn.rawgit.com/webpack/media/e7485eb2/logo/icon.svg">
@@ -20,7 +20,7 @@
     </a>
   </div>
   <h1>PostCSS Loader</h1>
-  <p>Loader for <a href="http://webpack.js.org/">webpack</a> to process CSS with <a href="http://postcss.org/">PostCSS</a></p>
+  <p>Loader for <a href="https://webpack.js.org/">webpack</a> to process CSS with <a href="https://postcss.org/">PostCSS</a></p>
 </div>
 
 <h2 align="center">Install</h2>
@@ -356,7 +356,7 @@ or use [postcss-modules] instead of `css-loader`.
 [`importLoaders`]: https://github.com/webpack-contrib/css-loader#importloaders
 [cannot be used]: https://github.com/webpack/css-loader/issues/137
 [CSS Modules]: https://github.com/webpack/css-loader#css-modules
-[postcss-modules]: https://github.com/outpunk/postcss-modules
+[postcss-modules]: https://github.com/css-modules/postcss-modules
 
 ### `CSS-in-JS`
 
@@ -461,7 +461,7 @@ module.exports = {
 [deps]: https://david-dm.org/postcss/postcss-loader.svg
 [deps-url]: https://david-dm.org/postcss/postcss-loader
 
-[tests]: http://img.shields.io/travis/postcss/postcss-loader.svg
+[tests]: https://img.shields.io/travis/postcss/postcss-loader.svg
 [tests-url]: https://travis-ci.org/postcss/postcss-loader
 
 [cover]: https://coveralls.io/repos/github/postcss/postcss-loader/badge.svg
