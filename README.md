@@ -401,29 +401,30 @@ export default {
 
 ### [Extract CSS][ExtractPlugin]
 
-[ExtractPlugin]: https://github.com/webpack-contrib/extract-text-webpack-plugin
+[ExtractPlugin]: https://github.com/webpack-contrib/mini-css-extract-plugin
 
 **webpack.config.js**
 ```js
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   module: {
     rules: [
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            { loader: 'css-loader', options: { importLoaders: 1 } },
-            'postcss-loader'
-          ]
-        })
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+        ]
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('[name].css')
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+    })
   ]
 }
 ```
