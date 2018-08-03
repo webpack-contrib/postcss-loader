@@ -192,9 +192,8 @@ module.exports = ({ file, options, env }) => ({
   options: {
     config: {
       ctx: {
-        cssnext: {...options},
+        'postcss-preset-env': {...options},
         cssnano: {...options},
-        autoprefixer: {...options}
       }
     }
   }
@@ -212,7 +211,6 @@ module.exports = ({ file, options, env }) => ({
     plugins: (loader) => [
       require('postcss-import')({ root: loader.resourcePath }),
       require('postcss-preset-env')(),
-      require('autoprefixer')(),
       require('cssnano')()
     ]
   }
