@@ -330,6 +330,31 @@ within the CSS directly as an annotation comment.
 }
 ```
 
+### Autoprefixing
+
+**webpack.config.js**
+```js
+{
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    'css-loader',
+    {
+      loader: 'postcss-loader',
+      options: {
+        ident: 'postcss',
+        plugins: [
+          require('autoprefixer')({...options}),
+          ...,
+        ]
+      }
+    }
+  ]
+}
+```
+
+> :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env/issues) includes autoprefixer, so adding it is not necessary if you use the preset.
+
 ### `CSS Modules`
 
 This loader [cannot be used] with [CSS Modules] out of the box due
