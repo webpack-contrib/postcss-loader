@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Errors Syntax Error 1`] = `
-"Syntax Error 
+"Syntax Error
 
 (1:3) Unexpected separator in property
 
@@ -14,6 +14,8 @@ exports[`Errors Syntax Error 1`] = `
 exports[`Errors Validation Error 1`] = `
 "ValidationError: PostCSS Loader Invalid Options
 
-options.sourceMap should be string,boolean
-"
+options.sourceMap should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)
+
+    at validateOptions (/Users/Cini/Github/webpack/loaders/postcss/node_modules/@webpack-utilities/schema/src/validateOptions.js:25:11)
+    at Object.loader (/Users/Cini/Github/webpack/loaders/postcss/src/index.js:44:3)"
 `;
