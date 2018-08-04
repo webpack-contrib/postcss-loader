@@ -10,11 +10,11 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a { color: rgba(255, 0, 0, 1.0) }\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('Config - Path - {String}', () => {
@@ -27,11 +27,11 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a { color: black }\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('Config - Context - {Object}', () => {
@@ -47,13 +47,12 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a { color: rgba(255, 0, 0, 1.0) }\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
-
 
   test('Config - Context - {Object} - with ident', () => {
     const config = {
@@ -69,11 +68,11 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a { color: rgba(255, 0, 0, 1.0) }\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('Pass loader object to config context', () => {
@@ -88,11 +87,11 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const assets = stats.compilation.assets;
-      const expectedAssetName = 'asset.txt';
+      const assets = stats.compilation.assets
+      const expectedAssetName = 'asset.txt'
 
-      expect(expectedAssetName in assets).toBeTruthy();
-      expect(assets[expectedAssetName].source()).toBe('123');
+      expect(expectedAssetName in assets).toBeTruthy()
+      expect(assets[expectedAssetName].source()).toBe('123')
     })
   })
 })

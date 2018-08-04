@@ -2,7 +2,7 @@
 
 const webpack = require('./helpers/compiler')
 const { loader } = require('./helpers/compilation')
-const { copyFile, deleteFile } = require('./helpers/fs');
+const { copyFile, deleteFile } = require('./helpers/fs')
 
 describe('Loader', () => {
   test('Default', () => {
@@ -15,11 +15,11 @@ describe('Loader', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a { color: black }\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   describe('Watching', () => {
@@ -40,7 +40,7 @@ describe('Loader', () => {
             options: {
               plugins: [
                 require('postcss-import')
-              ],
+              ]
             }
           }
         }
@@ -66,7 +66,7 @@ describe('Loader', () => {
             const { err, src } = loader(stats)
 
             expect(src).toMatchSnapshot()
-            expect(src).toEqual("module.exports = \"a { color: black }\\n\"")
+            expect(src).toEqual('module.exports = "a { color: black }\\n"')
             expect(err.length).toEqual(0)
 
             return close()
@@ -77,6 +77,10 @@ describe('Loader', () => {
 
         const options = {
           watch (err, stats, close) {
+            if (err) {
+              throw err
+            }
+
             steps[step](stats, close)
 
             step++

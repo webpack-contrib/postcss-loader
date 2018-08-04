@@ -14,11 +14,11 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a  color: black\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a  color: black\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('Stringifier - {Object}', () => {
@@ -32,10 +32,10 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a  color: black\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a  color: black\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 })

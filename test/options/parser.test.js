@@ -14,11 +14,11 @@ describe('Options', () => {
     }
 
     return webpack('sss/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a {\\n  color: black\\n}\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a {\\n  color: black\\n}\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('Parser - {Object}', () => {
@@ -32,10 +32,10 @@ describe('Options', () => {
     }
 
     return webpack('sss/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a {\\n  color: black\\n}\\n\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a {\\n  color: black\\n}\\n"')
+      expect(src).toMatchSnapshot()
+    })
   })
 })
