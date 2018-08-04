@@ -1,18 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Errors Syntax Error 1`] = `
-[ModuleBuildError: Module build failed: Syntax Error 
+"Syntax Error 
 
 (1:3) Unexpected separator in property
 
 [31m[1m>[22m[39m[90m 1 | [39ma [33m{[39m color[33m:[39m black [33m}[39m
  [90m   | [39m  [31m[1m^[22m[39m
  [90m 2 | [39m
-]
+"
 `;
 
 exports[`Errors Validation Error 1`] = `
-"PostCSS Loader Invalid Options
+"ValidationError: PostCSS Loader Invalid Options
 
 options.sourceMap should be string,boolean
 "

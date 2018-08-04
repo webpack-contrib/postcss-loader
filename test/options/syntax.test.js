@@ -1,12 +1,10 @@
-'use strict'
-
-const webpack = require('../helpers/compiler')
-const { loader } = require('../helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Options', () => {
   test('Syntax - {String}', () => {
     const config = {
       loader: {
+        test: /\.sss$/,
         options: {
           syntax: 'sugarss'
         }
@@ -14,16 +12,17 @@ describe('Options', () => {
     }
 
     return webpack('sss/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
+      expect(source).toMatchSnapshot()
     })
   })
 
   test('Syntax - {Object}', () => {
     const config = {
       loader: {
+        test: /\.sss$/,
         options: {
           ident: 'postcss',
           syntax: require('sugarss')
@@ -32,10 +31,10 @@ describe('Options', () => {
     }
 
     return webpack('sss/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
+      expect(source).toMatchSnapshot()
     })
   })
 })

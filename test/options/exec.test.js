@@ -1,7 +1,4 @@
-'use strict'
-
-const webpack = require('../helpers/compiler')
-const { loader } = require('../helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Options', () => {
   test('Exec - {Boolean}', () => {
@@ -15,10 +12,13 @@ describe('Options', () => {
     }
 
     return webpack('jss/exec/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a {\\n    color: green\\n}"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a {\\n    color: green\\n}"'
+      )
+
+      expect(source).toMatchSnapshot()
     })
   })
 
@@ -32,9 +32,9 @@ describe('Options', () => {
     }
 
     return webpack('jss/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toMatchSnapshot()
+      expect(source).toMatchSnapshot()
     })
   })
 })
