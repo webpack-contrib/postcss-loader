@@ -15,11 +15,11 @@ describe('Options', () => {
     }
 
     return webpack('jss/exec/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toEqual("module.exports = \"a {\\n    color: green\\n}\"")
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toEqual('module.exports = "a {\\n    color: green\\n}"')
+      expect(src).toMatchSnapshot()
+    })
   })
 
   test('JSS - {String}', () => {
@@ -32,9 +32,9 @@ describe('Options', () => {
     }
 
     return webpack('jss/index.js', config).then((stats) => {
-        const src = loader(stats).src
+      const src = loader(stats).src
 
-        expect(src).toMatchSnapshot()
-      })
+      expect(src).toMatchSnapshot()
+    })
   })
 })
