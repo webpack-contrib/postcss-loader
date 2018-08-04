@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Errors Syntax Error 1`] = `
-"Syntax Error
+"SyntaxError 
 
 (1:3) Unexpected separator in property
 

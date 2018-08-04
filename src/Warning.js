@@ -2,7 +2,7 @@ class Warning extends Error {
   constructor (warning) {
     super()
 
-    const { line, column, text } = warning
+    const { text, line, column } = warning
 
     this.name = 'LoaderWarning'
     this.message = `\n(${line}:${column}) ${text}\n`
