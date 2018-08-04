@@ -7,11 +7,11 @@
     "lib"
   ],
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
   "dependencies": {
     "loader-utils": "^1.1.0",
-    "postcss": "^6.0.0",
+    "postcss": "^7.0.0",
     "postcss-load-config": "^2.0.0",
     "schema-utils": "^0.4.0"
   },
@@ -20,7 +20,7 @@
     "jsdoc-to-markdown": "^4.0.0",
     "memory-fs": "^0.4.0",
     "postcss-import": "^11.0.0",
-    "postcss-js": "^1.0.0",
+    "postcss-js": "^2.0.0",
     "standard": "^11.0.0",
     "standard-version": "^4.0.0",
     "sugarss": "^1.0.0",
