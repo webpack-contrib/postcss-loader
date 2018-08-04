@@ -2,9 +2,9 @@
   "name": "postcss-loader",
   "version": "2.1.6",
   "description": "PostCSS loader for webpack",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "files": [
-    "lib"
+    "src"
   ],
   "engines": {
     "node": ">= 6"
@@ -16,21 +16,20 @@
     "schema-utils": "^0.4.0"
   },
   "devDependencies": {
-    "jest": "^22.0.0",
+    "@webpack-utilities/test": "^1.0.0-alpha.0",
+    "jest": "^23.0.0",
     "jsdoc-to-markdown": "^4.0.0",
-    "memory-fs": "^0.4.0",
     "postcss-import": "^11.0.0",
     "postcss-js": "^2.0.0",
     "standard": "^11.0.0",
     "standard-version": "^4.0.0",
     "sugarss": "^1.0.0",
-    "util.promisify": "^1.0.0",
-    "webpack": "^3.0.0"
+    "webpack": "^4.0.0"
   },
   "scripts": {
     "lint": "standard --env jest",
-    "test": "jest --env=node --verbose --coverage",
-    "docs": "jsdoc2md lib/index.js > LOADER.md",
+    "test": "jest --env node --verbose --coverage",
+    "docs": "jsdoc2md src/*.js > LOADER.md",
     "clean": "rm -rf coverage test/outputs",
     "release": "standard-version"
   },
