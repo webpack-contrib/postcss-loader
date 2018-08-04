@@ -163,7 +163,13 @@ module.exports = function loader (css, map, meta) {
 
         if (!meta) meta = {}
 
-        meta.ast = { 'type': 'postcss', root: result.root }
+        const ast = {
+          type: 'postcss',
+          version: processor.version,
+          root
+        }
+
+        meta.ast = ast
         meta.messages = result.messages
 
         if (this.loaderIndex === 0) {
