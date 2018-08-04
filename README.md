@@ -179,7 +179,7 @@ module.exports = ({ file, options, env }) => ({
   parser: file.extname === '.sss' ? 'sugarss' : false,
   plugins: {
     'postcss-import': { root: file.dirname },
-    'postcss-preset-env': options.presetEnv ? options.presetEnv : false,
+    'postcss-preset-env': options['postcss-preset-env'] ? options['postcss-preset-env'] : false,
     'cssnano': env === 'production' ? options.cssnano : false
   }
 })
@@ -192,9 +192,8 @@ module.exports = ({ file, options, env }) => ({
   options: {
     config: {
       ctx: {
-        cssnext: {...options},
+        'postcss-preset-env': {...options},
         cssnano: {...options},
-        autoprefixer: {...options}
       }
     }
   }
@@ -212,7 +211,6 @@ module.exports = ({ file, options, env }) => ({
     plugins: (loader) => [
       require('postcss-import')({ root: loader.resourcePath }),
       require('postcss-preset-env')(),
-      require('autoprefixer')(),
       require('cssnano')()
     ]
   }
@@ -331,6 +329,31 @@ within the CSS directly as an annotation comment.
   ]
 }
 ```
+
+### Autoprefixing
+
+**webpack.config.js**
+```js
+{
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    'css-loader',
+    {
+      loader: 'postcss-loader',
+      options: {
+        ident: 'postcss',
+        plugins: [
+          require('autoprefixer')({...options}),
+          ...,
+        ]
+      }
+    }
+  ]
+}
+```
+
+> :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset.
 
 ### `CSS Modules`
 
