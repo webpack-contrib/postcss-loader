@@ -1,13 +1,25 @@
 language: node_js
 
-node_js:
-  - stable
-  - lts/*
-  - 6
+jobs:
+  fast_finish: true
+  include:
+    - stage: Lint
+      env: SCRIPT=lint
+      node_js: 'stable'
+    - &test
+      stage: 'Test'
+      env: SCRIPT=test
+      node_js: 'stable'
+    - <<: *test
+      node_js: 'lts/*'
+    - <<: *test
+      node_js: 6
+
+script: npm run $SCRIPT
 
 after_success:
   - npm i coveralls
-  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - cat ./coverage/lcov.info | $(npm bin)/coveralls
 
 notifications:
   email: false
