@@ -29,7 +29,7 @@
   },
   "scripts": {
     "lint": "standard --env jest",
-    "test": "jest --verbose --coverage",
+    "test": "jest --env=node --verbose --coverage",
     "docs": "jsdoc2md lib/index.js > LOADER.md",
     "clean": "rm -rf coverage test/outputs",
     "release": "standard-version"
