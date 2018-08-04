@@ -1,12 +1,10 @@
-'use strict'
-
-const webpack = require('../helpers/compiler')
-const { loader } = require('../helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Options', () => {
   test('Stringifier - {String}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           stringifier: 'sugarss'
         }
@@ -14,16 +12,17 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a  color: black\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual('module.exports = "a  color: black\\n"')
+      expect(source).toMatchSnapshot()
     })
   })
 
   test('Stringifier - {Object}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           ident: 'postcss',
           stringifier: require('sugarss')
@@ -32,10 +31,10 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a  color: black\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual('module.exports = "a  color: black\\n"')
+      expect(source).toMatchSnapshot()
     })
   })
 })

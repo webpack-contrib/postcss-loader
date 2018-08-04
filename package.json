@@ -16,16 +16,15 @@
     "schema-utils": "^0.4.0"
   },
   "devDependencies": {
-    "jest": "^22.0.0",
+    "@webpack-utilities/test": "^1.0.0-alpha.0",
+    "jest": "^23.0.0",
     "jsdoc-to-markdown": "^4.0.0",
-    "memory-fs": "^0.4.0",
     "postcss-import": "^11.0.0",
     "postcss-js": "^2.0.0",
     "standard": "^11.0.0",
     "standard-version": "^4.0.0",
     "sugarss": "^1.0.0",
-    "util.promisify": "^1.0.0",
-    "webpack": "^3.0.0"
+    "webpack": "^4.0.0"
   },
   "scripts": {
     "lint": "standard --env jest",

@@ -1,13 +1,12 @@
-'use strict'
-
 const path = require('path')
-const webpack = require('../helpers/compiler')
-const { loader } = require('../helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Options', () => {
   test('Sourcemap - {Boolean}', () => {
     const config = {
+      devtool: 'sourcemap',
       loader: {
+        test: /\.css$/,
         options: {
           sourceMap: true
         }
@@ -15,15 +14,20 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
+      )
 
-      const map = loader(stats).map
+      expect(source).toMatchSnapshot()
 
-      map.file = path.relative(__dirname, map.file)
-      map.sources = map.sources.map((src) => path.relative(__dirname, src))
+      const map = stats.compilation.modules[1]._source._sourceMap
+
+      map.file = path.posix.relative(__dirname, map.file)
+      map.sources = map.sources.map(
+        (src) => path.posix.relative(__dirname, src)
+      )
 
       expect(map).toMatchSnapshot()
     })
@@ -32,6 +36,7 @@ describe('Options', () => {
   test('Sourcemap - {String}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           sourceMap: 'inline'
         }
@@ -39,10 +44,13 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n\\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDJCQUFZLEVBQUUiLCJmaWxlIjoidGVzdC9maXh0dXJlcy9jc3Mvc3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n\\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDJCQUFZLEVBQUUiLCJmaWxlIjoidGVzdC9maXh0dXJlcy9jc3Mvc3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */"'
+      )
+
+      expect(source).toMatchSnapshot()
     })
   })
 })

@@ -1,21 +1,40 @@
-'use strict'
-
-const webpack = require('./helpers/compiler')
-const { loader } = require('./helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Errors', () => {
   test('Validation Error', () => {
-    const loader = require('../lib')
+    const config = {
+      loader: {
+        test: /\.css$/,
+        options: {
+          sourceMap: 1
+        }
+      }
+    }
 
-    const error = () => loader.call({ query: { sourceMap: 1 } })
+    return webpack('css/index.js', config).then((stats) => {
+      const { source } = stats.toJson().modules[1]
 
-    expect(error).toThrow()
-    expect(error).toThrowErrorMatchingSnapshot()
+      const error = () => eval(source)
+
+      expect(error).toThrow()
+
+      try {
+        error()
+      } catch ({ message }) {
+        message = message
+          .split('\n')
+          .slice(1)
+          .join('\n')
+
+        expect(message).toMatchSnapshot()
+      }
+    })
   })
 
   test('Syntax Error', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           parser: 'sugarss'
         }
@@ -23,9 +42,22 @@ describe('Errors', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const error = loader(stats).err
+      const { source } = stats.toJson().modules[1]
 
-      expect(error[0]).toMatchSnapshot()
+      const error = () => eval(source)
+
+      expect(error).toThrow()
+
+      try {
+        error()
+      } catch ({ message }) {
+        message = message
+          .split('\n')
+          .slice(1)
+          .join('\n')
+
+        expect(message).toMatchSnapshot()
+      }
     })
   })
 })

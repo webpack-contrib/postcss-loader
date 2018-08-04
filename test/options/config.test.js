@@ -1,25 +1,28 @@
-'use strict'
-
-const webpack = require('../helpers/compiler')
-const { loader } = require('../helpers/compilation')
+const { webpack } = require('@webpack-utilities/test')
 
 describe('Options', () => {
   test('Config - {Object}', () => {
     const config = {
-      loader: {}
+      loader: {
+        test: /\.css$/,
+      }
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
+      )
+
+      expect(source).toMatchSnapshot()
     })
   })
 
   test('Config - Path - {String}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           config: { path: 'test/fixtures/config/postcss.config.js' }
         }
@@ -27,16 +30,17 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: black }\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual('module.exports = "a { color: black }\\n"')
+      expect(source).toMatchSnapshot()
     })
   })
 
   test('Config - Context - {Object}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           config: {
             path: 'test/fixtures/config/postcss.config.js',
@@ -47,16 +51,20 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
+      )
+
+      expect(source).toMatchSnapshot()
     })
   })
 
   test('Config - Context - {Object} - with ident', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           ident: 'postcss',
           config: {
@@ -68,16 +76,20 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const src = loader(stats).src
+      const { source } = stats.toJson().modules[1]
 
-      expect(src).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
-      expect(src).toMatchSnapshot()
+      expect(source).toEqual(
+        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
+      )
+
+      expect(source).toMatchSnapshot()
     })
   })
 
-  test('Pass loader object to config context', () => {
+  test('Config – Context – Loader {Object}', () => {
     const config = {
       loader: {
+        test: /\.css$/,
         options: {
           config: {
             path: 'test/fixtures/config/context/postcss.config.js'
@@ -87,11 +99,12 @@ describe('Options', () => {
     }
 
     return webpack('css/index.js', config).then((stats) => {
-      const assets = stats.compilation.assets
-      const expectedAssetName = 'asset.txt'
+      const { assets } = stats.compilation
 
-      expect(expectedAssetName in assets).toBeTruthy()
-      expect(assets[expectedAssetName].source()).toBe('123')
+      const asset = 'asset.txt'
+
+      expect(asset in assets).toBeTruthy()
+      expect(assets[asset].source()).toBe('123')
     })
   })
 })
