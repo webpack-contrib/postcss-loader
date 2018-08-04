@@ -1,10 +1,6 @@
-'use strict'
-
 const path = require('path')
 
-const loaderUtils = require('loader-utils')
-
-const parseOptions = require('./options')
+const { getOptions } = require('loader-utils')
 const validateOptions = require('schema-utils')
 
 const postcss = require('postcss')
@@ -42,7 +38,7 @@ const parseOptions = require('./options.js')
  * @return {cb} cb      Result
  */
 module.exports = function loader (css, map, meta) {
-  const options = Object.assign({}, loaderUtils.getOptions(this))
+  const options = Object.assign({}, getOptions(this))
 
   validateOptions(require('./options.json'), options, 'PostCSS Loader')
 
@@ -96,16 +92,25 @@ module.exports = function loader (css, map, meta) {
 
     return postcssrc(rc.ctx, rc.path)
   }).then((config) => {
-    if (!config) config = {}
+    if (!config) {
+      config = {}
+    }
 
-    if (config.file) this.addDependency(config.file)
+    if (config.file) {
+      this.addDependency(config.file)
+    }
 
     // Disable override `to` option from `postcss.config.js`
-    if (config.options.to) delete config.options.to
+    if (config.options.to) {
+      delete config.options.to
+    }
     // Disable override `from` option from `postcss.config.js`
-    if (config.options.from) delete config.options.from
+    if (config.options.from) {
+      delete config.options.from
+    }
 
     let plugins = config.plugins || []
+
     let options = Object.assign({
       from: file,
       map: sourceMap
@@ -139,29 +144,39 @@ module.exports = function loader (css, map, meta) {
       css = this.exec(css, this.resource)
     }
 
-    if (sourceMap && typeof map === 'string') map = JSON.parse(map)
-    if (sourceMap && map) options.map.prev = map
+    if (sourceMap && typeof map === 'string') {
+      map = JSON.parse(map)
+    }
+
+    if (sourceMap && map) {
+      options.map.prev = map
+    }
 
     return postcss(plugins)
       .process(css, options)
       .then((result) => {
+        let { css, map, root, processor, messages } = result
+
         result.warnings().forEach((warning) => {
           this.emitWarning(new Warning(warning))
         })
 
-        result.messages.forEach((msg) => {
-          if (msg.type === 'dependency') this.addDependency(msg.file)
+        messages.forEach((msg) => {
+          if (msg.type === 'dependency') {
+            this.addDependency(msg.file)
+          }
         })
 
-        css = result.css
-        map = result.map ? result.map.toJSON() : null
+        map = map ? map.toJSON() : null
 
         if (map) {
           map.file = path.resolve(map.file)
           map.sources = map.sources.map((src) => path.resolve(src))
         }
 
-        if (!meta) meta = {}
+        if (!meta) {
+          meta = {}
+        }
 
         const ast = {
           type: 'postcss',
@@ -170,7 +185,7 @@ module.exports = function loader (css, map, meta) {
         }
 
         meta.ast = ast
-        meta.messages = result.messages
+        meta.messages = messages
 
         if (this.loaderIndex === 0) {
           /**
@@ -199,8 +214,12 @@ module.exports = function loader (css, map, meta) {
         return null
       })
   }).catch((err) => {
-    if (err.file) this.addDependency(err.file)
+    if (err.file) {
+      this.addDependency(err.file)
+    }
 
-    return err.name === 'CssSyntaxError' ? cb(new SyntaxError(err)) : cb(err)
+    return err.name === 'CssSyntaxError'
+      ? cb(new SyntaxError(err))
+      : cb(err)
   })
 }
