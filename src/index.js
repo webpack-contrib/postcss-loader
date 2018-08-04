@@ -10,7 +10,9 @@ const validateOptions = require('schema-utils')
 const postcss = require('postcss')
 const postcssrc = require('postcss-load-config')
 
-const SyntaxError = require('./Error')
+const Warning = require('./Warning.js')
+const SyntaxError = require('./Error.js')
+const parseOptions = require('./options.js')
 
 /**
  * PostCSS Loader
@@ -143,7 +145,9 @@ module.exports = function loader (css, map, meta) {
     return postcss(plugins)
       .process(css, options)
       .then((result) => {
-        result.warnings().forEach((msg) => this.emitWarning(msg.toString()))
+        result.warnings().forEach((warning) => {
+          this.emitWarning(new Warning(warning))
+        })
 
         result.messages.forEach((msg) => {
           if (msg.type === 'dependency') this.addDependency(msg.file)
