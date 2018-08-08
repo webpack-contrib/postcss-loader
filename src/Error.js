@@ -9,16 +9,26 @@
  * @param {Object} err CssSyntaxError
  */
 class SyntaxError extends Error {
-  constructor (err) {
-    super(err)
+  constructor (error) {
+    super(error)
 
-    const { line, column, reason } = err
+    const { line, column, reason } = error
 
     this.name = 'SyntaxError'
 
-    this.message = ''
-    this.message += `${this.name} \n\n(${line}:${column}) ${reason}`
-    this.message += `\n\n${err.showSourceCode()}\n`
+    this.message = `${this.name}\n\n`
+
+    if (typeof line !== 'undefined') {
+      this.message += `(${line}:${column}) `
+    }
+
+    this.message += `${reason}`
+
+    const code = error.showSourceCode()
+
+    if (code) {
+      this.message += `\n\n${code}\n`
+    }
 
     this.stack = false
   }
