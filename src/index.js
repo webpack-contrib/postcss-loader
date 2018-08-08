@@ -11,33 +11,18 @@ const SyntaxError = require('./Error.js')
 const parseOptions = require('./options.js')
 
 /**
- * PostCSS Loader
+ * **PostCSS Loader**
  *
- * > Loads && processes CSS with [PostCSS](https://github.com/postcss/postcss)
- *
- * @author Andrey Sitnik (@ai) <andrey@sitnik.ru>
- *
- * @license MIT
- * @version 2.0.0
- *
- * @requires path
- *
- * @requires loader-utils
- * @requires schema-utils
- *
- * @requires postcss
- * @requires postcss-load-config
- *
- * @requires Error
+ * Loads && processes CSS with [PostCSS](https://github.com/postcss/postcss)
  *
  * @method loader
  *
- * @param  {String} css Source
- * @param  {Object} map Source Map
+ * @param {String} css Source
+ * @param {Object} map Source Map
  *
- * @return {cb} cb      Result
+ * @return {cb} cb Result
  */
-module.exports = function loader (css, map, meta) {
+function loader (css, map, meta) {
   const options = Object.assign({}, getOptions(this))
 
   validateOptions(require('./options.json'), options, 'PostCSS Loader')
@@ -192,9 +177,9 @@ module.exports = function loader (css, map, meta) {
            * @memberof loader
            * @callback cb
            *
-           * @param {Object} null   Error
-           * @param {String} result Result (JS Module)
-           * @param {Object} map    Source Map
+           * @param {Object} null Error
+           * @param {String} css  Result (JS Module)
+           * @param {Object} map  Source Map
            */
           cb(null, `module.exports = ${JSON.stringify(css)}`, map)
 
@@ -223,3 +208,25 @@ module.exports = function loader (css, map, meta) {
       : cb(err)
   })
 }
+
+/**
+ * @author Andrey Sitnik (@ai) <andrey@sitnik.ru>
+ *
+ * @license MIT
+ * @version 3.0.0
+ *
+ * @module postcss-loader
+ *
+ * @requires path
+ *
+ * @requires loader-utils
+ * @requires schema-utils
+ *
+ * @requires postcss
+ * @requires postcss-load-config
+ *
+ * @requires ./options.js
+ * @requires ./Warning.js
+ * @requires ./SyntaxError.js
+ */
+module.exports = loader
