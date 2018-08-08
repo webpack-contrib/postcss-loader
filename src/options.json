@@ -22,9 +22,6 @@
     "exec": {
       "type": "boolean"
     },
-    "ident": {
-      "type": "string"
-    },
     "parser": {
       "type": [ "string", "object" ]
     },
@@ -48,7 +45,6 @@
   "errorMessage": {
     "properties": {
       "exec": "should be {Boolean} (https://github.com/postcss/postcss-loader#exec)",
-      "ident": "should be {String} (https://github.com/postcss/postcss-loader#plugins)",
       "config": "should be {Object} (https://github.com/postcss/postcss-loader#config)",
       "parser": "should be {String|Object} (https://github.com/postcss/postcss-loader#parser)",
       "syntax": "should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)",
