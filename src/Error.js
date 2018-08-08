@@ -1,3 +1,13 @@
+/**
+ * **PostCSS Syntax Error**
+ *
+ * Loader wrapper for postcss syntax errors
+ *
+ * @class SyntaxError
+ * @extends Error
+ *
+ * @param {Object} err CssSyntaxError
+ */
 class SyntaxError extends Error {
   constructor (err) {
     super(err)
