@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/postcss/postcss-loader/compare/v2.1.6...v3.0.0) (2018-08-08)
+
+
+### Bug Fixes
+
+* **index:** add ast version (`meta.ast`) ([f34954f](https://github.com/postcss/postcss-loader/commit/f34954f))
+* **index:** emit `warnings` as an instance of `{Error}` ([8ac6fb5](https://github.com/postcss/postcss-loader/commit/8ac6fb5))
+* **options:** improved `ValidationError` messages ([549ea08](https://github.com/postcss/postcss-loader/commit/549ea08))
+
+
+### Chores
+
+* **package:** update `postcss` v6.0.0...7.0.0 (`dependencies`) ([#375](https://github.com/postcss/postcss-loader/issues/375)) ([daa0da8](https://github.com/postcss/postcss-loader/commit/daa0da8))
+
+
+### BREAKING CHANGES
+
+* **package:** requires `node >= v6.0.0`
+
+
+
 <a name="2.1.6"></a>
 ## [2.1.6](https://github.com/postcss/postcss-loader/compare/v2.1.5...v2.1.6) (2018-07-10)
 
