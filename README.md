@@ -117,6 +117,7 @@ module.exports = {
 |[`config`](#config)|`{Object}`|`undefined`|Set `postcss.config.js` config path && `ctx`|
 |[`plugins`](#plugins)|`{Array\|Function}`|`[]`|Set PostCSS Plugins|
 |[`sourceMap`](#sourcemap)|`{String\|Boolean}`|`false`|Enable Source Maps|
+|[`emitWarningsAsErrors`](#emitwarningsaserrors)|`{Boolean}`|`false`|Emit warnings as errors|
 
 ### `Exec`
 
@@ -304,6 +305,22 @@ within the CSS directly as an annotation comment.
 
 /*# sourceMappingURL=data:application/json;base64, ... */
 ```
+
+### `EmitWarningsAsErrors`
+
+Enabling `emitWarningsAsErrors` will emit any warnings from postcss plugins at the error level.
+
+**`webpack.config.js`**
+```js
+{
+  test: /\.css$/,
+  use: [
+    ...,
+    { loader: 'postcss-loader', options: { emitWarningsAsErrors: true } }
+  ]
+}
+```
+
 
 <h2 align="center">Examples</h2>
 
