@@ -30,4 +30,29 @@ describe('Warnings', () => {
       expect(message).toMatchSnapshot()
     })
   })
+
+  test('Emit as Error', () => {
+    const config = {
+      loader: {
+        test: /\.css$/,
+        options: {
+          emitWarningsAsErrors: true,
+          plugins: [
+            plugin()
+          ]
+        }
+      }
+    }
+
+    return webpack('css/index.js', config).then((stats) => {
+      const error = stats.compilation.errors[0]
+
+      const message = error.message
+        .split('\n')
+        .slice(1)
+        .join('\n')
+
+      expect(message).toMatchSnapshot()
+    })
+  })
 })

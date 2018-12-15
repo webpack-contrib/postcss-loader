@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Warnings Emit as Error 1`] = `
+"Warning
+
+(1:5) <Message>"
+`;
+
 exports[`Warnings Plugins 1`] = `
 "Warning
 
