@@ -31,6 +31,7 @@ function loader (css, map, meta) {
   const file = this.resourcePath
 
   const sourceMap = options.sourceMap
+  const emitWarningsAsErrors = options.emitWarningsAsErrors
 
   Promise.resolve().then(() => {
     const length = Object.keys(options)
@@ -40,6 +41,7 @@ function loader (css, map, meta) {
           case 'ident':
           case 'config':
           case 'sourceMap':
+          case 'emitWarningsAsErrors':
             return
           default:
             return option
@@ -142,8 +144,9 @@ function loader (css, map, meta) {
       .then((result) => {
         let { css, map, root, processor, messages } = result
 
-        result.warnings().forEach((warning) => {
-          this.emitWarning(new Warning(warning))
+        result.warnings().forEach(warning => {
+          const emit = emitWarningsAsErrors ? this.emitError : this.emitWarning
+          emit(new Warning(warning))
         })
 
         messages.forEach((msg) => {
