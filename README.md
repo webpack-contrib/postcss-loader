@@ -139,7 +139,7 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 |Name|Type|Default|Description|
 |:--:|:--:|:-----:|:----------|
 |[`path`](#path)|`{String}`|`undefined`|PostCSS Config Directory|
-|[`context`](#context)|`{Object}`|`undefined`|PostCSS Config Context|
+|[`context`](#context-ctx)|`{Object}`|`undefined`|PostCSS Config Context|
 
 #### `Path`
 
