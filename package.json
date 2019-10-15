@@ -1,6 +1,6 @@
 {
   "name": "postcss-loader",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "PostCSS loader for webpack",
   "main": "src/index.js",
   "files": [
@@ -12,7 +12,7 @@
   "dependencies": {
     "loader-utils": "^1.1.0",
     "postcss": "^7.0.0",
-    "postcss-load-config": "^2.0.0",
+    "postcss-load-config": "^3.0.0",
     "schema-utils": "^1.0.0"
   },
   "devDependencies": {
