@@ -1,9 +1,12 @@
 const path = require('path')
 
+const { satisfies } = require('semver')
+
 const { getOptions } = require('loader-utils')
 const validateOptions = require('schema-utils')
 
 const postcss = require('postcss')
+const postcssPkg = require('postcss/package.json')
 const postcssrc = require('postcss-load-config')
 
 const Warning = require('./Warning.js')
@@ -31,6 +34,16 @@ function loader (css, map, meta) {
   const file = this.resourcePath
 
   const sourceMap = options.sourceMap
+
+  let prevAst = null
+  if (
+    meta &&
+    meta.ast &&
+    meta.ast.type === 'postcss' &&
+    satisfies(meta.ast.version, `^${postcssPkg.version}`)
+  ) {
+    prevAst = meta.ast.root
+  }
 
   Promise.resolve().then(() => {
     const length = Object.keys(options)
@@ -107,7 +120,7 @@ function loader (css, map, meta) {
 
     // Loader Exec (Deprecated)
     // https://webpack.js.org/api/loaders/#deprecated-context-properties
-    if (options.parser === 'postcss-js') {
+    if (!prevAst && options.parser === 'postcss-js') {
       css = this.exec(css, this.resource)
     }
 
@@ -125,7 +138,7 @@ function loader (css, map, meta) {
 
     // Loader API Exec (Deprecated)
     // https://webpack.js.org/api/loaders/#deprecated-context-properties
-    if (config.exec) {
+    if (!prevAst && config.exec) {
       css = this.exec(css, this.resource)
     }
 
@@ -136,9 +149,10 @@ function loader (css, map, meta) {
     if (sourceMap && map) {
       options.map.prev = map
     }
+    const content = prevAst || css
 
     return postcss(plugins)
-      .process(css, options)
+      .process(content, options)
       .then((result) => {
         let { css, map, root, processor, messages } = result
 
@@ -218,6 +232,8 @@ function loader (css, map, meta) {
  * @module postcss-loader
  *
  * @requires path
+ *
+ * @requires semver
  *
  * @requires loader-utils
  * @requires schema-utils

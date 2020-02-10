@@ -25,6 +25,7 @@ describe('Options', () => {
   test('JSS - {String}', () => {
     const config = {
       loader: {
+        test: /style\.js$/,
         options: {
           parser: 'postcss-js'
         }
