@@ -1,48 +1,35 @@
 const { webpack } = require('@webpack-utilities/test')
-describe('Loader', () => {
+
+describe('Custom Loader', () => {
   test('Default', () => {
+    const configSpy = jest.fn((config, options) => {
+      expect(config.plugins).toHaveLength(1)
+      expect(options.source).toContain('color: black')
+    });
+
+    const resultSpy = jest.fn((result) => {
+      expect(result.css).toContain('color: rgba(255, 0, 0, 1.0)')
+    });
+
     const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          plugins: []
+      rules: [
+        {
+          test: /\.css$/,
+          use: {
+            loader: require.resolve('./custom-loader'),
+            options: { configSpy, resultSpy }
+          }
         }
-      }
+      ]
     }
 
     return webpack('css/index.js', config).then((stats) => {
       const { source } = stats.toJson().modules[1]
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toEqual('module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"')
 
-  test('uses previous AST', () => {
-    const spy = jest.fn()
-    const config = {
-      rules: [
-        {
-          test: /style\.js$/,
-          use: [
-            {
-              loader: require.resolve('../src'),
-              options: { importLoaders: 1 }
-            },
-            {
-              loader: require.resolve('./ast-loader'),
-              options: { spy }
-            }
-          ]
-        }
-      ]
-    }
-
-    return webpack('jss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
-
-      expect(spy).toHaveBeenCalledTimes(1)
-      expect(source).toMatchSnapshot()
+      expect(configSpy).toHaveBeenCalledTimes(1)
+      expect(resultSpy).toHaveBeenCalledTimes(1)
     })
   })
 })

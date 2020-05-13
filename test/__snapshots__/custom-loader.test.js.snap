@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Custom Loader Default 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+
 exports[`Loader Default 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
 
 exports[`Loader uses previous AST 1`] = `"module.exports = \\"a {\\\\n    color: yellow\\\\n}\\""`;

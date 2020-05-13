@@ -131,14 +131,6 @@ async function postcssLoader(source, inputMap, meta, overrides = {}) {
       }
     }
 
-    if (typeof loaderOptions.config === 'function') {
-      config = await loaderOptions.config.call(this, config, {
-        source,
-        inputMap,
-        inputAst,
-      });
-    }
-
     if (config.file) {
       this.addDependency(config.file);
     }
