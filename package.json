@@ -7,7 +7,7 @@
     "src"
   ],
   "engines": {
-    "node": ">= 6"
+    "node": ">= 10.13"
   },
   "dependencies": {
     "loader-utils": "^1.1.0",
