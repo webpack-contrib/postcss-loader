@@ -1,6 +1,7 @@
 const postcss = require('postcss')
 const postcssPkg = require('postcss/package.json')
 const semver = require('semver')
+const loader = require('../src')
 
 const incomingVersion = semver.inc(postcssPkg.version, 'minor')
 
