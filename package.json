@@ -13,7 +13,8 @@
     "loader-utils": "^1.1.0",
     "postcss": "^7.0.0",
     "postcss-load-config": "^2.0.0",
-    "schema-utils": "^1.0.0"
+    "schema-utils": "^1.0.0",
+    "semver": "^6.3.0"
   },
   "devDependencies": {
     "@webpack-utilities/test": "^1.0.0-alpha.0",
