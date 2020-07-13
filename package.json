@@ -22,7 +22,7 @@
     "postcss-import": "^11.0.0",
     "postcss-js": "^2.0.0",
     "standard": "^11.0.0",
-    "standard-version": "^4.0.0",
+    "standard-version": "^8.0.1",
     "sugarss": "^1.0.0",
     "webpack": "^4.0.0"
   },
