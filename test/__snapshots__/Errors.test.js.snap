@@ -11,4 +11,9 @@ exports[`Errors Syntax Error 1`] = `
 "
 `;
 
-exports[`Errors Validation Error 1`] = `"options.sourceMap should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)"`;
+exports[`Errors Validation Error 1`] = `
+"ValidationError: Invalid configuration object. Object has been initialized using a configuration object that does not match the API schema.
+ - configuration.sourceMap should be:
+   string | boolean
+   -> should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)"
+`;

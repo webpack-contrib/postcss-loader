@@ -24,7 +24,7 @@ describe('Errors', () => {
       try {
         error();
       } catch (err) {
-        const message = err.message.split('\n\n').slice(1, -1).join('\n\n');
+        const message = err.message.split('\n').slice(1, 5).join('\n');
 
         expect(message).toMatchSnapshot();
       }

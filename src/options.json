@@ -2,36 +2,38 @@
   "type": "object",
   "properties": {
     "config": {
+      "description": "should be {Object} (https://github.com/postcss/postcss-loader#config)",
       "type": "object",
       "properties": {
         "path": {
+          "description": "should be {String} (https://github.com/postcss/postcss-loader#path)",
           "type": "string"
         },
         "ctx": {
+          "description": "should be {Object} (https://github.com/postcss/postcss-loader#context-ctx)",
           "type": "object"
-        }
-      },
-      "errorMessage": {
-        "properties": {
-          "ctx": "should be {Object} (https://github.com/postcss/postcss-loader#context-ctx)",
-          "path": "should be {String} (https://github.com/postcss/postcss-loader#path)"
         }
       },
       "additionalProperties": false
     },
     "exec": {
+      "description": "should be {Boolean} (https://github.com/postcss/postcss-loader#exec)",
       "type": "boolean"
     },
     "parser": {
+      "description": "should be {String|Object} (https://github.com/postcss/postcss-loader#parser)",
       "type": ["string", "object"]
     },
     "syntax": {
+      "description": "should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)",
       "type": ["string", "object"]
     },
     "stringifier": {
+      "description": "should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)",
       "type": ["string", "object"]
     },
     "plugins": {
+      "description": "should be {Array|Object|Function} (https://github.com/postcss/postcss-loader#plugins)",
       "anyOf": [
         { "type": "array" },
         { "type": "object" },
@@ -39,18 +41,8 @@
       ]
     },
     "sourceMap": {
+      "description": "should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)",
       "type": ["string", "boolean"]
-    }
-  },
-  "errorMessage": {
-    "properties": {
-      "exec": "should be {Boolean} (https://github.com/postcss/postcss-loader#exec)",
-      "config": "should be {Object} (https://github.com/postcss/postcss-loader#config)",
-      "parser": "should be {String|Object} (https://github.com/postcss/postcss-loader#parser)",
-      "syntax": "should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)",
-      "stringifier": "should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)",
-      "plugins": "should be {Array|Object|Function} (https://github.com/postcss/postcss-loader#plugins)",
-      "sourceMap": "should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)"
     }
   },
   "additionalProperties": true

@@ -42,10 +42,10 @@
     "webpack": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
-    "loader-utils": "^1.1.0",
+    "loader-utils": "^2.0.0",
     "postcss": "^7.0.0",
     "postcss-load-config": "^2.0.0",
-    "schema-utils": "^1.0.0"
+    "schema-utils": "^2.7.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
@@ -67,16 +67,16 @@
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "jest-junit": "^11.1.0",
-    "jsdoc-to-markdown": "^4.0.0",
+    "jsdoc-to-markdown": "^6.0.1",
     "lint-staged": "^10.2.11",
     "memfs": "^3.2.0",
     "npm-run-all": "^4.1.5",
-    "postcss-import": "^11.0.0",
+    "postcss-import": "^12.0.1",
     "postcss-js": "^2.0.0",
     "prettier": "^2.0.5",
-    "standard": "^11.0.0",
-    "standard-version": "^4.0.0",
-    "sugarss": "^1.0.0",
+    "standard": "^14.3.4",
+    "standard-version": "^8.0.2",
+    "sugarss": "^2.0.0",
     "webpack": "^4.0.0"
   },
   "keywords": [

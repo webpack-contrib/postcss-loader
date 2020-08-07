@@ -1,24 +1,22 @@
-# OS
-
-.DS_Store
-._*
-
-# NODEJS
-
+logs
+*.log
 npm-debug.log
 yarn-error.log
+npm-debug.log*
+.eslintcache
+
 dmd
 jest
 jsdoc-api
-logs
-*.log
-npm-debug.log*
-.eslintcache
+
 /coverage
 /dist
 /local
 /reports
 /node_modules
+
+.DS_Store
+._*
 Thumbs.db
 .idea
 *.iml
