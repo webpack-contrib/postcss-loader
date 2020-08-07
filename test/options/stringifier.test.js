@@ -1,4 +1,6 @@
-const { webpack } = require('@webpack-utilities/test')
+/* eslint-disable */
+
+const { webpack } = require('@webpack-utilities/test');
 
 describe('Options', () => {
   test('Stringifier - {String}', () => {
@@ -6,18 +8,18 @@ describe('Options', () => {
       loader: {
         test: /\.css$/,
         options: {
-          stringifier: 'sugarss'
-        }
-      }
-    }
+          stringifier: 'sugarss',
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toEqual('module.exports = "a  color: black\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Stringifier - {Object}', () => {
     const config = {
@@ -25,16 +27,16 @@ describe('Options', () => {
         test: /\.css$/,
         options: {
           ident: 'postcss',
-          stringifier: require('sugarss')
-        }
-      }
-    }
+          stringifier: require('sugarss'),
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+      expect(source).toEqual('module.exports = "a  color: black\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
+});

@@ -9,23 +9,23 @@
  * @param {Object} warning PostCSS Warning
  */
 class Warning extends Error {
-  constructor (warning) {
-    super(warning)
+  constructor(warning) {
+    super(warning);
 
-    const { text, line, column } = warning
+    const { text, line, column } = warning;
 
-    this.name = 'Warning'
+    this.name = 'Warning';
 
-    this.message = `${this.name}\n\n`
+    this.message = `${this.name}\n\n`;
 
     if (typeof line !== 'undefined') {
-      this.message += `(${line}:${column}) `
+      this.message += `(${line}:${column}) `;
     }
 
-    this.message += `${text}`
+    this.message += `${text}`;
 
-    this.stack = false
+    this.stack = false;
   }
 }
 
-module.exports = Warning
+module.exports = Warning;

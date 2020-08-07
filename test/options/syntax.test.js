@@ -1,4 +1,6 @@
-const { webpack } = require('@webpack-utilities/test')
+/* eslint-disable */
+
+const { webpack } = require('@webpack-utilities/test');
 
 describe('Options', () => {
   test('Syntax - {String}', () => {
@@ -6,18 +8,18 @@ describe('Options', () => {
       loader: {
         test: /\.sss$/,
         options: {
-          syntax: 'sugarss'
-        }
-      }
-    }
+          syntax: 'sugarss',
+        },
+      },
+    };
 
     return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toEqual('module.exports = "a\\n  color: black\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Syntax - {Object}', () => {
     const config = {
@@ -25,16 +27,16 @@ describe('Options', () => {
         test: /\.sss$/,
         options: {
           ident: 'postcss',
-          syntax: require('sugarss')
-        }
-      }
-    }
+          syntax: require('sugarss'),
+        },
+      },
+    };
 
     return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+      expect(source).toEqual('module.exports = "a\\n  color: black\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
+});

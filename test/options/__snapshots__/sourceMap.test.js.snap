@@ -5,7 +5,7 @@ exports[`Options Sourcemap - {Boolean} 1`] = `"module.exports = \\"a { color: rg
 exports[`Options Sourcemap - {Boolean} 2`] = `
 Object {
   "file": "../fixtures/css/style.css",
-  "mappings": "AAAA,IAAI,2BAAY,EAAE",
+  "mappings": "AAAA,IAAI,4BAAa",
   "names": Array [],
   "sources": Array [
     "../fixtures/css/style.css",
@@ -18,4 +18,4 @@ Object {
 }
 `;
 
-exports[`Options Sourcemap - {String} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\\\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDJCQUFZLEVBQUUiLCJmaWxlIjoidGVzdC9maXh0dXJlcy9jc3Mvc3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */\\""`;
+exports[`Options Sourcemap - {String} 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\\\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDRCQUFhIiwiZmlsZSI6InRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImEgeyBjb2xvcjogYmxhY2sgfVxuIl19 */\\""`;

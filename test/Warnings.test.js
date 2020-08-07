@@ -1,10 +1,12 @@
-const { webpack } = require('@webpack-utilities/test')
+/* eslint-disable */
+
+const { webpack } = require('@webpack-utilities/test');
 
 const plugin = (options = {}) => (css, result) => {
   css.walkDecls((node) => {
-    node.warn(result, '<Message>')
-  })
-}
+    node.warn(result, '<Message>');
+  });
+};
 
 describe('Warnings', () => {
   test('Plugins', () => {
@@ -12,22 +14,17 @@ describe('Warnings', () => {
       loader: {
         test: /\.css$/,
         options: {
-          plugins: [
-            plugin()
-          ]
-        }
-      }
-    }
+          plugins: [plugin()],
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const warning = stats.compilation.warnings[0]
+      const warning = stats.compilation.warnings[0];
 
-      const message = warning.message
-        .split('\n')
-        .slice(1)
-        .join('\n')
+      const message = warning.message.split('\n').slice(1).join('\n');
 
-      expect(message).toMatchSnapshot()
-    })
-  })
-})
+      expect(message).toMatchSnapshot();
+    });
+  });
+});

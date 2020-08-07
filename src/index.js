@@ -1,14 +1,15 @@
-const path = require('path')
+import path from 'path';
 
-const { getOptions } = require('loader-utils')
-const validateOptions = require('schema-utils')
+import { getOptions } from 'loader-utils';
+import validateOptions from 'schema-utils';
 
-const postcss = require('postcss')
-const postcssrc = require('postcss-load-config')
+import postcss from 'postcss';
+import postcssrc from 'postcss-load-config';
 
-const Warning = require('./Warning.js')
-const SyntaxError = require('./Error.js')
-const parseOptions = require('./options.js')
+import Warning from './Warning';
+import SyntaxError from './Error';
+import parseOptions from './options';
+import schema from './options.json';
 
 /**
  * **PostCSS Loader**
@@ -17,196 +18,196 @@ const parseOptions = require('./options.js')
  *
  * @method loader
  *
- * @param {String} css Source
- * @param {Object} map Source Map
+ * @param {String} content Source
+ * @param {Object} sourceMap Source Map
  *
  * @return {cb} cb Result
  */
-function loader (css, map, meta) {
-  const options = Object.assign({}, getOptions(this))
+function loader(content, sourceMap, meta = {}) {
+  const options = getOptions(this);
 
-  validateOptions(require('./options.json'), options, 'PostCSS Loader')
+  validateOptions(schema, options, 'PostCSS Loader');
 
-  const cb = this.async()
-  const file = this.resourcePath
+  const cb = this.async();
+  const file = this.resourcePath;
 
-  const sourceMap = options.sourceMap
-
-  Promise.resolve().then(() => {
-    const length = Object.keys(options)
-      .filter((option) => {
+  Promise.resolve()
+    .then(() => {
+      const { length } = Object.keys(options).filter((option) => {
         switch (option) {
           // case 'exec':
           case 'ident':
           case 'config':
           case 'sourceMap':
-            return
+            return false;
           default:
-            return option
+            return option;
         }
-      })
-      .length
+      });
 
-    if (length) {
-      return parseOptions.call(this, options)
-    }
+      if (length) {
+        return parseOptions.call(this, options);
+      }
 
-    const rc = {
-      path: path.dirname(file),
-      ctx: {
-        file: {
-          extname: path.extname(file),
-          dirname: path.dirname(file),
-          basename: path.basename(file)
+      const rc = {
+        path: path.dirname(file),
+        ctx: {
+          file: {
+            extname: path.extname(file),
+            dirname: path.dirname(file),
+            basename: path.basename(file),
+          },
+          options: {},
         },
-        options: {}
+      };
+
+      if (options.config) {
+        if (options.config.path) {
+          rc.path = path.resolve(options.config.path);
+        }
+
+        if (options.config.ctx) {
+          rc.ctx.options = options.config.ctx;
+        }
       }
-    }
 
-    if (options.config) {
-      if (options.config.path) {
-        rc.path = path.resolve(options.config.path)
+      rc.ctx.webpack = this;
+
+      return postcssrc(rc.ctx, rc.path);
+    })
+    .then((config = {}) => {
+      if (config.file) {
+        this.addDependency(config.file);
       }
 
-      if (options.config.ctx) {
-        rc.ctx.options = options.config.ctx
+      // Disable override `to` option from `postcss.config.js`
+      if (config.options.to) {
+        // eslint-disable-next-line no-param-reassign
+        delete config.options.to;
       }
-    }
+      // Disable override `from` option from `postcss.config.js`
+      if (config.options.from) {
+        // eslint-disable-next-line no-param-reassign
+        delete config.options.from;
+      }
 
-    rc.ctx.webpack = this
+      const plugins = config.plugins || [];
 
-    return postcssrc(rc.ctx, rc.path)
-  }).then((config) => {
-    if (!config) {
-      config = {}
-    }
+      const postcssOptions = Object.assign(
+        {
+          from: file,
+          map: options.sourceMap
+            ? options.sourceMap === 'inline'
+              ? { inline: true, annotation: false }
+              : { inline: false, annotation: false }
+            : false,
+        },
+        config.options
+      );
 
-    if (config.file) {
-      this.addDependency(config.file)
-    }
+      // Loader Exec (Deprecated)
+      // https://webpack.js.org/api/loaders/#deprecated-context-properties
+      if (postcssOptions.parser === 'postcss-js') {
+        // eslint-disable-next-line no-param-reassign
+        content = this.exec(content, this.resource);
+      }
 
-    // Disable override `to` option from `postcss.config.js`
-    if (config.options.to) {
-      delete config.options.to
-    }
-    // Disable override `from` option from `postcss.config.js`
-    if (config.options.from) {
-      delete config.options.from
-    }
+      if (typeof postcssOptions.parser === 'string') {
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        postcssOptions.parser = require(postcssOptions.parser);
+      }
 
-    let plugins = config.plugins || []
+      if (typeof postcssOptions.syntax === 'string') {
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        postcssOptions.syntax = require(postcssOptions.syntax);
+      }
 
-    let options = Object.assign({
-      from: file,
-      map: sourceMap
-        ? sourceMap === 'inline'
-          ? { inline: true, annotation: false }
-          : { inline: false, annotation: false }
-        : false
-    }, config.options)
+      if (typeof postcssOptions.stringifier === 'string') {
+        // eslint-disable-next-line import/no-dynamic-require,global-require
+        postcssOptions.stringifier = require(postcssOptions.stringifier);
+      }
 
-    // Loader Exec (Deprecated)
-    // https://webpack.js.org/api/loaders/#deprecated-context-properties
-    if (options.parser === 'postcss-js') {
-      css = this.exec(css, this.resource)
-    }
+      // Loader API Exec (Deprecated)
+      // https://webpack.js.org/api/loaders/#deprecated-context-properties
+      if (config.exec) {
+        // eslint-disable-next-line no-param-reassign
+        content = this.exec(content, this.resource);
+      }
 
-    if (typeof options.parser === 'string') {
-      options.parser = require(options.parser)
-    }
+      if (options.sourceMap && typeof sourceMap === 'string') {
+        // eslint-disable-next-line no-param-reassign
+        sourceMap = JSON.parse(sourceMap);
+      }
 
-    if (typeof options.syntax === 'string') {
-      options.syntax = require(options.syntax)
-    }
+      if (options.sourceMap && sourceMap) {
+        postcssOptions.map.prev = sourceMap;
+      }
 
-    if (typeof options.stringifier === 'string') {
-      options.stringifier = require(options.stringifier)
-    }
+      return postcss(plugins)
+        .process(content, postcssOptions)
+        .then((result) => {
+          const { css, root, processor, messages } = result;
+          let { map } = result;
 
-    // Loader API Exec (Deprecated)
-    // https://webpack.js.org/api/loaders/#deprecated-context-properties
-    if (config.exec) {
-      css = this.exec(css, this.resource)
-    }
+          result.warnings().forEach((warning) => {
+            this.emitWarning(new Warning(warning));
+          });
 
-    if (sourceMap && typeof map === 'string') {
-      map = JSON.parse(map)
-    }
+          messages.forEach((msg) => {
+            if (msg.type === 'dependency') {
+              this.addDependency(msg.file);
+            }
+          });
 
-    if (sourceMap && map) {
-      options.map.prev = map
-    }
+          map = map ? map.toJSON() : null;
 
-    return postcss(plugins)
-      .process(css, options)
-      .then((result) => {
-        let { css, map, root, processor, messages } = result
-
-        result.warnings().forEach((warning) => {
-          this.emitWarning(new Warning(warning))
-        })
-
-        messages.forEach((msg) => {
-          if (msg.type === 'dependency') {
-            this.addDependency(msg.file)
+          if (map) {
+            map.file = path.resolve(map.file);
+            map.sources = map.sources.map((src) => path.resolve(src));
           }
-        })
 
-        map = map ? map.toJSON() : null
+          const ast = {
+            type: 'postcss',
+            version: processor.version,
+            root,
+          };
 
-        if (map) {
-          map.file = path.resolve(map.file)
-          map.sources = map.sources.map((src) => path.resolve(src))
-        }
+          const newMeta = { ...meta, ast, messages };
 
-        if (!meta) {
-          meta = {}
-        }
+          if (this.loaderIndex === 0) {
+            /**
+             * @memberof loader
+             * @callback cb
+             *
+             * @param {Object} null Error
+             * @param {String} css  Result (JS Module)
+             * @param {Object} map  Source Map
+             */
+            cb(null, `module.exports = ${JSON.stringify(css)}`, map);
 
-        const ast = {
-          type: 'postcss',
-          version: processor.version,
-          root
-        }
+            return null;
+          }
 
-        meta.ast = ast
-        meta.messages = messages
-
-        if (this.loaderIndex === 0) {
           /**
            * @memberof loader
            * @callback cb
            *
            * @param {Object} null Error
-           * @param {String} css  Result (JS Module)
+           * @param {String} css  Result (Raw Module)
            * @param {Object} map  Source Map
            */
-          cb(null, `module.exports = ${JSON.stringify(css)}`, map)
+          cb(null, css, map, newMeta);
 
-          return null
-        }
+          return null;
+        });
+    })
+    .catch((err) => {
+      if (err.file) {
+        this.addDependency(err.file);
+      }
 
-        /**
-         * @memberof loader
-         * @callback cb
-         *
-         * @param {Object} null Error
-         * @param {String} css  Result (Raw Module)
-         * @param {Object} map  Source Map
-         */
-        cb(null, css, map, meta)
-
-        return null
-      })
-  }).catch((err) => {
-    if (err.file) {
-      this.addDependency(err.file)
-    }
-
-    return err.name === 'CssSyntaxError'
-      ? cb(new SyntaxError(err))
-      : cb(err)
-  })
+      return err.name === 'CssSyntaxError' ? cb(new SyntaxError(err)) : cb(err);
+    });
 }
 
 /**
@@ -229,4 +230,4 @@ function loader (css, map, meta) {
  * @requires ./Warning.js
  * @requires ./SyntaxError.js
  */
-module.exports = loader
+module.exports = loader;

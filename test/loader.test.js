@@ -1,4 +1,6 @@
-const { webpack } = require('@webpack-utilities/test')
+/* eslint-disable */
+
+const { webpack } = require('@webpack-utilities/test');
 
 describe('Loader', () => {
   test('Default', () => {
@@ -6,16 +8,16 @@ describe('Loader', () => {
       loader: {
         test: /\.css$/,
         options: {
-          plugins: []
-        }
-      }
-    }
+          plugins: [],
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+      expect(source).toEqual('module.exports = "a { color: black }\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
+});

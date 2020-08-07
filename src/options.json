@@ -23,13 +23,13 @@
       "type": "boolean"
     },
     "parser": {
-      "type": [ "string", "object" ]
+      "type": ["string", "object"]
     },
     "syntax": {
-      "type": [ "string", "object" ]
+      "type": ["string", "object"]
     },
     "stringifier": {
-      "type": [ "string", "object" ]
+      "type": ["string", "object"]
     },
     "plugins": {
       "anyOf": [
@@ -39,7 +39,7 @@
       ]
     },
     "sourceMap": {
-      "type": [ "string", "boolean" ]
+      "type": ["string", "boolean"]
     }
   },
   "errorMessage": {

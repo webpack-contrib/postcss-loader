@@ -1,0 +1,6 @@
+/coverage
+/dist
+/node_modules
+/test/fixtures
+CHANGELOG.md
+docs/LOADER.md

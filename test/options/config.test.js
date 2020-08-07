@@ -1,41 +1,43 @@
-const { webpack } = require('@webpack-utilities/test')
+/* eslint-disable */
+
+const { webpack } = require('@webpack-utilities/test');
 
 describe('Options', () => {
   test('Config - {Object}', () => {
     const config = {
       loader: {
-        test: /\.css$/
-      }
-    }
+        test: /\.css$/,
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
       expect(source).toEqual(
         'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+      );
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Config - Path - {String}', () => {
     const config = {
       loader: {
         test: /\.css$/,
         options: {
-          config: { path: 'test/fixtures/config/postcss.config.js' }
-        }
-      }
-    }
+          config: { path: 'test/fixtures/config/postcss.config.js' },
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toEqual('module.exports = "a { color: black }\\n"');
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Config - Context - {Object}', () => {
     const config = {
@@ -44,22 +46,22 @@ describe('Options', () => {
         options: {
           config: {
             path: 'test/fixtures/config/postcss.config.js',
-            ctx: { plugin: true }
-          }
-        }
-      }
-    }
+            ctx: { plugin: true },
+          },
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
       expect(source).toEqual(
         'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+      );
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Config - Context - {Object} - with ident', () => {
     const config = {
@@ -69,22 +71,22 @@ describe('Options', () => {
           ident: 'postcss',
           config: {
             path: 'test/fixtures/config/postcss.config.js',
-            ctx: { plugin: true }
-          }
-        }
-      }
-    }
+            ctx: { plugin: true },
+          },
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+      const { source } = stats.toJson().modules[1];
 
       expect(source).toEqual(
         'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+      );
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+      expect(source).toMatchSnapshot();
+    });
+  });
 
   test('Config – Context – Loader {Object}', () => {
     const config = {
@@ -92,19 +94,19 @@ describe('Options', () => {
         test: /\.css$/,
         options: {
           config: {
-            path: 'test/fixtures/config/context/postcss.config.js'
-          }
-        }
-      }
-    }
+            path: 'test/fixtures/config/context/postcss.config.js',
+          },
+        },
+      },
+    };
 
     return webpack('css/index.js', config).then((stats) => {
-      const { assets } = stats.compilation
+      const { assets } = stats.compilation;
 
-      const asset = 'asset.txt'
+      const asset = 'asset.txt';
 
-      expect(asset in assets).toBeTruthy()
-      expect(assets[asset].source()).toBe('123')
-    })
-  })
-})
+      expect(asset in assets).toBeTruthy();
+      expect(assets[asset].source()).toBe('123');
+    });
+  });
+});

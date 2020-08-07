@@ -1,6 +1,6 @@
 ---
-name: 📚 Documentation
-about: Are the docs lacking or missing something? Do they need some new 🔥 hotness? Tell us here.
+name: 🔧 Modification Request
+about: Would you like something work differently? Have an alternative approach? This is the template for you.
 ---
 
 <!--
@@ -14,15 +14,14 @@ about: Are the docs lacking or missing something? Do they need some new 🔥 hot
   Head to StackOverflow or https://gitter.im/webpack/webpack.
 -->
 
-Documentation Is:
+- Operating System:
+- Node Version:
+- NPM Version:
+- webpack Version:
+- postcss-loader Version:
 
-<!-- Please place an x (no spaces!) in all [ ] that apply -->
+### Expected Behavior / Situation
 
-- [ ] Missing
-- [ ] Needed
-- [ ] Confusing
-- [ ] Not Sure?
+### Actual Behavior / Situation
 
-### Please Explain in Detail...
-
-### Your Proposal for Changes
+### Modification Proposal

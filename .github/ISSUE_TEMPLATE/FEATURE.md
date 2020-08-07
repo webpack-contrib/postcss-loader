@@ -1,22 +1,25 @@
 ---
-name: 🌟 Feature
-about: Request a feature
+name: ✨ Feature Request
+about: Suggest an idea for this project
 ---
 
-### Proposal
+<!--
+  Issues are so 🔥
 
-<!-- ✏️ Briefly describe the feature you want to be added -->
+  If you remove or skip this template, you'll make the 🐼 sad and the mighty god
+  of Github will appear and pile-drive the close button from a great height
+  while making animal noises.
 
-### Use Case
+  👉🏽 Need support, advice, or help? Don't open an issue!
+  Head to StackOverflow or https://gitter.im/webpack/webpack.
+-->
 
-<!-- ✏️ Describe in more detail the specific use case this feature addresses -->
+- Operating System:
+- Node Version:
+- NPM Version:
+- webpack Version:
+- postcss-loader Version:
 
-### Implementation
+### Feature Proposal
 
-<!-- 👉 Select one of the provided options -->
-
-- [ ] I'm open to work on this
-  - [ ] I need help/mentorship
-- [ ] I'm unable to work on this
-
-<!-- ✏️ Briefly describe the feature implementation -->
+### Feature Use Case
