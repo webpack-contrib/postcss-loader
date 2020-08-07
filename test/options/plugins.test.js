@@ -1,93 +1,69 @@
-/* eslint-disable */
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
 
-const { webpack } = require('@webpack-utilities/test');
-
-describe('Options', () => {
-  test('Plugins - {Array}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          plugins: [require('../fixtures/config/plugin')()],
-        },
-      },
-    };
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      );
-
-      expect(source).toMatchSnapshot();
+describe('Options Plugins', () => {
+  it('should work Plugins - {Array}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      plugins: [require('../fixtures/config/plugin')()],
     });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  test('Plugins - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          plugins: require('../fixtures/config/plugin'),
-        },
-      },
-    };
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      );
-
-      expect(source).toMatchSnapshot();
+  it('should work Plugins - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      plugins: require('../fixtures/config/plugin'),
     });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  test('Plugins - {Function} - {Array}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          plugins: () => [require('../fixtures/config/plugin')()],
-        },
-      },
-    };
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      );
-
-      expect(source).toMatchSnapshot();
+  it('should work Plugins - {Function} - {Array}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      plugins: () => [require('../fixtures/config/plugin')()],
     });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  test('Plugins - {Function} - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          plugins: () => require('../fixtures/config/plugin')(),
-        },
-      },
-    };
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      );
-
-      expect(source).toMatchSnapshot();
+  it('should work Plugins - {Function} - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      plugins: () => require('../fixtures/config/plugin')(),
     });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 });

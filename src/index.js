@@ -23,10 +23,14 @@ import schema from './options.json';
  *
  * @return {cb} cb Result
  */
-function loader(content, sourceMap, meta = {}) {
+
+export default function loader(content, sourceMap, meta = {}) {
   const options = getOptions(this);
 
-  validateOptions(schema, options, 'PostCSS Loader');
+  validateOptions(schema, options, {
+    name: 'PostCSS Loader',
+    baseDataPath: 'options',
+  });
 
   const cb = this.async();
   const file = this.resourcePath;
@@ -230,4 +234,3 @@ function loader(content, sourceMap, meta = {}) {
  * @requires ./Warning.js
  * @requires ./SyntaxError.js
  */
-module.exports = loader;

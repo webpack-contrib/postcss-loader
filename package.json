@@ -55,9 +55,7 @@
     "@commitlint/config-conventional": "^9.1.1",
     "@webpack-contrib/defaults": "^6.3.0",
     "@webpack-contrib/eslint-config-webpack": "^3.0.0",
-    "@webpack-utilities/test": "^1.0.0-alpha.0",
     "babel-jest": "^26.2.2",
-    "commitlint-azure-pipelines-cli": "^1.0.3",
     "cross-env": "^7.0.2",
     "del": "^5.1.0",
     "del-cli": "^3.0.1",
@@ -76,8 +74,9 @@
     "prettier": "^2.0.5",
     "standard": "^14.3.4",
     "standard-version": "^8.0.2",
+    "strip-ansi": "^6.0.0",
     "sugarss": "^2.0.0",
-    "webpack": "^4.0.0"
+    "webpack": "^4.44.1"
   },
   "keywords": [
     "css",

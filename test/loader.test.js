@@ -1,23 +1,45 @@
-/* eslint-disable */
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from './helpers/index';
 
-const { webpack } = require('@webpack-utilities/test');
+describe('loader', () => {
+  it('should work', async () => {
+    const compiler = getCompiler('./css/index.js', { plugins: [] });
+    const stats = await compile(compiler);
 
-describe('Loader', () => {
-  test('Default', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          plugins: [],
-        },
-      },
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit warning', async () => {
+    const plugin = () => (css, result) => {
+      css.walkDecls((node) => {
+        node.warn(result, '<Message>');
+      });
     };
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
+    const compiler = getCompiler('./css/index.js', { plugins: [plugin()] });
+    const stats = await compile(compiler);
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"');
-      expect(source).toMatchSnapshot();
-    });
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit Syntax Error', async () => {
+    const compiler = getCompiler('./css/index.js', { parser: 'sugarss' });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 });

@@ -1,58 +1,37 @@
-/* eslint-disable */
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
 
-const path = require('path');
-const { webpack } = require('@webpack-utilities/test');
+describe('Options Sourcemap', () => {
+  it('should work Sourcemap - {Boolean}', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      { sourceMap: true },
+      { devtool: 'source-map' }
+    );
+    const stats = await compile(compiler);
 
-describe('Options', () => {
-  test('Sourcemap - {Boolean}', () => {
-    const config = {
-      devtool: 'sourcemap',
-      loader: {
-        test: /\.css$/,
-        options: {
-          sourceMap: true,
-        },
-      },
-    };
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      );
-
-      expect(source).toMatchSnapshot();
-
-      const map = stats.compilation.modules[1]._source._sourceMap;
-
-      map.file = path.posix.relative(__dirname, map.file);
-      map.sources = map.sources.map((src) =>
-        path.posix.relative(__dirname, src)
-      );
-
-      expect(map).toMatchSnapshot();
-    });
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(codeFromBundle.map).toMatchSnapshot('map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  test('Sourcemap - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          sourceMap: 'inline',
-        },
-      },
-    };
+  it('should work Sourcemap - {String}', async () => {
+    const compiler = getCompiler('./css/index.js', { sourceMap: 'inline' });
+    const stats = await compile(compiler);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n\\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDRCQUFhIiwiZmlsZSI6InRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImEgeyBjb2xvcjogYmxhY2sgfVxuIl19 */"'
-      );
-
-      expect(source).toMatchSnapshot();
-    });
+    expect(codeFromBundle.map).toBeUndefined();
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 });

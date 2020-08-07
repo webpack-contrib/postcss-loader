@@ -1,42 +1,35 @@
-/* eslint-disable */
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
 
-const { webpack } = require('@webpack-utilities/test');
+describe('Options Stringifier', () => {
+  it('should work Stringifier - {String}', async () => {
+    const compiler = getCompiler('./css/index.js', { stringifier: 'sugarss' });
+    const stats = await compile(compiler);
 
-describe('Options', () => {
-  test('Stringifier - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          stringifier: 'sugarss',
-        },
-      },
-    };
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual('module.exports = "a  color: black\\n"');
-      expect(source).toMatchSnapshot();
-    });
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  test('Stringifier - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          stringifier: require('sugarss'),
-        },
-      },
-    };
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1];
-
-      expect(source).toEqual('module.exports = "a  color: black\\n"');
-      expect(source).toMatchSnapshot();
+  it('should work Stringifier - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      stringifier: require('sugarss'),
     });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 });

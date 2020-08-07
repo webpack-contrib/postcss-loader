@@ -1,3 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Loader Default 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`loader should emit Syntax Error: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+SyntaxError
+
+(1:3) Unexpected separator in property
+
+> 1 | a { color: black }
+    |   ^
+  2 | 
+",
+]
+`;
+
+exports[`loader should emit Syntax Error: warnings 1`] = `Array []`;
+
+exports[`loader should emit warning: css 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+
+exports[`loader should emit warning: errors 1`] = `Array []`;
+
+exports[`loader should emit warning: warnings 1`] = `
+Array [
+  "ModuleWarning: Module Warning (from \`replaced original path\`):
+Warning
+
+(1:5) <Message>",
+]
+`;
+
+exports[`loader should work: css 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+
+exports[`loader should work: errors 1`] = `Array []`;
+
+exports[`loader should work: warnings 1`] = `Array []`;
