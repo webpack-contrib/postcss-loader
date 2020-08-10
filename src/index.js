@@ -1,4 +1,5 @@
 import path from 'path';
+import Module from 'module';
 
 import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
@@ -10,6 +11,23 @@ import Warning from './Warning';
 import SyntaxError from './Error';
 import parseOptions from './options';
 import schema from './options.json';
+
+const parentModule = module;
+
+function exec(code, loaderContext) {
+  const { resource, context } = loaderContext;
+
+  const module = new Module(resource, parentModule);
+
+  // eslint-disable-next-line no-underscore-dangle
+  module.paths = Module._nodeModulePaths(context);
+  module.filename = resource;
+
+  // eslint-disable-next-line no-underscore-dangle
+  module._compile(code, resource);
+
+  return module.exports;
+}
 
 /**
  * **PostCSS Loader**
@@ -113,7 +131,7 @@ export default function loader(content, sourceMap, meta = {}) {
       // https://webpack.js.org/api/loaders/#deprecated-context-properties
       if (postcssOptions.parser === 'postcss-js') {
         // eslint-disable-next-line no-param-reassign
-        content = this.exec(content, this.resource);
+        content = exec(content, this);
       }
 
       if (typeof postcssOptions.parser === 'string') {
@@ -135,7 +153,7 @@ export default function loader(content, sourceMap, meta = {}) {
       // https://webpack.js.org/api/loaders/#deprecated-context-properties
       if (config.exec) {
         // eslint-disable-next-line no-param-reassign
-        content = this.exec(content, this.resource);
+        content = exec(content, this);
       }
 
       if (options.sourceMap && typeof sourceMap === 'string') {
