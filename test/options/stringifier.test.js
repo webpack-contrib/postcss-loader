@@ -1,40 +1,35 @@
-const { webpack } = require('@webpack-utilities/test')
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
 
-describe('Options', () => {
-  test('Stringifier - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          stringifier: 'sugarss'
-        }
-      }
-    }
+describe('Options Stringifier', () => {
+  it('should work Stringifier - {String}', async () => {
+    const compiler = getCompiler('./css/index.js', { stringifier: 'sugarss' });
+    const stats = await compile(compiler);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-      expect(source).toEqual('module.exports = "a  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-  test('Stringifier - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          stringifier: require('sugarss')
-        }
-      }
-    }
+  it('should work Stringifier - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      stringifier: require('sugarss'),
+    });
+    const stats = await compile(compiler);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-      expect(source).toEqual('module.exports = "a  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

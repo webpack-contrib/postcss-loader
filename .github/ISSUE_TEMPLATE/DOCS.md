@@ -1,30 +1,28 @@
 ---
-name: 📖 Docs
-about: Report documentation related issues
+name: 📚 Documentation
+about: Are the docs lacking or missing something? Do they need some new 🔥 hotness? Tell us here.
 ---
 
-### Type
+<!--
+  Issues are so 🔥
 
-<!-- 👉 Specify the type of issue by checking one of the provided checkboxes below and please deleted all others -->
+  If you remove or skip this template, you'll make the 🐼 sad and the mighty god
+  of Github will appear and pile-drive the close button from a great height
+  while making animal noises.
 
-- [ ] Other
-- [ ] Wrong
-- [ ] Unclear
+  👉🏽 Need support, advice, or help? Don't open an issue!
+  Head to StackOverflow or https://gitter.im/webpack/webpack.
+-->
+
+Documentation Is:
+
+<!-- Please place an x (no spaces!) in all [ ] that apply -->
+
 - [ ] Missing
+- [ ] Needed
+- [ ] Confusing
+- [ ] Not Sure?
 
-### Details
+### Please Explain in Detail...
 
-<!-- ✏️ Briefly describe the issue you are experiencing. Tell us what you were trying to do (how you understood the documentation) and what happened instead -->
-
-### Location
-
-<!-- 👉 Select the area where the aforementioned issue is currently located -->
-
-- [ ] README
-- [ ] LICENSE
-- [ ] CHANGELOG
-- [ ] ISSUE_TEMPLATE
-  - [ ] BUG
-  - [ ] DOCS
-  - [ ] FEATURE
-- [ ] PULL_REQUEST_TEMPLATE
+### Your Proposal for Changes

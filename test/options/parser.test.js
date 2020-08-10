@@ -1,40 +1,70 @@
-const { webpack } = require('@webpack-utilities/test')
+import path from 'path';
 
-describe('Options', () => {
-  test('Parser - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.sss$/,
-        options: {
-          parser: 'sugarss'
-        }
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
+
+describe('Options Parser', () => {
+  it('should work Parser - {String}', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { parser: 'sugarss' },
+                },
+              ],
+            },
+          ],
+        },
       }
-    }
+    );
+    const stats = await compile(compiler);
 
-    return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.sss', stats);
 
-      expect(source).toEqual('module.exports = "a {\\n  color: black\\n}\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-  test('Parser - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.sss$/,
-        options: {
-          ident: 'postcss',
-          parser: require('sugarss')
-        }
+  it('should work Parser - {Object}', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  // eslint-disable-next-line global-require
+                  options: { ident: 'postcss', parser: require('sugarss') },
+                },
+              ],
+            },
+          ],
+        },
       }
-    }
+    );
+    const stats = await compile(compiler);
 
-    return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.sss', stats);
 
-      expect(source).toEqual('module.exports = "a {\\n  color: black\\n}\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

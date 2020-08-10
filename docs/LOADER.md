@@ -17,7 +17,7 @@
 ## Functions
 
 <dl>
-<dt><a href="#loader">loader(css, map)</a> ⇒ <code>cb</code></dt>
+<dt><a href="#loader">loader(content, sourceMap)</a> ⇒ <code>cb</code></dt>
 <dd><p><strong>PostCSS Loader</strong></p>
 <p>Loads &amp;&amp; processes CSS with <a href="https://github.com/postcss/postcss">PostCSS</a></p>
 </dd>
@@ -70,7 +70,7 @@ Loader wrapper for postcss plugin warnings (`root.messages`)
 
 <a name="loader"></a>
 
-## loader(css, map) ⇒ <code>cb</code>
+## loader(content, sourceMap) ⇒ <code>cb</code>
 **PostCSS Loader**
 
 Loads && processes CSS with [PostCSS](https://github.com/postcss/postcss)
@@ -80,11 +80,11 @@ Loads && processes CSS with [PostCSS](https://github.com/postcss/postcss)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| css | <code>String</code> | Source |
-| map | <code>Object</code> | Source Map |
+| content | <code>String</code> | Source |
+| sourceMap | <code>Object</code> | Source Map |
 
 
-* [loader(css, map)](#loader) ⇒ <code>cb</code>
+* [loader(content, sourceMap)](#loader) ⇒ <code>cb</code>
     * [.cb](#loader.cb) : <code>function</code>
     * [.cb](#loader.cb) : <code>function</code>
 

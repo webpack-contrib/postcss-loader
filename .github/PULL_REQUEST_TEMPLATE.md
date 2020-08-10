@@ -1,63 +1,35 @@
-### Notable Changes
+<!--
+  HOLY CRAP a Pull Request. We ❤️ those!
 
-<!-- ✏️ Describe the big picture of your changes here to communicate to the maintainers why we should accept this pull request. If it fixes a bug or resolves a feature request, be sure to link to that issue(s) down below -->
+  If you remove or skip this template, you'll make the 🐼 sad and the mighty god
+  of Github will appear and pile-drive the close button from a great height
+  while making animal noises.
 
-#### `Commit Message Summary (CHANGELOG)`
+  Please place an x (no spaces!) in all [ ] that apply
+-->
 
-<!-- ⚠️  All commits will be squashed into a single commit when merging the PR, so if there is any additional information needed to describe your changes (e.g BREAKING CHANGES), please list them here so the maintainers are able to include them as the commit message body of the final commit. I case your unsure what might be relevant don't hesitate to ask -->
+This PR contains a:
 
-<!-- 👉 Replace the example with your changes or otherwise delete the code block in case no additional information is needed -->
+- [ ] **bugfix**
+- [ ] new **feature**
+- [ ] **code refactor**
+- [ ] **test update** <!-- if bug or feature is checked, this should be too -->
+- [ ] **typo fix**
+- [ ] **metadata update**
 
-```bash
-# Commit Message Body
-#
-# Example
-BREAKING CHANGE: requires `node >= v8.0.0`
-BREAKING CHANGE: `options.x` requires to be a `{Function}` now
-```
+### Motivation / Use-Case
 
-### Type
+<!--
+  Please explain the motivation or use-case for your change.
+  What existing problem does the PR solve?
+  If this PR addresses an issue, please link to the issue.
+-->
 
-> ℹ️ What type of changes does your code introduce?
+### Breaking Changes
 
-<!-- 👉 Put an `x` in the boxes that apply and delete all others -->
+<!--
+  If this PR introduces a breaking change, please describe the impact and a
+  migration path for existing applications.
+-->
 
-- [ ] CI
-- [ ] Fix
-- [ ] Perf
-- [ ] Docs
-- [ ] Test
-- [ ] Style
-- [ ] Build
-- [ ] Chore
-- [ ] Feature
-- [ ] Refactor
-
-### Issues
-
-> ℹ️ What issue(s) (if any) are closed by your PR?
-
-<!-- 👉 Replace `#1` with the issue number that applies and remove the ``` `  ``` (`#1` => #1) -->
-
-- Fixes `#1`
-
-### SemVer
-
-> ℹ️  What changes to the current `semver` range does your PR introduce?
-
-<!-- 👉  Put an `x` in the boxes that apply and delete all others -->
-
-- [ ] Fix (:label: Patch)
-- [ ] Feature (:label: Minor)
-- [ ] Breaking Change (:label: Major)
-
-### Checklist
-
-> ℹ️  You can also fill these out after creating the PR. If you're unsure about any of them, don't hesitate to ask. This is a reminder of what we are going to look for before merging your code.
-
-<!-- 👉  Put an `x` in the boxes that apply and delete all others -->
-
-- [ ] Lint and unit tests pass with my changes
-- [ ] I have added tests that prove my fix is effective/works (if needed)
-- [ ] I have added necessary documentation (if appropriate)
-- [ ] Any dependent changes are merged and published in downstream modules
+### Additional Info

@@ -1,110 +1,84 @@
-const { webpack } = require('@webpack-utilities/test')
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
 
-describe('Options', () => {
-  test('Config - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/
-      }
-    }
+describe('Config Options', () => {
+  it('should work Config - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {});
+    const stats = await compile(compiler);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+  it('should work Config - Path - {String}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: { path: 'test/fixtures/config/postcss.config.js' },
+    });
+    const stats = await compile(compiler);
 
-  test('Config - Path - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          config: { path: 'test/fixtures/config/postcss.config.js' }
-        }
-      }
-    }
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+  it('should work Config - Context - {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: {
+        path: 'test/fixtures/config/postcss.config.js',
+        ctx: { plugin: true },
+      },
+    });
+    const stats = await compile(compiler);
 
-  test('Config - Context - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          config: {
-            path: 'test/fixtures/config/postcss.config.js',
-            ctx: { plugin: true }
-          }
-        }
-      }
-    }
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+  it('should work Config - Context - {Object} - with ident', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      config: {
+        path: 'test/fixtures/config/postcss.config.js',
+        ctx: { plugin: true },
+      },
+    });
+    const stats = await compile(compiler);
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-  test('Config - Context - {Object} - with ident', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          ident: 'postcss',
-          config: {
-            path: 'test/fixtures/config/postcss.config.js',
-            ctx: { plugin: true }
-          }
-        }
-      }
-    }
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+  it('should work Config – Context – Loader {Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: {
+        path: 'test/fixtures/config/context/postcss.config.js',
+      },
+    });
+    const stats = await compile(compiler);
 
-      expect(source).toEqual(
-        'module.exports = "a { color: rgba(255, 0, 0, 1.0) }\\n"'
-      )
+    const { assets } = stats.compilation;
 
-      expect(source).toMatchSnapshot()
-    })
-  })
+    const asset = 'asset.txt';
 
-  test('Config – Context – Loader {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          config: {
-            path: 'test/fixtures/config/context/postcss.config.js'
-          }
-        }
-      }
-    }
-
-    return webpack('css/index.js', config).then((stats) => {
-      const { assets } = stats.compilation
-
-      const asset = 'asset.txt'
-
-      expect(asset in assets).toBeTruthy()
-      expect(assets[asset].source()).toBe('123')
-    })
-  })
-})
+    expect(asset in assets).toBeTruthy();
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    // Todo fixed error in testplugin
+    // expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

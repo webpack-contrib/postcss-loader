@@ -1,40 +1,71 @@
-const { webpack } = require('@webpack-utilities/test')
+import path from 'path';
 
-describe('Options', () => {
-  test('Exec - {Boolean}', () => {
-    const config = {
-      loader: {
-        test: /style\.(exec\.js|js)$/,
-        options: {
-          exec: true
-        }
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
+
+describe('Options Exec', () => {
+  // Todo loaderContext.exec is deprecated and removed in webpack 5
+  // it('should work Exec - {Boolean}', async () => {
+  //   const compiler = getCompiler(
+  //     './jss/exec/index.js',
+  //     {},
+  //     {
+  //       module: {
+  //         rules: [
+  //           {
+  //             test: /style\.(exec\.js|js)$/i,
+  //             use: [
+  //               {
+  //                 loader: path.resolve(__dirname, '../../src'),
+  //                 options: { exec: true },
+  //               },
+  //             ],
+  //           },
+  //         ],
+  //       },
+  //     }
+  //   );
+  //   const stats = await compile(compiler);
+  //
+  //   const codeFromBundle = getCodeFromBundle('style.exec.js', stats);
+  //
+  //   expect(codeFromBundle.css).toMatchSnapshot('css');
+  //   expect(getWarnings(stats)).toMatchSnapshot('warnings');
+  //   expect(getErrors(stats)).toMatchSnapshot('errors');
+  // });
+
+  it('should work JSS - {String}', async () => {
+    const compiler = getCompiler(
+      './jss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /style.\.js$/i,
+              use: [
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { parser: 'postcss-js' },
+                },
+              ],
+            },
+          ],
+        },
       }
-    }
+    );
 
-    return webpack('jss/exec/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const stats = await compile(compiler);
 
-      expect(source).toEqual(
-        'module.exports = "a {\\n    color: green\\n}"'
-      )
+    const codeFromBundle = getCodeFromBundle('style.js', stats);
 
-      expect(source).toMatchSnapshot()
-    })
-  })
-
-  test('JSS - {String}', () => {
-    const config = {
-      loader: {
-        options: {
-          parser: 'postcss-js'
-        }
-      }
-    }
-
-    return webpack('jss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
-
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

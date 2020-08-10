@@ -1,34 +1,50 @@
 ---
-name: 🐛  Bug
-about: Report a Bug
+name: 🐛 Bug Report
+about: Something went awry and you'd like to tell us about it.
 ---
 
-<!-- ✏️ Briefly describe the issue you are experiencing. Tell us what you were trying to do and what happened instead. Remember, this is *not* the right place to ask general support questions. For that, please go to http://gitter.im/postcss/postcss -->
+<!--
+  Issues are so 🔥
 
-### Details
+  If you remove or skip this template, you'll make the 🐼 sad and the mighty god
+  of Github will appear and pile-drive the close button from a great height
+  while making animal noises.
 
-<!-- ✏️ Describe in more detail the problem you have been experiencing (if necessary) -->
+  👉🏽 Need support, advice, or help? Don't open an issue!
+  Head to StackOverflow or https://gitter.im/webpack/webpack.
+-->
 
-### Error (Logs|Stacks)
+- Operating System:
+- Node Version:
+- NPM Version:
+- webpack Version:
+- postcss-loader Version:
 
-<!-- 👉 Create a [gist](https://gist.github.com) which is a paste of your **full** logs, and link them here -->
+### Expected Behavior
 
-<!-- ⚠️ Do **not** paste your full logs here (or at least fold them by using a `<details>{{ logs }}</details>` block), as it will make this issue long and hard to read! If you are reporting a bug, **always** include logs! -->
+<!-- Remove this section if not reporting a bug or modification request. -->
 
-### Reproduction (Code)
+### Actual Behavior
 
-<!-- ⚠️ Please remember that, with sample code; it's easier to reproduce a bug and much faster to fix it -->
+<!-- Remove this section if not reporting a bug or modification request. -->
 
-<!-- 🔗 Please refer to a simple code example -->
+### Code
 
-```bash
-$ git clone https://github.com/<user>/<sample>
+```js
+// webpack.config.js
+// If your code blocks are over 20 lines, please paste a link to a gist
+// (https://gist.github.com).
 ```
 
-### Environment
+```js
+// additional code, HEY YO remove this block if you don't need it
+```
 
-<!-- 👉 Please provide information about your current environment -->
+### How Do We Reproduce?
 
-|OS|node|npm/yarn|package|
-|:-:|:--:|:-:|:------:|
-|[name][version]|[version]|[version]|[version]|
+<!--
+  Remove this section if not reporting a bug.
+
+  If your webpack config is over 50 lines long, please provide a URL to a repo
+  for your beefy 🍖 app that we can use to reproduce.
+-->

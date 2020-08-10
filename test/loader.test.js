@@ -1,21 +1,45 @@
-const { webpack } = require('@webpack-utilities/test')
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from './helpers/index';
 
-describe('Loader', () => {
-  test('Default', () => {
-    const config = {
-      loader: {
-        test: /\.css$/,
-        options: {
-          plugins: []
-        }
-      }
-    }
+describe('loader', () => {
+  it('should work', async () => {
+    const compiler = getCompiler('./css/index.js', { plugins: [] });
+    const stats = await compile(compiler);
 
-    return webpack('css/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
-      expect(source).toEqual('module.exports = "a { color: black }\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit warning', async () => {
+    const plugin = () => (css, result) => {
+      css.walkDecls((node) => {
+        node.warn(result, '<Message>');
+      });
+    };
+
+    const compiler = getCompiler('./css/index.js', { plugins: [plugin()] });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit Syntax Error', async () => {
+    const compiler = getCompiler('./css/index.js', { parser: 'sugarss' });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

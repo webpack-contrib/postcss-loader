@@ -1,40 +1,74 @@
-const { webpack } = require('@webpack-utilities/test')
+import path from 'path';
 
-describe('Options', () => {
-  test('Syntax - {String}', () => {
-    const config = {
-      loader: {
-        test: /\.sss$/,
-        options: {
-          syntax: 'sugarss'
-        }
+import {
+  compile,
+  getCompiler,
+  getErrors,
+  getCodeFromBundle,
+  getWarnings,
+} from '../helpers/index';
+
+describe('Options Syntax', () => {
+  it('should work Syntax - {String}', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { syntax: 'sugarss' },
+                },
+              ],
+            },
+          ],
+        },
       }
-    }
+    );
+    const stats = await compile(compiler);
 
-    return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const codeFromBundle = getCodeFromBundle('style.sss', stats);
 
-      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
-  test('Syntax - {Object}', () => {
-    const config = {
-      loader: {
-        test: /\.sss$/,
-        options: {
-          ident: 'postcss',
-          syntax: require('sugarss')
-        }
+  it('should work Syntax - {Object}', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: {
+                    ident: 'postcss',
+                    // eslint-disable-next-line global-require
+                    syntax: require('sugarss'),
+                  },
+                },
+              ],
+            },
+          ],
+        },
       }
-    }
+    );
 
-    return webpack('sss/index.js', config).then((stats) => {
-      const { source } = stats.toJson().modules[1]
+    const stats = await compile(compiler);
 
-      expect(source).toEqual('module.exports = "a\\n  color: black\\n"')
-      expect(source).toMatchSnapshot()
-    })
-  })
-})
+    const codeFromBundle = getCodeFromBundle('style.sss', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+});

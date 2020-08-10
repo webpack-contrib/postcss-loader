@@ -1,5 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Stringifier - {Object} 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
+exports[`Options Stringifier should work Stringifier - {Object}: css 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
 
-exports[`Options Stringifier - {String} 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
+exports[`Options Stringifier should work Stringifier - {Object}: errors 1`] = `Array []`;
+
+exports[`Options Stringifier should work Stringifier - {Object}: warnings 1`] = `Array []`;
+
+exports[`Options Stringifier should work Stringifier - {String}: css 1`] = `"module.exports = \\"a  color: black\\\\n\\""`;
+
+exports[`Options Stringifier should work Stringifier - {String}: errors 1`] = `Array []`;
+
+exports[`Options Stringifier should work Stringifier - {String}: warnings 1`] = `Array []`;
