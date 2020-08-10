@@ -39,10 +39,10 @@ function exec(code, loaderContext) {
  * @param {String} content Source
  * @param {Object} sourceMap Source Map
  *
- * @return {cb} cb Result
+ * @return {callback} callback Result
  */
 
-export default function loader(content, sourceMap, meta = {}) {
+export default async function loader(content, sourceMap, meta = {}) {
   const options = getOptions(this);
 
   validateOptions(schema, options, {
@@ -50,186 +50,204 @@ export default function loader(content, sourceMap, meta = {}) {
     baseDataPath: 'options',
   });
 
-  const cb = this.async();
+  const callback = this.async();
   const file = this.resourcePath;
+  let config;
 
-  Promise.resolve()
-    .then(() => {
-      const { length } = Object.keys(options).filter((option) => {
-        switch (option) {
-          // case 'exec':
-          case 'ident':
-          case 'config':
-          case 'sourceMap':
-            return false;
-          default:
-            return option;
-        }
-      });
+  const { length } = Object.keys(options).filter((option) => {
+    switch (option) {
+      // case 'exec':
+      case 'ident':
+      case 'config':
+      case 'sourceMap':
+        return false;
+      default:
+        return option;
+    }
+  });
 
-      if (length) {
-        return parseOptions.call(this, options);
-      }
+  if (length) {
+    try {
+      config = await parseOptions.call(this, options);
+    } catch (error) {
+      callback(error);
 
-      const rc = {
-        path: path.dirname(file),
-        ctx: {
-          file: {
-            extname: path.extname(file),
-            dirname: path.dirname(file),
-            basename: path.basename(file),
-          },
-          options: {},
+      return;
+    }
+  } else {
+    const rc = {
+      path: path.dirname(file),
+      ctx: {
+        file: {
+          extname: path.extname(file),
+          dirname: path.dirname(file),
+          basename: path.basename(file),
         },
-      };
+        options: {},
+      },
+    };
 
-      if (options.config) {
-        if (options.config.path) {
-          rc.path = path.resolve(options.config.path);
-        }
-
-        if (options.config.ctx) {
-          rc.ctx.options = options.config.ctx;
-        }
+    if (options.config) {
+      if (options.config.path) {
+        rc.path = path.resolve(options.config.path);
       }
 
-      rc.ctx.webpack = this;
-
-      return postcssrc(rc.ctx, rc.path);
-    })
-    .then((config = {}) => {
-      if (config.file) {
-        this.addDependency(config.file);
+      if (options.config.ctx) {
+        rc.ctx.options = options.config.ctx;
       }
+    }
 
-      // Disable override `to` option from `postcss.config.js`
-      if (config.options.to) {
-        // eslint-disable-next-line no-param-reassign
-        delete config.options.to;
-      }
-      // Disable override `from` option from `postcss.config.js`
-      if (config.options.from) {
-        // eslint-disable-next-line no-param-reassign
-        delete config.options.from;
-      }
+    rc.ctx.webpack = this;
 
-      const plugins = config.plugins || [];
+    try {
+      config = await postcssrc(rc.ctx, rc.path);
+    } catch (error) {
+      callback(error);
 
-      const postcssOptions = Object.assign(
-        {
-          from: file,
-          map: options.sourceMap
-            ? options.sourceMap === 'inline'
-              ? { inline: true, annotation: false }
-              : { inline: false, annotation: false }
-            : false,
-        },
-        config.options
-      );
+      return;
+    }
+  }
 
-      // Loader Exec (Deprecated)
-      // https://webpack.js.org/api/loaders/#deprecated-context-properties
-      if (postcssOptions.parser === 'postcss-js') {
-        // eslint-disable-next-line no-param-reassign
-        content = exec(content, this);
-      }
+  if (typeof config === 'undefined') {
+    config = {};
+  }
 
-      if (typeof postcssOptions.parser === 'string') {
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        postcssOptions.parser = require(postcssOptions.parser);
-      }
+  if (config.file) {
+    this.addDependency(config.file);
+  }
 
-      if (typeof postcssOptions.syntax === 'string') {
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        postcssOptions.syntax = require(postcssOptions.syntax);
-      }
+  // Disable override `to` option from `postcss.config.js`
+  if (config.options.to) {
+    // eslint-disable-next-line no-param-reassign
+    delete config.options.to;
+  }
+  // Disable override `from` option from `postcss.config.js`
+  if (config.options.from) {
+    // eslint-disable-next-line no-param-reassign
+    delete config.options.from;
+  }
 
-      if (typeof postcssOptions.stringifier === 'string') {
-        // eslint-disable-next-line import/no-dynamic-require,global-require
-        postcssOptions.stringifier = require(postcssOptions.stringifier);
-      }
+  const plugins = config.plugins || [];
 
-      // Loader API Exec (Deprecated)
-      // https://webpack.js.org/api/loaders/#deprecated-context-properties
-      if (config.exec) {
-        // eslint-disable-next-line no-param-reassign
-        content = exec(content, this);
-      }
+  const postcssOptions = Object.assign(
+    {
+      from: file,
+      map: options.sourceMap
+        ? options.sourceMap === 'inline'
+          ? { inline: true, annotation: false }
+          : { inline: false, annotation: false }
+        : false,
+    },
+    config.options
+  );
 
-      if (options.sourceMap && typeof sourceMap === 'string') {
-        // eslint-disable-next-line no-param-reassign
-        sourceMap = JSON.parse(sourceMap);
-      }
+  // Loader Exec (Deprecated)
+  // https://webpack.js.org/api/loaders/#deprecated-context-properties
+  if (postcssOptions.parser === 'postcss-js') {
+    // eslint-disable-next-line no-param-reassign
+    content = exec(content, this);
+  }
 
-      if (options.sourceMap && sourceMap) {
-        postcssOptions.map.prev = sourceMap;
-      }
+  if (typeof postcssOptions.parser === 'string') {
+    // eslint-disable-next-line import/no-dynamic-require,global-require
+    postcssOptions.parser = require(postcssOptions.parser);
+  }
 
-      return postcss(plugins)
-        .process(content, postcssOptions)
-        .then((result) => {
-          const { css, root, processor, messages } = result;
-          let { map } = result;
+  if (typeof postcssOptions.syntax === 'string') {
+    // eslint-disable-next-line import/no-dynamic-require,global-require
+    postcssOptions.syntax = require(postcssOptions.syntax);
+  }
 
-          result.warnings().forEach((warning) => {
-            this.emitWarning(new Warning(warning));
-          });
+  if (typeof postcssOptions.stringifier === 'string') {
+    // eslint-disable-next-line import/no-dynamic-require,global-require
+    postcssOptions.stringifier = require(postcssOptions.stringifier);
+  }
 
-          messages.forEach((msg) => {
-            if (msg.type === 'dependency') {
-              this.addDependency(msg.file);
-            }
-          });
+  // Loader API Exec (Deprecated)
+  // https://webpack.js.org/api/loaders/#deprecated-context-properties
+  if (config.exec) {
+    // eslint-disable-next-line no-param-reassign
+    content = exec(content, this);
+  }
 
-          map = map ? map.toJSON() : null;
+  if (options.sourceMap && typeof sourceMap === 'string') {
+    // eslint-disable-next-line no-param-reassign
+    sourceMap = JSON.parse(sourceMap);
+  }
 
-          if (map) {
-            map.file = path.resolve(map.file);
-            map.sources = map.sources.map((src) => path.resolve(src));
-          }
+  if (options.sourceMap && sourceMap) {
+    postcssOptions.map.prev = sourceMap;
+  }
 
-          const ast = {
-            type: 'postcss',
-            version: processor.version,
-            root,
-          };
+  let result;
 
-          const newMeta = { ...meta, ast, messages };
+  try {
+    result = await postcss(plugins).process(content, postcssOptions);
+  } catch (error) {
+    if (error.file) {
+      this.addDependency(error.file);
+    }
 
-          if (this.loaderIndex === 0) {
-            /**
-             * @memberof loader
-             * @callback cb
-             *
-             * @param {Object} null Error
-             * @param {String} css  Result (JS Module)
-             * @param {Object} map  Source Map
-             */
-            cb(null, `module.exports = ${JSON.stringify(css)}`, map);
+    if (error.name === 'CssSyntaxError') {
+      callback(new SyntaxError(error));
+    } else {
+      callback(error);
+    }
 
-            return null;
-          }
+    return;
+  }
 
-          /**
-           * @memberof loader
-           * @callback cb
-           *
-           * @param {Object} null Error
-           * @param {String} css  Result (Raw Module)
-           * @param {Object} map  Source Map
-           */
-          cb(null, css, map, newMeta);
+  const { css, root, processor, messages } = result;
+  let { map } = result;
 
-          return null;
-        });
-    })
-    .catch((err) => {
-      if (err.file) {
-        this.addDependency(err.file);
-      }
+  result.warnings().forEach((warning) => {
+    this.emitWarning(new Warning(warning));
+  });
 
-      return err.name === 'CssSyntaxError' ? cb(new SyntaxError(err)) : cb(err);
-    });
+  messages.forEach((msg) => {
+    if (msg.type === 'dependency') {
+      this.addDependency(msg.file);
+    }
+  });
+
+  map = map ? map.toJSON() : null;
+
+  if (map) {
+    map.file = path.resolve(map.file);
+    map.sources = map.sources.map((src) => path.resolve(src));
+  }
+
+  const ast = {
+    type: 'postcss',
+    version: processor.version,
+    root,
+  };
+
+  const newMeta = { ...meta, ast, messages };
+
+  if (this.loaderIndex === 0) {
+    /**
+     * @memberof loader
+     * @callback callback
+     *
+     * @param {Object} null Error
+     * @param {String} css  Result (JS Module)
+     * @param {Object} map  Source Map
+     */
+    callback(null, `module.exports = ${JSON.stringify(css)}`, map);
+
+    return;
+  }
+
+  /**
+   * @memberof loader
+   * @callback callback
+   *
+   * @param {Object} null Error
+   * @param {String} css  Result (Raw Module)
+   * @param {Object} map  Source Map
+   */
+  callback(null, css, map, newMeta);
 }
 
 /**
