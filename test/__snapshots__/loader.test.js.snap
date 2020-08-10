@@ -16,7 +16,10 @@ SyntaxError
 
 exports[`loader should emit Syntax Error: warnings 1`] = `Array []`;
 
-exports[`loader should emit warning: css 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`loader should emit warning: css 1`] = `
+"a { color: black }
+"
+`;
 
 exports[`loader should emit warning: errors 1`] = `Array []`;
 
@@ -29,7 +32,10 @@ Warning
 ]
 `;
 
-exports[`loader should work: css 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`loader should work: css 1`] = `
+"a { color: black }
+"
+`;
 
 exports[`loader should work: errors 1`] = `Array []`;
 

@@ -20,6 +20,10 @@ describe('Options Exec', () => {
               test: /style\.(exec\.js|js)$/i,
               use: [
                 {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
                   loader: path.resolve(__dirname, '../../src'),
                   options: { exec: true },
                 },
@@ -48,6 +52,10 @@ describe('Options Exec', () => {
             {
               test: /style.\.js$/i,
               use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   options: { parser: 'postcss-js' },

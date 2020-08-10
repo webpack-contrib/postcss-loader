@@ -20,6 +20,10 @@ describe('Options Parser', () => {
               test: /\.sss$/i,
               use: [
                 {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
                   loader: path.resolve(__dirname, '../../src'),
                   options: { parser: 'sugarss' },
                 },
@@ -48,6 +52,10 @@ describe('Options Parser', () => {
             {
               test: /\.sss$/i,
               use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require

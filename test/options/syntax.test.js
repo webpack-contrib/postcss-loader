@@ -20,6 +20,10 @@ describe('Options Syntax', () => {
               test: /\.sss$/i,
               use: [
                 {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
                   loader: path.resolve(__dirname, '../../src'),
                   options: { syntax: 'sugarss' },
                 },
@@ -48,6 +52,10 @@ describe('Options Syntax', () => {
             {
               test: /\.sss$/i,
               use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   options: {
