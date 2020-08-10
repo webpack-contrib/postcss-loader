@@ -21,6 +21,10 @@ export default (fixture, loaderOptions = {}, config = {}) => {
           test: /\.css$/i,
           use: [
             {
+              loader: require.resolve('./testLoader'),
+              options: {},
+            },
+            {
               loader: path.resolve(__dirname, '../../src'),
               options: loaderOptions || {},
             },

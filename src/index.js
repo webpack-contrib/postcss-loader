@@ -225,20 +225,6 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const newMeta = { ...meta, ast, messages };
 
-  if (this.loaderIndex === 0) {
-    /**
-     * @memberof loader
-     * @callback callback
-     *
-     * @param {Object} null Error
-     * @param {String} css  Result (JS Module)
-     * @param {Object} map  Source Map
-     */
-    callback(null, `module.exports = ${JSON.stringify(css)}`, map);
-
-    return;
-  }
-
   /**
    * @memberof loader
    * @callback callback

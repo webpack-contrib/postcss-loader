@@ -73,6 +73,10 @@ describe('validate options', () => {
                   test: /\.sss$/i,
                   use: [
                     {
+                      loader: require.resolve('./helpers/testLoader'),
+                      options: {},
+                    },
+                    {
                       loader: path.resolve(__dirname, '../src'),
                       options: { [key]: value },
                     },

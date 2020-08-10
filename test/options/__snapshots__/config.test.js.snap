@@ -1,24 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Config Options should work Config - {Object}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Config Options should work Config - {Object}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Config Options should work Config - {Object}: errors 1`] = `Array []`;
 
 exports[`Config Options should work Config - {Object}: warnings 1`] = `Array []`;
 
-exports[`Config Options should work Config - Context - {Object} - with ident: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Config Options should work Config - Context - {Object} - with ident: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Config Options should work Config - Context - {Object} - with ident: errors 1`] = `Array []`;
 
 exports[`Config Options should work Config - Context - {Object} - with ident: warnings 1`] = `Array []`;
 
-exports[`Config Options should work Config - Context - {Object}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Config Options should work Config - Context - {Object}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Config Options should work Config - Context - {Object}: errors 1`] = `Array []`;
 
 exports[`Config Options should work Config - Context - {Object}: warnings 1`] = `Array []`;
 
-exports[`Config Options should work Config - Path - {String}: css 1`] = `"module.exports = \\"a { color: black }\\\\n\\""`;
+exports[`Config Options should work Config - Path - {String}: css 1`] = `
+"a { color: black }
+"
+`;
 
 exports[`Config Options should work Config - Path - {String}: errors 1`] = `Array []`;
 

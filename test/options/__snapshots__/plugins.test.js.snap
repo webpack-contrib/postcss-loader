@@ -1,24 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Plugins should work Plugins - {Array}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Options Plugins should work Plugins - {Array}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Options Plugins should work Plugins - {Array}: errors 1`] = `Array []`;
 
 exports[`Options Plugins should work Plugins - {Array}: warnings 1`] = `Array []`;
 
-exports[`Options Plugins should work Plugins - {Function} - {Array}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Options Plugins should work Plugins - {Function} - {Array}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Options Plugins should work Plugins - {Function} - {Array}: errors 1`] = `Array []`;
 
 exports[`Options Plugins should work Plugins - {Function} - {Array}: warnings 1`] = `Array []`;
 
-exports[`Options Plugins should work Plugins - {Function} - {Object}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Options Plugins should work Plugins - {Function} - {Object}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Options Plugins should work Plugins - {Function} - {Object}: errors 1`] = `Array []`;
 
 exports[`Options Plugins should work Plugins - {Function} - {Object}: warnings 1`] = `Array []`;
 
-exports[`Options Plugins should work Plugins - {Object}: css 1`] = `"module.exports = \\"a { color: rgba(255, 0, 0, 1.0) }\\\\n\\""`;
+exports[`Options Plugins should work Plugins - {Object}: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
 
 exports[`Options Plugins should work Plugins - {Object}: errors 1`] = `Array []`;
 
