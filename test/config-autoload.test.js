@@ -29,7 +29,11 @@ describe('config-autoload', () => {
       );
     };
 
-    const config = await loadConfig({}, path.resolve(testDirectory, 'rc'));
+    const config = await loadConfig(
+      null,
+      {},
+      path.resolve(testDirectory, 'rc')
+    );
 
     expected(config);
   });
@@ -54,6 +58,7 @@ describe('config-autoload', () => {
     };
 
     const config = await loadConfig(
+      null,
       ctx,
       path.resolve(testDirectory, 'js/object')
     );
@@ -79,6 +84,7 @@ describe('config-autoload', () => {
     };
 
     const config = await loadConfig(
+      null,
       ctx,
       path.resolve(testDirectory, 'js/array')
     );
@@ -103,14 +109,18 @@ describe('config-autoload', () => {
       );
     };
 
-    const config = await loadConfig({}, path.resolve(testDirectory, 'pkg'));
+    const config = await loadConfig(
+      null,
+      {},
+      path.resolve(testDirectory, 'pkg')
+    );
 
     expected(config);
   });
 
   it('Loading Config - {Error}', async () => {
     try {
-      await loadConfig({}, path.resolve('unresolved'));
+      await loadConfig(null, {}, path.resolve('unresolved'));
     } catch (error) {
       expect(error.message).toMatch(/^No PostCSS Config found in: (.*)$/);
     }
@@ -118,7 +128,7 @@ describe('config-autoload', () => {
 
   it('Plugin - {Type} - Invalid', async () => {
     try {
-      await loadConfig({}, path.resolve(testDirectory, 'err/plugins'));
+      await loadConfig(null, {}, path.resolve(testDirectory, 'err/plugins'));
     } catch (error) {
       expect(error.message).toMatch(
         /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/
@@ -128,7 +138,11 @@ describe('config-autoload', () => {
 
   it('Loading Plugin - {Object} - {Error}', async () => {
     try {
-      await loadConfig({}, path.resolve(testDirectory, 'err/plugins/object'));
+      await loadConfig(
+        null,
+        {},
+        path.resolve(testDirectory, 'err/plugins/object')
+      );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Plugin failed: .*$/m);
     }
@@ -137,6 +151,7 @@ describe('config-autoload', () => {
   it('Loading Plugin - {Object} - Options - {Error}', async () => {
     try {
       await loadConfig(
+        null,
         {},
         path.resolve(testDirectory, 'err/plugins/object/options')
       );
@@ -147,7 +162,11 @@ describe('config-autoload', () => {
 
   it('Loading Plugin - {Array} - {Error}', async () => {
     try {
-      await loadConfig({}, path.resolve(testDirectory, 'err/plugins/array'));
+      await loadConfig(
+        null,
+        {},
+        path.resolve(testDirectory, 'err/plugins/array')
+      );
     } catch (error) {
       expect(error.message).toMatch(/^Cannot find (.*)$/);
     }
@@ -156,6 +175,7 @@ describe('config-autoload', () => {
   it('Loading Plugin - {Array} - Options - {Error}', async () => {
     try {
       await loadConfig(
+        null,
         {},
         path.resolve(testDirectory, 'err/plugins/array/options')
       );
@@ -168,7 +188,11 @@ describe('config-autoload', () => {
 describe('Loading Options - {Error}', () => {
   it('Parser - {String}', async () => {
     try {
-      await loadConfig({}, path.resolve(testDirectory, 'err/options/parser'));
+      await loadConfig(
+        null,
+        {},
+        path.resolve(testDirectory, 'err/options/parser')
+      );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Parser failed: .*$/m);
     }
@@ -176,7 +200,11 @@ describe('Loading Options - {Error}', () => {
 
   it('Syntax - {String}', async () => {
     try {
-      await loadConfig({}, path.resolve(testDirectory, 'err/options/syntax'));
+      await loadConfig(
+        null,
+        {},
+        path.resolve(testDirectory, 'err/options/syntax')
+      );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Syntax failed: .*$/m);
     }
@@ -185,6 +213,7 @@ describe('Loading Options - {Error}', () => {
   it('Stringifier - {String}', async () => {
     try {
       await loadConfig(
+        null,
         {},
         path.resolve(testDirectory, 'err/options/stringifier')
       );

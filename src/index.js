@@ -82,7 +82,7 @@ export default async function loader(content, sourceMap, meta = {}) {
     rc.ctx.webpack = this;
 
     try {
-      config = await loadConfig(rc.ctx, rc.path);
+      config = await loadConfig(options.config, rc.ctx, rc.path);
     } catch (error) {
       callback(error);
 
@@ -98,15 +98,14 @@ export default async function loader(content, sourceMap, meta = {}) {
     this.addDependency(config.file);
   }
 
-  // Disable override `to` option from `postcss.config.js`
-  if (config.options.to) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.options.to;
-  }
-  // Disable override `from` option from `postcss.config.js`
-  if (config.options.from) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.options.from;
+  if (typeof config.options !== 'undefined') {
+    if (typeof config.options.to !== 'undefined') {
+      delete config.options.to;
+    }
+
+    if (typeof config.options.from !== 'undefined') {
+      delete config.options.from;
+    }
   }
 
   const plugins = config.plugins || [];

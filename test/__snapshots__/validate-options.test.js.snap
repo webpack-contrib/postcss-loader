@@ -2,44 +2,22 @@
 
 exports[`validate options should throw an error on the "config" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be an object:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
+ - options.config should be one of these:
+   object { path?, ctx? } | string | boolean
+   -> should be {Object} (https://github.com/postcss/postcss-loader#config)
+   Details:
+    * options.config should be an object:
+      object { path?, ctx? }
+    * options.config should be a string.
+      -> Allows to specify the path to the configuration file
+    * options.config should be a boolean.
+      -> Enables/Disables autoloading config"
 `;
 
 exports[`validate options should throw an error on the "config" option with "{"foo":"bar"}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.config has an unknown property 'foo'. These properties are valid:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
-`;
-
-exports[`validate options should throw an error on the "config" option with "false" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be an object:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
-`;
-
-exports[`validate options should throw an error on the "config" option with "test" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be an object:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
-`;
-
-exports[`validate options should throw an error on the "config" option with "true" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be an object:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
-`;
-
-exports[`validate options should throw an error on the "config" option with "true" value 2`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be an object:
-   object { path?, ctx? }
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)"
+   object { path?, ctx? }"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "/test/" value 1`] = `

@@ -11,6 +11,45 @@ import {
 const testDirectory = path.resolve(__dirname, '../fixtures', 'config-autoload');
 
 describe('Config Options', () => {
+  it('should work Config - false', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Config - true', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: true,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Config - "string"', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: path.resolve(__dirname, '../fixtures/css/custom.config.js'),
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should work Config - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {});
     const stats = await compile(compiler);

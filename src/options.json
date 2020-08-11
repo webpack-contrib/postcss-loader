@@ -3,18 +3,30 @@
   "properties": {
     "config": {
       "description": "should be {Object} (https://github.com/postcss/postcss-loader#config)",
-      "type": "object",
-      "properties": {
-        "path": {
-          "description": "should be {String} (https://github.com/postcss/postcss-loader#path)",
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "path": {
+              "description": "should be {String} (https://github.com/postcss/postcss-loader#path)",
+              "type": "string"
+            },
+            "ctx": {
+              "description": "should be {Object} (https://github.com/postcss/postcss-loader#context-ctx)",
+              "type": "object"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Allows to specify the path to the configuration file",
           "type": "string"
         },
-        "ctx": {
-          "description": "should be {Object} (https://github.com/postcss/postcss-loader#context-ctx)",
-          "type": "object"
+        {
+          "description": "Enables/Disables autoloading config",
+          "type": "boolean"
         }
-      },
-      "additionalProperties": false
+      ]
     },
     "exec": {
       "description": "should be {Boolean} (https://github.com/postcss/postcss-loader#exec)",

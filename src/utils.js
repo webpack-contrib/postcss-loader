@@ -5,6 +5,7 @@ import { cosmiconfig } from 'cosmiconfig';
 import importCwd from 'import-cwd';
 
 const parentModule = module;
+const moduleName = 'postcss';
 
 const createContext = (context) => {
   const result = {
@@ -159,16 +160,39 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-function loadConfig(context, configPath) {
-  const configPathResolved = configPath
-    ? path.resolve(configPath)
-    : process.cwd();
+function loadConfig(config, context, configPath) {
+  if (config === false) {
+    return {};
+  }
 
-  return cosmiconfig('postcss')
-    .search(configPathResolved)
+  const searchPlaces = [
+    `.${moduleName}rc.js`,
+    `.${moduleName}rc.yaml`,
+    `.${moduleName}rc.yml`,
+    `.${moduleName}rc.json`,
+    `.${moduleName}rc`,
+    `${moduleName}.config.js`,
+    `package.json`,
+  ];
+  const cosmiconfigOptions = { searchPlaces };
+  let configFilename;
+  let configDir;
+
+  if (typeof config === 'string') {
+    const parsedPath = path.parse(config);
+    configFilename = parsedPath.base;
+    configDir = parsedPath.dir;
+
+    cosmiconfigOptions.searchPlaces.unshift(configFilename);
+  }
+
+  configDir = configDir || configPath || process.cwd();
+
+  return cosmiconfig(moduleName, cosmiconfigOptions)
+    .search(configDir)
     .then((result) => {
       if (!result) {
-        throw new Error(`No PostCSS Config found in: ${configPathResolved}`);
+        throw new Error(`No PostCSS Config found in: ${configDir}`);
       }
 
       return processResult(createContext(context), result);
