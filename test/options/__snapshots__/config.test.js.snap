@@ -37,3 +37,48 @@ exports[`Config Options should work Config - Path - {String}: errors 1`] = `Arra
 exports[`Config Options should work Config - Path - {String}: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: css 1`] = `
+".import {
+  color: red;
+}
+
+.test {
+  color: blue;
+}
+"
+`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: warnings 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: css 1`] = `
+".import {
+  color: goldenrod;
+}
+
+.test {
+  color: cyan;
+}
+"
+`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: warnings 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: css 1`] = `
+".import {
+  color: red;
+}
+
+.test {
+  color: blue;
+}
+"
+`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: warnings 1`] = `Array []`;
