@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
 
 import path from 'path';
+import fs from 'fs';
 
 import { loadConfig } from '../src/utils';
 
@@ -32,7 +33,8 @@ describe('config-autoload', () => {
     const config = await loadConfig(
       null,
       {},
-      path.resolve(testDirectory, 'rc')
+      path.resolve(testDirectory, 'rc'),
+      fs
     );
 
     expected(config);
@@ -60,7 +62,8 @@ describe('config-autoload', () => {
     const config = await loadConfig(
       null,
       ctx,
-      path.resolve(testDirectory, 'js/object')
+      path.resolve(testDirectory, 'js/object'),
+      fs
     );
 
     expected(config);
@@ -86,7 +89,8 @@ describe('config-autoload', () => {
     const config = await loadConfig(
       null,
       ctx,
-      path.resolve(testDirectory, 'js/array')
+      path.resolve(testDirectory, 'js/array'),
+      fs
     );
 
     expected(config);
@@ -112,7 +116,8 @@ describe('config-autoload', () => {
     const config = await loadConfig(
       null,
       {},
-      path.resolve(testDirectory, 'pkg')
+      path.resolve(testDirectory, 'pkg'),
+      fs
     );
 
     expected(config);
@@ -120,7 +125,7 @@ describe('config-autoload', () => {
 
   it('Loading Config - {Error}', async () => {
     try {
-      await loadConfig(null, {}, path.resolve('unresolved'));
+      await loadConfig(null, {}, path.resolve('unresolved'), fs);
     } catch (error) {
       expect(error.message).toMatch(/^No PostCSS Config found in: (.*)$/);
     }
@@ -128,7 +133,12 @@ describe('config-autoload', () => {
 
   it('Plugin - {Type} - Invalid', async () => {
     try {
-      await loadConfig(null, {}, path.resolve(testDirectory, 'err/plugins'));
+      await loadConfig(
+        null,
+        {},
+        path.resolve(testDirectory, 'err/plugins'),
+        fs
+      );
     } catch (error) {
       expect(error.message).toMatch(
         /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/
@@ -141,7 +151,8 @@ describe('config-autoload', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/plugins/object')
+        path.resolve(testDirectory, 'err/plugins/object'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Plugin failed: .*$/m);
@@ -153,7 +164,8 @@ describe('config-autoload', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/plugins/object/options')
+        path.resolve(testDirectory, 'err/plugins/object/options'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Plugin failed: .*$/m);
@@ -165,7 +177,8 @@ describe('config-autoload', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/plugins/array')
+        path.resolve(testDirectory, 'err/plugins/array'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Cannot find (.*)$/);
@@ -177,7 +190,8 @@ describe('config-autoload', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/plugins/array/options')
+        path.resolve(testDirectory, 'err/plugins/array/options'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Cannot find (.*)$/);
@@ -191,7 +205,8 @@ describe('Loading Options - {Error}', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/options/parser')
+        path.resolve(testDirectory, 'err/options/parser'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Parser failed: .*$/m);
@@ -203,7 +218,8 @@ describe('Loading Options - {Error}', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/options/syntax')
+        path.resolve(testDirectory, 'err/options/syntax'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(/^Loading PostCSS Syntax failed: .*$/m);
@@ -215,7 +231,8 @@ describe('Loading Options - {Error}', () => {
       await loadConfig(
         null,
         {},
-        path.resolve(testDirectory, 'err/options/stringifier')
+        path.resolve(testDirectory, 'err/options/stringifier'),
+        fs
       );
     } catch (error) {
       expect(error.message).toMatch(

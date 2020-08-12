@@ -1,4 +1,5 @@
 import path from 'path';
+
 import Module from 'module';
 
 import { cosmiconfig } from 'cosmiconfig';
@@ -6,6 +7,16 @@ import importCwd from 'import-cwd';
 
 const parentModule = module;
 const moduleName = 'postcss';
+
+const stat = (inputFileSystem, filePath) =>
+  new Promise((resolve, reject) => {
+    inputFileSystem.stat(filePath, (err, stats) => {
+      if (err) {
+        reject(err);
+      }
+      resolve(stats);
+    });
+  });
 
 const createContext = (context) => {
   const result = {
@@ -160,43 +171,40 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-function loadConfig(config, context, configPath) {
+async function loadConfig(config, context, configPath, inputFileSystem) {
   if (config === false) {
     return {};
   }
 
-  const searchPlaces = [
-    `.${moduleName}rc.js`,
-    `.${moduleName}rc.yaml`,
-    `.${moduleName}rc.yml`,
-    `.${moduleName}rc.json`,
-    `.${moduleName}rc`,
-    `${moduleName}.config.js`,
-    `package.json`,
-  ];
-  const cosmiconfigOptions = { searchPlaces };
-  let configFilename;
-  let configDir;
+  let searchPath = configPath ? path.resolve(configPath) : process.cwd();
 
   if (typeof config === 'string') {
-    const parsedPath = path.parse(config);
-    configFilename = parsedPath.base;
-    configDir = parsedPath.dir;
-
-    cosmiconfigOptions.searchPlaces.unshift(configFilename);
+    searchPath = path.resolve(config);
   }
 
-  configDir = configDir || configPath || process.cwd();
+  let stats;
 
-  return cosmiconfig(moduleName, cosmiconfigOptions)
-    .search(configDir)
-    .then((result) => {
-      if (!result) {
-        throw new Error(`No PostCSS Config found in: ${configDir}`);
-      }
+  try {
+    stats = await stat(inputFileSystem, searchPath);
+  } catch (errorIgnore) {
+    throw new Error(`No PostCSS Config found in: ${searchPath}`);
+  }
 
-      return processResult(createContext(context), result);
-    });
+  const explorer = cosmiconfig(moduleName);
+
+  let result;
+
+  try {
+    if (stats.isFile()) {
+      result = await explorer.load(searchPath);
+    } else {
+      result = await explorer.search(searchPath);
+    }
+  } catch (errorIgnore) {
+    throw new Error(`No PostCSS Config found in: ${searchPath}`);
+  }
+
+  return processResult(createContext(context), result);
 }
 
 export { exec, loadConfig };

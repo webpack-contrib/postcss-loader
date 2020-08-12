@@ -50,6 +50,47 @@ describe('Config Options', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
+  it('should work Config - "string" with relative path', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: 'test/fixtures/css/custom.config.js',
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Config - "string" with path directory', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: 'test/fixtures',
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Config - Object - path file', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: {
+        path: path.resolve(__dirname, '../fixtures/css/custom.config.js'),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should work Config - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {});
     const stats = await compile(compiler);

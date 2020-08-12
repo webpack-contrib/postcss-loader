@@ -82,7 +82,7 @@ export default async function loader(content, sourceMap, meta = {}) {
     rc.ctx.webpack = this;
 
     try {
-      config = await loadConfig(options.config, rc.ctx, rc.path);
+      config = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
     } catch (error) {
       callback(error);
 
