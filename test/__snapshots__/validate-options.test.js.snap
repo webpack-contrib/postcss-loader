@@ -100,8 +100,6 @@ exports[`validate options should throw an error on the "parser" option with "tru
       object { … }"
 `;
 
-exports[`validate options should throw an error on the "plugins" option with "/test/" value 1`] = `"/test/ is not a PostCSS plugin"`;
-
 exports[`validate options should throw an error on the "plugins" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.plugins should be one of these:

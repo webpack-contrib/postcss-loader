@@ -44,7 +44,7 @@ describe('validate options', () => {
         require('./fixtures/config/plugin'),
         () => [require('./fixtures/config/plugin')()],
       ],
-      failure: [1, true, false, /test/],
+      failure: [1, true, false],
     },
   };
 

@@ -5,11 +5,81 @@ import validateOptions from 'schema-utils';
 
 import postcss from 'postcss';
 
+import postcssPkg from 'postcss/package.json';
+
 import Warning from './Warning';
 import SyntaxError from './Error';
 import parseOptions from './options';
 import schema from './options.json';
 import { exec, loadConfig } from './utils';
+
+const load = (plugin, options, file) => {
+  try {
+    if (
+      options === null ||
+      typeof options === 'undefined' ||
+      Object.keys(options).length === 0
+    ) {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      return require(plugin);
+    }
+
+    // eslint-disable-next-line global-require,import/no-dynamic-require
+    return require(plugin)(options);
+  } catch (err) {
+    throw new Error(
+      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
+    );
+  }
+};
+
+const loadPlugins = (pluginEntry, file) => {
+  let plugins = [];
+
+  if (Array.isArray(pluginEntry)) {
+    plugins = pluginEntry.filter(Boolean);
+  } else {
+    plugins = Object.entries(pluginEntry).filter((i) => {
+      const [, options] = i;
+
+      return options !== false ? pluginEntry : '';
+    });
+  }
+
+  plugins = plugins.map((plugin) => {
+    const [pluginName, pluginOptions] = plugin;
+
+    return load(pluginName, pluginOptions, file);
+  });
+
+  if (plugins.length && plugins.length > 0) {
+    plugins.forEach((plugin, i) => {
+      if (plugin.postcss) {
+        // eslint-disable-next-line no-param-reassign
+        plugin = plugin.postcss;
+      }
+
+      if (plugin.default) {
+        // eslint-disable-next-line no-param-reassign
+        plugin = plugin.default;
+      }
+
+      if (
+        // eslint-disable-next-line
+        !(
+          (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
+          typeof plugin === 'function'
+        )
+      ) {
+        throw new TypeError(
+          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
+        );
+      }
+    });
+  }
+
+  return plugins;
+};
 
 /**
  * **PostCSS Loader**
@@ -34,29 +104,16 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const callback = this.async();
   const file = this.resourcePath;
-  let config;
+  let configRc = {};
 
-  const { length } = Object.keys(options).filter((option) => {
-    switch (option) {
-      // case 'exec':
-      case 'ident':
-      case 'config':
-      case 'sourceMap':
-        return false;
-      default:
-        return option;
-    }
-  });
+  options.config =
+    options.config === false
+      ? options.config
+      : typeof options.config !== 'undefined'
+      ? options.config
+      : true;
 
-  if (length) {
-    try {
-      config = await parseOptions.call(this, options);
-    } catch (error) {
-      callback(error);
-
-      return;
-    }
-  } else {
+  if (options.config) {
     const rc = {
       path: path.dirname(file),
       ctx: {
@@ -69,20 +126,64 @@ export default async function loader(content, sourceMap, meta = {}) {
       },
     };
 
-    if (options.config) {
-      if (options.config.path) {
-        rc.path = path.resolve(options.config.path);
-      }
+    if (typeof options.config.path !== 'undefined') {
+      rc.path = path.resolve(options.config.path);
+    }
 
-      if (options.config.ctx) {
-        rc.ctx.options = options.config.ctx;
-      }
+    if (typeof options.config.ctx !== 'undefined') {
+      rc.ctx.options = options.config.ctx;
     }
 
     rc.ctx.webpack = this;
 
     try {
-      config = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
+      configRc = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
+      delete options.config;
+    } catch (error) {
+      callback(error);
+
+      return;
+    }
+  }
+
+  function pluginsToArray(plugins) {
+    if (typeof plugins === 'undefined') {
+      return [];
+    }
+
+    if (Array.isArray(plugins)) {
+      return plugins;
+    }
+
+    return [plugins];
+  }
+
+  const mergedOptions = {
+    ...configRc,
+    ...options,
+    plugins: [
+      ...pluginsToArray(configRc.plugins),
+      ...pluginsToArray(options.plugins),
+    ],
+  };
+
+  let config;
+
+  const { length } = Object.keys(mergedOptions).filter((option) => {
+    switch (option) {
+      // case 'exec':
+      // case 'ident':
+      case 'config':
+      case 'sourceMap':
+        return false;
+      default:
+        return option;
+    }
+  });
+
+  if (length) {
+    try {
+      config = await parseOptions.call(this, mergedOptions);
     } catch (error) {
       callback(error);
 
@@ -160,10 +261,26 @@ export default async function loader(content, sourceMap, meta = {}) {
     postcssOptions.map.prev = sourceMap;
   }
 
+  let resultPlugins = [];
+
+  for (const plugin of plugins) {
+    if (plugin === false) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+    if (plugin.postcssVersion === postcssPkg.version) {
+      resultPlugins.push(plugin);
+    } else if (typeof plugin === 'function') {
+      resultPlugins.push(plugin);
+    } else {
+      resultPlugins = resultPlugins.concat(loadPlugins(plugin, file));
+    }
+  }
+
   let result;
 
   try {
-    result = await postcss(plugins).process(content, postcssOptions);
+    result = await postcss(resultPlugins).process(content, postcssOptions);
   } catch (error) {
     if (error.file) {
       this.addDependency(error.file);

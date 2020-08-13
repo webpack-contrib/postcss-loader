@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "cosmiconfig": "^7.0.0",
-    "import-cwd": "^3.0.0",
     "loader-utils": "^2.0.0",
     "postcss": "^7.0.0",
     "schema-utils": "^2.7.0"
@@ -74,6 +73,7 @@
     "postcss-import": "^12.0.1",
     "postcss-js": "^2.0.0",
     "postcss-nested": "^4.2.3",
+    "postcss-short": "^5.0.0",
     "prettier": "^2.0.5",
     "standard": "^14.3.4",
     "standard-version": "^8.0.2",

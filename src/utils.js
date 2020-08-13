@@ -3,7 +3,6 @@ import path from 'path';
 import Module from 'module';
 
 import { cosmiconfig } from 'cosmiconfig';
-import importCwd from 'import-cwd';
 
 const parentModule = module;
 const moduleName = 'postcss';
@@ -37,7 +36,8 @@ const loadOptions = (config, file) => {
 
   if (config.parser && typeof config.parser === 'string') {
     try {
-      result.parser = importCwd(config.parser);
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      result.parser = require(config.parser);
     } catch (err) {
       throw new Error(
         `Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`
@@ -47,7 +47,8 @@ const loadOptions = (config, file) => {
 
   if (config.syntax && typeof config.syntax === 'string') {
     try {
-      result.syntax = importCwd(config.syntax);
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      result.syntax = require(config.syntax);
     } catch (err) {
       throw new Error(
         `Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`
@@ -57,7 +58,8 @@ const loadOptions = (config, file) => {
 
   if (config.stringifier && typeof config.stringifier === 'string') {
     try {
-      result.stringifier = importCwd(config.stringifier);
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      result.stringifier = require(config.stringifier);
     } catch (err) {
       throw new Error(
         `Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`
@@ -65,95 +67,7 @@ const loadOptions = (config, file) => {
     }
   }
 
-  if (config.plugins) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.plugins;
-  }
-
   return { ...config, ...result };
-};
-
-const load = (plugin, options, file) => {
-  try {
-    if (
-      options === null ||
-      typeof options === 'undefined' ||
-      Object.keys(options).length === 0
-    ) {
-      return importCwd(plugin);
-    }
-
-    return importCwd(plugin)(options);
-  } catch (err) {
-    throw new Error(
-      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
-    );
-  }
-};
-
-const loadPlugins = (config, file) => {
-  let plugins = [];
-
-  if (Array.isArray(config.plugins)) {
-    plugins = config.plugins.filter(Boolean);
-  } else {
-    plugins = Object.keys(config.plugins)
-      .filter((plugin) => {
-        return config.plugins[plugin] !== false ? plugin : '';
-      })
-      .map((plugin) => {
-        return load(plugin, config.plugins[plugin], file);
-      });
-  }
-
-  if (plugins.length && plugins.length > 0) {
-    plugins.forEach((plugin, i) => {
-      if (plugin.postcss) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.postcss;
-      }
-
-      if (plugin.default) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.default;
-      }
-
-      if (
-        // eslint-disable-next-line
-        !(
-          (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
-          typeof plugin === 'function'
-        )
-      ) {
-        throw new TypeError(
-          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
-        );
-      }
-    });
-  }
-
-  return plugins;
-};
-
-const processResult = (context, result) => {
-  const file = result.filepath || '';
-  let config = result.config || {};
-
-  if (typeof config === 'function') {
-    config = config(context);
-  } else {
-    config = Object.assign({}, config, context);
-  }
-
-  if (!config.plugins) {
-    config.plugins = [];
-  }
-
-  return {
-    plugins: loadPlugins(config, file),
-    options: loadOptions(config, file),
-    file,
-  };
 };
 
 function exec(code, loaderContext) {
@@ -172,10 +86,6 @@ function exec(code, loaderContext) {
 }
 
 async function loadConfig(config, context, configPath, inputFileSystem) {
-  if (config === false) {
-    return {};
-  }
-
   let searchPath = configPath ? path.resolve(configPath) : process.cwd();
 
   if (typeof config === 'string') {
@@ -204,7 +114,27 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
     throw new Error(`No PostCSS Config found in: ${searchPath}`);
   }
 
-  return processResult(createContext(context), result);
+  const patchedContext = createContext(context);
+
+  let resultConfig = result.config || {};
+
+  if (typeof resultConfig === 'function') {
+    resultConfig = resultConfig(patchedContext);
+  } else {
+    resultConfig = Object.assign({}, resultConfig, patchedContext);
+  }
+
+  if (!resultConfig.plugins) {
+    resultConfig.plugins = [];
+  }
+
+  resultConfig.file = result.filepath || '';
+
+  delete resultConfig.webpack;
+
+  const options = loadOptions(resultConfig, resultConfig.file);
+
+  return { ...resultConfig, ...options };
 }
 
 export { exec, loadConfig };

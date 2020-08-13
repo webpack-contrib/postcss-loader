@@ -8,7 +8,10 @@ import {
 
 describe('loader', () => {
   it('should work', async () => {
-    const compiler = getCompiler('./css/index.js', { plugins: [] });
+    const compiler = getCompiler('./css/index.js', {
+      plugins: [],
+      config: false,
+    });
     const stats = await compile(compiler);
 
     const codeFromBundle = getCodeFromBundle('style.css', stats);
@@ -25,7 +28,10 @@ describe('loader', () => {
       });
     };
 
-    const compiler = getCompiler('./css/index.js', { plugins: [plugin()] });
+    const compiler = getCompiler('./css/index.js', {
+      plugins: [plugin()],
+      config: false,
+    });
     const stats = await compile(compiler);
 
     const codeFromBundle = getCodeFromBundle('style.css', stats);
@@ -36,7 +42,10 @@ describe('loader', () => {
   });
 
   it('should emit Syntax Error', async () => {
-    const compiler = getCompiler('./css/index.js', { parser: 'sugarss' });
+    const compiler = getCompiler('./css/index.js', {
+      parser: 'sugarss',
+      config: false,
+    });
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot('warnings');

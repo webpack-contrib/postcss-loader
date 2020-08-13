@@ -66,4 +66,36 @@ describe('Options Plugins', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should work Plugins - {Object without require}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      plugins: {
+        'postcss-import': {},
+        'postcss-nested': {},
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Plugins - {Object without require} + options', async () => {
+    const compiler = getCompiler('./css/index2.js', {
+      plugins: {
+        'postcss-short': { prefix: 'x' },
+      },
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style2.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });

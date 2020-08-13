@@ -25,7 +25,7 @@ describe('Options Syntax', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { syntax: 'sugarss' },
+                  options: { syntax: 'sugarss', config: false },
                 },
               ],
             },
@@ -62,6 +62,7 @@ describe('Options Syntax', () => {
                     ident: 'postcss',
                     // eslint-disable-next-line global-require
                     syntax: require('sugarss'),
+                    config: false,
                   },
                 },
               ],

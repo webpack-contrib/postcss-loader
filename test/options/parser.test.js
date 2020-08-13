@@ -25,7 +25,7 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'sugarss' },
+                  options: { parser: 'sugarss', config: false },
                 },
               ],
             },
@@ -59,7 +59,12 @@ describe('Options Parser', () => {
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
-                  options: { ident: 'postcss', parser: require('sugarss') },
+                  options: {
+                    ident: 'postcss',
+                    // eslint-disable-next-line global-require,import/no-dynamic-require
+                    parser: require('sugarss'),
+                    config: false,
+                  },
                 },
               ],
             },
