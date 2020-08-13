@@ -2,6 +2,7 @@ import path from 'path';
 
 import Module from 'module';
 
+import postcssPkg from 'postcss/package.json';
 import { cosmiconfig } from 'cosmiconfig';
 
 const parentModule = module;
@@ -29,6 +30,26 @@ const createContext = (context) => {
   }
 
   return result;
+};
+
+const load = (plugin, options, file) => {
+  try {
+    if (
+      options === null ||
+      typeof options === 'undefined' ||
+      Object.keys(options).length === 0
+    ) {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      return require(plugin);
+    }
+
+    // eslint-disable-next-line global-require,import/no-dynamic-require
+    return require(plugin)(options);
+  } catch (err) {
+    throw new Error(
+      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
+    );
+  }
 };
 
 const loadOptions = (config, file) => {
@@ -69,6 +90,54 @@ const loadOptions = (config, file) => {
 
   return { ...config, ...result };
 };
+
+function loadPlugins(pluginEntry, file) {
+  let plugins = [];
+
+  if (Array.isArray(pluginEntry)) {
+    plugins = pluginEntry.filter(Boolean);
+  } else {
+    plugins = Object.entries(pluginEntry).filter((i) => {
+      const [, options] = i;
+
+      return options !== false ? pluginEntry : '';
+    });
+  }
+
+  plugins = plugins.map((plugin) => {
+    const [pluginName, pluginOptions] = plugin;
+
+    return load(pluginName, pluginOptions, file);
+  });
+
+  if (plugins.length && plugins.length > 0) {
+    plugins.forEach((plugin, i) => {
+      if (plugin.postcss) {
+        // eslint-disable-next-line no-param-reassign
+        plugin = plugin.postcss;
+      }
+
+      if (plugin.default) {
+        // eslint-disable-next-line no-param-reassign
+        plugin = plugin.default;
+      }
+
+      if (
+        // eslint-disable-next-line
+        !(
+          (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
+          typeof plugin === 'function'
+        )
+      ) {
+        throw new TypeError(
+          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
+        );
+      }
+    });
+  }
+
+  return plugins;
+}
 
 function exec(code, loaderContext) {
   const { resource, context } = loaderContext;
@@ -130,11 +199,50 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
 
   resultConfig.file = result.filepath || '';
 
-  delete resultConfig.webpack;
-
   const options = loadOptions(resultConfig, resultConfig.file);
 
   return { ...resultConfig, ...options };
 }
 
-export { exec, loadConfig };
+function createPostCssPlugins(items, file) {
+  function iterator(plugins, plugin, acc) {
+    if (typeof plugin === 'undefined') {
+      return acc;
+    }
+
+    if (plugin === false) {
+      return iterator(plugins, plugins.pop(), acc);
+    }
+
+    if (plugin.postcssVersion === postcssPkg.version) {
+      acc.push(plugin);
+      return iterator(plugins, plugins.pop(), acc);
+    }
+
+    if (typeof plugin === 'function') {
+      const postcssPlugin = plugin.call(this, this);
+
+      if (Array.isArray(postcssPlugin)) {
+        acc.concat(postcssPlugin);
+      } else {
+        acc.push(postcssPlugin);
+      }
+
+      return iterator(plugins, plugins.pop(), acc);
+    }
+
+    if (Object.keys(plugin).length === 0) {
+      return iterator(plugins, plugins.pop(), acc);
+    }
+
+    const concatPlugins = [...plugins, ...loadPlugins(plugin, file)];
+
+    return iterator(concatPlugins, concatPlugins.pop(), acc);
+  }
+
+  const pl = [...items];
+
+  return iterator(pl, pl.pop(), []);
+}
+
+export { exec, loadConfig, createPostCssPlugins };

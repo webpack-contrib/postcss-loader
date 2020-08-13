@@ -1,3 +1,5 @@
+import postcss from 'postcss';
+
 import {
   compile,
   getCompiler,
@@ -28,8 +30,10 @@ describe('loader', () => {
       });
     };
 
+    const postcssPlugin = postcss.plugin('postcss-plugin', plugin);
+
     const compiler = getCompiler('./css/index.js', {
-      plugins: [plugin()],
+      plugins: [postcssPlugin()],
       config: false,
     });
     const stats = await compile(compiler);

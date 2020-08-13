@@ -83,11 +83,54 @@ describe('Options Plugins', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
+  it('should work Plugins - {empty Object}', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      plugins: {},
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should work Plugins - {Object without require} + options', async () => {
     const compiler = getCompiler('./css/index2.js', {
       plugins: {
         'postcss-short': { prefix: 'x' },
       },
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style2.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Plugins - {Object} + options', async () => {
+    const compiler = getCompiler('./css/index2.js', {
+      // eslint-disable-next-line global-require
+      plugins: require('postcss-short')({ prefix: 'x' }),
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style2.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work Plugins - {Array<Object>} + options', async () => {
+    const compiler = getCompiler('./css/index2.js', {
+      // eslint-disable-next-line global-require
+      plugins: [require('postcss-short')({ prefix: 'x' })],
       config: false,
     });
     const stats = await compile(compiler);

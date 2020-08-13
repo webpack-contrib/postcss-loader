@@ -14,26 +14,13 @@
  * @return {Promise} PostCSS Config
  */
 function parseOptions({ exec, parser, syntax, stringifier, plugins }) {
-  if (typeof plugins === 'function') {
-    // eslint-disable-next-line no-param-reassign
-    plugins = plugins.call(this, this);
-  }
-
-  if (typeof plugins === 'undefined') {
-    // eslint-disable-next-line no-param-reassign
-    plugins = [];
-  } else if (!Array.isArray(plugins)) {
-    // eslint-disable-next-line no-param-reassign
-    plugins = [plugins];
-  }
-
   const options = {};
 
   options.parser = parser;
   options.syntax = syntax;
   options.stringifier = stringifier;
 
-  return Promise.resolve({ options, plugins, exec });
+  return { options, plugins, exec };
 }
 
 module.exports = parseOptions;

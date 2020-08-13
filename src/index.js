@@ -5,81 +5,11 @@ import validateOptions from 'schema-utils';
 
 import postcss from 'postcss';
 
-import postcssPkg from 'postcss/package.json';
-
 import Warning from './Warning';
 import SyntaxError from './Error';
 import parseOptions from './options';
 import schema from './options.json';
-import { exec, loadConfig } from './utils';
-
-const load = (plugin, options, file) => {
-  try {
-    if (
-      options === null ||
-      typeof options === 'undefined' ||
-      Object.keys(options).length === 0
-    ) {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(plugin);
-    }
-
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(plugin)(options);
-  } catch (err) {
-    throw new Error(
-      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
-    );
-  }
-};
-
-const loadPlugins = (pluginEntry, file) => {
-  let plugins = [];
-
-  if (Array.isArray(pluginEntry)) {
-    plugins = pluginEntry.filter(Boolean);
-  } else {
-    plugins = Object.entries(pluginEntry).filter((i) => {
-      const [, options] = i;
-
-      return options !== false ? pluginEntry : '';
-    });
-  }
-
-  plugins = plugins.map((plugin) => {
-    const [pluginName, pluginOptions] = plugin;
-
-    return load(pluginName, pluginOptions, file);
-  });
-
-  if (plugins.length && plugins.length > 0) {
-    plugins.forEach((plugin, i) => {
-      if (plugin.postcss) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.postcss;
-      }
-
-      if (plugin.default) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.default;
-      }
-
-      if (
-        // eslint-disable-next-line
-        !(
-          (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
-          typeof plugin === 'function'
-        )
-      ) {
-        throw new TypeError(
-          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
-        );
-      }
-    });
-  }
-
-  return plugins;
-};
+import { exec, loadConfig, createPostCssPlugins } from './utils';
 
 /**
  * **PostCSS Loader**
@@ -182,17 +112,7 @@ export default async function loader(content, sourceMap, meta = {}) {
   });
 
   if (length) {
-    try {
-      config = await parseOptions.call(this, mergedOptions);
-    } catch (error) {
-      callback(error);
-
-      return;
-    }
-  }
-
-  if (typeof config === 'undefined') {
-    config = {};
+    config = parseOptions.call(this, mergedOptions);
   }
 
   if (config.file) {
@@ -261,21 +181,7 @@ export default async function loader(content, sourceMap, meta = {}) {
     postcssOptions.map.prev = sourceMap;
   }
 
-  let resultPlugins = [];
-
-  for (const plugin of plugins) {
-    if (plugin === false) {
-      // eslint-disable-next-line no-continue
-      continue;
-    }
-    if (plugin.postcssVersion === postcssPkg.version) {
-      resultPlugins.push(plugin);
-    } else if (typeof plugin === 'function') {
-      resultPlugins.push(plugin);
-    } else {
-      resultPlugins = resultPlugins.concat(loadPlugins(plugin, file));
-    }
-  }
+  const resultPlugins = createPostCssPlugins(plugins, file);
 
   let result;
 
