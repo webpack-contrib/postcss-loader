@@ -111,15 +111,15 @@ module.exports = {
 
 <h2 align="center">Options</h2>
 
-|            Name            |        Type         |   Default   | Description                                  |
-| :------------------------: | :-----------------: | :---------: | :------------------------------------------- |
-|      [`exec`](#exec)       |     `{Boolean}`     | `undefined` | Enable PostCSS Parser support in `CSS-in-JS` |
-|   [`parser`](#syntaxes)    | `{String\|Object}`  | `undefined` | Set PostCSS Parser                           |
-|   [`syntax`](#syntaxes)    | `{String\|Object}`  | `undefined` | Set PostCSS Syntax                           |
-| [`stringifier`](#syntaxes) | `{String\|Object}`  | `undefined` | Set PostCSS Stringifier                      |
-|    [`config`](#config)     |     `{Object}`      | `undefined` | Set `postcss.config.js` config path && `ctx` |
-|   [`plugins`](#plugins)    | `{Array\|Function}` |    `[]`     | Set PostCSS Plugins                          |
-| [`sourceMap`](#sourcemap)  | `{String\|Boolean}` |   `false`   | Enable Source Maps                           |
+|            Name            |            Type             |   Default   | Description                                  |
+| :------------------------: | :-------------------------: | :---------: | :------------------------------------------- |
+|      [`exec`](#exec)       |         `{Boolean}`         | `undefined` | Enable PostCSS Parser support in `CSS-in-JS` |
+|   [`parser`](#syntaxes)    |     `{String\|Object}`      | `undefined` | Set PostCSS Parser                           |
+|   [`syntax`](#syntaxes)    |     `{String\|Object}`      | `undefined` | Set PostCSS Syntax                           |
+| [`stringifier`](#syntaxes) |     `{String\|Object}`      | `undefined` | Set PostCSS Stringifier                      |
+|    [`config`](#config)     | `{String\|Object\|Boolean}` | `undefined` | Set `postcss.config.js` config path && `ctx` |
+|   [`plugins`](#plugins)    |     `{Array\|Function}`     |    `[]`     | Set PostCSS Plugins                          |
+| [`sourceMap`](#sourcemap)  |     `{String\|Boolean}`     |   `false`   | Enable Source Maps                           |
 
 ### `Exec`
 
@@ -140,12 +140,61 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 
 ### `Config`
 
+Type: `Boolean|String|Object`
+Default: `undefined`
+
+#### Boolean
+
+Enables/Disables autoloading config.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          config: false,
+        },
+      },
+    ],
+  },
+};
+```
+
+#### String
+
+Allows to specify the absolute path to the config file.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          config: path.resolve(__dirname, 'custom.config.js'),
+        },
+      },
+    ],
+  },
+};
+```
+
+#### Object
+
 |           Name            |    Type    |   Default   | Description              |
 | :-----------------------: | :--------: | :---------: | :----------------------- |
 |      [`path`](#path)      | `{String}` | `undefined` | PostCSS Config Directory |
 | [`context`](#context-ctx) | `{Object}` | `undefined` | PostCSS Config Context   |
 
-#### `Path`
+##### `Path`
 
 You can manually specify the path to search for your config (`postcss.config.js`) with the `config.path` option. This is needed if you store your config in a separate e.g `./config || ./.config` folder.
 
@@ -169,7 +218,7 @@ You can manually specify the path to search for your config (`postcss.config.js`
 
 [supported config formats]: https://github.com/michael-ciniawsky/postcss-load-config#usage
 
-#### `Context (ctx)`
+##### `Context (ctx)`
 
 |   Name    |    Type    |        Default        | Description                      |
 | :-------: | :--------: | :-------------------: | :------------------------------- |

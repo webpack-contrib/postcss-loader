@@ -12,8 +12,11 @@ describe('validate options', () => {
           path: 'test/fixtures/config/postcss.config.js',
           ctx: { plugin: true },
         },
+        true,
+        false,
+        'test/fixtures/config/postcss.config.js',
       ],
-      failure: ['true', true, false, 'test', [], { foo: 'bar' }],
+      failure: [[], { foo: 'bar' }],
     },
     exec: {
       success: [false],

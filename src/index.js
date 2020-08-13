@@ -1,33 +1,15 @@
 import path from 'path';
-import Module from 'module';
 
 import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
 import postcss from 'postcss';
-import postcssrc from 'postcss-load-config';
 
 import Warning from './Warning';
 import SyntaxError from './Error';
 import parseOptions from './options';
 import schema from './options.json';
-
-const parentModule = module;
-
-function exec(code, loaderContext) {
-  const { resource, context } = loaderContext;
-
-  const module = new Module(resource, parentModule);
-
-  // eslint-disable-next-line no-underscore-dangle
-  module.paths = Module._nodeModulePaths(context);
-  module.filename = resource;
-
-  // eslint-disable-next-line no-underscore-dangle
-  module._compile(code, resource);
-
-  return module.exports;
-}
+import { exec, loadConfig } from './utils';
 
 /**
  * **PostCSS Loader**
@@ -100,7 +82,7 @@ export default async function loader(content, sourceMap, meta = {}) {
     rc.ctx.webpack = this;
 
     try {
-      config = await postcssrc(rc.ctx, rc.path);
+      config = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
     } catch (error) {
       callback(error);
 
@@ -116,15 +98,14 @@ export default async function loader(content, sourceMap, meta = {}) {
     this.addDependency(config.file);
   }
 
-  // Disable override `to` option from `postcss.config.js`
-  if (config.options.to) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.options.to;
-  }
-  // Disable override `from` option from `postcss.config.js`
-  if (config.options.from) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.options.from;
+  if (typeof config.options !== 'undefined') {
+    if (typeof config.options.to !== 'undefined') {
+      delete config.options.to;
+    }
+
+    if (typeof config.options.from !== 'undefined') {
+      delete config.options.from;
+    }
   }
 
   const plugins = config.plugins || [];

@@ -1,5 +1,32 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Config Options should work Config - "string" with path directory: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
+
+exports[`Config Options should work Config - "string" with path directory: errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - "string" with path directory: warnings 1`] = `Array []`;
+
+exports[`Config Options should work Config - "string" with relative path: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
+
+exports[`Config Options should work Config - "string" with relative path: errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - "string" with relative path: warnings 1`] = `Array []`;
+
+exports[`Config Options should work Config - "string": css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
+
+exports[`Config Options should work Config - "string": errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - "string": warnings 1`] = `Array []`;
+
 exports[`Config Options should work Config - {Object}: css 1`] = `
 "a { color: rgba(255, 0, 0, 1.0) }
 "
@@ -27,6 +54,15 @@ exports[`Config Options should work Config - Context - {Object}: errors 1`] = `A
 
 exports[`Config Options should work Config - Context - {Object}: warnings 1`] = `Array []`;
 
+exports[`Config Options should work Config - Object - path file: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
+
+exports[`Config Options should work Config - Object - path file: errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - Object - path file: warnings 1`] = `Array []`;
+
 exports[`Config Options should work Config - Path - {String}: css 1`] = `
 "a { color: black }
 "
@@ -36,4 +72,67 @@ exports[`Config Options should work Config - Path - {String}: errors 1`] = `Arra
 
 exports[`Config Options should work Config - Path - {String}: warnings 1`] = `Array []`;
 
+exports[`Config Options should work Config - false: css 1`] = `
+"a { color: black }
+"
+`;
+
+exports[`Config Options should work Config - false: errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - false: warnings 1`] = `Array []`;
+
+exports[`Config Options should work Config - true: css 1`] = `
+"a { color: rgba(255, 0, 0, 1.0) }
+"
+`;
+
+exports[`Config Options should work Config - true: errors 1`] = `Array []`;
+
+exports[`Config Options should work Config - true: warnings 1`] = `Array []`;
+
 exports[`Config Options should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: css 1`] = `
+".import {
+  color: red;
+}
+
+.test {
+  color: blue;
+}
+"
+`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work package.json - {Object} - Process CSS: warnings 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: css 1`] = `
+".import {
+  color: goldenrod;
+}
+
+.test {
+  color: cyan;
+}
+"
+`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Array} - Process CSS: warnings 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: css 1`] = `
+".import {
+  color: red;
+}
+
+.test {
+  color: blue;
+}
+"
+`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: errors 1`] = `Array []`;
+
+exports[`Config Options should work postcss.config.js - {Object} - Process CSS: warnings 1`] = `Array []`;
