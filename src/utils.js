@@ -53,31 +53,20 @@ const load = (plugin, options, file) => {
 };
 
 function loadPlugins(pluginEntry, file) {
-  let plugins = [];
+  const plugins = Object.entries(pluginEntry).filter((i) => {
+    const [, options] = i;
 
-  if (Array.isArray(pluginEntry)) {
-    plugins = pluginEntry.filter(Boolean);
-  } else {
-    plugins = Object.entries(pluginEntry).filter((i) => {
-      const [, options] = i;
+    return options !== false ? pluginEntry : '';
+  });
 
-      return options !== false ? pluginEntry : '';
-    });
-  }
-
-  plugins = plugins.map((plugin) => {
+  const loadedPlugins = plugins.map((plugin) => {
     const [pluginName, pluginOptions] = plugin;
 
     return load(pluginName, pluginOptions, file);
   });
 
-  if (plugins.length && plugins.length > 0) {
-    plugins.forEach((plugin, i) => {
-      if (plugin.postcss) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.postcss;
-      }
-
+  if (loadedPlugins.length && loadedPlugins.length > 0) {
+    loadedPlugins.forEach((plugin, i) => {
       if (plugin.default) {
         // eslint-disable-next-line no-param-reassign
         plugin = plugin.default;
@@ -97,7 +86,7 @@ function loadPlugins(pluginEntry, file) {
     });
   }
 
-  return plugins;
+  return loadedPlugins;
 }
 
 function exec(code, loaderContext) {

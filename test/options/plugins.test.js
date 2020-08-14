@@ -141,4 +141,16 @@ describe('Options Plugins', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should emit error on load plugin', async () => {
+    const compiler = getCompiler('./css/index2.js', {
+      plugins: {
+        'postcss-unresolved': {},
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
 });

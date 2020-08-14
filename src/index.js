@@ -75,13 +75,21 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
+  let plugins;
+
+  try {
+    plugins = [
+      ...getArrayPlugins(loadedConfig.plugins, file),
+      ...getArrayPlugins(options.plugins, file),
+    ];
+  } catch (error) {
+    this.emitError(error);
+  }
+
   const mergedOptions = {
     ...loadedConfig,
     ...options,
-    plugins: [
-      ...getArrayPlugins(loadedConfig.plugins, file),
-      ...getArrayPlugins(options.plugins, file),
-    ],
+    plugins,
   };
 
   const resultPlugins = mergedOptions.plugins;
