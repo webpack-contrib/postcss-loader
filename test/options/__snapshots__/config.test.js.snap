@@ -4,7 +4,7 @@ exports[`Config Options should emit error when invalid config : errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: No PostCSS Config found in: /test/fixtures/css/invalid.config.js
-    at loadConfig (/src/utils.js:183:11)",
+    at loadConfig (/src/utils.js:144:11)",
 ]
 `;
 
@@ -14,7 +14,7 @@ exports[`Config Options should emit error when unresolved config : errors 1`] = 
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: No PostCSS Config found in: /test/fixtures/css/unresolve.js
-    at loadConfig (/src/utils.js:169:11)
+    at loadConfig (/src/utils.js:130:11)
     at processTicksAndRejections (internal/process/task_queues.js:97:5)",
 ]
 `;

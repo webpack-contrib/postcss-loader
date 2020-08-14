@@ -45,50 +45,11 @@ const load = (plugin, options, file) => {
 
     // eslint-disable-next-line global-require,import/no-dynamic-require
     return require(plugin)(options);
-  } catch (err) {
+  } catch (error) {
     throw new Error(
-      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
+      `Loading PostCSS Plugin failed: ${error.message}\n\n(@${file})`
     );
   }
-};
-
-const loadOptions = (config, file) => {
-  const result = {};
-
-  if (config.parser && typeof config.parser === 'string') {
-    try {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      result.parser = require(config.parser);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (config.syntax && typeof config.syntax === 'string') {
-    try {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      result.syntax = require(config.syntax);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (config.stringifier && typeof config.stringifier === 'string') {
-    try {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      result.stringifier = require(config.stringifier);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  return { ...config, ...result };
 };
 
 function loadPlugins(pluginEntry, file) {
@@ -154,7 +115,7 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-async function loadConfig(config, context, configPath, inputFileSystem) {
+async function loadConfig(config, context, configPath, loaderContext) {
   let searchPath = configPath ? path.resolve(configPath) : process.cwd();
 
   if (typeof config === 'string') {
@@ -164,7 +125,7 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
   let stats;
 
   try {
-    stats = await stat(inputFileSystem, searchPath);
+    stats = await stat(loaderContext.fs, searchPath);
   } catch (errorIgnore) {
     throw new Error(`No PostCSS Config found in: ${searchPath}`);
   }
@@ -197,11 +158,12 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
     resultConfig.plugins = [];
   }
 
-  resultConfig.file = result.filepath || '';
+  if (result.filepath) {
+    resultConfig.file = result.filepath;
+    loaderContext.addDependency(result.filepath);
+  }
 
-  const options = loadOptions(resultConfig, resultConfig.file);
-
-  return { ...resultConfig, ...options };
+  return resultConfig;
 }
 
 function createPostCssPlugins(items, file) {

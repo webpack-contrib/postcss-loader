@@ -11,6 +11,18 @@ import parseOptions from './options';
 import schema from './options.json';
 import { exec, loadConfig, createPostCssPlugins } from './utils';
 
+function pluginsToArray(plugins) {
+  if (typeof plugins === 'undefined') {
+    return [];
+  }
+
+  if (Array.isArray(plugins)) {
+    return plugins;
+  }
+
+  return [plugins];
+}
+
 /**
  * **PostCSS Loader**
  *
@@ -34,17 +46,13 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const callback = this.async();
   const file = this.resourcePath;
-  let configRc = {};
+  let loadedConfig = {};
 
-  options.config =
-    options.config === false
-      ? options.config
-      : typeof options.config !== 'undefined'
-      ? options.config
-      : true;
+  const configOptions =
+    typeof options.config === 'undefined' ? true : options.config;
 
-  if (options.config) {
-    const rc = {
+  if (configOptions) {
+    const dataForLoadConfig = {
       path: path.dirname(file),
       ctx: {
         file: {
@@ -56,19 +64,23 @@ export default async function loader(content, sourceMap, meta = {}) {
       },
     };
 
-    if (typeof options.config.path !== 'undefined') {
-      rc.path = path.resolve(options.config.path);
+    if (typeof configOptions.path !== 'undefined') {
+      dataForLoadConfig.path = path.resolve(configOptions.path);
     }
 
-    if (typeof options.config.ctx !== 'undefined') {
-      rc.ctx.options = options.config.ctx;
+    if (typeof configOptions.ctx !== 'undefined') {
+      dataForLoadConfig.ctx.options = configOptions.ctx;
     }
 
-    rc.ctx.webpack = this;
+    dataForLoadConfig.ctx.webpack = this;
 
     try {
-      configRc = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
-      delete options.config;
+      loadedConfig = await loadConfig(
+        configOptions,
+        dataForLoadConfig.ctx,
+        dataForLoadConfig.path,
+        this
+      );
     } catch (error) {
       callback(error);
 
@@ -76,23 +88,11 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  function pluginsToArray(plugins) {
-    if (typeof plugins === 'undefined') {
-      return [];
-    }
-
-    if (Array.isArray(plugins)) {
-      return plugins;
-    }
-
-    return [plugins];
-  }
-
   const mergedOptions = {
-    ...configRc,
+    ...loadedConfig,
     ...options,
     plugins: [
-      ...pluginsToArray(configRc.plugins),
+      ...pluginsToArray(loadedConfig.plugins),
       ...pluginsToArray(options.plugins),
     ],
   };
@@ -113,10 +113,6 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   if (length) {
     config = parseOptions.call(this, mergedOptions);
-  }
-
-  if (config.file) {
-    this.addDependency(config.file);
   }
 
   if (typeof config.options !== 'undefined') {
@@ -151,18 +147,36 @@ export default async function loader(content, sourceMap, meta = {}) {
   }
 
   if (typeof postcssOptions.parser === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.parser = require(postcssOptions.parser);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.parser = require(postcssOptions.parser);
+    } catch (error) {
+      throw new Error(
+        `Loading PostCSS Parser failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   if (typeof postcssOptions.syntax === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.syntax = require(postcssOptions.syntax);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.syntax = require(postcssOptions.syntax);
+    } catch (error) {
+      throw new Error(
+        `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   if (typeof postcssOptions.stringifier === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.stringifier = require(postcssOptions.stringifier);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.stringifier = require(postcssOptions.stringifier);
+    } catch (error) {
+      throw new Error(
+        `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   // Loader API Exec (Deprecated)

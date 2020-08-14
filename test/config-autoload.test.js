@@ -7,6 +7,11 @@ import { loadConfig } from '../src/utils';
 
 const testDirectory = path.resolve(__dirname, 'fixtures', 'config-autoload');
 
+const loaderContext = {
+  fs,
+  addDependency: () => true,
+};
+
 describe('config-autoload', () => {
   const ctx = {
     parser: true,
@@ -15,8 +20,6 @@ describe('config-autoload', () => {
 
   it('.postcssrc - {Object} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.parser).toEqual(require('sugarss'));
-      expect(config.syntax).toEqual(require('sugarss'));
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/rc/fixtures/index.css');
       expect(config.to).toEqual('./test/rc/expect/index.css');
@@ -32,7 +35,7 @@ describe('config-autoload', () => {
       true,
       {},
       path.resolve(testDirectory, 'rc'),
-      fs
+      loaderContext
     );
 
     expected(config);
@@ -40,8 +43,6 @@ describe('config-autoload', () => {
 
   it('postcss.config.js - {Object} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.parser).toEqual(require('sugarss'));
-      expect(config.syntax).toEqual(require('sugarss'));
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/js/object/fixtures/index.css');
       expect(config.to).toEqual('./test/js/object/expect/index.css');
@@ -57,7 +58,7 @@ describe('config-autoload', () => {
       true,
       ctx,
       path.resolve(testDirectory, 'js/object'),
-      fs
+      loaderContext
     );
 
     expected(config);
@@ -65,8 +66,6 @@ describe('config-autoload', () => {
 
   it('postcss.config.js - {Array} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.parser).toEqual(require('sugarss'));
-      expect(config.syntax).toEqual(require('sugarss'));
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/js/array/fixtures/index.css');
       expect(config.to).toEqual('./test/js/array/expect/index.css');
@@ -82,7 +81,7 @@ describe('config-autoload', () => {
       true,
       ctx,
       path.resolve(testDirectory, 'js/array'),
-      fs
+      loaderContext
     );
 
     expected(config);
@@ -106,7 +105,7 @@ describe('config-autoload', () => {
       true,
       {},
       path.resolve(testDirectory, 'pkg'),
-      fs
+      loaderContext
     );
 
     expected(config);
@@ -117,116 +116,6 @@ describe('config-autoload', () => {
       await loadConfig(true, {}, path.resolve('unresolved'), fs);
     } catch (error) {
       expect(error.message).toMatch(/^No PostCSS Config found in: (.*)$/);
-    }
-  });
-
-  it('Plugin - {Type} - Invalid', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/plugins'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(
-        /^Invalid PostCSS Plugin found at: (.*)\n\n\(@.*\)$/
-      );
-    }
-  });
-
-  it('Loading Plugin - {Object} - {Error}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/plugins/object'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Loading PostCSS Plugin failed: .*$/m);
-    }
-  });
-
-  it('Loading Plugin - {Object} - Options - {Error}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/plugins/object/options'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Loading PostCSS Plugin failed: .*$/m);
-    }
-  });
-
-  it('Loading Plugin - {Array} - {Error}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/plugins/array'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Cannot find (.*)$/);
-    }
-  });
-
-  it('Loading Plugin - {Array} - Options - {Error}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/plugins/array/options'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Cannot find (.*)$/);
-    }
-  });
-});
-
-describe('Loading Options - {Error}', () => {
-  it('Parser - {String}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/options/parser'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Loading PostCSS Parser failed: .*$/m);
-    }
-  });
-
-  it('Syntax - {String}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/options/syntax'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(/^Loading PostCSS Syntax failed: .*$/m);
-    }
-  });
-
-  it('Stringifier - {String}', async () => {
-    try {
-      await loadConfig(
-        true,
-        {},
-        path.resolve(testDirectory, 'err/options/stringifier'),
-        fs
-      );
-    } catch (error) {
-      expect(error.message).toMatch(
-        /^Loading PostCSS Stringifier failed: .*$/m
-      );
     }
   });
 });
