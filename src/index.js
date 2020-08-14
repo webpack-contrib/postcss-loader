@@ -77,11 +77,13 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   let plugins;
 
+  const disabledPlugins = [];
+
   try {
     plugins = [
       ...getArrayPlugins(loadedConfig.plugins, file),
-      ...getArrayPlugins(options.plugins, file),
-    ];
+      ...getArrayPlugins(options.plugins, file, disabledPlugins),
+    ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
   } catch (error) {
     this.emitError(error);
   }

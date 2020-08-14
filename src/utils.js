@@ -165,7 +165,7 @@ function getPlugin(pluginEntry) {
   return Array.isArray(result) ? result : [result];
 }
 
-function getArrayPlugins(plugins, file) {
+function getArrayPlugins(plugins, file, disabledPlugins) {
   if (Array.isArray(plugins)) {
     return plugins.reduce((accumulator, plugin) => {
       // eslint-disable-next-line no-param-reassign
@@ -180,7 +180,22 @@ function getArrayPlugins(plugins, file) {
       return [];
     }
 
-    return getArrayPlugins(loadPlugins(plugins, file), file);
+    const statePlagins = {
+      enabled: {},
+      disabled: disabledPlugins || [],
+    };
+
+    Object.entries(plugins).forEach((plugin) => {
+      const [name, options] = plugin;
+
+      if (options === false) {
+        statePlagins.disabled.push(name);
+      } else {
+        statePlagins.enabled[name] = options;
+      }
+    });
+
+    return getArrayPlugins(loadPlugins(statePlagins.enabled, file), file);
   }
 
   return getPlugin(plugins);

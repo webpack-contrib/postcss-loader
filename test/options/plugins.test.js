@@ -142,6 +142,22 @@ describe('Options Plugins', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
+  it('should disables plugin from config', async () => {
+    const compiler = getCompiler('./css/index2.js', {
+      config: 'test/fixtures/css/plugins.config.js',
+      plugins: {
+        'postcss-short': false,
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style2.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should emit error on load plugin', async () => {
     const compiler = getCompiler('./css/index2.js', {
       plugins: {
