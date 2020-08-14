@@ -71,7 +71,7 @@ Config lookup starts from `path.dirname(file)` and walks the file tree upwards u
 |– package.json
 ```
 
-After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **after** `css-loader` and `style-loader`, but **before** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any.
+After setting up your `postcss.config.js`, add `postcss-loader` to your `webpack.config.js`. You can use it standalone or in conjunction with `css-loader` (recommended). Use it **before** `css-loader` and `style-loader`, but **after** other preprocessor loaders like e.g `sass|less|stylus-loader`, if you use any (since [webpack loaders evaluate right to left/bottom to top](https://webpack.js.org/concepts/loaders/#configuration)).
 
 **`webpack.config.js`**
 
