@@ -112,7 +112,7 @@ export default async function loader(content, sourceMap, meta = {}) {
       // eslint-disable-next-line import/no-dynamic-require,global-require
       postcssOptions.parser = require(postcssOptions.parser);
     } catch (error) {
-      throw new Error(
+      this.emitError(
         `Loading PostCSS Parser failed: ${error.message}\n\n(@${file})`
       );
     }
@@ -123,7 +123,7 @@ export default async function loader(content, sourceMap, meta = {}) {
       // eslint-disable-next-line import/no-dynamic-require,global-require
       postcssOptions.syntax = require(postcssOptions.syntax);
     } catch (error) {
-      throw new Error(
+      this.emitError(
         `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
       );
     }
@@ -134,7 +134,7 @@ export default async function loader(content, sourceMap, meta = {}) {
       // eslint-disable-next-line import/no-dynamic-require,global-require
       postcssOptions.stringifier = require(postcssOptions.stringifier);
     } catch (error) {
-      throw new Error(
+      this.emitError(
         `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
       );
     }

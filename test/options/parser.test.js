@@ -80,4 +80,35 @@ describe('Options Parser', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should emit error Parser', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { parser: 'unresolve', config: false },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
 });

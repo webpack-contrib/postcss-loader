@@ -36,4 +36,17 @@ describe('Options Stringifier', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should emit error Stringifier', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      ident: 'postcss',
+      // eslint-disable-next-line global-require
+      stringifier: 'unresolved',
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
 });
