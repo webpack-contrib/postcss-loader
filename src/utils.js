@@ -151,11 +151,7 @@ async function loadConfig(config, context, configPath, loaderContext) {
   if (typeof resultConfig === 'function') {
     resultConfig = resultConfig(patchedContext);
   } else {
-    resultConfig = Object.assign({}, resultConfig, patchedContext);
-  }
-
-  if (!resultConfig.plugins) {
-    resultConfig.plugins = [];
+    resultConfig = { ...resultConfig, ...patchedContext };
   }
 
   if (result.filepath) {
@@ -166,45 +162,39 @@ async function loadConfig(config, context, configPath, loaderContext) {
   return resultConfig;
 }
 
-function createPostCssPlugins(items, file) {
-  function iterator(plugins, plugin, acc) {
-    if (typeof plugin === 'undefined') {
-      return acc;
-    }
-
-    if (plugin === false) {
-      return iterator(plugins, plugins.pop(), acc);
-    }
-
-    if (plugin.postcssVersion === postcssPkg.version) {
-      acc.push(plugin);
-      return iterator(plugins, plugins.pop(), acc);
-    }
-
-    if (typeof plugin === 'function') {
-      const postcssPlugin = plugin.call(this, this);
-
-      if (Array.isArray(postcssPlugin)) {
-        acc.concat(postcssPlugin);
-      } else {
-        acc.push(postcssPlugin);
-      }
-
-      return iterator(plugins, plugins.pop(), acc);
-    }
-
-    if (Object.keys(plugin).length === 0) {
-      return iterator(plugins, plugins.pop(), acc);
-    }
-
-    const concatPlugins = [...plugins, ...loadPlugins(plugin, file)];
-
-    return iterator(concatPlugins, concatPlugins.pop(), acc);
+function getPlugin(pluginEntry) {
+  if (!pluginEntry) {
+    return [];
   }
 
-  const pl = [...items];
+  if (pluginEntry.postcssVersion === postcssPkg.version) {
+    return [pluginEntry];
+  }
 
-  return iterator(pl, pl.pop(), []);
+  const result = pluginEntry.call(this, this);
+
+  return Array.isArray(result) ? result : [result];
 }
 
-export { exec, loadConfig, createPostCssPlugins };
+function getArrayPlugins(plugins, file) {
+  if (Array.isArray(plugins)) {
+    return plugins.reduce((accumulator, plugin) => {
+      // eslint-disable-next-line no-param-reassign
+      accumulator = accumulator.concat(getArrayPlugins(plugin));
+
+      return accumulator;
+    }, []);
+  }
+
+  if (typeof plugins === 'object' && typeof plugins !== 'function') {
+    if (Object.keys(plugins).length === 0) {
+      return [];
+    }
+
+    return getArrayPlugins(loadPlugins(plugins, file), file);
+  }
+
+  return getPlugin(plugins);
+}
+
+export { exec, loadConfig, getArrayPlugins };

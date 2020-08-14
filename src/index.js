@@ -7,21 +7,8 @@ import postcss from 'postcss';
 
 import Warning from './Warning';
 import SyntaxError from './Error';
-import parseOptions from './options';
 import schema from './options.json';
-import { exec, loadConfig, createPostCssPlugins } from './utils';
-
-function pluginsToArray(plugins) {
-  if (typeof plugins === 'undefined') {
-    return [];
-  }
-
-  if (Array.isArray(plugins)) {
-    return plugins;
-  }
-
-  return [plugins];
-}
+import { exec, loadConfig, getArrayPlugins } from './utils';
 
 /**
  * **PostCSS Loader**
@@ -92,52 +79,26 @@ export default async function loader(content, sourceMap, meta = {}) {
     ...loadedConfig,
     ...options,
     plugins: [
-      ...pluginsToArray(loadedConfig.plugins),
-      ...pluginsToArray(options.plugins),
+      ...getArrayPlugins(loadedConfig.plugins, file),
+      ...getArrayPlugins(options.plugins, file),
     ],
   };
 
-  let config;
+  const resultPlugins = mergedOptions.plugins;
 
-  const { length } = Object.keys(mergedOptions).filter((option) => {
-    switch (option) {
-      // case 'exec':
-      // case 'ident':
-      case 'config':
-      case 'sourceMap':
-        return false;
-      default:
-        return option;
-    }
-  });
+  const { parser, syntax, stringifier } = mergedOptions;
 
-  if (length) {
-    config = parseOptions.call(this, mergedOptions);
-  }
-
-  if (typeof config.options !== 'undefined') {
-    if (typeof config.options.to !== 'undefined') {
-      delete config.options.to;
-    }
-
-    if (typeof config.options.from !== 'undefined') {
-      delete config.options.from;
-    }
-  }
-
-  const plugins = config.plugins || [];
-
-  const postcssOptions = Object.assign(
-    {
-      from: file,
-      map: options.sourceMap
-        ? options.sourceMap === 'inline'
-          ? { inline: true, annotation: false }
-          : { inline: false, annotation: false }
-        : false,
-    },
-    config.options
-  );
+  const postcssOptions = {
+    from: file,
+    map: options.sourceMap
+      ? options.sourceMap === 'inline'
+        ? { inline: true, annotation: false }
+        : { inline: false, annotation: false }
+      : false,
+    parser,
+    syntax,
+    stringifier,
+  };
 
   // Loader Exec (Deprecated)
   // https://webpack.js.org/api/loaders/#deprecated-context-properties
@@ -181,7 +142,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   // Loader API Exec (Deprecated)
   // https://webpack.js.org/api/loaders/#deprecated-context-properties
-  if (config.exec) {
+  if (mergedOptions.exec) {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
   }
@@ -194,8 +155,6 @@ export default async function loader(content, sourceMap, meta = {}) {
   if (options.sourceMap && sourceMap) {
     postcssOptions.map.prev = sourceMap;
   }
-
-  const resultPlugins = createPostCssPlugins(plugins, file);
 
   let result;
 
@@ -268,9 +227,7 @@ export default async function loader(content, sourceMap, meta = {}) {
  * @requires schema-utils
  *
  * @requires postcss
- * @requires postcss-load-config
  *
- * @requires ./options.js
  * @requires ./Warning.js
  * @requires ./SyntaxError.js
  */

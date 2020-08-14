@@ -220,7 +220,7 @@ describe('Config Options', () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
   it('should emit error when invalid config ', async () => {
@@ -230,6 +230,6 @@ describe('Config Options', () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 });
