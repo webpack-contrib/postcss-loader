@@ -55,4 +55,28 @@ describe('loader', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should emit asset', async () => {
+    const plugin = () => (css, result) => {
+      result.messages.push({
+        type: 'asset',
+        file: 'sprite.svg',
+        content: '<svg>...</svg>',
+        plugin,
+      });
+    };
+
+    const postcssPlugin = postcss.plugin('postcss-assets', plugin);
+
+    const compiler = getCompiler('./css/index.js', {
+      plugins: [postcssPlugin()],
+      config: false,
+    });
+    const stats = await compile(compiler);
+
+    // eslint-disable-next-line no-underscore-dangle
+    expect(stats.compilation.assets['sprite.svg']).toBeDefined();
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });
