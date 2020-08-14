@@ -143,6 +143,9 @@ If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exe
 Type: `Boolean|String|Object`
 Default: `undefined`
 
+Options specified in the config file are combined with options passed to the loader.
+Loader options overwrite options from config.
+
 #### Boolean
 
 Enables/Disables autoloading config.
@@ -264,20 +267,88 @@ module.exports = ({ file, options, env }) => ({
 **`webpack.config.js`**
 
 ```js
-{
-  loader: 'postcss-loader',
-  options: {
-    ident: 'postcss',
-    plugins: (loader) => [
-      require('postcss-import')({ root: loader.resourcePath }),
-      require('postcss-preset-env')(),
-      require('cssnano')()
-    ]
-  }
-}
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: (loader) => [
+            require('postcss-import')({ root: loader.resourcePath }),
+            require('postcss-preset-env')(),
+            require('cssnano')(),
+          ],
+        },
+      },
+    ],
+  },
+};
 ```
 
 > ⚠️ webpack requires an identifier (`ident`) in `options` when `{Function}/require` is used (Complex Options). The `ident` can be freely named as long as it is unique. It's recommended to name it (`ident: 'postcss'`)
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: {
+            'postcss-import': {},
+            'postcss-nested': {},
+            'postcss-short': { prefix: 'x' },
+          },
+        },
+      },
+    ],
+  },
+};
+```
+
+It is possible to disable the plugin specified in the config.
+
+**`postcss.config.js`**
+
+```js
+module.exports = {
+  plugins: {
+    'postcss-short': { prefix: 'x' },
+    'postcss-import': {},
+    'postcss-nested': {},
+  },
+};
+```
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss',
+          plugins: {
+            'postcss-import': {},
+            'postcss-nested': {},
+            // Turn off the plugin
+            'postcss-short': false,
+          },
+        },
+      },
+    ],
+  },
+};
+```
 
 ### `Syntaxes`
 

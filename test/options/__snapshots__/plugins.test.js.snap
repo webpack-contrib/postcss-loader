@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Options Plugins should disables plugin from config: css 1`] = `
+"a {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+"
+`;
+
+exports[`Options Plugins should disables plugin from config: errors 1`] = `Array []`;
+
+exports[`Options Plugins should disables plugin from config: warnings 1`] = `Array []`;
+
 exports[`Options Plugins should emit error on load plugin: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
