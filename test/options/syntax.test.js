@@ -25,7 +25,7 @@ describe('Options Syntax', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { syntax: 'sugarss' },
+                  options: { syntax: 'sugarss', config: false },
                 },
               ],
             },
@@ -62,6 +62,7 @@ describe('Options Syntax', () => {
                     ident: 'postcss',
                     // eslint-disable-next-line global-require
                     syntax: require('sugarss'),
+                    config: false,
                   },
                 },
               ],
@@ -78,5 +79,35 @@ describe('Options Syntax', () => {
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit error Syntax', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { syntax: 'unresolve', config: false },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 });

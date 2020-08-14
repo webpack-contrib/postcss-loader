@@ -50,7 +50,7 @@ describe('Options Exec', () => {
         module: {
           rules: [
             {
-              test: /style.\.js$/i,
+              test: /style\.js$/i,
               use: [
                 {
                   loader: require.resolve('../helpers/testLoader'),

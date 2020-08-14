@@ -25,7 +25,7 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'sugarss' },
+                  options: { parser: 'sugarss', config: false },
                 },
               ],
             },
@@ -59,7 +59,12 @@ describe('Options Parser', () => {
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
-                  options: { ident: 'postcss', parser: require('sugarss') },
+                  options: {
+                    ident: 'postcss',
+                    // eslint-disable-next-line global-require,import/no-dynamic-require
+                    parser: require('sugarss'),
+                    config: false,
+                  },
                 },
               ],
             },
@@ -74,5 +79,36 @@ describe('Options Parser', () => {
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit error Parser', async () => {
+    const compiler = getCompiler(
+      './sss/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /\.sss$/i,
+              use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: { parser: 'unresolve', config: false },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 });

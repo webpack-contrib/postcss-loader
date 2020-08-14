@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Config Options should emit error when invalid config : errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: No PostCSS Config found in: /test/fixtures/css/invalid.config.js",
+]
+`;
+
+exports[`Config Options should emit error when invalid config : warnings 1`] = `Array []`;
+
+exports[`Config Options should emit error when unresolved config : errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: No PostCSS Config found in: /test/fixtures/css/unresolve.js",
+]
+`;
+
+exports[`Config Options should emit error when unresolved config : warnings 1`] = `Array []`;
+
 exports[`Config Options should work Config - "string" with path directory: css 1`] = `
 "a { color: rgba(255, 0, 0, 1.0) }
 "

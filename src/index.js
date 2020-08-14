@@ -7,9 +7,8 @@ import postcss from 'postcss';
 
 import Warning from './Warning';
 import SyntaxError from './Error';
-import parseOptions from './options';
 import schema from './options.json';
-import { exec, loadConfig } from './utils';
+import { exec, loadConfig, getArrayPlugins } from './utils';
 
 /**
  * **PostCSS Loader**
@@ -34,30 +33,13 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const callback = this.async();
   const file = this.resourcePath;
-  let config;
+  let loadedConfig = {};
 
-  const { length } = Object.keys(options).filter((option) => {
-    switch (option) {
-      // case 'exec':
-      case 'ident':
-      case 'config':
-      case 'sourceMap':
-        return false;
-      default:
-        return option;
-    }
-  });
+  const configOptions =
+    typeof options.config === 'undefined' ? true : options.config;
 
-  if (length) {
-    try {
-      config = await parseOptions.call(this, options);
-    } catch (error) {
-      callback(error);
-
-      return;
-    }
-  } else {
-    const rc = {
+  if (configOptions) {
+    const dataForLoadConfig = {
       path: path.dirname(file),
       ctx: {
         file: {
@@ -69,20 +51,23 @@ export default async function loader(content, sourceMap, meta = {}) {
       },
     };
 
-    if (options.config) {
-      if (options.config.path) {
-        rc.path = path.resolve(options.config.path);
-      }
-
-      if (options.config.ctx) {
-        rc.ctx.options = options.config.ctx;
-      }
+    if (typeof configOptions.path !== 'undefined') {
+      dataForLoadConfig.path = path.resolve(configOptions.path);
     }
 
-    rc.ctx.webpack = this;
+    if (typeof configOptions.ctx !== 'undefined') {
+      dataForLoadConfig.ctx.options = configOptions.ctx;
+    }
+
+    dataForLoadConfig.ctx.webpack = this;
 
     try {
-      config = await loadConfig(options.config, rc.ctx, rc.path, this.fs);
+      loadedConfig = await loadConfig(
+        configOptions,
+        dataForLoadConfig.ctx,
+        dataForLoadConfig.path,
+        this
+      );
     } catch (error) {
       callback(error);
 
@@ -90,37 +75,38 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  if (typeof config === 'undefined') {
-    config = {};
+  let plugins;
+
+  try {
+    plugins = [
+      ...getArrayPlugins(loadedConfig.plugins, file),
+      ...getArrayPlugins(options.plugins, file),
+    ];
+  } catch (error) {
+    this.emitError(error);
   }
 
-  if (config.file) {
-    this.addDependency(config.file);
-  }
+  const mergedOptions = {
+    ...loadedConfig,
+    ...options,
+    plugins,
+  };
 
-  if (typeof config.options !== 'undefined') {
-    if (typeof config.options.to !== 'undefined') {
-      delete config.options.to;
-    }
+  const resultPlugins = mergedOptions.plugins;
 
-    if (typeof config.options.from !== 'undefined') {
-      delete config.options.from;
-    }
-  }
+  const { parser, syntax, stringifier } = mergedOptions;
 
-  const plugins = config.plugins || [];
-
-  const postcssOptions = Object.assign(
-    {
-      from: file,
-      map: options.sourceMap
-        ? options.sourceMap === 'inline'
-          ? { inline: true, annotation: false }
-          : { inline: false, annotation: false }
-        : false,
-    },
-    config.options
-  );
+  const postcssOptions = {
+    from: file,
+    map: options.sourceMap
+      ? options.sourceMap === 'inline'
+        ? { inline: true, annotation: false }
+        : { inline: false, annotation: false }
+      : false,
+    parser,
+    syntax,
+    stringifier,
+  };
 
   // Loader Exec (Deprecated)
   // https://webpack.js.org/api/loaders/#deprecated-context-properties
@@ -130,23 +116,41 @@ export default async function loader(content, sourceMap, meta = {}) {
   }
 
   if (typeof postcssOptions.parser === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.parser = require(postcssOptions.parser);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.parser = require(postcssOptions.parser);
+    } catch (error) {
+      this.emitError(
+        `Loading PostCSS Parser failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   if (typeof postcssOptions.syntax === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.syntax = require(postcssOptions.syntax);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.syntax = require(postcssOptions.syntax);
+    } catch (error) {
+      this.emitError(
+        `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   if (typeof postcssOptions.stringifier === 'string') {
-    // eslint-disable-next-line import/no-dynamic-require,global-require
-    postcssOptions.stringifier = require(postcssOptions.stringifier);
+    try {
+      // eslint-disable-next-line import/no-dynamic-require,global-require
+      postcssOptions.stringifier = require(postcssOptions.stringifier);
+    } catch (error) {
+      this.emitError(
+        `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
+      );
+    }
   }
 
   // Loader API Exec (Deprecated)
   // https://webpack.js.org/api/loaders/#deprecated-context-properties
-  if (config.exec) {
+  if (mergedOptions.exec) {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
   }
@@ -163,7 +167,7 @@ export default async function loader(content, sourceMap, meta = {}) {
   let result;
 
   try {
-    result = await postcss(plugins).process(content, postcssOptions);
+    result = await postcss(resultPlugins).process(content, postcssOptions);
   } catch (error) {
     if (error.file) {
       this.addDependency(error.file);
@@ -231,9 +235,7 @@ export default async function loader(content, sourceMap, meta = {}) {
  * @requires schema-utils
  *
  * @requires postcss
- * @requires postcss-load-config
  *
- * @requires ./options.js
  * @requires ./Warning.js
  * @requires ./SyntaxError.js
  */

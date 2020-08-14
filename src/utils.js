@@ -2,8 +2,8 @@ import path from 'path';
 
 import Module from 'module';
 
+import postcssPkg from 'postcss/package.json';
 import { cosmiconfig } from 'cosmiconfig';
-import importCwd from 'import-cwd';
 
 const parentModule = module;
 const moduleName = 'postcss';
@@ -32,47 +32,6 @@ const createContext = (context) => {
   return result;
 };
 
-const loadOptions = (config, file) => {
-  const result = {};
-
-  if (config.parser && typeof config.parser === 'string') {
-    try {
-      result.parser = importCwd(config.parser);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Parser failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (config.syntax && typeof config.syntax === 'string') {
-    try {
-      result.syntax = importCwd(config.syntax);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Syntax failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (config.stringifier && typeof config.stringifier === 'string') {
-    try {
-      result.stringifier = importCwd(config.stringifier);
-    } catch (err) {
-      throw new Error(
-        `Loading PostCSS Stringifier failed: ${err.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (config.plugins) {
-    // eslint-disable-next-line no-param-reassign
-    delete config.plugins;
-  }
-
-  return { ...config, ...result };
-};
-
 const load = (plugin, options, file) => {
   try {
     if (
@@ -80,39 +39,34 @@ const load = (plugin, options, file) => {
       typeof options === 'undefined' ||
       Object.keys(options).length === 0
     ) {
-      return importCwd(plugin);
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      return require(plugin);
     }
 
-    return importCwd(plugin)(options);
-  } catch (err) {
+    // eslint-disable-next-line global-require,import/no-dynamic-require
+    return require(plugin)(options);
+  } catch (error) {
     throw new Error(
-      `Loading PostCSS Plugin failed: ${err.message}\n\n(@${file})`
+      `Loading PostCSS Plugin failed: ${error.message}\n\n(@${file})`
     );
   }
 };
 
-const loadPlugins = (config, file) => {
-  let plugins = [];
+function loadPlugins(pluginEntry, file) {
+  const plugins = Object.entries(pluginEntry).filter((i) => {
+    const [, options] = i;
 
-  if (Array.isArray(config.plugins)) {
-    plugins = config.plugins.filter(Boolean);
-  } else {
-    plugins = Object.keys(config.plugins)
-      .filter((plugin) => {
-        return config.plugins[plugin] !== false ? plugin : '';
-      })
-      .map((plugin) => {
-        return load(plugin, config.plugins[plugin], file);
-      });
-  }
+    return options !== false ? pluginEntry : '';
+  });
 
-  if (plugins.length && plugins.length > 0) {
-    plugins.forEach((plugin, i) => {
-      if (plugin.postcss) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.postcss;
-      }
+  const loadedPlugins = plugins.map((plugin) => {
+    const [pluginName, pluginOptions] = plugin;
 
+    return load(pluginName, pluginOptions, file);
+  });
+
+  if (loadedPlugins.length && loadedPlugins.length > 0) {
+    loadedPlugins.forEach((plugin, i) => {
       if (plugin.default) {
         // eslint-disable-next-line no-param-reassign
         plugin = plugin.default;
@@ -132,29 +86,8 @@ const loadPlugins = (config, file) => {
     });
   }
 
-  return plugins;
-};
-
-const processResult = (context, result) => {
-  const file = result.filepath || '';
-  let config = result.config || {};
-
-  if (typeof config === 'function') {
-    config = config(context);
-  } else {
-    config = Object.assign({}, config, context);
-  }
-
-  if (!config.plugins) {
-    config.plugins = [];
-  }
-
-  return {
-    plugins: loadPlugins(config, file),
-    options: loadOptions(config, file),
-    file,
-  };
-};
+  return loadedPlugins;
+}
 
 function exec(code, loaderContext) {
   const { resource, context } = loaderContext;
@@ -171,11 +104,7 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-async function loadConfig(config, context, configPath, inputFileSystem) {
-  if (config === false) {
-    return {};
-  }
-
+async function loadConfig(config, context, configPath, loaderContext) {
   let searchPath = configPath ? path.resolve(configPath) : process.cwd();
 
   if (typeof config === 'string') {
@@ -185,7 +114,7 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
   let stats;
 
   try {
-    stats = await stat(inputFileSystem, searchPath);
+    stats = await stat(loaderContext.fs, searchPath);
   } catch (errorIgnore) {
     throw new Error(`No PostCSS Config found in: ${searchPath}`);
   }
@@ -204,7 +133,57 @@ async function loadConfig(config, context, configPath, inputFileSystem) {
     throw new Error(`No PostCSS Config found in: ${searchPath}`);
   }
 
-  return processResult(createContext(context), result);
+  const patchedContext = createContext(context);
+
+  let resultConfig = result.config || {};
+
+  if (typeof resultConfig === 'function') {
+    resultConfig = resultConfig(patchedContext);
+  } else {
+    resultConfig = { ...resultConfig, ...patchedContext };
+  }
+
+  if (result.filepath) {
+    resultConfig.file = result.filepath;
+    loaderContext.addDependency(result.filepath);
+  }
+
+  return resultConfig;
 }
 
-export { exec, loadConfig };
+function getPlugin(pluginEntry) {
+  if (!pluginEntry) {
+    return [];
+  }
+
+  if (pluginEntry.postcssVersion === postcssPkg.version) {
+    return [pluginEntry];
+  }
+
+  const result = pluginEntry.call(this, this);
+
+  return Array.isArray(result) ? result : [result];
+}
+
+function getArrayPlugins(plugins, file) {
+  if (Array.isArray(plugins)) {
+    return plugins.reduce((accumulator, plugin) => {
+      // eslint-disable-next-line no-param-reassign
+      accumulator = accumulator.concat(getArrayPlugins(plugin));
+
+      return accumulator;
+    }, []);
+  }
+
+  if (typeof plugins === 'object' && typeof plugins !== 'function') {
+    if (Object.keys(plugins).length === 0) {
+      return [];
+    }
+
+    return getArrayPlugins(loadPlugins(plugins, file), file);
+  }
+
+  return getPlugin(plugins);
+}
+
+export { exec, loadConfig, getArrayPlugins };

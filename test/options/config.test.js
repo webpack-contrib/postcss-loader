@@ -212,4 +212,24 @@ describe('Config Options', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should emit error when unresolved config ', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: path.resolve(__dirname, '../fixtures/css/unresolve.js'),
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
+
+  it('should emit error when invalid config ', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      config: path.resolve(__dirname, '../fixtures/css/invalid.config.js'),
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
 });
