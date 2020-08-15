@@ -98,9 +98,14 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const { parser, syntax, stringifier } = mergedOptions;
 
+  const useSourceMap =
+    typeof options.sourceMap !== 'undefined'
+      ? options.sourceMap
+      : this.sourceMap;
+
   const postcssOptions = {
     from: file,
-    map: options.sourceMap
+    map: useSourceMap
       ? options.sourceMap === 'inline'
         ? { inline: true, annotation: false }
         : { inline: false, annotation: false }
@@ -109,6 +114,11 @@ export default async function loader(content, sourceMap, meta = {}) {
     syntax,
     stringifier,
   };
+
+  if (postcssOptions.map && sourceMap) {
+    postcssOptions.map.prev =
+      typeof sourceMap === 'string' ? JSON.parse(sourceMap) : sourceMap;
+  }
 
   // Loader Exec (Deprecated)
   // https://webpack.js.org/api/loaders/#deprecated-context-properties
@@ -155,15 +165,6 @@ export default async function loader(content, sourceMap, meta = {}) {
   if (mergedOptions.exec) {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
-  }
-
-  if (options.sourceMap && typeof sourceMap === 'string') {
-    // eslint-disable-next-line no-param-reassign
-    sourceMap = JSON.parse(sourceMap);
-  }
-
-  if (options.sourceMap && sourceMap) {
-    postcssOptions.map.prev = sourceMap;
   }
 
   let result;
