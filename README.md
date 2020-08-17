@@ -861,6 +861,100 @@ module.exports = {
 };
 ```
 
+### `Add dependencies`
+
+There are two way to add dependencies:
+
+1. (Recommended). Postcss plugin should emit message in `result.messages`.
+
+The message should contain the following fields:
+
+- `type` = `dependency` - Message type (require, should be equal `dependency`)
+- `file` - absolute file path (require)
+
+**`webpack.config.js`**
+
+```js
+const path = require('path');
+
+const customPlugin = () => (css, result) => {
+  result.messages.push({
+    type: 'dependency',
+    file: path.resolve(__dirname, 'path', 'to', 'file'),
+  });
+};
+
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [postcssPlugin()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+2. Pass `loaderContext` in plugin.
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: 'path/to/postcss.config.js',
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
+**`postcss.config.js`**
+
+```js
+module.exports = (loaderContext) => ({
+  plugins: [require('path/to/customPlugin')(loaderContext)],
+});
+```
+
+**`customPlugin.js`**
+
+```js
+const path = require('path');
+
+const customPlugin = (loaderContext) => (css, result) => {
+  loaderContext.webpack.addDependency(
+    path.resolve(__dirname, 'path', 'to', 'file')
+  );
+};
+
+module.exports = postcss.plugin('postcss-assets', customPlugin);
+```
+
 <h2 align="center">Maintainers</h2>
 
 <table>

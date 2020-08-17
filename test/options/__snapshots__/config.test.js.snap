@@ -99,6 +99,8 @@ exports[`Config Options should work Config - true: errors 1`] = `Array []`;
 
 exports[`Config Options should work Config - true: warnings 1`] = `Array []`;
 
+exports[`Config Options should work Config – Context – Loader {Object}: errors 1`] = `Array []`;
+
 exports[`Config Options should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
 
 exports[`Config Options should work package.json - {Object} - Process CSS: css 1`] = `

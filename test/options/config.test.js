@@ -145,8 +145,7 @@ describe('Config Options', () => {
 
     expect(asset in assets).toBeTruthy();
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    // Todo fixed error in testplugin
-    // expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
   it('should work postcss.config.js - {Object} - Process CSS', async () => {
