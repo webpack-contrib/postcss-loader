@@ -1,9 +1,6 @@
-'use strict'
+const postcss = require('postcss');
 
-const postcss = require('postcss')
-
-// This plugin creates asset file in webpack compilation
-module.exports = postcss.plugin('plugin', (ctx) => {
+const customPlugin = (ctx) => (css, result) => {
   ctx.webpack._compilation.assets['asset.txt'] = {
     source () {
       return '123'
@@ -12,4 +9,6 @@ module.exports = postcss.plugin('plugin', (ctx) => {
       return 0
     }
   }
-})
+};
+
+module.exports = postcss.plugin('plugin', customPlugin);
