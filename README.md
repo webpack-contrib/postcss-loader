@@ -816,6 +816,51 @@ module.exports = {
 };
 ```
 
+### `Emit assets`
+
+To write a asset from the postcss plugin to the webpack's output file system, need to add a message in `result.messages`.
+The message should contain the following fields:
+
+- `type` = `asset` - Message type (require, should be equal `asset`)
+- `file` - file name (require)
+- `content` - file content (require)
+- `sourceMap` - sourceMap
+- `info` - asset info
+
+**`webpack.config.js`**
+
+```js
+const customPlugin = () => (css, result) => {
+  result.messages.push({
+    type: 'asset',
+    file: 'sprite.svg',
+    content: '<svg>...</svg>',
+  });
+};
+
+const postcssPlugin = postcss.plugin('postcss-assets', customPlugin);
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: [postcssPlugin()],
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 <h2 align="center">Maintainers</h2>
 
 <table>
