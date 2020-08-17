@@ -40,6 +40,9 @@
         },
         {
           "type": "object"
+        },
+        {
+          "instanceof": "Function"
         }
       ]
     },
@@ -62,6 +65,9 @@
         },
         {
           "type": "object"
+        },
+        {
+          "instanceof": "Function"
         }
       ]
     },

@@ -114,9 +114,9 @@ module.exports = {
 |            Name            |                     Type                      |      Default       | Description                                  |
 | :------------------------: | :-------------------------------------------: | :----------------: | :------------------------------------------- |
 |      [`exec`](#exec)       |                  `{Boolean}`                  |    `undefined`     | Enable PostCSS Parser support in `CSS-in-JS` |
-|   [`parser`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Parser                           |
+|   [`parser`](#syntaxes)    |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Parser                           |
 |   [`syntax`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Syntax                           |
-| [`stringifier`](#syntaxes) |              `{String\|Object}`               |    `undefined`     | Set PostCSS Stringifier                      |
+| [`stringifier`](#syntaxes) |         `{String\|Object\|Function}`          |    `undefined`     | Set PostCSS Stringifier                      |
 |    [`config`](#config)     |          `{String\|Object\|Boolean}`          |    `undefined`     | Set `postcss.config.js` config path && `ctx` |
 |   [`plugins`](#plugins)    | `{Function\|Object\|Array<Function\|Object>}` |        `[]`        | Set PostCSS Plugins                          |
 | [`sourceMap`](#sourcemap)  |              `{String\|Boolean}`              | `compiler.devtool` | Enables/Disables generation of source maps   |
@@ -390,16 +390,20 @@ module.exports = {
 Type: `String|Object`
 Default: `undefined`
 
-|             Name              |        Type        |   Default   | Description                |
-| :---------------------------: | :----------------: | :---------: | :------------------------- |
-|      [`parser`](#parser)      | `{String\|Object}` | `undefined` | Custom PostCSS Parser      |
-|      [`syntax`](#syntax)      | `{String\|Object}` | `undefined` | Custom PostCSS Syntax      |
-| [`stringifier`](#stringifier) | `{String\|Object}` | `undefined` | Custom PostCSS Stringifier |
+|             Name              |             Type             |   Default   | Description                |
+| :---------------------------: | :--------------------------: | :---------: | :------------------------- |
+|      [`parser`](#parser)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Parser      |
+|      [`syntax`](#syntax)      |      `{String\|Object}`      | `undefined` | Custom PostCSS Syntax      |
+| [`stringifier`](#stringifier) | `{String\|Object\|Function}` | `undefined` | Custom PostCSS Stringifier |
 
 #### `Parser`
 
-Type: `String|Object`
+Type: `String|Object|Function`
 Default: `undefined`
+
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
 
 **`webpack.config.js`**
 
@@ -411,7 +415,48 @@ module.exports = {
         test: /\.sss$/i,
         loader: 'postcss-loader',
         options: {
+          // Will be converted to `require('sugarss')`
           parser: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        loader: 'postcss-loader',
+        options: {
+          parser: require('sugarss'),
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Function`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        loader: 'postcss-loader',
+        options: {
+          parser: require('sugarss').parse,
         },
       },
     ],
@@ -424,6 +469,10 @@ module.exports = {
 Type: `String|Object`
 Default: `undefined`
 
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
+
 **`webpack.config.js`**
 
 ```js
@@ -434,7 +483,28 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
+          // Will be converted to `require('sugarss')`
           syntax: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: require('sugarss'),
         },
       },
     ],
@@ -444,8 +514,12 @@ module.exports = {
 
 #### `Stringifier`
 
-Type: `String|Object`
+Type: `String|Object|Function`
 Default: `undefined`
+
+##### `String`
+
+The passed `string` is converted to the form `require('string')`.
 
 **`webpack.config.js`**
 
@@ -457,7 +531,51 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          stringifier: 'midas',
+          // Will be converted to `require('sugarss')`
+          stringifier: 'sugarss',
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Object`
+
+**`webpack.config.js`**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: require('sugarss'),
+        },
+      },
+    ],
+  },
+};
+```
+
+##### `Function`
+
+**`webpack.config.js`**
+
+```js
+const Midas = require('midas');
+const midas = new Midas();
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        loader: 'postcss-loader',
+        options: {
+          stringifier: midas.stringifier,
         },
       },
     ],
