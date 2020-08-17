@@ -69,6 +69,7 @@
     "jsdoc-to-markdown": "^6.0.1",
     "lint-staged": "^10.2.11",
     "memfs": "^3.2.0",
+    "midas": "^2.0.3",
     "npm-run-all": "^4.1.5",
     "postcss-import": "^12.0.1",
     "postcss-js": "^2.0.0",

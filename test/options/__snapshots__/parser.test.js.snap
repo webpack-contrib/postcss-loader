@@ -11,6 +11,17 @@ TypeError: parser is not a function",
 
 exports[`Options Parser should emit error Parser: warnings 1`] = `Array []`;
 
+exports[`Options Parser should work Parser - {Function}: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`Options Parser should work Parser - {Function}: errors 1`] = `Array []`;
+
+exports[`Options Parser should work Parser - {Function}: warnings 1`] = `Array []`;
+
 exports[`Options Parser should work Parser - {Object}: css 1`] = `
 "a {
   color: black

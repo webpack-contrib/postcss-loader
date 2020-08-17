@@ -23,7 +23,7 @@ describe('validate options', () => {
       failure: [1, 'test', /test/, [], {}, { foo: 'bar' }],
     },
     parser: {
-      success: ['sugarss', require('sugarss')],
+      success: ['sugarss', require('sugarss'), require('sugarss').parse],
       failure: [1, true, false, []],
     },
     syntax: {
@@ -31,7 +31,7 @@ describe('validate options', () => {
       failure: [1, true, false, []],
     },
     stringifier: {
-      success: ['sugarss', require('sugarss')],
+      success: ['sugarss', require('sugarss'), require('sugarss').stringify],
       failure: [1, true, false, []],
     },
     sourceMap: {

@@ -11,6 +11,15 @@ TypeError: this.stringify is not a function",
 
 exports[`Options Stringifier should emit error Stringifier: warnings 1`] = `Array []`;
 
+exports[`Options Stringifier should work Stringifier - {Function}: css 1`] = `
+"<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span> <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span> <span class=\\"midas__brace\\">}</span>
+</code></pre>"
+`;
+
+exports[`Options Stringifier should work Stringifier - {Function}: errors 1`] = `Array []`;
+
+exports[`Options Stringifier should work Stringifier - {Function}: warnings 1`] = `Array []`;
+
 exports[`Options Stringifier should work Stringifier - {Object}: css 1`] = `
 "a  color: black
 "
