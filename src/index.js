@@ -197,7 +197,12 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
 
     if (message.type === 'asset' && message.content && message.file) {
-      this.emitFile(message.file, message.content);
+      this.emitFile(
+        message.file,
+        message.content,
+        message.sourceMap,
+        message.info
+      );
     }
   });
 
