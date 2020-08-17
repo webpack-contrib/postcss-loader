@@ -191,9 +191,18 @@ export default async function loader(content, sourceMap, meta = {}) {
     this.emitWarning(new Warning(warning));
   });
 
-  messages.forEach((msg) => {
-    if (msg.type === 'dependency') {
-      this.addDependency(msg.file);
+  messages.forEach((message) => {
+    if (message.type === 'dependency') {
+      this.addDependency(message.file);
+    }
+
+    if (message.type === 'asset' && message.content && message.file) {
+      this.emitFile(
+        message.file,
+        message.content,
+        message.sourceMap,
+        message.info
+      );
     }
   });
 
