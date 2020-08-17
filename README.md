@@ -309,7 +309,6 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          ident: 'postcss',
           plugins: (loader) => [
             require('postcss-import')({ root: loader.resourcePath }),
             require('postcss-preset-env')(),
@@ -322,8 +321,6 @@ module.exports = {
 };
 ```
 
-> ⚠️ webpack requires an identifier (`ident`) in `options` when `{Function}/require` is used (Complex Options). The `ident` can be freely named as long as it is unique. It's recommended to name it (`ident: 'postcss'`)
-
 **`webpack.config.js`**
 
 ```js
@@ -334,7 +331,6 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          ident: 'postcss',
           plugins: {
             'postcss-import': {},
             'postcss-nested': {},
@@ -371,7 +367,6 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          ident: 'postcss',
           plugins: {
             'postcss-import': {},
             'postcss-nested': {},
@@ -586,7 +581,7 @@ module.exports = {
 ### `SourceMap`
 
 Type: `Boolean|String`
-Default: `undefined`
+Default: `compiler.devtool`
 
 By default generation of source maps depends on the devtool option.
 All values enable source map generation except eval and false value.
@@ -667,7 +662,6 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
               plugins: [require('postcss-import')(), require('stylelint')()],
             },
           },
@@ -694,7 +688,6 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
               plugins: [require('autoprefixer')({ ...options })],
             },
           },

@@ -131,23 +131,6 @@ describe('Config Options', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - Context - {Object} - with ident', async () => {
-    const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
-      config: {
-        path: 'test/fixtures/config/postcss.config.js',
-        ctx: { plugin: true },
-      },
-    });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
   it('should work Config – Context – Loader {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
       config: {

@@ -23,7 +23,6 @@ describe('Options Stringifier', () => {
 
   it('should work Stringifier - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       stringifier: require('sugarss'),
       config: false,
@@ -58,7 +57,6 @@ describe('Options Stringifier', () => {
 
   it('should emit error Stringifier', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       stringifier: 'unresolved',
       config: false,
