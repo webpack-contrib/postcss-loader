@@ -111,15 +111,15 @@ module.exports = {
 
 <h2 align="center">Options</h2>
 
-|            Name            |                     Type                      |   Default   | Description                                  |
-| :------------------------: | :-------------------------------------------: | :---------: | :------------------------------------------- |
-|      [`exec`](#exec)       |                  `{Boolean}`                  | `undefined` | Enable PostCSS Parser support in `CSS-in-JS` |
-|   [`parser`](#syntaxes)    |              `{String\|Object}`               | `undefined` | Set PostCSS Parser                           |
-|   [`syntax`](#syntaxes)    |              `{String\|Object}`               | `undefined` | Set PostCSS Syntax                           |
-| [`stringifier`](#syntaxes) |              `{String\|Object}`               | `undefined` | Set PostCSS Stringifier                      |
-|    [`config`](#config)     |          `{String\|Object\|Boolean}`          | `undefined` | Set `postcss.config.js` config path && `ctx` |
-|   [`plugins`](#plugins)    | `{Function\|Object\|Array<Function\|Object>}` |    `[]`     | Set PostCSS Plugins                          |
-| [`sourceMap`](#sourcemap)  |              `{String\|Boolean}`              | `undefined` | Enable inline Source Maps                    |
+|            Name            |                     Type                      |      Default       | Description                                  |
+| :------------------------: | :-------------------------------------------: | :----------------: | :------------------------------------------- |
+|      [`exec`](#exec)       |                  `{Boolean}`                  |    `undefined`     | Enable PostCSS Parser support in `CSS-in-JS` |
+|   [`parser`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Parser                           |
+|   [`syntax`](#syntaxes)    |              `{String\|Object}`               |    `undefined`     | Set PostCSS Syntax                           |
+| [`stringifier`](#syntaxes) |              `{String\|Object}`               |    `undefined`     | Set PostCSS Stringifier                      |
+|    [`config`](#config)     |          `{String\|Object\|Boolean}`          |    `undefined`     | Set `postcss.config.js` config path && `ctx` |
+|   [`plugins`](#plugins)    | `{Function\|Object\|Array<Function\|Object>}` |        `[]`        | Set PostCSS Plugins                          |
+| [`sourceMap`](#sourcemap)  |              `{String\|Boolean}`              | `compiler.devtool` | Enables/Disables generation of source maps   |
 
 ### `Exec`
 
