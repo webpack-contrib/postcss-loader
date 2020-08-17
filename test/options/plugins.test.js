@@ -9,7 +9,6 @@ import {
 describe('Options Plugins', () => {
   it('should work Plugins - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       plugins: [require('../fixtures/config/plugin')()],
     });
@@ -24,7 +23,6 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       plugins: require('../fixtures/config/plugin'),
     });
@@ -39,7 +37,6 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Function} - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       plugins: () => [require('../fixtures/config/plugin')()],
     });
@@ -54,7 +51,6 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Function} - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      ident: 'postcss',
       // eslint-disable-next-line global-require
       plugins: () => require('../fixtures/config/plugin')(),
     });

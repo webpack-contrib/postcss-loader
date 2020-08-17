@@ -54,15 +54,6 @@ exports[`Config Options should work Config - {Object}: errors 1`] = `Array []`;
 
 exports[`Config Options should work Config - {Object}: warnings 1`] = `Array []`;
 
-exports[`Config Options should work Config - Context - {Object} - with ident: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
-"
-`;
-
-exports[`Config Options should work Config - Context - {Object} - with ident: errors 1`] = `Array []`;
-
-exports[`Config Options should work Config - Context - {Object} - with ident: warnings 1`] = `Array []`;
-
 exports[`Config Options should work Config - Context - {Object}: css 1`] = `
 "a { color: rgba(255, 0, 0, 1.0) }
 "

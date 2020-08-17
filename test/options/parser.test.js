@@ -60,7 +60,6 @@ describe('Options Parser', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
                   options: {
-                    ident: 'postcss',
                     // eslint-disable-next-line global-require,import/no-dynamic-require
                     parser: require('sugarss'),
                     config: false,
@@ -99,7 +98,6 @@ describe('Options Parser', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
                   options: {
-                    ident: 'postcss',
                     // eslint-disable-next-line global-require,import/no-dynamic-require
                     parser: require('sugarss').parse,
                     config: false,
