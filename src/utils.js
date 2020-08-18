@@ -242,4 +242,24 @@ function getArrayPlugins(plugins, file, disabledPlugins, loaderContext) {
   return pluginsProcessing(plugins, file, disabledPlugins);
 }
 
-export { exec, loadConfig, getArrayPlugins };
+// TODO Remove, when postcss 8 will be released
+function getSourceMapAbsolutePath(file, to) {
+  if (file.indexOf('<') === 0) return file;
+  if (/^\w+:\/\//.test(file)) return file;
+
+  // Without the `to` option we cannot get the correct dirname
+  if (typeof to === 'undefined') return file;
+
+  const dirname = path.dirname(to);
+
+  const result = path.resolve(dirname, file);
+
+  if (path.sep === '\\') {
+    return result.replace(/\\/g, '/');
+  }
+
+  return result;
+}
+
+
+export { exec, loadConfig, getArrayPlugins, getSourceMapAbsolutePath };

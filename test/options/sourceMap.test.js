@@ -94,4 +94,35 @@ describe('Options Sourcemap', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should generated absolute paths in sourcemap', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      sourceMap: true,
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+    const notNormalizecodeFromBundle = getCodeFromBundle(
+      'style.css',
+      stats,
+      false
+    );
+
+    const { file, sources } = notNormalizecodeFromBundle.map;
+    const expectedFile = path.resolve(
+      __dirname,
+      '..',
+      'fixtures',
+      'css',
+      'style.css'
+    );
+
+    expect(file).toEqual(expectedFile);
+    sources.forEach((source) => expect(source).toEqual(expectedFile));
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(codeFromBundle.map).toMatchSnapshot('map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });

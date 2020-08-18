@@ -8,7 +8,12 @@ import postcss from 'postcss';
 import Warning from './Warning';
 import SyntaxError from './Error';
 import schema from './options.json';
-import { exec, loadConfig, getArrayPlugins } from './utils';
+import {
+  exec,
+  loadConfig,
+  getArrayPlugins,
+  getSourceMapAbsolutePath,
+} from './utils';
 
 /**
  * **PostCSS Loader**
@@ -105,6 +110,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const postcssOptions = {
     from: file,
+    to: file,
     map: useSourceMap
       ? options.sourceMap === 'inline'
         ? { inline: true, annotation: false }
@@ -210,8 +216,10 @@ export default async function loader(content, sourceMap, meta = {}) {
   map = map ? map.toJSON() : null;
 
   if (map) {
-    map.file = path.resolve(map.file);
-    map.sources = map.sources.map((src) => path.resolve(src));
+    map.file = getSourceMapAbsolutePath(map.file, postcssOptions.to);
+    map.sources = map.sources.map((src) =>
+      getSourceMapAbsolutePath(src, postcssOptions.to)
+    );
   }
 
   const ast = {
