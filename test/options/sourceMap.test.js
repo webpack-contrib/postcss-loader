@@ -117,8 +117,13 @@ describe('Options Sourcemap', () => {
       'style.css'
     );
 
-    expect(file).toEqual(expectedFile);
-    sources.forEach((source) => expect(source).toEqual(expectedFile));
+    const normalizePath = (src) =>
+      path.sep === '\\' ? src.replace(/\\/g, '/') : src;
+
+    expect(file).toEqual(normalizePath(expectedFile));
+    sources.forEach((source) =>
+      expect(source).toEqual(normalizePath(expectedFile))
+    );
 
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(codeFromBundle.map).toMatchSnapshot('map');
