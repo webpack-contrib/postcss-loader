@@ -1,12 +1,14 @@
 {
-  "parser": "sugarss",
-  "syntax": "sugarss",
-  "map": false,
-  "from": "./test/rc/fixtures/index.css",
-  "to": "./test/rc/expect/index.css",
-  "plugins": {
-    "postcss-import": {},
-    "postcss-nested": {},
-    "cssnano": false
+  "postcssOptions": {
+    "parser": "sugarss",
+    "syntax": "sugarss",
+    "map": false,
+    "from": "./test/rc/fixtures/index.css",
+    "to": "./test/rc/expect/index.css",
+    "plugins": {
+      "postcss-import": {},
+      "postcss-nested": {},
+      "cssnano": false
+    }
   }
 }

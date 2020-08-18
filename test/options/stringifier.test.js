@@ -9,7 +9,9 @@ import {
 describe('Options Stringifier', () => {
   it('should work Stringifier - {String}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      stringifier: 'sugarss',
+      postcssOptions: {
+        stringifier: 'sugarss',
+      },
     });
     const stats = await compile(compiler);
 
@@ -22,8 +24,10 @@ describe('Options Stringifier', () => {
 
   it('should work Stringifier - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      stringifier: require('sugarss'),
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        stringifier: require('sugarss'),
+      },
     });
     const stats = await compile(compiler);
 
@@ -40,8 +44,9 @@ describe('Options Stringifier', () => {
     const midas = new Midas();
 
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      stringifier: midas.stringifier,
+      postcssOptions: {
+        stringifier: midas.stringifier,
+      },
     });
     const stats = await compile(compiler);
 
@@ -54,8 +59,9 @@ describe('Options Stringifier', () => {
 
   it('should emit error Stringifier', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      stringifier: 'unresolved',
+      postcssOptions: {
+        stringifier: 'unresolved',
+      },
     });
     const stats = await compile(compiler);
 

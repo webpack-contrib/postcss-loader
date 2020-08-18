@@ -82,14 +82,17 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
+  loadedConfig.postcssOptions = loadedConfig.postcssOptions || {};
+  options.postcssOptions = options.postcssOptions || {};
+
   let plugins;
 
   const disabledPlugins = [];
 
   try {
     plugins = [
-      ...getArrayPlugins(loadedConfig.plugins, file, false, this),
-      ...getArrayPlugins(options.plugins, file, disabledPlugins, this),
+      ...getArrayPlugins(loadedConfig.postcssOptions.plugins, file, false, this),
+      ...getArrayPlugins(options.postcssOptions.plugins, file, disabledPlugins, this),
     ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
   } catch (error) {
     this.emitError(error);
@@ -101,9 +104,9 @@ export default async function loader(content, sourceMap, meta = {}) {
     plugins,
   };
 
-  const resultPlugins = mergedOptions.plugins;
+  mergedOptions.postcssOptions.plugins = plugins;
 
-  const { parser, syntax, stringifier } = mergedOptions;
+  const resultPlugins = mergedOptions.postcssOptions.plugins;
 
   const useSourceMap =
     typeof options.sourceMap !== 'undefined'
@@ -127,9 +130,7 @@ export default async function loader(content, sourceMap, meta = {}) {
         ? { inline: true, annotation: false }
         : { inline: false, annotation: false }
       : false,
-    parser,
-    syntax,
-    stringifier,
+    ...mergedOptions.postcssOptions,
   };
 
   if (postcssOptions.map && sourceMapNormalized) {

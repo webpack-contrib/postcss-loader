@@ -9,8 +9,10 @@ import {
 describe('Options Plugins', () => {
   it('should work Plugins - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      plugins: [require('../fixtures/config-scope/config/plugin')()],
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: [require('../fixtures/config/plugin')()],
+      },
     });
     const stats = await compile(compiler);
 
@@ -23,8 +25,10 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      plugins: require('../fixtures/config-scope/config/plugin'),
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: require('../fixtures/config/plugin'),
+      },
     });
     const stats = await compile(compiler);
 
@@ -37,8 +41,10 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Function} - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      plugins: () => [require('../fixtures/config-scope/config/plugin')()],
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: () => [require('../fixtures/config/plugin')()],
+      },
     });
     const stats = await compile(compiler);
 
@@ -51,8 +57,10 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Function} - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      // eslint-disable-next-line global-require
-      plugins: () => require('../fixtures/config-scope/config/plugin')(),
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: () => require('../fixtures/config/plugin')(),
+      },
     });
     const stats = await compile(compiler);
 
@@ -65,9 +73,11 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Object without require}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      plugins: {
-        'postcss-import': {},
-        'postcss-nested': {},
+      postcssOptions: {
+        plugins: {
+          'postcss-import': {},
+          'postcss-nested': {},
+        },
       },
     });
     const stats = await compile(compiler);
@@ -80,8 +90,10 @@ describe('Options Plugins', () => {
   });
 
   it('should work Plugins - {empty Object}', async () => {
-    const compiler = getCompiler('./config-scope/css/index.js', {
-      plugins: {},
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        plugins: {},
+      },
     });
     const stats = await compile(compiler);
 
@@ -94,8 +106,10 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Object without require} + options', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      plugins: {
-        'postcss-short': { prefix: 'x' },
+      postcssOptions: {
+        plugins: {
+          'postcss-short': { prefix: 'x' },
+        },
       },
     });
     const stats = await compile(compiler);
@@ -109,8 +123,10 @@ describe('Options Plugins', () => {
 
   it('should work Plugins - {Object} + options', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      // eslint-disable-next-line global-require
-      plugins: require('postcss-short')({ prefix: 'x' }),
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: require('postcss-short')({ prefix: 'x' }),
+      },
     });
     const stats = await compile(compiler);
 
@@ -138,16 +154,11 @@ describe('Options Plugins', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Plugins - { Function } Array + options', async () => {
+  it('should work Plugins - {Array<Object>} + options', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      plugins: (loader) => {
-        expect(loader).toBeDefined();
-
-        return [
-          'postcss-nested',
-          ['postcss-import', { root: loader.resourcePath }],
-          ['postcss-short', { prefix: 'x' }],
-        ];
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        plugins: [require('postcss-short')({ prefix: 'x' })],
       },
     });
     const stats = await compile(compiler);
@@ -159,24 +170,14 @@ describe('Options Plugins', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Plugins - {Array<Object>} + options', async () => {
+  it('should disables plugin from config', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      // eslint-disable-next-line global-require
-      plugins: [require('postcss-short')({ prefix: 'x' })],
-    });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style2.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should not disables plugin from config', async () => {
-    const compiler = getCompiler('./css/index2.js', {
-      config: 'test/fixtures/config-scope/css/plugins.config.js',
-      plugins: [['postcss-short', false]],
+      config: 'test/fixtures/css/plugins.config.js',
+      postcssOptions: {
+        plugins: {
+          'postcss-short': false,
+        },
+      },
     });
     const stats = await compile(compiler);
 
@@ -189,8 +190,10 @@ describe('Options Plugins', () => {
 
   it('should emit error on load plugin', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      plugins: {
-        'postcss-unresolved': {},
+      postcssOptions: {
+        plugins: {
+          'postcss-unresolved': {},
+        },
       },
     });
     const stats = await compile(compiler);

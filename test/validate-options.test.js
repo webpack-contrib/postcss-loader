@@ -22,32 +22,45 @@ describe('validate options', () => {
       success: [false],
       failure: [1, 'test', /test/, [], {}, { foo: 'bar' }],
     },
-    parser: {
-      success: ['sugarss', require('sugarss'), require('sugarss').parse],
-      failure: [1, true, false, []],
-    },
-    syntax: {
-      success: ['sugarss', require('sugarss')],
-      failure: [1, true, false, []],
-    },
-    stringifier: {
-      success: ['sugarss', require('sugarss'), require('sugarss').stringify],
-      failure: [1, true, false, []],
+    postcssOptions: {
+      success: [
+        { parser: 'sugarss' },
+        { parser: require('sugarss') },
+        { parser: require('sugarss').parse },
+        { syntax: 'sugarss' },
+        { syntax: require('sugarss') },
+        { stringifier: 'sugarss' },
+        { stringifier: require('sugarss') },
+        { stringifier: require('sugarss').stringify },
+        { plugins: () => require('./fixtures/config/plugin')() },
+        { plugins: () => [require('./fixtures/config/plugin')()] },
+        {
+          plugins: [
+            require('./fixtures/config/plugin')(),
+            require('./fixtures/config/plugin'),
+            { 'postcss-short': { prefix: 'x' } },
+          ],
+        },
+        { plugins: { 'postcss-short': { prefix: 'x' } } },
+      ],
+      failure: [
+        { parser: 1 },
+        { parser: true },
+        { parser: [] },
+        { syntax: 1 },
+        { syntax: true },
+        { syntax: [] },
+        { stringifier: 1 },
+        { stringifier: true },
+        { stringifier: [] },
+        { plugins: 1 },
+        { plugins: true },
+        { plugins: 'postcss-short' },
+      ],
     },
     sourceMap: {
       success: ['source-map', true],
       failure: [1, /test/, [], {}],
-    },
-    plugins: {
-      success: [
-        [require('./fixtures/config-scope/config/plugin')()],
-        require('./fixtures/config-scope/config/plugin'),
-        () => [require('./fixtures/config-scope/config/plugin')()],
-        [['postcss-short', false]],
-        [['postcss-short', { prefix: 'x' }]],
-        ['postcss-short'],
-      ],
-      failure: [1, true, false],
     },
   };
 
@@ -68,7 +81,11 @@ describe('validate options', () => {
     } the "${key}" option with "${stringifyValue(value)}" value`, async () => {
       let compiler;
 
-      if (key === 'parser' || key === 'syntax') {
+      if (
+        key === 'postcssOptions' &&
+        // eslint-disable-next-line no-prototype-builtins
+        (value.hasOwnProperty('parser') || value.hasOwnProperty('syntax'))
+      ) {
         compiler = getCompiler(
           './sss/index.js',
           {},

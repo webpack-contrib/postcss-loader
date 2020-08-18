@@ -2,15 +2,17 @@
   "name": "postcss-config",
   "version": "1.0.0",
   "postcss": {
-    "parser": false,
-    "syntax": false,
-    "map": false,
-    "from": "./test/pkg/fixtures/index.css",
-    "to": "./test/pkg/expect/index.css",
-    "plugins": {
-      "postcss-import": {},
-      "postcss-nested": {},
-      "cssnano": false
+    "postcssOptions": {
+      "parser": false,
+      "syntax": false,
+      "map": false,
+      "from": "./test/pkg/fixtures/index.css",
+      "to": "./test/pkg/expect/index.css",
+      "plugins": {
+        "postcss-import": {},
+        "postcss-nested": {},
+        "cssnano": false
+      }
     }
   }
 }

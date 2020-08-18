@@ -20,11 +20,13 @@ describe('config-autoload', () => {
 
   it('.postcssrc - {Object} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.map).toEqual(false);
-      expect(config.from).toEqual('./test/rc/fixtures/index.css');
-      expect(config.to).toEqual('./test/rc/expect/index.css');
+      expect(config.postcssOptions.map).toEqual(false);
+      expect(config.postcssOptions.from).toEqual(
+        './test/rc/fixtures/index.css'
+      );
+      expect(config.postcssOptions.to).toEqual('./test/rc/expect/index.css');
 
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.postcssOptions.plugins).length).toEqual(3);
 
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'rc', '.postcssrc')
@@ -43,11 +45,15 @@ describe('config-autoload', () => {
 
   it('postcss.config.js - {Object} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.map).toEqual(false);
-      expect(config.from).toEqual('./test/js/object/fixtures/index.css');
-      expect(config.to).toEqual('./test/js/object/expect/index.css');
+      expect(config.postcssOptions.map).toEqual(false);
+      expect(config.postcssOptions.from).toEqual(
+        './test/js/object/fixtures/index.css'
+      );
+      expect(config.postcssOptions.to).toEqual(
+        './test/js/object/expect/index.css'
+      );
 
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.postcssOptions.plugins).length).toEqual(3);
 
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/object', 'postcss.config.js')
@@ -66,11 +72,15 @@ describe('config-autoload', () => {
 
   it('postcss.config.js - {Array} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.map).toEqual(false);
-      expect(config.from).toEqual('./test/js/array/fixtures/index.css');
-      expect(config.to).toEqual('./test/js/array/expect/index.css');
+      expect(config.postcssOptions.map).toEqual(false);
+      expect(config.postcssOptions.from).toEqual(
+        './test/js/array/fixtures/index.css'
+      );
+      expect(config.postcssOptions.to).toEqual(
+        './test/js/array/expect/index.css'
+      );
 
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.postcssOptions.plugins).length).toEqual(3);
 
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/array', 'postcss.config.js')
@@ -89,12 +99,14 @@ describe('config-autoload', () => {
 
   it('package.json - {Object} - Load Config', async () => {
     const expected = (config) => {
-      expect(config.parser).toEqual(false);
-      expect(config.syntax).toEqual(false);
-      expect(config.map).toEqual(false);
-      expect(config.from).toEqual('./test/pkg/fixtures/index.css');
-      expect(config.to).toEqual('./test/pkg/expect/index.css');
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(config.postcssOptions.parser).toEqual(false);
+      expect(config.postcssOptions.syntax).toEqual(false);
+      expect(config.postcssOptions.map).toEqual(false);
+      expect(config.postcssOptions.from).toEqual(
+        './test/pkg/fixtures/index.css'
+      );
+      expect(config.postcssOptions.to).toEqual('./test/pkg/expect/index.css');
+      expect(Object.keys(config.postcssOptions.plugins).length).toEqual(3);
 
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'pkg', 'package.json')

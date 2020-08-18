@@ -25,7 +25,11 @@ describe('Options Syntax', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { syntax: 'sugarss' },
+                  options: {
+                    postcssOptions: {
+                      syntax: 'sugarss',
+                    },
+                  },
                 },
               ],
             },
@@ -59,8 +63,10 @@ describe('Options Syntax', () => {
                 {
                   loader: path.resolve(__dirname, '../../src'),
                   options: {
-                    // eslint-disable-next-line global-require
-                    syntax: require('sugarss'),
+                    postcssOptions: {
+                      // eslint-disable-next-line global-require
+                      syntax: require('sugarss'),
+                    },
                   },
                 },
               ],
@@ -95,7 +101,11 @@ describe('Options Syntax', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { syntax: 'unresolve' },
+                  options: {
+                    postcssOptions: {
+                      syntax: 'unresolve',
+                    },
+                  },
                 },
               ],
             },
