@@ -13,6 +13,8 @@ import {
   loadConfig,
   getArrayPlugins,
   getSourceMapAbsolutePath,
+  getSourceMapRelativePath,
+  normalizeSourceMap,
 } from './utils';
 
 /**
@@ -108,6 +110,15 @@ export default async function loader(content, sourceMap, meta = {}) {
       ? options.sourceMap
       : this.sourceMap;
 
+  const sourceMapNormalized =
+    sourceMap && useSourceMap ? normalizeSourceMap(sourceMap) : null;
+
+  if (sourceMapNormalized) {
+    sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
+      getSourceMapRelativePath(src, path.dirname(file))
+    );
+  }
+
   const postcssOptions = {
     from: file,
     to: file,
@@ -121,9 +132,8 @@ export default async function loader(content, sourceMap, meta = {}) {
     stringifier,
   };
 
-  if (postcssOptions.map && sourceMap) {
-    postcssOptions.map.prev =
-      typeof sourceMap === 'string' ? JSON.parse(sourceMap) : sourceMap;
+  if (postcssOptions.map && sourceMapNormalized) {
+    postcssOptions.map.prev = sourceMapNormalized;
   }
 
   // Loader Exec (Deprecated)
@@ -216,7 +226,10 @@ export default async function loader(content, sourceMap, meta = {}) {
   map = map ? map.toJSON() : null;
 
   if (map) {
-    map.file = getSourceMapAbsolutePath(map.file, postcssOptions.to);
+    if (typeof map.file !== 'undefined') {
+      delete map.file;
+    }
+
     map.sources = map.sources.map((src) =>
       getSourceMapAbsolutePath(src, postcssOptions.to)
     );

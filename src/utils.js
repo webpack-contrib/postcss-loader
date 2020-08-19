@@ -2,6 +2,8 @@ import path from 'path';
 
 import Module from 'module';
 
+import normalizePath from 'normalize-path';
+
 import postcssPkg from 'postcss/package.json';
 import { cosmiconfig } from 'cosmiconfig';
 
@@ -243,11 +245,56 @@ function getArrayPlugins(plugins, file, disabledPlugins, loaderContext) {
 }
 
 // TODO Remove, when postcss 8 will be released
+function normalizeSourceMap(map) {
+  let newMap = map;
+
+  // Some loader emit source map as string
+  // Strip any JSON XSSI avoidance prefix from the string (as documented in the source maps specification), and then parse the string as JSON.
+  if (typeof newMap === 'string') {
+    newMap = JSON.parse(newMap);
+  }
+
+  // Source maps should use forward slash because it is URLs (https://github.com/mozilla/source-map/issues/91)
+  // We should normalize path because previous loaders like `sass-loader` using backslash when generate source map
+
+  if (newMap.file) {
+    delete newMap.file;
+  }
+
+  const { sourceRoot } = newMap;
+
+  if (newMap.sourceRoot) {
+    delete newMap.sourceRoot;
+  }
+
+  if (newMap.sources) {
+    newMap.sources = newMap.sources.map((source) => {
+      return !sourceRoot
+        ? normalizePath(source)
+        : normalizePath(path.resolve(sourceRoot, source));
+    });
+  }
+
+  return newMap;
+}
+
+function getSourceMapRelativePath(file, from) {
+  if (file.indexOf('<') === 0) return file;
+  if (/^\w+:\/\//.test(file)) return file;
+
+  const result = path.relative(from, file);
+
+  if (path.sep === '\\') {
+    return result.replace(/\\/g, '/');
+  }
+
+  return result;
+}
+
 function getSourceMapAbsolutePath(file, to) {
   if (file.indexOf('<') === 0) return file;
   if (/^\w+:\/\//.test(file)) return file;
 
-  // Without the `to` option we cannot get the correct dirname
   if (typeof to === 'undefined') return file;
 
   const dirname = path.dirname(to);
@@ -261,5 +308,11 @@ function getSourceMapAbsolutePath(file, to) {
   return result;
 }
 
-
-export { exec, loadConfig, getArrayPlugins, getSourceMapAbsolutePath };
+export {
+  exec,
+  loadConfig,
+  getArrayPlugins,
+  getSourceMapAbsolutePath,
+  getSourceMapRelativePath,
+  normalizeSourceMap,
+};
