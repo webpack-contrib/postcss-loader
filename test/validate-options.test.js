@@ -7,14 +7,14 @@ describe('validate options', () => {
   const tests = {
     config: {
       success: [
-        { path: 'test/fixtures/config/postcss.config.js' },
+        { path: 'test/fixtures/config-scope/config/postcss.config.js' },
         {
-          path: 'test/fixtures/config/postcss.config.js',
+          path: 'test/fixtures/config-scope/config/postcss.config.js',
           ctx: { plugin: true },
         },
         true,
         false,
-        'test/fixtures/config/postcss.config.js',
+        'test/fixtures/config-scope/config/postcss.config.js',
       ],
       failure: [[], { foo: 'bar' }],
     },
@@ -40,9 +40,9 @@ describe('validate options', () => {
     },
     plugins: {
       success: [
-        [require('./fixtures/config/plugin')()],
-        require('./fixtures/config/plugin'),
-        () => [require('./fixtures/config/plugin')()],
+        [require('./fixtures/config-scope/config/plugin')()],
+        require('./fixtures/config-scope/config/plugin'),
+        () => [require('./fixtures/config-scope/config/plugin')()],
       ],
       failure: [1, true, false],
     },

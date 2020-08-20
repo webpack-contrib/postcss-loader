@@ -10,7 +10,6 @@ describe('Options Stringifier', () => {
   it('should work Stringifier - {String}', async () => {
     const compiler = getCompiler('./css/index.js', {
       stringifier: 'sugarss',
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -25,7 +24,6 @@ describe('Options Stringifier', () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
       stringifier: require('sugarss'),
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -44,7 +42,6 @@ describe('Options Stringifier', () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
       stringifier: midas.stringifier,
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -59,7 +56,6 @@ describe('Options Stringifier', () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
       stringifier: 'unresolved',
-      config: false,
     });
     const stats = await compile(compiler);
 

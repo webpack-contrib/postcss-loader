@@ -56,9 +56,7 @@ describe('Options Sourcemap', () => {
   it('should work with prev sourceMap', async () => {
     const compiler = getCompiler(
       './scss/index.js',
-      {
-        config: false,
-      },
+      {},
       {
         devtool: 'source-map',
         module: {
@@ -72,9 +70,7 @@ describe('Options Sourcemap', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: {
-                    config: false,
-                  },
+                  options: {},
                 },
                 {
                   loader: 'sass-loader',

@@ -25,7 +25,7 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'sugarss', config: false },
+                  options: { parser: 'sugarss' },
                 },
               ],
             },
@@ -62,7 +62,6 @@ describe('Options Parser', () => {
                   options: {
                     // eslint-disable-next-line global-require,import/no-dynamic-require
                     parser: require('sugarss'),
-                    config: false,
                   },
                 },
               ],
@@ -100,7 +99,6 @@ describe('Options Parser', () => {
                   options: {
                     // eslint-disable-next-line global-require,import/no-dynamic-require
                     parser: require('sugarss').parse,
-                    config: false,
                   },
                 },
               ],
@@ -134,7 +132,7 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'unresolve', config: false },
+                  options: { parser: 'unresolve' },
                 },
               ],
             },
