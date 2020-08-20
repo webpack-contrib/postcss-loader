@@ -10,7 +10,7 @@ describe('Options Plugins', () => {
   it('should work Plugins - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
-      plugins: [require('../fixtures/config/plugin')()],
+      plugins: [require('../fixtures/config-scope/config/plugin')()],
     });
     const stats = await compile(compiler);
 
@@ -24,7 +24,7 @@ describe('Options Plugins', () => {
   it('should work Plugins - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
-      plugins: require('../fixtures/config/plugin'),
+      plugins: require('../fixtures/config-scope/config/plugin'),
     });
     const stats = await compile(compiler);
 
@@ -38,7 +38,7 @@ describe('Options Plugins', () => {
   it('should work Plugins - {Function} - {Array}', async () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
-      plugins: () => [require('../fixtures/config/plugin')()],
+      plugins: () => [require('../fixtures/config-scope/config/plugin')()],
     });
     const stats = await compile(compiler);
 
@@ -52,7 +52,7 @@ describe('Options Plugins', () => {
   it('should work Plugins - {Function} - {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
       // eslint-disable-next-line global-require
-      plugins: () => require('../fixtures/config/plugin')(),
+      plugins: () => require('../fixtures/config-scope/config/plugin')(),
     });
     const stats = await compile(compiler);
 
@@ -80,7 +80,7 @@ describe('Options Plugins', () => {
   });
 
   it('should work Plugins - {empty Object}', async () => {
-    const compiler = getCompiler('./css/index.js', {
+    const compiler = getCompiler('./config-scope/css/index.js', {
       plugins: {},
     });
     const stats = await compile(compiler);
@@ -97,7 +97,6 @@ describe('Options Plugins', () => {
       plugins: {
         'postcss-short': { prefix: 'x' },
       },
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -112,7 +111,6 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index2.js', {
       // eslint-disable-next-line global-require
       plugins: require('postcss-short')({ prefix: 'x' }),
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -127,7 +125,6 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index2.js', {
       // eslint-disable-next-line global-require
       plugins: [require('postcss-short')({ prefix: 'x' })],
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -140,7 +137,7 @@ describe('Options Plugins', () => {
 
   it('should disables plugin from config', async () => {
     const compiler = getCompiler('./css/index2.js', {
-      config: 'test/fixtures/css/plugins.config.js',
+      config: 'test/fixtures/config-scope/css/plugins.config.js',
       plugins: {
         'postcss-short': false,
       },

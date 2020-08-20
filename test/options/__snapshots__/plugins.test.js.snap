@@ -79,7 +79,7 @@ exports[`Options Plugins should work Plugins - {Object without require} + option
 exports[`Options Plugins should work Plugins - {Object without require} + options: warnings 1`] = `Array []`;
 
 exports[`Options Plugins should work Plugins - {Object without require}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: black }
 "
 `;
 

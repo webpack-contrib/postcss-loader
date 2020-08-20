@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: black }
 "
 `;
 
@@ -10,7 +10,7 @@ exports[`Options Sourcemap should work Sourcemap - {Boolean}: errors 1`] = `Arra
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: map 1`] = `
 Object {
   "file": "x",
-  "mappings": "AAAA,IAAI,4BAAa",
+  "mappings": "AAAA,IAAI,aAAa",
   "names": Array [],
   "sources": Array [
     "xxx",
@@ -26,9 +26,9 @@ Object {
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: warnings 1`] = `Array []`;
 
 exports[`Options Sourcemap should work Sourcemap - {String}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: black }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLDRCQUFhIiwiZmlsZSI6InRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyIsInNvdXJjZXNDb250ZW50IjpbImEgeyBjb2xvcjogYmxhY2sgfVxuIl19 */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRlc3QvZml4dHVyZXMvY3NzL3N0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLGFBQWEiLCJmaWxlIjoidGVzdC9maXh0dXJlcy9jc3Mvc3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */"
 `;
 
 exports[`Options Sourcemap should work Sourcemap - {String}: errors 1`] = `Array []`;
@@ -36,7 +36,7 @@ exports[`Options Sourcemap should work Sourcemap - {String}: errors 1`] = `Array
 exports[`Options Sourcemap should work Sourcemap - {String}: warnings 1`] = `Array []`;
 
 exports[`Options Sourcemap should work disable Sourcemap - {Boolean}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: black }
 "
 `;
 

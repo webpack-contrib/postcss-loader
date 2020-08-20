@@ -129,8 +129,12 @@ async function loadConfig(config, context, configPath, loaderContext) {
     } else {
       result = await explorer.search(searchPath);
     }
-  } catch (errorIgnore) {
-    throw new Error(`No PostCSS Config found in: ${searchPath}`);
+  } catch (error) {
+    throw error;
+  }
+
+  if (!result) {
+    return {};
   }
 
   const patchedContext = createContext(context);
