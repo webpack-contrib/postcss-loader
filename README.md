@@ -299,7 +299,7 @@ Type: `Function|Object|Array<String|Function\|Object|Array>`
 Default: `[]`
 
 It is recommended to specify plugins in the format `Array<String\|Array>` or `Function` that returns the same array as shown below.
-`Object` formats (`{pluginName: pluginOptions}`) is deprecated and will be removed in the next major release.
+`Object` format (`{pluginName: pluginOptions}`) is deprecated and will be removed in the next major release.
 
 **`webpack.config.js`**
 
