@@ -182,7 +182,7 @@ function pluginsProcessing(plugins, file, disabledPlugins) {
         const [name] = plugin;
         let [, options] = plugin;
 
-        options = typeof options !== 'undefined' ? options : {};
+        options = options || {};
 
         normalizedPlugin = { [name]: options };
       }

@@ -1,17 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Plugins should disables plugin from config: css 1`] = `
-"a {
-  -x-border-color: blue blue *;
-  -x-color: * #fafafa;
-}
-"
-`;
-
-exports[`Options Plugins should disables plugin from config: errors 1`] = `Array []`;
-
-exports[`Options Plugins should disables plugin from config: warnings 1`] = `Array []`;
-
 exports[`Options Plugins should emit error on load plugin: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
@@ -22,6 +10,20 @@ Loading PostCSS Plugin failed: Cannot find module 'postcss-unresolved' from 'src
 `;
 
 exports[`Options Plugins should emit error on load plugin: warnings 1`] = `Array []`;
+
+exports[`Options Plugins should not disables plugin from config: css 1`] = `
+"a {
+  border-top-color: blue;
+  border-right-color: blue;
+  border-left-color: blue;
+  background-color: #fafafa;
+}
+"
+`;
+
+exports[`Options Plugins should not disables plugin from config: errors 1`] = `Array []`;
+
+exports[`Options Plugins should not disables plugin from config: warnings 1`] = `Array []`;
 
 exports[`Options Plugins should work Plugins - { Array } Array + options: css 1`] = `
 "a {

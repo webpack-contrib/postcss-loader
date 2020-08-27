@@ -5,10 +5,10 @@ module.exports = function (ctx) {
     map: ctx.map ? 'inline' : false,
     from: './test/js/object/fixtures/index.css',
     to: './test/js/object/expect/index.css',
-    plugins: [
-      'postcss-import',
-      'postcss-nested',
-      ['cssnano', ctx.env === 'production' ? {} : false]
-    ]
+    plugins: {
+      'postcss-import': {},
+      'postcss-nested': {},
+      'cssnano': ctx.env === 'production' ? {} : false,
+    }
   }
 }

@@ -415,12 +415,12 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          plugins: [
-            'postcss-import',
-            'postcss-nested',
+          plugins: {
+            'postcss-import': {},
+            'postcss-nested': {},
             // Turn off the plugin
-            ['postcss-short', false],
-          ],
+            'postcss-short': false,
+          },
         },
       },
     ],
