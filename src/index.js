@@ -81,8 +81,8 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   try {
     plugins = [
-      ...getArrayPlugins(loadedConfig.plugins, file),
-      ...getArrayPlugins(options.plugins, file, disabledPlugins),
+      ...getArrayPlugins(loadedConfig.plugins, file, false, this),
+      ...getArrayPlugins(options.plugins, file, disabledPlugins, this),
     ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
   } catch (error) {
     this.emitError(error);

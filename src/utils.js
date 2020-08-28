@@ -160,26 +160,47 @@ function getPlugin(pluginEntry) {
     return [];
   }
 
-  if (pluginEntry.postcssVersion === postcssPkg.version) {
+  if (isPostcssPlugin(pluginEntry)) {
     return [pluginEntry];
   }
 
-  const result = pluginEntry.call(this, this);
+  const result = pluginEntry();
 
   return Array.isArray(result) ? result : [result];
 }
 
-function getArrayPlugins(plugins, file, disabledPlugins) {
+function isPostcssPlugin(plugin) {
+  return plugin.postcssVersion === postcssPkg.version;
+}
+
+function pluginsProcessing(plugins, file, disabledPlugins) {
   if (Array.isArray(plugins)) {
     return plugins.reduce((accumulator, plugin) => {
+      let normalizedPlugin = plugin;
+
+      if (Array.isArray(plugin)) {
+        const [name] = plugin;
+        let [, options] = plugin;
+
+        options = options || {};
+
+        normalizedPlugin = { [name]: options };
+      }
+
+      if (typeof plugin === 'string') {
+        normalizedPlugin = { [plugin]: {} };
+      }
+
       // eslint-disable-next-line no-param-reassign
-      accumulator = accumulator.concat(getArrayPlugins(plugin));
+      accumulator = accumulator.concat(
+        pluginsProcessing(normalizedPlugin, file, disabledPlugins)
+      );
 
       return accumulator;
     }, []);
   }
 
-  if (typeof plugins === 'object' && typeof plugins !== 'function') {
+  if (typeof plugins === 'object') {
     if (Object.keys(plugins).length === 0) {
       return [];
     }
@@ -199,10 +220,26 @@ function getArrayPlugins(plugins, file, disabledPlugins) {
       }
     });
 
-    return getArrayPlugins(loadPlugins(statePlagins.enabled, file), file);
+    return pluginsProcessing(
+      loadPlugins(statePlagins.enabled, file),
+      file,
+      disabledPlugins
+    );
   }
 
   return getPlugin(plugins);
+}
+
+function getArrayPlugins(plugins, file, disabledPlugins, loaderContext) {
+  if (typeof plugins === 'function') {
+    if (isPostcssPlugin(plugins)) {
+      return [plugins];
+    }
+
+    return pluginsProcessing(plugins(loaderContext), file, disabledPlugins);
+  }
+
+  return pluginsProcessing(plugins, file, disabledPlugins);
 }
 
 export { exec, loadConfig, getArrayPlugins };
