@@ -8,7 +8,14 @@ import postcss from 'postcss';
 import Warning from './Warning';
 import SyntaxError from './Error';
 import schema from './options.json';
-import { exec, loadConfig, getArrayPlugins } from './utils';
+import {
+  exec,
+  loadConfig,
+  getArrayPlugins,
+  getSourceMapAbsolutePath,
+  getSourceMapRelativePath,
+  normalizeSourceMap,
+} from './utils';
 
 /**
  * **PostCSS Loader**
@@ -103,8 +110,18 @@ export default async function loader(content, sourceMap, meta = {}) {
       ? options.sourceMap
       : this.sourceMap;
 
+  const sourceMapNormalized =
+    sourceMap && useSourceMap ? normalizeSourceMap(sourceMap) : null;
+
+  if (sourceMapNormalized) {
+    sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
+      getSourceMapRelativePath(src, path.dirname(file))
+    );
+  }
+
   const postcssOptions = {
     from: file,
+    to: file,
     map: useSourceMap
       ? options.sourceMap === 'inline'
         ? { inline: true, annotation: false }
@@ -115,9 +132,8 @@ export default async function loader(content, sourceMap, meta = {}) {
     stringifier,
   };
 
-  if (postcssOptions.map && sourceMap) {
-    postcssOptions.map.prev =
-      typeof sourceMap === 'string' ? JSON.parse(sourceMap) : sourceMap;
+  if (postcssOptions.map && sourceMapNormalized) {
+    postcssOptions.map.prev = sourceMapNormalized;
   }
 
   // Loader Exec (Deprecated)
@@ -210,8 +226,13 @@ export default async function loader(content, sourceMap, meta = {}) {
   map = map ? map.toJSON() : null;
 
   if (map) {
-    map.file = path.resolve(map.file);
-    map.sources = map.sources.map((src) => path.resolve(src));
+    if (typeof map.file !== 'undefined') {
+      delete map.file;
+    }
+
+    map.sources = map.sources.map((src) =>
+      getSourceMapAbsolutePath(src, postcssOptions.to)
+    );
   }
 
   const ast = {
