@@ -173,7 +173,7 @@ describe('Options Plugins', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should disables plugin from config', async () => {
+  it('should not disables plugin from config', async () => {
     const compiler = getCompiler('./css/index2.js', {
       config: 'test/fixtures/config-scope/css/plugins.config.js',
       plugins: [['postcss-short', false]],
