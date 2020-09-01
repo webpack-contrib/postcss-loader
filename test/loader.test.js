@@ -11,7 +11,9 @@ import {
 describe('loader', () => {
   it('should work', async () => {
     const compiler = getCompiler('./css/index.js', {
-      plugins: [],
+      postcssOptions: {
+        plugins: [],
+      },
       config: false,
     });
     const stats = await compile(compiler);
@@ -33,7 +35,9 @@ describe('loader', () => {
     const postcssPlugin = postcss.plugin('postcss-plugin', plugin);
 
     const compiler = getCompiler('./css/index.js', {
-      plugins: [postcssPlugin()],
+      postcssOptions: {
+        plugins: [postcssPlugin()],
+      },
       config: false,
     });
     const stats = await compile(compiler);
@@ -47,7 +51,9 @@ describe('loader', () => {
 
   it('should emit Syntax Error', async () => {
     const compiler = getCompiler('./css/index.js', {
-      parser: 'sugarss',
+      postcssOptions: {
+        parser: 'sugarss',
+      },
       config: false,
     });
     const stats = await compile(compiler);
@@ -69,7 +75,9 @@ describe('loader', () => {
     const postcssPlugin = postcss.plugin('postcss-assets', plugin);
 
     const compiler = getCompiler('./css/index.js', {
-      plugins: [postcssPlugin()],
+      postcssOptions: {
+        plugins: [postcssPlugin()],
+      },
       config: false,
     });
     const stats = await compile(compiler);

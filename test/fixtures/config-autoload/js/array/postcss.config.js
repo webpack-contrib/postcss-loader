@@ -11,4 +11,4 @@ module.exports = function (ctx) {
       ctx.env === 'production' ? require('cssnano')() : false
     ]
   }
-}
+};

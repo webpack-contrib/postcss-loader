@@ -1,153 +1,256 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`validate options should throw an error on the "config" option with "[]" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config should be one of these:
-   object { path?, ctx? } | string | boolean
-   -> should be {Object} (https://github.com/postcss/postcss-loader#config)
-   Details:
-    * options.config should be an object:
-      object { path?, ctx? }
-    * options.config should be a string.
-      -> Allows to specify the path to the configuration file
-    * options.config should be a boolean.
-      -> Enables/Disables autoloading config"
-`;
-
-exports[`validate options should throw an error on the "config" option with "{"foo":"bar"}" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.config has an unknown property 'foo'. These properties are valid:
-   object { path?, ctx? }"
-`;
-
 exports[`validate options should throw an error on the "exec" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "{"foo":"bar"}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
 exports[`validate options should throw an error on the "exec" option with "test" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.exec should be a boolean.
-   -> should be {Boolean} (https://github.com/postcss/postcss-loader#exec)"
+   -> Enable PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
 `;
 
-exports[`validate options should throw an error on the "parser" option with "[]" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"config":[]}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.parser should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#parser)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.parser should be a string.
-    * options.parser should be an object:
-      object { … }
-    * options.parser should be an instance of function."
+    * options.postcssOptions.config should be one of these:
+      object { path?, ctx? } | string | boolean
+      -> Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)
+      Details:
+       * options.postcssOptions.config should be an object:
+         object { path?, ctx? }
+       * options.postcssOptions.config should be a string.
+         -> Allows to specify the path to the configuration file
+       * options.postcssOptions.config should be a boolean.
+         -> Enables/Disables autoloading config"
 `;
 
-exports[`validate options should throw an error on the "parser" option with "1" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"parser":[]}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.parser should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#parser)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.parser should be a string.
-    * options.parser should be an object:
-      object { … }
-    * options.parser should be an instance of function."
+    * options.postcssOptions.parser should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss Parser (https://github.com/postcss/postcss-loader#parser)
+      Details:
+       * options.postcssOptions.parser should be a string.
+       * options.postcssOptions.parser should be an object:
+         object { … }
+       * options.postcssOptions.parser should be an instance of function."
 `;
 
-exports[`validate options should throw an error on the "parser" option with "false" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"parser":1}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.parser should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#parser)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.parser should be a string.
-    * options.parser should be an object:
-      object { … }
-    * options.parser should be an instance of function."
+    * options.postcssOptions.parser should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss Parser (https://github.com/postcss/postcss-loader#parser)
+      Details:
+       * options.postcssOptions.parser should be a string.
+       * options.postcssOptions.parser should be an object:
+         object { … }
+       * options.postcssOptions.parser should be an instance of function."
 `;
 
-exports[`validate options should throw an error on the "parser" option with "true" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"parser":true}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.parser should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#parser)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.parser should be a string.
-    * options.parser should be an object:
-      object { … }
-    * options.parser should be an instance of function."
+    * options.postcssOptions.parser should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss Parser (https://github.com/postcss/postcss-loader#parser)
+      Details:
+       * options.postcssOptions.parser should be a string.
+       * options.postcssOptions.parser should be an object:
+         object { … }
+       * options.postcssOptions.parser should be an instance of function."
 `;
 
-exports[`validate options should throw an error on the "plugins" option with "1" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"plugins":"postcss-short"}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.plugins should be one of these:
-   [any, ...] | object { … } | function
-   -> should be {Array|Object|Function} (https://github.com/postcss/postcss-loader#plugins)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.plugins should be an array:
-      [any, ...]
-    * options.plugins should be an object:
-      object { … }
-    * options.plugins should be an instance of function."
+    * options.postcssOptions.plugins should be one of these:
+      [any, ...] | object { … } | function
+      -> Set PostCSS Plugins (https://github.com/postcss/postcss-loader#plugins)
+      Details:
+       * options.postcssOptions.plugins should be an array:
+         [any, ...]
+       * options.postcssOptions.plugins should be an object:
+         object { … }
+       * options.postcssOptions.plugins should be an instance of function."
 `;
 
-exports[`validate options should throw an error on the "plugins" option with "false" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"plugins":1}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.plugins should be one of these:
-   [any, ...] | object { … } | function
-   -> should be {Array|Object|Function} (https://github.com/postcss/postcss-loader#plugins)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.plugins should be an array:
-      [any, ...]
-    * options.plugins should be an object:
-      object { … }
-    * options.plugins should be an instance of function."
+    * options.postcssOptions.plugins should be one of these:
+      [any, ...] | object { … } | function
+      -> Set PostCSS Plugins (https://github.com/postcss/postcss-loader#plugins)
+      Details:
+       * options.postcssOptions.plugins should be an array:
+         [any, ...]
+       * options.postcssOptions.plugins should be an object:
+         object { … }
+       * options.postcssOptions.plugins should be an instance of function."
 `;
 
-exports[`validate options should throw an error on the "plugins" option with "true" value 1`] = `
+exports[`validate options should throw an error on the "postcssOptions" option with "{"plugins":true}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.plugins should be one of these:
-   [any, ...] | object { … } | function
-   -> should be {Array|Object|Function} (https://github.com/postcss/postcss-loader#plugins)
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
    Details:
-    * options.plugins should be an array:
-      [any, ...]
-    * options.plugins should be an object:
-      object { … }
-    * options.plugins should be an instance of function."
+    * options.postcssOptions.plugins should be one of these:
+      [any, ...] | object { … } | function
+      -> Set PostCSS Plugins (https://github.com/postcss/postcss-loader#plugins)
+      Details:
+       * options.postcssOptions.plugins should be an array:
+         [any, ...]
+       * options.postcssOptions.plugins should be an object:
+         object { … }
+       * options.postcssOptions.plugins should be an instance of function."
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"stringifier":[]}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.stringifier should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss stringifier (https://github.com/postcss/postcss-loader#stringifier)
+      Details:
+       * options.postcssOptions.stringifier should be a string.
+       * options.postcssOptions.stringifier should be an object:
+         object { … }
+       * options.postcssOptions.stringifier should be an instance of function."
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"stringifier":1}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.stringifier should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss stringifier (https://github.com/postcss/postcss-loader#stringifier)
+      Details:
+       * options.postcssOptions.stringifier should be a string.
+       * options.postcssOptions.stringifier should be an object:
+         object { … }
+       * options.postcssOptions.stringifier should be an instance of function."
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"stringifier":true}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.stringifier should be one of these:
+      string | object { … } | function
+      -> Allows to specify custom Postcss stringifier (https://github.com/postcss/postcss-loader#stringifier)
+      Details:
+       * options.postcssOptions.stringifier should be a string.
+       * options.postcssOptions.stringifier should be an object:
+         object { … }
+       * options.postcssOptions.stringifier should be an instance of function."
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"syntax":[]}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.syntax should be one of these:
+      string | object { … }
+      -> Allows to specify custom Postcss Syntax (https://github.com/postcss/postcss-loader#syntax)
+      Details:
+       * options.postcssOptions.syntax should be a string.
+       * options.postcssOptions.syntax should be an object:
+         object { … }"
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"syntax":1}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.syntax should be one of these:
+      string | object { … }
+      -> Allows to specify custom Postcss Syntax (https://github.com/postcss/postcss-loader#syntax)
+      Details:
+       * options.postcssOptions.syntax should be a string.
+       * options.postcssOptions.syntax should be an object:
+         object { … }"
+`;
+
+exports[`validate options should throw an error on the "postcssOptions" option with "{"syntax":true}" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.postcssOptions should be one of these:
+   object { config?, parser?, syntax?, stringifier?, plugins?, … } | function
+   -> Options to pass through to \`Postcss\`.
+   Details:
+    * options.postcssOptions.syntax should be one of these:
+      string | object { … }
+      -> Allows to specify custom Postcss Syntax (https://github.com/postcss/postcss-loader#syntax)
+      Details:
+       * options.postcssOptions.syntax should be a string.
+       * options.postcssOptions.syntax should be an object:
+         object { … }"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be one of these:
    string | boolean
-   -> should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
    Details:
     * options.sourceMap should be a string.
     * options.sourceMap should be a boolean."
@@ -157,7 +260,7 @@ exports[`validate options should throw an error on the "sourceMap" option with "
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be one of these:
    string | boolean
-   -> should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
    Details:
     * options.sourceMap should be a string.
     * options.sourceMap should be a boolean."
@@ -167,7 +270,7 @@ exports[`validate options should throw an error on the "sourceMap" option with "
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be one of these:
    string | boolean
-   -> should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
    Details:
     * options.sourceMap should be a string.
     * options.sourceMap should be a boolean."
@@ -177,100 +280,8 @@ exports[`validate options should throw an error on the "sourceMap" option with "
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be one of these:
    string | boolean
-   -> should be {String|Boolean} (https://github.com/postcss/postcss-loader#sourcemap)
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
    Details:
     * options.sourceMap should be a string.
     * options.sourceMap should be a boolean."
-`;
-
-exports[`validate options should throw an error on the "stringifier" option with "[]" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.stringifier should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)
-   Details:
-    * options.stringifier should be a string.
-    * options.stringifier should be an object:
-      object { … }
-    * options.stringifier should be an instance of function."
-`;
-
-exports[`validate options should throw an error on the "stringifier" option with "1" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.stringifier should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)
-   Details:
-    * options.stringifier should be a string.
-    * options.stringifier should be an object:
-      object { … }
-    * options.stringifier should be an instance of function."
-`;
-
-exports[`validate options should throw an error on the "stringifier" option with "false" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.stringifier should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)
-   Details:
-    * options.stringifier should be a string.
-    * options.stringifier should be an object:
-      object { … }
-    * options.stringifier should be an instance of function."
-`;
-
-exports[`validate options should throw an error on the "stringifier" option with "true" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.stringifier should be one of these:
-   string | object { … } | function
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#stringifier)
-   Details:
-    * options.stringifier should be a string.
-    * options.stringifier should be an object:
-      object { … }
-    * options.stringifier should be an instance of function."
-`;
-
-exports[`validate options should throw an error on the "syntax" option with "[]" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.syntax should be one of these:
-   string | object { … }
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)
-   Details:
-    * options.syntax should be a string.
-    * options.syntax should be an object:
-      object { … }"
-`;
-
-exports[`validate options should throw an error on the "syntax" option with "1" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.syntax should be one of these:
-   string | object { … }
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)
-   Details:
-    * options.syntax should be a string.
-    * options.syntax should be an object:
-      object { … }"
-`;
-
-exports[`validate options should throw an error on the "syntax" option with "false" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.syntax should be one of these:
-   string | object { … }
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)
-   Details:
-    * options.syntax should be a string.
-    * options.syntax should be an object:
-      object { … }"
-`;
-
-exports[`validate options should throw an error on the "syntax" option with "true" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.syntax should be one of these:
-   string | object { … }
-   -> should be {String|Object} (https://github.com/postcss/postcss-loader#syntax)
-   Details:
-    * options.syntax should be a string.
-    * options.syntax should be an object:
-      object { … }"
 `;

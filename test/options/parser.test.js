@@ -25,7 +25,11 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'sugarss' },
+                  options: {
+                    postcssOptions: {
+                      parser: 'sugarss',
+                    },
+                  },
                 },
               ],
             },
@@ -60,8 +64,10 @@ describe('Options Parser', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
                   options: {
-                    // eslint-disable-next-line global-require,import/no-dynamic-require
-                    parser: require('sugarss'),
+                    postcssOptions: {
+                      // eslint-disable-next-line global-require,import/no-dynamic-require
+                      parser: require('sugarss'),
+                    },
                   },
                 },
               ],
@@ -97,8 +103,10 @@ describe('Options Parser', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   // eslint-disable-next-line global-require
                   options: {
-                    // eslint-disable-next-line global-require,import/no-dynamic-require
-                    parser: require('sugarss').parse,
+                    postcssOptions: {
+                      // eslint-disable-next-line global-require,import/no-dynamic-require
+                      parser: require('sugarss').parse,
+                    },
                   },
                 },
               ],
@@ -132,7 +140,11 @@ describe('Options Parser', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'unresolve' },
+                  options: {
+                    postcssOptions: {
+                      parser: 'unresolve',
+                    },
+                  },
                 },
               ],
             },

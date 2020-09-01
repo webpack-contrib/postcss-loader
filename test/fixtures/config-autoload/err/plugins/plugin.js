@@ -1,1 +1,1 @@
-module.exports = 'Invalid Plugin'
+module.exports = 'Invalid Plugin';

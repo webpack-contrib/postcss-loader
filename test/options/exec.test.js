@@ -58,7 +58,11 @@ describe('Options Exec', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: { parser: 'postcss-js' },
+                  options: {
+                    postcssOptions: {
+                      parser: 'postcss-js',
+                    },
+                  },
                 },
               ],
             },

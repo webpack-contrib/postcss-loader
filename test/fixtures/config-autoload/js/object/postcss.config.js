@@ -8,7 +8,7 @@ module.exports = function (ctx) {
     plugins: {
       'postcss-import': {},
       'postcss-nested': {},
-      'cssnano': ctx.env === 'production' ? {} : false,
+      'cssnano': ctx.env === 'production' ? {} : false
     }
   }
-}
+};

@@ -13,7 +13,9 @@ const testDirectory = path.resolve(__dirname, '../fixtures', 'config-autoload');
 describe('Config Options', () => {
   it('should work Config - false', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: false,
+      postcssOptions: {
+        config: false,
+      },
     });
     const stats = await compile(compiler);
 
@@ -26,7 +28,9 @@ describe('Config Options', () => {
 
   it('should work Config - true', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: true,
+      postcssOptions: {
+        config: true,
+      },
     });
     const stats = await compile(compiler);
 
@@ -39,10 +43,12 @@ describe('Config Options', () => {
 
   it('should work Config - "string"', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: path.resolve(
-        __dirname,
-        '../fixtures/config-scope/css/custom.config.js'
-      ),
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          '../fixtures/config-scope/css/custom.config.js'
+        ),
+      },
     });
     const stats = await compile(compiler);
 
@@ -55,7 +61,9 @@ describe('Config Options', () => {
 
   it('should work Config - "string" with relative path', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: 'test/fixtures/config-scope/css/custom.config.js',
+      postcssOptions: {
+        config: 'test/fixtures/config-scope/css/custom.config.js',
+      },
     });
     const stats = await compile(compiler);
 
@@ -68,7 +76,9 @@ describe('Config Options', () => {
 
   it('should work Config - "string" with path directory', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: 'test/fixtures/config-scope',
+      postcssOptions: {
+        config: 'test/fixtures/config-scope',
+      },
     });
     const stats = await compile(compiler);
 
@@ -81,11 +91,13 @@ describe('Config Options', () => {
 
   it('should work Config - Object - path file', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: {
-        path: path.resolve(
-          __dirname,
-          '../fixtures/config-scope/css/custom.config.js'
-        ),
+      postcssOptions: {
+        config: {
+          path: path.resolve(
+            __dirname,
+            '../fixtures/config-scope/css/custom.config.js'
+          ),
+        },
       },
     });
     const stats = await compile(compiler);
@@ -110,7 +122,9 @@ describe('Config Options', () => {
 
   it('should work Config - Path - {String}', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: { path: 'test/fixtures/config-scope/config/postcss.config.js' },
+      postcssOptions: {
+        config: { path: 'test/fixtures/config-scope/config/postcss.config.js' },
+      },
     });
     const stats = await compile(compiler);
 
@@ -123,9 +137,11 @@ describe('Config Options', () => {
 
   it('should work Config - Context - {Object}', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: {
-        path: 'test/fixtures/config-scope/config/postcss.config.js',
-        ctx: { plugin: true },
+      postcssOptions: {
+        config: {
+          path: 'test/fixtures/config-scope/config/postcss.config.js',
+          ctx: { plugin: true },
+        },
       },
     });
     const stats = await compile(compiler);
@@ -139,8 +155,10 @@ describe('Config Options', () => {
 
   it('should work Config – Context – Loader {Object}', async () => {
     const compiler = getCompiler('./css/index.js', {
-      config: {
-        path: 'test/fixtures/config-scope/config/context/postcss.config.js',
+      postcssOptions: {
+        config: {
+          path: 'test/fixtures/config-scope/config/context/postcss.config.js',
+        },
       },
     });
     const stats = await compile(compiler);
@@ -156,9 +174,11 @@ describe('Config Options', () => {
 
   it('should work postcss.config.js - {Object} - Process CSS', async () => {
     const compiler = getCompiler('./config-autoload/js/object/index.js', {
-      config: {
-        path: path.resolve(testDirectory, 'js/object'),
-        ctx: { parser: false, syntax: false },
+      postcssOptions: {
+        config: {
+          path: path.resolve(testDirectory, 'js/object'),
+          ctx: { parser: false, syntax: false },
+        },
       },
     });
     const stats = await compile(compiler);
@@ -172,9 +192,11 @@ describe('Config Options', () => {
 
   it('should work postcss.config.js - {Array} - Process CSS', async () => {
     const compiler = getCompiler('./config-autoload/js/array/index.js', {
-      config: {
-        path: path.resolve(testDirectory, 'js/array'),
-        ctx: { parser: false, syntax: false },
+      postcssOptions: {
+        config: {
+          path: path.resolve(testDirectory, 'js/array'),
+          ctx: { parser: false, syntax: false },
+        },
       },
     });
     const stats = await compile(compiler);
@@ -188,8 +210,10 @@ describe('Config Options', () => {
 
   it('should work package.json - {Object} - Process CSS', async () => {
     const compiler = getCompiler('./config-autoload/pkg/index.js', {
-      config: {
-        path: path.resolve(testDirectory, 'pkg'),
+      postcssOptions: {
+        config: {
+          path: path.resolve(testDirectory, 'pkg'),
+        },
       },
     });
     const stats = await compile(compiler);
@@ -203,10 +227,12 @@ describe('Config Options', () => {
 
   it('should emit error when unresolved config ', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: path.resolve(
-        __dirname,
-        '../fixtures/config-scope/css/unresolve.js'
-      ),
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          '../fixtures/config-scope/css/unresolve.js'
+        ),
+      },
     });
     const stats = await compile(compiler);
 
@@ -216,10 +242,12 @@ describe('Config Options', () => {
 
   it('should emit error when invalid config ', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
-      config: path.resolve(
-        __dirname,
-        '../fixtures/config-scope/css/invalid.config.js'
-      ),
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          '../fixtures/config-scope/css/invalid.config.js'
+        ),
+      },
     });
     const stats = await compile(compiler);
 

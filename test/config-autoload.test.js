@@ -23,9 +23,7 @@ describe('config-autoload', () => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/rc/fixtures/index.css');
       expect(config.to).toEqual('./test/rc/expect/index.css');
-
       expect(Object.keys(config.plugins).length).toEqual(3);
-
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'rc', '.postcssrc')
       );
@@ -46,9 +44,7 @@ describe('config-autoload', () => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/js/object/fixtures/index.css');
       expect(config.to).toEqual('./test/js/object/expect/index.css');
-
       expect(Object.keys(config.plugins).length).toEqual(3);
-
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/object', 'postcss.config.js')
       );
@@ -69,9 +65,7 @@ describe('config-autoload', () => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/js/array/fixtures/index.css');
       expect(config.to).toEqual('./test/js/array/expect/index.css');
-
       expect(Object.keys(config.plugins).length).toEqual(3);
-
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/array', 'postcss.config.js')
       );
@@ -95,7 +89,6 @@ describe('config-autoload', () => {
       expect(config.from).toEqual('./test/pkg/fixtures/index.css');
       expect(config.to).toEqual('./test/pkg/expect/index.css');
       expect(Object.keys(config.plugins).length).toEqual(3);
-
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'pkg', 'package.json')
       );

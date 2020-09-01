@@ -151,6 +151,7 @@ async function loadConfig(config, context, configPath, loaderContext) {
 
   if (result.filepath) {
     resultConfig.file = result.filepath;
+
     loaderContext.addDependency(result.filepath);
   }
 

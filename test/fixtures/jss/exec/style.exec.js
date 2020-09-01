@@ -1,11 +1,11 @@
-'use strict'
+'use strict';
 
-const postcssJS = require('postcss-js')
+const postcssJS = require('postcss-js');
 
 const style = {
   a: {
     color: 'green'
   }
-}
+};
 
-module.exports = postcssJS.parse(style)
+module.exports = postcssJS.parse(style);
