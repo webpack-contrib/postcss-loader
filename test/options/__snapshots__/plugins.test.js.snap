@@ -14,8 +14,6 @@ exports[`Options Plugins should disables plugin from config: warnings 1`] = `Arr
 
 exports[`Options Plugins should emit error on load plugin: errors 1`] = `
 Array [
-  "ModuleBuildError: Module build failed (from \`replaced original path\`):
-TypeError: Cannot read property 'postcss' of undefined",
   "ModuleError: Module Error (from \`replaced original path\`):
 Loading PostCSS Plugin failed: Cannot find module 'postcss-unresolved' from 'src/utils.js'",
 ]

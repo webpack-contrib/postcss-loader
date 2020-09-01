@@ -9,9 +9,9 @@ import Warning from './Warning';
 import SyntaxError from './Error';
 import schema from './options.json';
 import {
-  exec,
   loadConfig,
-  getArrayPlugins,
+  getPostcssOptions,
+  exec,
   getSourceMapAbsolutePath,
   getSourceMapRelativePath,
   normalizeSourceMap,
@@ -38,9 +38,7 @@ export default async function loader(content, sourceMap, meta = {}) {
     baseDataPath: 'options',
   });
 
-  const callback = this.async();
   const file = this.resourcePath;
-
   const configOptions =
     typeof options.postcssOptions === 'undefined' ||
     typeof options.postcssOptions.config === 'undefined'
@@ -48,6 +46,8 @@ export default async function loader(content, sourceMap, meta = {}) {
       : options.postcssOptions.config;
 
   let loadedConfig = {};
+
+  const callback = this.async();
 
   if (configOptions) {
     const dataForLoadConfig = {
@@ -86,112 +86,43 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  options.postcssOptions = options.postcssOptions || {};
-
-  let plugins;
-
-  const disabledPlugins = [];
-
-  try {
-    plugins = [
-      ...getArrayPlugins(loadedConfig.plugins, file, false, this),
-      ...getArrayPlugins(
-        options.postcssOptions.plugins,
-        file,
-        disabledPlugins,
-        this
-      ),
-    ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
-  } catch (error) {
-    this.emitError(error);
-  }
-
-  const mergedOptions = {
-    ...loadedConfig,
-    ...options,
-    plugins,
-  };
-
-  mergedOptions.postcssOptions.plugins = plugins;
-
-  const resultPlugins = mergedOptions.postcssOptions.plugins;
-
   const useSourceMap =
     typeof options.sourceMap !== 'undefined'
       ? options.sourceMap
       : this.sourceMap;
 
-  const sourceMapNormalized =
-    sourceMap && useSourceMap ? normalizeSourceMap(sourceMap) : null;
+  const { plugins, processOptions, needExecute } = getPostcssOptions(
+    this,
+    loadedConfig,
+    options.postcssOptions
+  );
 
-  if (sourceMapNormalized) {
-    sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
-      getSourceMapRelativePath(src, path.dirname(file))
-    );
+  if (options.exec || needExecute) {
+    // eslint-disable-next-line no-param-reassign
+    content = exec(content, this);
   }
 
-  const postcssOptions = {
-    from: file,
-    to: file,
-    map: useSourceMap
-      ? options.sourceMap === 'inline'
+  if (useSourceMap) {
+    processOptions.map =
+      options.sourceMap === 'inline'
         ? { inline: true, annotation: false }
-        : { inline: false, annotation: false }
-      : false,
-    ...mergedOptions.postcssOptions,
-  };
+        : { inline: false, annotation: false };
 
-  if (postcssOptions.map && sourceMapNormalized) {
-    postcssOptions.map.prev = sourceMapNormalized;
-  }
+    if (sourceMap) {
+      const sourceMapNormalized = normalizeSourceMap(sourceMap);
 
-  if (postcssOptions.parser === 'postcss-js') {
-    // eslint-disable-next-line no-param-reassign
-    content = exec(content, this);
-  }
-
-  if (typeof postcssOptions.parser === 'string') {
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      postcssOptions.parser = require(postcssOptions.parser);
-    } catch (error) {
-      this.emitError(
-        `Loading PostCSS Parser failed: ${error.message}\n\n(@${file})`
+      sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
+        getSourceMapRelativePath(src, path.dirname(file))
       );
-    }
-  }
 
-  if (typeof postcssOptions.syntax === 'string') {
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      postcssOptions.syntax = require(postcssOptions.syntax);
-    } catch (error) {
-      this.emitError(
-        `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
-      );
+      processOptions.map.prev = sourceMapNormalized;
     }
-  }
-
-  if (typeof postcssOptions.stringifier === 'string') {
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      postcssOptions.stringifier = require(postcssOptions.stringifier);
-    } catch (error) {
-      this.emitError(
-        `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
-      );
-    }
-  }
-
-  if (mergedOptions.exec) {
-    // eslint-disable-next-line no-param-reassign
-    content = exec(content, this);
   }
 
   let result;
 
   try {
-    result = await postcss(resultPlugins).process(content, postcssOptions);
+    result = await postcss(plugins).process(content, processOptions);
   } catch (error) {
     if (error.file) {
       this.addDependency(error.file);
@@ -206,14 +137,11 @@ export default async function loader(content, sourceMap, meta = {}) {
     return;
   }
 
-  const { css, root, processor, messages } = result;
-  let { map } = result;
-
   result.warnings().forEach((warning) => {
     this.emitWarning(new Warning(warning));
   });
 
-  messages.forEach((message) => {
+  result.messages.forEach((message) => {
     if (message.type === 'dependency') {
       this.addDependency(message.file);
     }
@@ -228,52 +156,23 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   });
 
-  map = map ? map.toJSON() : null;
+  const map = result.map ? result.map.toJSON() : null;
 
   if (map && useSourceMap) {
     if (typeof map.file !== 'undefined') {
       delete map.file;
     }
 
-    map.sources = map.sources.map((src) =>
-      getSourceMapAbsolutePath(src, postcssOptions.to)
-    );
+    map.sources = map.sources.map((src) => getSourceMapAbsolutePath(src, file));
   }
 
   const ast = {
     type: 'postcss',
-    version: processor.version,
-    root,
+    version: result.processor.version,
+    root: result.result,
   };
 
-  const newMeta = { ...meta, ast, messages };
+  const newMeta = { ...meta, ast };
 
-  /**
-   * @memberof loader
-   * @callback callback
-   *
-   * @param {Object} null Error
-   * @param {String} css  Result (Raw Module)
-   * @param {Object} map  Source Map
-   */
-  callback(null, css, map, newMeta);
+  callback(null, result.css, map, newMeta);
 }
-
-/**
- * @author Andrey Sitnik (@ai) <andrey@sitnik.ru>
- *
- * @license MIT
- * @version 3.0.0
- *
- * @module postcss-loader
- *
- * @requires path
- *
- * @requires loader-utils
- * @requires schema-utils
- *
- * @requires postcss
- *
- * @requires ./Warning.js
- * @requires ./SyntaxError.js
- */

@@ -265,4 +265,20 @@ describe('Config Options', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should work "config" and "postcssOptions" options', async () => {
+    const compiler = getCompiler('./config-scope/css/index.js', {
+      postcssOptions: {
+        config: true,
+        plugins: ['postcss-rtl'],
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });

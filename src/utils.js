@@ -158,6 +158,80 @@ async function loadConfig(config, context, configPath, loaderContext) {
   return resultConfig;
 }
 
+function getPostcssOptions(loaderContext, config, options = {}) {
+  let plugins = [];
+
+  const disabledPlugins = [];
+  const file = loaderContext.resourcePath;
+
+  try {
+    plugins = [
+      ...getArrayPlugins(config.plugins, file, false, loaderContext),
+      ...getArrayPlugins(options.plugins, file, disabledPlugins, loaderContext),
+    ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
+  } catch (error) {
+    loaderContext.emitError(error);
+  }
+
+  const processOptions = {
+    // TODO path.resolve
+    from: file,
+    to: file,
+    map: false,
+    ...config,
+    ...options,
+  };
+
+  let needExecute = false;
+
+  if (typeof processOptions.parser === 'string') {
+    // TODO respect the `syntax` option too or remove this options
+    if (processOptions.parser === 'postcss-js') {
+      needExecute = true;
+    }
+
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      processOptions.parser = require(processOptions.parser);
+    } catch (error) {
+      // TODO improve
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS parser failed: ${error.message}\n\n(@${file})`
+        )
+      );
+    }
+  }
+
+  if (typeof processOptions.stringifier === 'string') {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      processOptions.stringifier = require(processOptions.stringifier);
+    } catch (error) {
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
+        )
+      );
+    }
+  }
+
+  if (typeof processOptions.syntax === 'string') {
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      processOptions.syntax = require(processOptions.syntax);
+    } catch (error) {
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
+        )
+      );
+    }
+  }
+
+  return { plugins, processOptions, needExecute };
+}
+
 function getPlugin(pluginEntry) {
   if (!pluginEntry) {
     return [];
@@ -310,8 +384,9 @@ function getSourceMapAbsolutePath(file, to) {
 }
 
 export {
-  exec,
   loadConfig,
+  getPostcssOptions,
+  exec,
   getArrayPlugins,
   getSourceMapAbsolutePath,
   getSourceMapRelativePath,

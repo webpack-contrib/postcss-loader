@@ -5,7 +5,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: parser is not a function",
   "ModuleError: Module Error (from \`replaced original path\`):
-(Emitted value instead of an instance of Error) Loading PostCSS Parser failed: Cannot find module 'unresolve' from 'src/index.js'",
+Loading PostCSS parser failed: Cannot find module 'unresolve' from 'src/utils.js'",
 ]
 `;
 

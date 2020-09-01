@@ -5,8 +5,8 @@
     "parser": false,
     "syntax": false,
     "map": false,
-    "from": "./test/pkg/fixtures/index.css",
-    "to": "./test/pkg/expect/index.css",
+    "from": "./test/fixtures/config-autoload/pkg/index.css",
+    "to": "./test/fixtures/config-autoload/pkg/expected/index.css",
     "plugins": {
       "postcss-import": {},
       "postcss-nested": {},
