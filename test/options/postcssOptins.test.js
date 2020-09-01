@@ -6,8 +6,8 @@ import {
   getWarnings,
 } from '../helpers/index';
 
-describe('Postcss options', () => {
-  it.only('should work "from", "to" and "map" postcssOptions', async () => {
+describe('"postcssOptions" option', () => {
+  it('should work with "from", "to" and "map" options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         from: '/test/from.css',
@@ -32,6 +32,21 @@ describe('Postcss options', () => {
 
     expect(toIsWork).toBe(true);
     expect(fromIsWork).toBe(true);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(codeFromBundle.map).toMatchSnapshot('map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work the the "map" option and generate inlined source maps', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        map: { inline: true, annotation: false },
+      },
+    });
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
 
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(codeFromBundle.map).toMatchSnapshot('map');

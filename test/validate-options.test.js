@@ -61,8 +61,8 @@ describe('validate options', () => {
       ],
     },
     sourceMap: {
-      success: ['source-map', true],
-      failure: [1, /test/, [], {}],
+      success: [true, false],
+      failure: [1, /test/, [], {}, 'something'],
     },
   };
 

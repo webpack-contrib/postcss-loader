@@ -103,10 +103,10 @@ export default async function loader(content, sourceMap, meta = {}) {
   }
 
   if (useSourceMap) {
-    processOptions.map =
-      options.sourceMap === 'inline'
-        ? { inline: true, annotation: false }
-        : { inline: false, annotation: false };
+    processOptions.map = { inline: false, annotation: false };
+    // options.sourceMap === 'inline'
+    //   ? { inline: true, annotation: false }
+    //   : { inline: false, annotation: false };
 
     if (sourceMap) {
       const sourceMapNormalized = normalizeSourceMap(sourceMap);

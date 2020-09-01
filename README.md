@@ -118,7 +118,7 @@ module.exports = {
 |           [`exec`](#exec)           |         `{Boolean}`         |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS`    |
 |         [`config`](#config)         | `{String\|Object\|Boolean}` |              `undefined`              | Set `postcss.config.js` config path && `ctx`    |
 | [`postcssOptions`](#postcssOptions) |         `{Object}`          | `defaults values for Postcss.process` | Set Postcss.process options and postcss plugins |
-|      [`sourceMap`](#sourcemap)      |     `{String\|Boolean}`     |          `compiler.devtool`           | Enables/Disables generation of source maps      |
+|      [`sourceMap`](#sourcemap)      |         `{Boolean}`         |          `compiler.devtool`           | Enables/Disables generation of source maps      |
 
 ### `Exec`
 
@@ -649,68 +649,29 @@ module.exports = {
 
 ### `SourceMap`
 
-Type: `Boolean|String`
-Default: `compiler.devtool`
+Type: `Boolean`
+Default: depends on the `compiler.devtool` value
 
-By default generation of source maps depends on the devtool option.
-All values enable source map generation except eval and false value.
-In most cases this option should be discouraged.
-If need `postcss-loader` to generate an inline map, use the `inline` value.
-`postcss-loader` will use the previous source map given by other loaders and update it accordingly, if no previous loader is applied before `postcss-loader`, the loader will generate a source map for you.
+By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option. All values enable source map generation except `eval` and `false` value.
 
 **webpack.config.js**
 
 ```js
 module.exports = {
-  devtool: 'source-map',
   module: {
     rules: [
       {
         test: /\.css$/i,
         use: [
-          { loader: 'style-loader', options: { sourceMap: true } },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader' },
-          { loader: 'sass-loader' },
+          { loader: 'style-loader' },
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
     ],
   },
 };
-```
-
-#### `'inline'`
-
-You can set the `sourceMap: 'inline'` option to inline the source map
-within the CSS directly as an annotation comment.
-
-**webpack.config.js**
-
-```js
-module.exports = {
-  devtool: 'source-map',
-  module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: [
-          { loader: 'style-loader', options: { sourceMap: true } },
-          { loader: 'css-loader' },
-          { loader: 'postcss-loader', options: { sourceMap: 'inline' } },
-          { loader: 'sass-loader' },
-        ],
-      },
-    ],
-  },
-};
-```
-
-```css
-.class {
-  color: red;
-}
-
-/*# sourceMappingURL=data:application/json;base64, ... */
 ```
 
 <h2 align="center">Examples</h2>

@@ -95,14 +95,7 @@
     },
     "sourceMap": {
       "description": "Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)",
-      "anyOf": [
-        {
-          "type": "string"
-        },
-        {
-          "type": "boolean"
-        }
-      ]
+      "type": "boolean"
     }
   },
   "additionalProperties": true
