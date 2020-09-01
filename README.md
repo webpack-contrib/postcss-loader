@@ -760,7 +760,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                 plugins: [['autoprefixer', { ...options }]],
+                plugins: [['autoprefixer', { ...options }]],
               },
             },
           },
