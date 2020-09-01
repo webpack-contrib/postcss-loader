@@ -248,40 +248,30 @@ exports[`validate options should throw an error on the "postcssOptions" option w
 
 exports[`validate options should throw an error on the "sourceMap" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be one of these:
-   string | boolean
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
-   Details:
-    * options.sourceMap should be a string.
-    * options.sourceMap should be a boolean."
+ - options.sourceMap should be a boolean.
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be one of these:
-   string | boolean
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
-   Details:
-    * options.sourceMap should be a string.
-    * options.sourceMap should be a boolean."
+ - options.sourceMap should be a boolean.
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be one of these:
-   string | boolean
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
-   Details:
-    * options.sourceMap should be a string.
-    * options.sourceMap should be a boolean."
+ - options.sourceMap should be a boolean.
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be one of these:
-   string | boolean
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
-   Details:
-    * options.sourceMap should be a string.
-    * options.sourceMap should be a boolean."
+ - options.sourceMap should be a boolean.
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+`;
+
+exports[`validate options should throw an error on the "sourceMap" option with "something" value 1`] = `
+"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
+ - options.sourceMap should be a boolean.
+   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
 `;

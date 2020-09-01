@@ -1,13 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Postcss options should work "from", "to" and "map" postcssOptions: css 1`] = `
+exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: css 1`] = `
+"a { color: black }
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLGFBQWEiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */"
+`;
+
+exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: map 1`] = `undefined`;
+
+exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with "from", "to" and "map" options: css 1`] = `
 "a { color: black }
 "
 `;
 
-exports[`Postcss options should work "from", "to" and "map" postcssOptions: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options: errors 1`] = `Array []`;
 
-exports[`Postcss options should work "from", "to" and "map" postcssOptions: map 1`] = `
+exports[`"postcssOptions" option should work with "from", "to" and "map" options: map 1`] = `
 Object {
   "file": "x",
   "mappings": "AAAA,IAAI,aAAa",
@@ -23,4 +35,4 @@ Object {
 }
 `;
 
-exports[`Postcss options should work "from", "to" and "map" postcssOptions: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options: warnings 1`] = `Array []`;
