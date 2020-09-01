@@ -5,19 +5,6 @@ import { getCompiler, compile } from './helpers/index';
 
 describe('validate options', () => {
   const tests = {
-    config: {
-      success: [
-        { path: 'test/fixtures/config-scope/config/postcss.config.js' },
-        {
-          path: 'test/fixtures/config-scope/config/postcss.config.js',
-          ctx: { plugin: true },
-        },
-        true,
-        false,
-        'test/fixtures/config-scope/config/postcss.config.js',
-      ],
-      failure: [[], { foo: 'bar' }],
-    },
     exec: {
       success: [false],
       failure: [1, 'test', /test/, [], {}, { foo: 'bar' }],
@@ -32,16 +19,30 @@ describe('validate options', () => {
         { stringifier: 'sugarss' },
         { stringifier: require('sugarss') },
         { stringifier: require('sugarss').stringify },
-        { plugins: () => require('./fixtures/config/plugin')() },
-        { plugins: () => [require('./fixtures/config/plugin')()] },
+        { plugins: () => require('./fixtures/config-scope/config/plugin')() },
+        { plugins: () => [require('./fixtures/config-scope/config/plugin')()] },
         {
           plugins: [
-            require('./fixtures/config/plugin')(),
-            require('./fixtures/config/plugin'),
+            require('./fixtures/config-scope/config/plugin')(),
+            require('./fixtures/config-scope/config/plugin'),
             { 'postcss-short': { prefix: 'x' } },
           ],
         },
         { plugins: { 'postcss-short': { prefix: 'x' } } },
+        { config: true },
+        { config: false },
+        { config: 'test/fixtures/config-scope/config/postcss.config.js' },
+        {
+          config: {
+            path: 'test/fixtures/config-scope/config/postcss.config.js',
+          },
+        },
+        {
+          config: {
+            path: 'test/fixtures/config-scope/config/postcss.config.js',
+            ctx: { plugin: true },
+          },
+        },
       ],
       failure: [
         { parser: 1 },
@@ -56,6 +57,7 @@ describe('validate options', () => {
         { plugins: 1 },
         { plugins: true },
         { plugins: 'postcss-short' },
+        { config: [] },
       ],
     },
     sourceMap: {

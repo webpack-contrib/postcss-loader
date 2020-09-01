@@ -8,6 +8,33 @@
           "type": "object",
           "additionalProperties": true,
           "properties": {
+            "config": {
+              "description": "Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)",
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "path": {
+                      "description": "Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#path)",
+                      "type": "string"
+                    },
+                    "ctx": {
+                      "description": "Allows to specify PostCSS Config Context (https://github.com/postcss/postcss-loader#context-ctx)",
+                      "type": "object"
+                    }
+                  },
+                  "additionalProperties": false
+                },
+                {
+                  "description": "Allows to specify the path to the configuration file",
+                  "type": "string"
+                },
+                {
+                  "description": "Enables/Disables autoloading config",
+                  "type": "boolean"
+                }
+              ]
+            },
             "parser": {
               "description": "Allows to specify custom Postcss Parser (https://github.com/postcss/postcss-loader#parser)",
               "anyOf": [
@@ -59,33 +86,6 @@
         },
         {
           "instanceof": "Function"
-        }
-      ]
-    },
-    "config": {
-      "description": "Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)",
-      "anyOf": [
-        {
-          "type": "object",
-          "properties": {
-            "path": {
-              "description": "Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#path)",
-              "type": "string"
-            },
-            "ctx": {
-              "description": "Allows to specify PostCSS Config Context (https://github.com/postcss/postcss-loader#context-ctx)",
-              "type": "object"
-            }
-          },
-          "additionalProperties": false
-        },
-        {
-          "description": "Allows to specify the path to the configuration file",
-          "type": "string"
-        },
-        {
-          "description": "Enables/Disables autoloading config",
-          "type": "boolean"
         }
       ]
     },

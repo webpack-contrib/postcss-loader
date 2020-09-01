@@ -11,7 +11,7 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line global-require
-        plugins: [require('../fixtures/config/plugin')()],
+        plugins: [require('../fixtures/config-scope/config/plugin')()],
       },
     });
     const stats = await compile(compiler);
@@ -27,7 +27,7 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line global-require
-        plugins: require('../fixtures/config/plugin'),
+        plugins: require('../fixtures/config-scope/config/plugin'),
       },
     });
     const stats = await compile(compiler);
@@ -43,7 +43,7 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line global-require
-        plugins: () => [require('../fixtures/config/plugin')()],
+        plugins: () => [require('../fixtures/config-scope/config/plugin')()],
       },
     });
     const stats = await compile(compiler);
@@ -59,7 +59,7 @@ describe('Options Plugins', () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line global-require
-        plugins: () => require('../fixtures/config/plugin')(),
+        plugins: () => require('../fixtures/config-scope/config/plugin')(),
       },
     });
     const stats = await compile(compiler);

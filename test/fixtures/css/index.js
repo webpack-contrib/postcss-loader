@@ -1,3 +1,3 @@
-import style from './style.css'
+import style from './style.css';
 
-export default style
+export default style;

@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const postcss = require('postcss')
+const postcss = require('postcss');
 
 module.exports = postcss.plugin('plugin', (options) => {
-  options = Object.assign({ alpha: '1.0' }, options)
+  options = Object.assign({ alpha: '1.0' }, options);
 
   return (css, result) => {
     css.walkDecls((decl) => {
@@ -12,4 +12,4 @@ module.exports = postcss.plugin('plugin', (options) => {
       }
     })
   }
-})
+});

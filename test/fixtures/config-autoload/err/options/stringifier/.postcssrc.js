@@ -1,5 +1,5 @@
-module.exports = function (ctx) {
+module.exports = function () {
   return {
     stringifier: 'postcss-stringifier'
   }
-}
+};

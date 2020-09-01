@@ -40,10 +40,14 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   const callback = this.async();
   const file = this.resourcePath;
-  let loadedConfig = {};
 
   const configOptions =
-    typeof options.config === 'undefined' ? true : options.config;
+    typeof options.postcssOptions === 'undefined' ||
+    typeof options.postcssOptions.config === 'undefined'
+      ? true
+      : options.postcssOptions.config;
+
+  let loadedConfig = {};
 
   if (configOptions) {
     const dataForLoadConfig = {
@@ -82,7 +86,6 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  loadedConfig.postcssOptions = loadedConfig.postcssOptions || {};
   options.postcssOptions = options.postcssOptions || {};
 
   let plugins;
@@ -91,8 +94,13 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   try {
     plugins = [
-      ...getArrayPlugins(loadedConfig.postcssOptions.plugins, file, false, this),
-      ...getArrayPlugins(options.postcssOptions.plugins, file, disabledPlugins, this),
+      ...getArrayPlugins(loadedConfig.plugins, file, false, this),
+      ...getArrayPlugins(
+        options.postcssOptions.plugins,
+        file,
+        disabledPlugins,
+        this
+      ),
     ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
   } catch (error) {
     this.emitError(error);
@@ -137,8 +145,6 @@ export default async function loader(content, sourceMap, meta = {}) {
     postcssOptions.map.prev = sourceMapNormalized;
   }
 
-  // Loader Exec (Deprecated)
-  // https://webpack.js.org/api/loaders/#deprecated-context-properties
   if (postcssOptions.parser === 'postcss-js') {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
@@ -146,7 +152,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   if (typeof postcssOptions.parser === 'string') {
     try {
-      // eslint-disable-next-line import/no-dynamic-require,global-require
+      // eslint-disable-next-line import/no-dynamic-require, global-require
       postcssOptions.parser = require(postcssOptions.parser);
     } catch (error) {
       this.emitError(
@@ -157,7 +163,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   if (typeof postcssOptions.syntax === 'string') {
     try {
-      // eslint-disable-next-line import/no-dynamic-require,global-require
+      // eslint-disable-next-line import/no-dynamic-require, global-require
       postcssOptions.syntax = require(postcssOptions.syntax);
     } catch (error) {
       this.emitError(
@@ -168,7 +174,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   if (typeof postcssOptions.stringifier === 'string') {
     try {
-      // eslint-disable-next-line import/no-dynamic-require,global-require
+      // eslint-disable-next-line import/no-dynamic-require, global-require
       postcssOptions.stringifier = require(postcssOptions.stringifier);
     } catch (error) {
       this.emitError(
@@ -177,8 +183,6 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  // Loader API Exec (Deprecated)
-  // https://webpack.js.org/api/loaders/#deprecated-context-properties
   if (mergedOptions.exec) {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
@@ -226,7 +230,7 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   map = map ? map.toJSON() : null;
 
-  if (map) {
+  if (map && useSourceMap) {
     if (typeof map.file !== 'undefined') {
       delete map.file;
     }

@@ -1,7 +1,5 @@
 module.exports = (ctx) => ({
-  postcssOptions: {
-    plugins: [
-      require('./plugin')(ctx)
-    ]
-  },
-})
+  plugins: [
+    require('./plugin')(ctx)
+  ]
+});

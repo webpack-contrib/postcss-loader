@@ -1,7 +1,6 @@
 module.exports = {
-  postcssOptions: {
-    plugins: [
-      require('../config/plugin')()
-    ]
-  }
-}
+  plugins: [
+    require('../config/plugin')()
+  ]
+};
+

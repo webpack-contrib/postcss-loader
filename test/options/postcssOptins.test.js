@@ -7,14 +7,13 @@ import {
 } from '../helpers/index';
 
 describe('Postcss options', () => {
-  it('should work "from", "to" and "map" postcssOptions', async () => {
+  it.only('should work "from", "to" and "map" postcssOptions', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         from: '/test/from.css',
         to: '/test/to.css',
         map: { inline: false, annotation: false },
       },
-      config: false,
     });
     const stats = await compile(compiler);
 

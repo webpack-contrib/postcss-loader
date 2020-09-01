@@ -1,5 +1,5 @@
-module.exports = function (ctx) {
+module.exports = function () {
   return {
     parser: 'postcss-parser'
   }
-}
+};
