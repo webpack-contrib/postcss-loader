@@ -145,15 +145,11 @@ async function loadConfig(config, context, configPath, loaderContext) {
 
   if (typeof resultConfig === 'function') {
     resultConfig = resultConfig(patchedContext);
-  } else {
-    resultConfig = { ...resultConfig, ...patchedContext };
   }
 
-  if (result.filepath) {
-    resultConfig.file = result.filepath;
+  resultConfig.file = result.filepath;
 
-    loaderContext.addDependency(result.filepath);
-  }
+  loaderContext.addDependency(result.filepath);
 
   return resultConfig;
 }
@@ -173,13 +169,24 @@ function getPostcssOptions(loaderContext, config, options = {}) {
     loaderContext.emitError(error);
   }
 
+  const processOptionsFromConfig = { ...config };
+
+  // No need them
+  delete processOptionsFromConfig.plugins;
+
+  const processOptionsFromOptions = { ...options };
+
+  // No need them
+  delete processOptionsFromOptions.config;
+  delete processOptionsFromOptions.plugins;
+
   const processOptions = {
     // TODO path.resolve
     from: file,
     to: file,
     map: false,
-    ...config,
-    ...options,
+    ...processOptionsFromConfig,
+    ...processOptionsFromOptions,
   };
 
   let needExecute = false;
@@ -194,10 +201,9 @@ function getPostcssOptions(loaderContext, config, options = {}) {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       processOptions.parser = require(processOptions.parser);
     } catch (error) {
-      // TODO improve
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS parser failed: ${error.message}\n\n(@${file})`
+          `Loading PostCSS "${processOptions.parser}" parser failed: ${error.message}\n\n(@${file})`
         )
       );
     }
@@ -210,7 +216,7 @@ function getPostcssOptions(loaderContext, config, options = {}) {
     } catch (error) {
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS Stringifier failed: ${error.message}\n\n(@${file})`
+          `Loading PostCSS "${processOptions.stringifier}" stringifier failed: ${error.message}\n\n(@${file})`
         )
       );
     }
@@ -223,7 +229,7 @@ function getPostcssOptions(loaderContext, config, options = {}) {
     } catch (error) {
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS Syntax failed: ${error.message}\n\n(@${file})`
+          `Loading PostCSS "${processOptions.syntax}" syntax failed: ${error.message}\n\n(@${file})`
         )
       );
     }

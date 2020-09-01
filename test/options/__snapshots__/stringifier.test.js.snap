@@ -5,7 +5,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: this.stringify is not a function",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS Stringifier failed: Cannot find module 'unresolved' from 'src/utils.js'",
+Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 

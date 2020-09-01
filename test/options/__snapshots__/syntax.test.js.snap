@@ -5,7 +5,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: Cannot read property 'parse' of undefined",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS Syntax failed: Cannot find module 'unresolve' from 'src/utils.js'",
+Loading PostCSS \\"unresolve\\" syntax failed: Cannot find module 'unresolve' from 'src/utils.js'",
 ]
 `;
 
