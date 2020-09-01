@@ -45,18 +45,6 @@ describe('Options Sourcemap', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Sourcemap - {String}', async () => {
-    const compiler = getCompiler('./css/index.js', { sourceMap: 'inline' });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style.css', stats);
-
-    expect(codeFromBundle.map).toBeUndefined();
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
   it('should work with prev sourceMap (sass-loader)', async () => {
     const compiler = getCompiler(
       './scss/index.js',
@@ -118,9 +106,6 @@ describe('Options Sourcemap', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../../src'),
-                  options: {
-                    config: false,
-                  },
                 },
                 {
                   loader: 'less-loader',

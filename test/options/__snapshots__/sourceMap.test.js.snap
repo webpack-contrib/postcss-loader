@@ -48,21 +48,6 @@ Object {
 
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: warnings 1`] = `Array []`;
 
-exports[`Options Sourcemap should work Sourcemap - {String}: css 1`] = `"throw new Error(\\"Module build failed (from /home/evilebottnawi/IdeaProjects/postcss-loader/src/index.js):\\\\nValidationError: Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.\\\\n - options.sourceMap should be a boolean.\\\\n   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)\\\\n    at validate (/home/evilebottnawi/IdeaProjects/postcss-loader/node_modules/schema-utils/dist/validate.js:96:11)\\\\n    at Object.loader (/home/evilebottnawi/IdeaProjects/postcss-loader/src/index.js:36:3)\\");"`;
-
-exports[`Options Sourcemap should work Sourcemap - {String}: errors 1`] = `
-Array [
-  "ModuleBuildError: Module build failed (from \`replaced original path\`):
-ValidationError: Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)
-    at validate (/node_modules/schema-utils/dist/validate.js:96:11)
-    at Object.loader (/src/index.js:36:3)",
-]
-`;
-
-exports[`Options Sourcemap should work Sourcemap - {String}: warnings 1`] = `Array []`;
-
 exports[`Options Sourcemap should work disable Sourcemap - {Boolean}: css 1`] = `
 "a { color: black }
 "
