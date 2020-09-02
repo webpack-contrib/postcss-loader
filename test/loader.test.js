@@ -14,7 +14,6 @@ describe('loader', () => {
       postcssOptions: {
         plugins: [],
       },
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -38,7 +37,6 @@ describe('loader', () => {
       postcssOptions: {
         plugins: [postcssPlugin()],
       },
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -54,7 +52,6 @@ describe('loader', () => {
       postcssOptions: {
         parser: 'sugarss',
       },
-      config: false,
     });
     const stats = await compile(compiler);
 
@@ -78,7 +75,6 @@ describe('loader', () => {
       postcssOptions: {
         plugins: [postcssPlugin()],
       },
-      config: false,
     });
     const stats = await compile(compiler);
 

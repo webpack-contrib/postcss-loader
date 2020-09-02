@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
-    'postcss-short': { prefix: 'x' },
     'postcss-import': {},
-    'postcss-nested': {},
+    'postcss-nested': { preserveEmpty: true },
+    'postcss-short': { prefix: 'x' },
   }
 };

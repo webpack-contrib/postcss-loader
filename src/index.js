@@ -38,43 +38,40 @@ export default async function loader(content, sourceMap, meta = {}) {
     baseDataPath: 'options',
   });
 
-  const file = this.resourcePath;
-  const configOptions =
+  const callback = this.async();
+  const configOption =
     typeof options.postcssOptions === 'undefined' ||
     typeof options.postcssOptions.config === 'undefined'
       ? true
       : options.postcssOptions.config;
-
   let loadedConfig = {};
 
-  const callback = this.async();
-
-  if (configOptions) {
+  if (configOption) {
     const dataForLoadConfig = {
-      path: path.dirname(file),
+      path: path.dirname(this.resourcePath),
       ctx: {
         file: {
-          extname: path.extname(file),
-          dirname: path.dirname(file),
-          basename: path.basename(file),
+          extname: path.extname(this.resourcePath),
+          dirname: path.dirname(this.resourcePath),
+          basename: path.basename(this.resourcePath),
         },
         options: {},
       },
     };
 
-    if (typeof configOptions.path !== 'undefined') {
-      dataForLoadConfig.path = path.resolve(configOptions.path);
+    if (typeof configOption.path !== 'undefined') {
+      dataForLoadConfig.path = path.resolve(configOption.path);
     }
 
-    if (typeof configOptions.ctx !== 'undefined') {
-      dataForLoadConfig.ctx.options = configOptions.ctx;
+    if (typeof configOption.ctx !== 'undefined') {
+      dataForLoadConfig.ctx.options = configOption.ctx;
     }
 
     dataForLoadConfig.ctx.webpack = this;
 
     try {
       loadedConfig = await loadConfig(
-        configOptions,
+        configOption,
         dataForLoadConfig.ctx,
         dataForLoadConfig.path,
         this
@@ -112,7 +109,7 @@ export default async function loader(content, sourceMap, meta = {}) {
       const sourceMapNormalized = normalizeSourceMap(sourceMap);
 
       sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
-        getSourceMapRelativePath(src, path.dirname(file))
+        getSourceMapRelativePath(src, path.dirname(this.resourcePath))
       );
 
       processOptions.map.prev = sourceMapNormalized;
@@ -137,11 +134,11 @@ export default async function loader(content, sourceMap, meta = {}) {
     return;
   }
 
-  result.warnings().forEach((warning) => {
+  for (const warning of result.warnings()) {
     this.emitWarning(new Warning(warning));
-  });
+  }
 
-  result.messages.forEach((message) => {
+  for (const message of result.messages) {
     if (message.type === 'dependency') {
       this.addDependency(message.file);
     }
@@ -154,7 +151,7 @@ export default async function loader(content, sourceMap, meta = {}) {
         message.info
       );
     }
-  });
+  }
 
   const map = result.map ? result.map.toJSON() : null;
 
@@ -163,7 +160,9 @@ export default async function loader(content, sourceMap, meta = {}) {
       delete map.file;
     }
 
-    map.sources = map.sources.map((src) => getSourceMapAbsolutePath(src, file));
+    map.sources = map.sources.map((src) =>
+      getSourceMapAbsolutePath(src, this.resourcePath)
+    );
   }
 
   const ast = {

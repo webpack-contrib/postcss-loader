@@ -12,7 +12,49 @@ Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresol
 exports[`Options Stringifier should emit error Stringifier: warnings 1`] = `Array []`;
 
 exports[`Options Stringifier should work Stringifier - {Function}: css 1`] = `
-"<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span> <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span> <span class=\\"midas__brace\\">}</span>
+"<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">red</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">green</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">-x-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__property\\">-x-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class-foo</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">-z-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__property\\">-z-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.phone</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__selector\\">_title</span> <span class=\\"midas__brace\\">{</span>
+    <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__number\\">500px</span></span><span class=\\"midas__semicolon\\">;</span>
+
+    <span class=\\"midas__at-rule\\"><span class=\\"midas__at-rule-name\\">@media</span> <span class=\\"midas__function\\"><span class=\\"midas__parenthesis\\">(</span><span class=\\"midas__property\\">max-width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__number\\">500px</span><span class=\\"midas__parenthesis\\">)</span></span></span> <span class=\\"midas__brace\\">{</span>
+      <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">auto</span></span><span class=\\"midas__semicolon\\">;</span>
+    <span class=\\"midas__brace\\">}</span>
+
+    <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">body</span><span class=\\"midas__class\\">.is_dark</span><span class=\\"midas__combinator\\"> </span></span> <span class=\\"midas__brace\\">{</span>
+      <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">white</span></span><span class=\\"midas__semicolon\\">;</span>
+    <span class=\\"midas__brace\\">}</span>
+  <span class=\\"midas__brace\\">}</span>
+
+  <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">img</span></span> <span class=\\"midas__brace\\">{</span>
+    <span class=\\"midas__property\\">display</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">block</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__brace\\">}</span>
+<span class=\\"midas__brace\\">}</span>
 </code></pre>"
 `;
 
@@ -21,7 +63,38 @@ exports[`Options Stringifier should work Stringifier - {Function}: errors 1`] = 
 exports[`Options Stringifier should work Stringifier - {Function}: warnings 1`] = `Array []`;
 
 exports[`Options Stringifier should work Stringifier - {Object}: css 1`] = `
-"a  color: black
+"a
+  color: black
+
+a
+  color: red
+
+a
+  color: green
+
+a
+  color: blue
+
+.class
+  -x-border-color: blue blue *
+  -x-color: * #fafafa
+
+.class-foo
+  -z-border-color: blue blue *
+  -z-color: * #fafafa
+
+.phone
+  &_title
+    width: 500px
+
+    @media (max-width: 500px)
+      width: auto
+
+    body.is_dark &
+      color: white
+
+  img
+    display: block
 "
 `;
 
@@ -30,7 +103,38 @@ exports[`Options Stringifier should work Stringifier - {Object}: errors 1`] = `A
 exports[`Options Stringifier should work Stringifier - {Object}: warnings 1`] = `Array []`;
 
 exports[`Options Stringifier should work Stringifier - {String}: css 1`] = `
-"a  color: black
+"a
+  color: black
+
+a
+  color: red
+
+a
+  color: green
+
+a
+  color: blue
+
+.class
+  -x-border-color: blue blue *
+  -x-color: * #fafafa
+
+.class-foo
+  -z-border-color: blue blue *
+  -z-color: * #fafafa
+
+.phone
+  &_title
+    width: 500px
+
+    @media (max-width: 500px)
+      width: auto
+
+    body.is_dark &
+      color: white
+
+  img
+    display: block
 "
 `;
 

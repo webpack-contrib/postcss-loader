@@ -1,7 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Options Sourcemap should generated absolute paths in sourcemap: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 "
 `;
 
@@ -9,13 +51,55 @@ exports[`Options Sourcemap should generated absolute paths in sourcemap: errors 
 
 exports[`Options Sourcemap should generated absolute paths in sourcemap: map 1`] = `
 Object {
-  "mappings": "AAAA,IAAI,aAAa",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": Array [],
   "sources": Array [
     "xxx",
   ],
   "sourcesContent": Array [
-    "a { color: black }
+    "a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 ",
   ],
   "version": 3,
@@ -25,7 +109,49 @@ Object {
 exports[`Options Sourcemap should generated absolute paths in sourcemap: warnings 1`] = `Array []`;
 
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 "
 `;
 
@@ -33,13 +159,55 @@ exports[`Options Sourcemap should work Sourcemap - {Boolean}: errors 1`] = `Arra
 
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: map 1`] = `
 Object {
-  "mappings": "AAAA,IAAI,aAAa",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": Array [],
   "sources": Array [
     "xxx",
   ],
   "sourcesContent": Array [
-    "a { color: black }
+    "a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 ",
   ],
   "version": 3,
@@ -49,7 +217,49 @@ Object {
 exports[`Options Sourcemap should work Sourcemap - {Boolean}: warnings 1`] = `Array []`;
 
 exports[`Options Sourcemap should work disable Sourcemap - {Boolean}: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 "
 `;
 

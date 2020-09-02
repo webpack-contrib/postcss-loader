@@ -8,7 +8,7 @@ module.exports = postcss.plugin('plugin', (options) => {
   return (css, result) => {
     css.walkDecls((decl) => {
       if (decl.value === 'black') {
-        decl.value = 'rgba(255, 0, 0, ' + options.alpha + ')'
+        decl.value = 'rgba(0, 0, 0, ' + options.alpha + ')'
       }
     })
   }

@@ -19,7 +19,7 @@ Error: No PostCSS Config found in: /test/fixtures/config-scope/css/unresolve.js"
 exports[`Config Options should emit error when unresolved config : warnings 1`] = `Array []`;
 
 exports[`Config Options should work "config" and "postcssOptions" options: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 [dir=ltr] .foo { float: right;
 }
@@ -35,7 +35,7 @@ exports[`Config Options should work "config" and "postcssOptions" options: error
 exports[`Config Options should work "config" and "postcssOptions" options: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - "string" with path directory: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -48,7 +48,7 @@ exports[`Config Options should work Config - "string" with path directory: error
 exports[`Config Options should work Config - "string" with path directory: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - "string" with relative path: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -61,7 +61,7 @@ exports[`Config Options should work Config - "string" with relative path: errors
 exports[`Config Options should work Config - "string" with relative path: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - "string": css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -74,7 +74,7 @@ exports[`Config Options should work Config - "string": errors 1`] = `Array []`;
 exports[`Config Options should work Config - "string": warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - {Object}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -87,7 +87,7 @@ exports[`Config Options should work Config - {Object}: errors 1`] = `Array []`;
 exports[`Config Options should work Config - {Object}: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - Context - {Object}: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -100,7 +100,7 @@ exports[`Config Options should work Config - Context - {Object}: errors 1`] = `A
 exports[`Config Options should work Config - Context - {Object}: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - Object - path file: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -139,7 +139,7 @@ exports[`Config Options should work Config - false: errors 1`] = `Array []`;
 exports[`Config Options should work Config - false: warnings 1`] = `Array []`;
 
 exports[`Config Options should work Config - true: css 1`] = `
-"a { color: rgba(255, 0, 0, 1.0) }
+"a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
   float: right;
@@ -156,7 +156,49 @@ exports[`Config Options should work Config – Context – Loader {Object}: erro
 exports[`Config Options should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
 
 exports[`Config Options should work if Config not found: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 "
 `;
 

@@ -3,4 +3,3 @@ module.exports = (ctx) => ({
     ctx.options.plugin ? require('./plugin')() : false
   ]
 });
-

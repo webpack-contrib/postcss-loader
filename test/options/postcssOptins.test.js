@@ -53,4 +53,57 @@ describe('"postcssOptions" option', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should work when the "postcssOptions" option is "Function"', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: () => {
+        return {
+          // eslint-disable-next-line global-require
+          plugins: [require('../fixtures/config-scope/config/plugin')()],
+        };
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work when the "postcssOptions" option is "Function" and the "plugins" option is "Array"', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: () => {
+        return {
+          // eslint-disable-next-line global-require
+          plugins: [require('../fixtures/config-scope/config/plugin')()],
+        };
+      },
+    });
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work when the "postcssOptions" option is "Function" and the "plugins" option is "Object"', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: () => {
+        return {
+          // eslint-disable-next-line global-require
+          plugins: [require('../fixtures/config-scope/config/plugin')()],
+        };
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });
