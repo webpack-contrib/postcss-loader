@@ -1,8 +1,6 @@
 import path from 'path';
-
 import Module from 'module';
 
-import normalizePath from 'normalize-path';
 import { cosmiconfig } from 'cosmiconfig';
 
 const parentModule = module;
@@ -259,8 +257,26 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
   return { plugins, processOptions, needExecute };
 }
 
-// TODO Remove, when postcss 8 will be released
-function normalizeSourceMap(map) {
+const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
+const ABSOLUTE_SCHEME = /^[a-z0-9+\-.]+:/i;
+
+function getURLType(source) {
+  if (source[0] === '/') {
+    if (source[1] === '/') {
+      return 'scheme-relative';
+    }
+
+    return 'path-absolute';
+  }
+
+  if (IS_NATIVE_WIN32_PATH.test(source)) {
+    return 'path-absolute';
+  }
+
+  return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
+}
+
+function normalizeSourceMap(map, resourcePath) {
   let newMap = map;
 
   // Some loader emit source map as string
@@ -269,65 +285,69 @@ function normalizeSourceMap(map) {
     newMap = JSON.parse(newMap);
   }
 
-  // Source maps should use forward slash because it is URLs (https://github.com/mozilla/source-map/issues/91)
-  // We should normalize path because previous loaders like `sass-loader` using backslash when generate source map
-
-  if (newMap.file) {
-    delete newMap.file;
-  }
+  delete newMap.file;
 
   const { sourceRoot } = newMap;
 
-  if (newMap.sourceRoot) {
-    delete newMap.sourceRoot;
-  }
+  delete newMap.sourceRoot;
 
   if (newMap.sources) {
     newMap.sources = newMap.sources.map((source) => {
-      return !sourceRoot
-        ? normalizePath(source)
-        : normalizePath(path.resolve(sourceRoot, source));
+      const sourceType = getURLType(source);
+
+      // Do no touch `scheme-relative` and `absolute` URLs
+      if (sourceType === 'path-relative' || sourceType === 'path-absolute') {
+        const absoluteSource =
+          sourceType === 'path-relative' && sourceRoot
+            ? path.resolve(sourceRoot, path.normalize(source))
+            : path.normalize(source);
+
+        return path.relative(path.dirname(resourcePath), absoluteSource);
+      }
+
+      return source;
     });
   }
 
   return newMap;
 }
 
-function getSourceMapRelativePath(file, from) {
-  if (file.indexOf('<') === 0) return file;
-  if (/^\w+:\/\//.test(file)) return file;
+function normalizeSourceMapAfterPostcss(map, resourcePath) {
+  const newMap = map;
 
-  const result = path.relative(from, file);
+  // result.map.file is an optional property that provides the output filename.
+  // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
+  // eslint-disable-next-line no-param-reassign
+  delete newMap.file;
 
-  if (path.sep === '\\') {
-    return result.replace(/\\/g, '/');
-  }
+  // eslint-disable-next-line no-param-reassign
+  newMap.sourceRoot = '';
 
-  return result;
-}
+  // eslint-disable-next-line no-param-reassign
+  newMap.sources = newMap.sources.map((source) => {
+    if (source.indexOf('<') === 0) {
+      return source;
+    }
 
-function getSourceMapAbsolutePath(file, to) {
-  if (file.indexOf('<') === 0) return file;
-  if (/^\w+:\/\//.test(file)) return file;
+    const sourceType = getURLType(source);
 
-  if (typeof to === 'undefined') return file;
+    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
+    if (sourceType === 'path-relative') {
+      const dirname = path.dirname(resourcePath);
 
-  const dirname = path.dirname(to);
+      return path.resolve(dirname, source);
+    }
 
-  const result = path.resolve(dirname, file);
+    return source;
+  });
 
-  if (path.sep === '\\') {
-    return result.replace(/\\/g, '/');
-  }
-
-  return result;
+  return newMap;
 }
 
 export {
   loadConfig,
   getPostcssOptions,
   exec,
-  getSourceMapAbsolutePath,
-  getSourceMapRelativePath,
   normalizeSourceMap,
+  normalizeSourceMapAfterPostcss,
 };

@@ -12,9 +12,8 @@ import {
   loadConfig,
   getPostcssOptions,
   exec,
-  getSourceMapAbsolutePath,
-  getSourceMapRelativePath,
   normalizeSourceMap,
+  normalizeSourceMapAfterPostcss,
 } from './utils';
 
 /**
@@ -101,18 +100,12 @@ export default async function loader(content, sourceMap, meta = {}) {
 
   if (useSourceMap) {
     processOptions.map = { inline: false, annotation: false };
-    // options.sourceMap === 'inline'
-    //   ? { inline: true, annotation: false }
-    //   : { inline: false, annotation: false };
 
     if (sourceMap) {
-      const sourceMapNormalized = normalizeSourceMap(sourceMap);
-
-      sourceMapNormalized.sources = sourceMapNormalized.sources.map((src) =>
-        getSourceMapRelativePath(src, path.dirname(this.resourcePath))
+      processOptions.map.prev = normalizeSourceMap(
+        sourceMap,
+        this.resourcePath
       );
-
-      processOptions.map.prev = sourceMapNormalized;
     }
   }
 
@@ -153,16 +146,11 @@ export default async function loader(content, sourceMap, meta = {}) {
     }
   }
 
-  const map = result.map ? result.map.toJSON() : null;
+  // eslint-disable-next-line no-undefined
+  let map = result.map ? result.map.toJSON() : undefined;
 
   if (map && useSourceMap) {
-    if (typeof map.file !== 'undefined') {
-      delete map.file;
-    }
-
-    map.sources = map.sources.map((src) =>
-      getSourceMapAbsolutePath(src, this.resourcePath)
-    );
+    map = normalizeSourceMapAfterPostcss(map, this.resourcePath);
   }
 
   const ast = {

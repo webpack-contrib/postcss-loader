@@ -44,7 +44,6 @@
   "dependencies": {
     "cosmiconfig": "^7.0.0",
     "loader-utils": "^2.0.0",
-    "normalize-path": "^3.0.0",
     "postcss": "^7.0.0",
     "schema-utils": "^2.7.0"
   },
@@ -80,7 +79,7 @@
     "postcss-short": "^5.0.0",
     "prettier": "^2.0.5",
     "sass": "^1.26.10",
-    "sass-loader": "^9.0.3",
+    "sass-loader": "^10.0.1",
     "standard": "^14.3.4",
     "standard-version": "^8.0.2",
     "strip-ansi": "^6.0.0",
