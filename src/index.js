@@ -29,7 +29,7 @@ import {
  * @return {callback} callback Result
  */
 
-export default async function loader(content, sourceMap, meta = {}) {
+export default async function loader(content, sourceMap) {
   const options = getOptions(this);
 
   validateOptions(schema, options, {
@@ -156,10 +156,8 @@ export default async function loader(content, sourceMap, meta = {}) {
   const ast = {
     type: 'postcss',
     version: result.processor.version,
-    root: result.result,
+    root: result.root,
   };
 
-  const newMeta = { ...meta, ast };
-
-  callback(null, result.css, map, newMeta);
+  callback(null, result.css, map, { ast });
 }
