@@ -1,9 +1,51 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxJQUFJLGFBQWEiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG4iXX0= */"
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLDRCQUE0QjtFQUM1QixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSw0QkFBNEI7RUFDNUIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0U7SUFDRSxZQUFZOztJQUVaO01BQ0UsV0FBVztJQUNiOztJQUVBO01BQ0UsWUFBWTtJQUNkO0VBQ0Y7O0VBRUE7SUFDRSxjQUFjO0VBQ2hCO0FBQ0YiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuYSB7XG4gIGNvbG9yOiByZWQ7XG59XG5cbmEge1xuICBjb2xvcjogZ3JlZW47XG59XG5cbmEge1xuICBjb2xvcjogYmx1ZTtcbn1cblxuLmNsYXNzIHtcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXgtY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLmNsYXNzLWZvbyB7XG4gIC16LWJvcmRlci1jb2xvcjogYmx1ZSBibHVlICo7XG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XG59XG5cbi5waG9uZSB7XG4gICZfdGl0bGUge1xuICAgIHdpZHRoOiA1MDBweDtcblxuICAgIEBtZWRpYSAobWF4LXdpZHRoOiA1MDBweCkge1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgfVxuXG4gICAgYm9keS5pc19kYXJrICYge1xuICAgICAgY29sb3I6IHdoaXRlO1xuICAgIH1cbiAgfVxuXG4gIGltZyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cbn1cbiJdfQ== */"
 `;
 
 exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: errors 1`] = `Array []`;
@@ -12,27 +54,208 @@ exports[`"postcssOptions" option should work the the "map" option and generate i
 
 exports[`"postcssOptions" option should work the the "map" option and generate inlined source maps: warnings 1`] = `Array []`;
 
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Array": css 1`] = `
+"a {
+  color: rgba(0, 0, 0, 1.0);
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Array": errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Array": warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Object": css 1`] = `
+"a {
+  color: rgba(0, 0, 0, 1.0);
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Object": errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function" and the "plugins" option is "Object": warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function": css 1`] = `
+"a {
+  color: rgba(0, 0, 0, 1.0);
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function": errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work when the "postcssOptions" option is "Function": warnings 1`] = `Array []`;
+
 exports[`"postcssOptions" option should work with "from", "to" and "map" options: css 1`] = `
-"a { color: black }
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
 "
 `;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options: errors 1`] = `Array []`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options: map 1`] = `
-Object {
-  "file": "x",
-  "mappings": "AAAA,IAAI,aAAa",
-  "names": Array [],
-  "sources": Array [
-    "xxx",
-  ],
-  "sourcesContent": Array [
-    "a { color: black }
-",
-  ],
-  "version": 3,
-}
-`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options: map 1`] = `undefined`;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options: warnings 1`] = `Array []`;

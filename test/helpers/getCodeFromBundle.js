@@ -1,6 +1,4 @@
-import normalizeMap from './normalizeMap';
-
-export default (id, stats, processMap = true) => {
+export default (id, stats) => {
   const { modules } = stats.compilation;
   const module = modules.find((m) => m.id.endsWith(id));
   const { _source } = module;
@@ -19,7 +17,7 @@ export default (id, stats, processMap = true) => {
     result = { css: code };
   }
 
-  const { css, map } = result;
+  const { css, map: sourceMap } = result;
 
-  return { css, map: processMap ? normalizeMap(map) : map };
+  return { css, sourceMap };
 };

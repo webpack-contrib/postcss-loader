@@ -19,12 +19,17 @@ describe('validate options', () => {
         { stringifier: 'sugarss' },
         { stringifier: require('sugarss') },
         { stringifier: require('sugarss').stringify },
-        { plugins: () => require('./fixtures/config-scope/config/plugin')() },
-        { plugins: () => [require('./fixtures/config-scope/config/plugin')()] },
         {
           plugins: [
-            require('./fixtures/config-scope/config/plugin')(),
-            require('./fixtures/config-scope/config/plugin'),
+            require('./fixtures/plugin/plugin')(),
+            require('./fixtures/plugin/plugin'),
+            ['postcss-short', { prefix: 'x' }],
+          ],
+        },
+        {
+          plugins: [
+            require('./fixtures/plugin/plugin')(),
+            require('./fixtures/plugin/plugin'),
             { 'postcss-short': { prefix: 'x' } },
           ],
         },
@@ -57,6 +62,11 @@ describe('validate options', () => {
         { plugins: 1 },
         { plugins: true },
         { plugins: 'postcss-short' },
+        {
+          plugins: () => {
+            return [];
+          },
+        },
         { config: [] },
       ],
     },

@@ -1,10 +1,6 @@
 import path from 'path';
-
 import Module from 'module';
 
-import normalizePath from 'normalize-path';
-
-import postcssPkg from 'postcss/package.json';
 import { cosmiconfig } from 'cosmiconfig';
 
 const parentModule = module;
@@ -33,63 +29,6 @@ const createContext = (context) => {
 
   return result;
 };
-
-const load = (plugin, options, file) => {
-  try {
-    if (
-      options === null ||
-      typeof options === 'undefined' ||
-      Object.keys(options).length === 0
-    ) {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(plugin);
-    }
-
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(plugin)(options);
-  } catch (error) {
-    throw new Error(
-      `Loading PostCSS Plugin failed: ${error.message}\n\n(@${file})`
-    );
-  }
-};
-
-function loadPlugins(pluginEntry, file) {
-  const plugins = Object.entries(pluginEntry).filter((i) => {
-    const [, options] = i;
-
-    return options !== false ? pluginEntry : '';
-  });
-
-  const loadedPlugins = plugins.map((plugin) => {
-    const [pluginName, pluginOptions] = plugin;
-
-    return load(pluginName, pluginOptions, file);
-  });
-
-  if (loadedPlugins.length && loadedPlugins.length > 0) {
-    loadedPlugins.forEach((plugin, i) => {
-      if (plugin.default) {
-        // eslint-disable-next-line no-param-reassign
-        plugin = plugin.default;
-      }
-
-      if (
-        // eslint-disable-next-line
-        !(
-          (typeof plugin === 'object' && Array.isArray(plugin.plugins)) ||
-          typeof plugin === 'function'
-        )
-      ) {
-        throw new TypeError(
-          `Invalid PostCSS Plugin found at: plugins[${i}]\n\n(@${file})`
-        );
-      }
-    });
-  }
-
-  return loadedPlugins;
-}
 
 function exec(code, loaderContext) {
   const { resource, context } = loaderContext;
@@ -154,29 +93,109 @@ async function loadConfig(config, context, configPath, loaderContext) {
   return resultConfig;
 }
 
-function getPostcssOptions(loaderContext, config, options = {}) {
-  let plugins = [];
+function loadPlugin(plugin, options, file) {
+  // TODO defaults
+  try {
+    if (!options || Object.keys(options).length === 0) {
+      // eslint-disable-next-line global-require,import/no-dynamic-require
+      return require(plugin);
+    }
 
-  const disabledPlugins = [];
+    // eslint-disable-next-line global-require,import/no-dynamic-require
+    return require(plugin)(options);
+  } catch (error) {
+    throw new Error(
+      `Loading PostCSS Plugin failed: ${error.message}\n\n(@${file})`
+    );
+  }
+}
+
+function pluginFactory() {
+  const listOfPlugins = new Map();
+
+  return (plugins) => {
+    if (typeof plugins === 'undefined') {
+      return listOfPlugins;
+    }
+
+    if (Array.isArray(plugins)) {
+      for (const plugin of plugins) {
+        if (Array.isArray(plugin)) {
+          const [name, options] = plugin;
+
+          listOfPlugins.set(name, options);
+        } else if (
+          plugin &&
+          Object.keys(plugin).length === 1 &&
+          typeof plugin[Object.keys(plugin)[0]] === 'object' &&
+          plugin[Object.keys(plugin)[0]] !== null
+        ) {
+          const [name] = Object.keys(plugin);
+          const options = plugin[name];
+
+          if (options === false) {
+            listOfPlugins.delete(name);
+          } else {
+            listOfPlugins.set(name, options);
+          }
+        } else if (plugin) {
+          listOfPlugins.set(plugin);
+        }
+      }
+    } else {
+      const objectPlugins = Object.entries(plugins);
+
+      for (const [name, options] of objectPlugins) {
+        if (options === false) {
+          listOfPlugins.delete(name);
+        } else {
+          listOfPlugins.set(name, options);
+        }
+      }
+    }
+
+    return listOfPlugins;
+  };
+}
+
+function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
   const file = loaderContext.resourcePath;
 
+  let normalizedPostcssOptions = postcssOptions;
+
+  if (typeof normalizedPostcssOptions === 'function') {
+    normalizedPostcssOptions = normalizedPostcssOptions(loaderContext);
+  }
+
+  let plugins = [];
+
   try {
-    plugins = [
-      ...getArrayPlugins(config.plugins, file, false, loaderContext),
-      ...getArrayPlugins(options.plugins, file, disabledPlugins, loaderContext),
-    ].filter((i) => !disabledPlugins.includes(i.postcssPlugin));
+    const factory = pluginFactory();
+
+    factory(config.plugins);
+    factory(normalizedPostcssOptions.plugins);
+
+    plugins = [...factory()].map((item) => {
+      const [plugin, options] = item;
+
+      if (typeof plugin === 'string') {
+        return loadPlugin(plugin, options, file);
+      }
+
+      return plugin;
+    });
   } catch (error) {
     loaderContext.emitError(error);
   }
 
   const processOptionsFromConfig = { ...config };
 
-  // No need them
+  // No need them for processOptions
   delete processOptionsFromConfig.plugins;
 
-  const processOptionsFromOptions = { ...options };
+  const processOptionsFromOptions = { ...normalizedPostcssOptions };
 
-  // No need them
+  // No need them for processOptions
   delete processOptionsFromOptions.config;
   delete processOptionsFromOptions.plugins;
 
@@ -238,95 +257,26 @@ function getPostcssOptions(loaderContext, config, options = {}) {
   return { plugins, processOptions, needExecute };
 }
 
-function getPlugin(pluginEntry) {
-  if (!pluginEntry) {
-    return [];
-  }
+const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
+const ABSOLUTE_SCHEME = /^[a-z0-9+\-.]+:/i;
 
-  if (isPostcssPlugin(pluginEntry)) {
-    return [pluginEntry];
-  }
-
-  const result = pluginEntry();
-
-  return Array.isArray(result) ? result : [result];
-}
-
-function isPostcssPlugin(plugin) {
-  return plugin.postcssVersion === postcssPkg.version;
-}
-
-function pluginsProcessing(plugins, file, disabledPlugins) {
-  if (Array.isArray(plugins)) {
-    return plugins.reduce((accumulator, plugin) => {
-      let normalizedPlugin = plugin;
-
-      if (Array.isArray(plugin)) {
-        const [name] = plugin;
-        let [, options] = plugin;
-
-        options = options || {};
-
-        normalizedPlugin = { [name]: options };
-      }
-
-      if (typeof plugin === 'string') {
-        normalizedPlugin = { [plugin]: {} };
-      }
-
-      // eslint-disable-next-line no-param-reassign
-      accumulator = accumulator.concat(
-        pluginsProcessing(normalizedPlugin, file, disabledPlugins)
-      );
-
-      return accumulator;
-    }, []);
-  }
-
-  if (typeof plugins === 'object') {
-    if (Object.keys(plugins).length === 0) {
-      return [];
+function getURLType(source) {
+  if (source[0] === '/') {
+    if (source[1] === '/') {
+      return 'scheme-relative';
     }
 
-    const statePlagins = {
-      enabled: {},
-      disabled: disabledPlugins || [],
-    };
-
-    Object.entries(plugins).forEach((plugin) => {
-      const [name, options] = plugin;
-
-      if (options === false) {
-        statePlagins.disabled.push(name);
-      } else {
-        statePlagins.enabled[name] = options;
-      }
-    });
-
-    return pluginsProcessing(
-      loadPlugins(statePlagins.enabled, file),
-      file,
-      disabledPlugins
-    );
+    return 'path-absolute';
   }
 
-  return getPlugin(plugins);
-}
-
-function getArrayPlugins(plugins, file, disabledPlugins, loaderContext) {
-  if (typeof plugins === 'function') {
-    if (isPostcssPlugin(plugins)) {
-      return [plugins];
-    }
-
-    return pluginsProcessing(plugins(loaderContext), file, disabledPlugins);
+  if (IS_NATIVE_WIN32_PATH.test(source)) {
+    return 'path-absolute';
   }
 
-  return pluginsProcessing(plugins, file, disabledPlugins);
+  return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
 }
 
-// TODO Remove, when postcss 8 will be released
-function normalizeSourceMap(map) {
+function normalizeSourceMap(map, resourcePath) {
   let newMap = map;
 
   // Some loader emit source map as string
@@ -335,66 +285,69 @@ function normalizeSourceMap(map) {
     newMap = JSON.parse(newMap);
   }
 
-  // Source maps should use forward slash because it is URLs (https://github.com/mozilla/source-map/issues/91)
-  // We should normalize path because previous loaders like `sass-loader` using backslash when generate source map
-
-  if (newMap.file) {
-    delete newMap.file;
-  }
+  delete newMap.file;
 
   const { sourceRoot } = newMap;
 
-  if (newMap.sourceRoot) {
-    delete newMap.sourceRoot;
-  }
+  delete newMap.sourceRoot;
 
   if (newMap.sources) {
     newMap.sources = newMap.sources.map((source) => {
-      return !sourceRoot
-        ? normalizePath(source)
-        : normalizePath(path.resolve(sourceRoot, source));
+      const sourceType = getURLType(source);
+
+      // Do no touch `scheme-relative` and `absolute` URLs
+      if (sourceType === 'path-relative' || sourceType === 'path-absolute') {
+        const absoluteSource =
+          sourceType === 'path-relative' && sourceRoot
+            ? path.resolve(sourceRoot, path.normalize(source))
+            : path.normalize(source);
+
+        return path.relative(path.dirname(resourcePath), absoluteSource);
+      }
+
+      return source;
     });
   }
 
   return newMap;
 }
 
-function getSourceMapRelativePath(file, from) {
-  if (file.indexOf('<') === 0) return file;
-  if (/^\w+:\/\//.test(file)) return file;
+function normalizeSourceMapAfterPostcss(map, resourcePath) {
+  const newMap = map;
 
-  const result = path.relative(from, file);
+  // result.map.file is an optional property that provides the output filename.
+  // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
+  // eslint-disable-next-line no-param-reassign
+  delete newMap.file;
 
-  if (path.sep === '\\') {
-    return result.replace(/\\/g, '/');
-  }
+  // eslint-disable-next-line no-param-reassign
+  newMap.sourceRoot = '';
 
-  return result;
-}
+  // eslint-disable-next-line no-param-reassign
+  newMap.sources = newMap.sources.map((source) => {
+    if (source.indexOf('<') === 0) {
+      return source;
+    }
 
-function getSourceMapAbsolutePath(file, to) {
-  if (file.indexOf('<') === 0) return file;
-  if (/^\w+:\/\//.test(file)) return file;
+    const sourceType = getURLType(source);
 
-  if (typeof to === 'undefined') return file;
+    // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
+    if (sourceType === 'path-relative') {
+      const dirname = path.dirname(resourcePath);
 
-  const dirname = path.dirname(to);
+      return path.resolve(dirname, source);
+    }
 
-  const result = path.resolve(dirname, file);
+    return source;
+  });
 
-  if (path.sep === '\\') {
-    return result.replace(/\\/g, '/');
-  }
-
-  return result;
+  return newMap;
 }
 
 export {
   loadConfig,
   getPostcssOptions,
   exec,
-  getArrayPlugins,
-  getSourceMapAbsolutePath,
-  getSourceMapRelativePath,
   normalizeSourceMap,
+  normalizeSourceMapAfterPostcss,
 };
