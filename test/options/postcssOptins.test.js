@@ -24,9 +24,11 @@ describe('"postcssOptions" option', () => {
       false
     );
 
-    const toIsWork = notNormalizecodeFromBundle.map.file.endsWith('to.css');
+    const toIsWork = notNormalizecodeFromBundle.sourceMap.file.endsWith(
+      'to.css'
+    );
     const fromIsWork =
-      notNormalizecodeFromBundle.map.sources.filter((i) =>
+      notNormalizecodeFromBundle.sourceMap.sources.filter((i) =>
         i.endsWith('from.css')
       ).length > 0;
 
