@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Stringifier should emit error Stringifier: errors 1`] = `
+exports[`Options Stringifier should throw an error on "unresolved" stringifier: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: this.stringify is not a function",
@@ -9,7 +9,7 @@ Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresol
 ]
 `;
 
-exports[`Options Stringifier should emit error Stringifier: warnings 1`] = `Array []`;
+exports[`Options Stringifier should throw an error on "unresolved" stringifier: warnings 1`] = `Array []`;
 
 exports[`Options Stringifier should work Stringifier - {Function}: css 1`] = `
 "<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>

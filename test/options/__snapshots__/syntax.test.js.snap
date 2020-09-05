@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Syntax should emit error Syntax: errors 1`] = `
+exports[`Options Syntax should throw an error on "unresolved" syntax: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: Cannot read property 'parse' of undefined",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS \\"unresolve\\" syntax failed: Cannot find module 'unresolve' from 'src/utils.js'",
+Loading PostCSS \\"unresolved\\" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
-exports[`Options Syntax should emit error Syntax: warnings 1`] = `Array []`;
+exports[`Options Syntax should throw an error on "unresolved" syntax: warnings 1`] = `Array []`;
 
 exports[`Options Syntax should work Syntax - {Object}: css 1`] = `
 "a

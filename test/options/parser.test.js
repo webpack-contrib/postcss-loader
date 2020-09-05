@@ -124,7 +124,7 @@ describe('Options Parser', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit error Parser', async () => {
+  it('should throw an error on "unresolved" parser', async () => {
     const compiler = getCompiler(
       './sss/index.js',
       {},
@@ -142,7 +142,7 @@ describe('Options Parser', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   options: {
                     postcssOptions: {
-                      parser: 'unresolve',
+                      parser: 'unresolved',
                     },
                   },
                 },
