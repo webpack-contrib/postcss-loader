@@ -8,6 +8,8 @@ import {
 
 import myPostcssPlugin from '../fixtures/plugin/plugin';
 
+jest.setTimeout(30000);
+
 describe('"plugins" option', () => {
   it('should work with "Array"', async () => {
     const compiler = getCompiler('./css/index.js', {

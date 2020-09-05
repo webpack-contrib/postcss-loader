@@ -26,7 +26,7 @@
 <h2 align="center">Install</h2>
 
 ```bash
-npm i -D postcss-loader
+npm i -D postcss-loader postcss
 ```
 
 <h2 align="center">Usage</h2>
