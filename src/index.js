@@ -107,6 +107,12 @@ export default async function loader(content, sourceMap) {
         this.resourcePath
       );
     }
+  } else if (sourceMap && typeof processOptions.map !== 'undefined') {
+    if (typeof processOptions.map === 'boolean') {
+      processOptions.map = { inline: true };
+    }
+
+    processOptions.map.prev = sourceMap;
   }
 
   let result;

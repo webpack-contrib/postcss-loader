@@ -1,15 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("less-loader"): css 1`] = `
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has the "true" values and previous loader returns source maps ("sass-loader"): css 1`] = `
+"a {
+  color: coral;
+}
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL2V2aWxlYm90dG5hd2kvSWRlYVByb2plY3RzL3Bvc3Rjc3MtbG9hZGVyL3Rlc3QvZml4dHVyZXMvc2Nzcy9zdHlsZS5zY3NzIiwic3R5bGUuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUFJLFlBQUE7QUNFSiIsImZpbGUiOiJzdHlsZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBjb3JhbCB9XG4iLCJhIHtcbiAgY29sb3I6IGNvcmFsO1xufSJdfQ== */"
+`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has the "true" values and previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has the "true" values and previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader"): css 1`] = `
+"a {
+  color: coral;
+}
+/*# sourceMappingURL=style.scss.map */"
+`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader"): source map 1`] = `
+Object {
+  "file": "style.scss",
+  "mappings": "AAAA;EACE,YAAY;AACd",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "fixtures/scss/style.scss",
+  ],
+  "sourcesContent": Array [
+    "a { color: coral }
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`"sourceMap" option should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
+
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): css 1`] = `
 "a {
   color: coral;
 }
 "
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("less-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): errors 1`] = `Array []`;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("less-loader"): source map 1`] = `
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): source map 1`] = `
 Object {
   "mappings": "AAAA;EAAI,YAAA;AAEJ",
   "names": Array [],
@@ -25,17 +64,17 @@ Object {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("less-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): warnings 1`] = `Array []`;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("sass-loader"): css 1`] = `
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
   color: coral;
 }"
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("sass-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("sass-loader"): source map 1`] = `
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): source map 1`] = `
 Object {
   "mappings": "AAAA;EAAI,YAAA;AAEJ",
   "names": Array [],
@@ -51,9 +90,9 @@ Object {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader return source maps ("sass-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
 
-exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has the "true" value: css 1`] = `
+exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has values: css 1`] = `
 "a {
   color: black;
 }
@@ -100,9 +139,9 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has the "true" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has values: errors 1`] = `Array []`;
 
-exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has the "true" value: source map 1`] = `
+exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has values: source map 1`] = `
 Object {
   "file": "style.css",
   "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
@@ -161,7 +200,7 @@ a {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has the "true" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when value has "false" value, but the "postcssOptions.map" has values: warnings 1`] = `Array []`;
 
 exports[`"sourceMap" option should generate source maps when value has "true" value and the "devtool" option has "false" value: css 1`] = `
 "a {

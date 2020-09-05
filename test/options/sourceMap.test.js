@@ -108,7 +108,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when value has "false" value, but the "postcssOptions.map" has the "true" value', async () => {
+  it('should generate source maps when value has "false" value, but the "postcssOptions.map" has values', async () => {
     const compiler = getCompiler(
       './css/index.js',
       {
@@ -147,7 +147,120 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when previous loader return source maps ("sass-loader")', async () => {
+  it('should generate source maps the "postcssOptions.map" has the "true" values and previous loader returns source maps ("sass-loader")', async () => {
+    const compiler = getCompiler(
+      './scss/index.js',
+      {},
+      {
+        devtool: false,
+        module: {
+          rules: [
+            {
+              test: /\.scss$/i,
+              use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: {
+                    postcssOptions: {
+                      map: true,
+                    },
+                  },
+                },
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    sourceMap: true,
+                    // eslint-disable-next-line global-require
+                    implementation: require('sass'),
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle('style.scss', stats);
+
+    expect(css).toMatchSnapshot('css');
+    expect(sourceMap).toBeUndefined();
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader")', async () => {
+    const compiler = getCompiler(
+      './scss/index.js',
+      {},
+      {
+        devtool: false,
+        module: {
+          rules: [
+            {
+              test: /\.scss$/i,
+              use: [
+                {
+                  loader: require.resolve('../helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../../src'),
+                  options: {
+                    postcssOptions: {
+                      map: {
+                        inline: false,
+                        sourcesContent: true,
+                        annotation: true,
+                        from: path.resolve(
+                          __dirname,
+                          '../fixtures/scss/style.scss'
+                        ),
+                      },
+                    },
+                  },
+                },
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    sourceMap: true,
+                    // eslint-disable-next-line global-require
+                    implementation: require('sass'),
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle('style.scss', stats);
+
+    sourceMap.sourceRoot = '';
+    sourceMap.sources = sourceMap.sources.map((source) => {
+      expect(path.isAbsolute(source)).toBe(true);
+      expect(source).toBe(path.normalize(source));
+      expect(
+        fs.existsSync(path.resolve(__dirname, '../fixtures/css', source))
+      ).toBe(true);
+
+      return path
+        .relative(path.resolve(__dirname, '..'), source)
+        .replace(/\\/g, '/');
+    });
+
+    expect(css).toMatchSnapshot('css');
+    expect(sourceMap).toMatchSnapshot('source map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should generate source maps when previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
       './scss/index.js',
       {},
@@ -201,7 +314,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when previous loader return source maps ("less-loader")', async () => {
+  it('should generate source maps when previous loader returns source maps ("less-loader")', async () => {
     const compiler = getCompiler(
       './less/index.js',
       {
