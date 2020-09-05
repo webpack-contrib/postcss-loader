@@ -173,9 +173,18 @@ describe('"sourceMap" option', () => {
                 {
                   loader: 'sass-loader',
                   options: {
-                    sourceMap: true,
                     // eslint-disable-next-line global-require
                     implementation: require('sass'),
+                    sassOptions: {
+                      sourceMap: true,
+                      outFile: path.join(
+                        __dirname,
+                        '../fixtures/scss/style.css.map'
+                      ),
+                      sourceMapContents: true,
+                      omitSourceMapUrl: true,
+                      sourceMapEmbed: false,
+                    },
                   },
                 },
               ],
@@ -216,10 +225,6 @@ describe('"sourceMap" option', () => {
                         inline: false,
                         sourcesContent: true,
                         annotation: true,
-                        from: path.resolve(
-                          __dirname,
-                          '../fixtures/scss/style.scss'
-                        ),
                       },
                     },
                   },
@@ -227,9 +232,18 @@ describe('"sourceMap" option', () => {
                 {
                   loader: 'sass-loader',
                   options: {
-                    sourceMap: true,
                     // eslint-disable-next-line global-require
                     implementation: require('sass'),
+                    sassOptions: {
+                      sourceMap: true,
+                      outFile: path.join(
+                        __dirname,
+                        '../fixtures/scss/style.css.map'
+                      ),
+                      sourceMapContents: true,
+                      omitSourceMapUrl: true,
+                      sourceMapEmbed: false,
+                    },
                   },
                 },
               ],
@@ -243,10 +257,9 @@ describe('"sourceMap" option', () => {
 
     sourceMap.sourceRoot = '';
     sourceMap.sources = sourceMap.sources.map((source) => {
-      expect(path.isAbsolute(source)).toBe(true);
-      expect(source).toBe(path.normalize(source));
+      expect(path.isAbsolute(source)).toBe(false);
       expect(
-        fs.existsSync(path.resolve(__dirname, '../fixtures/css', source))
+        fs.existsSync(path.resolve(__dirname, '../fixtures/scss', source))
       ).toBe(true);
 
       return path
