@@ -147,6 +147,77 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
+  it('should work with "Array" and override the previous plugin options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        plugins: [
+          ['postcss-short', { prefix: 'x' }],
+          ['postcss-short', { prefix: 'z' }],
+        ],
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "Array", and config, and override the previous plugin options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        config: 'test/fixtures/css/plugins.config.js',
+        plugins: [['postcss-short', { prefix: 'z' }]],
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "Object" and override the previous plugin options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        plugins: {
+          'postcss-short': { prefix: 'x' },
+          // eslint-disable-next-line no-dupe-keys
+          'postcss-short': { prefix: 'z' },
+        },
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "Object", and config, and override the previous plugin options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        config: 'test/fixtures/css/plugins.config.js',
+        plugins: {
+          'postcss-short': { prefix: 'z' },
+        },
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should throw an error on the unresolved plugin', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
