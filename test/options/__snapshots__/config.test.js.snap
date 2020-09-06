@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`"config" option should throw an error on the invalid config : errors 1`] = `
+exports[`"config" option should throw an error on the invalid config: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: invalid postcss config",
 ]
 `;
 
-exports[`"config" option should throw an error on the invalid config : warnings 1`] = `Array []`;
+exports[`"config" option should throw an error on the invalid config: warnings 1`] = `Array []`;
 
-exports[`"config" option should throw an error when unresolved config : errors 1`] = `
+exports[`"config" option should throw an error on the unresolved config: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: No PostCSS Config found in: /test/fixtures/config-scope/css/unresolve.js",
 ]
 `;
 
-exports[`"config" option should throw an error when unresolved config : warnings 1`] = `Array []`;
+exports[`"config" option should throw an error on the unresolved config: warnings 1`] = `Array []`;
 
-exports[`"config" option should work Config - "string" with path directory: css 1`] = `
+exports[`"config" option should work "string" value (relative path): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
@@ -27,48 +27,9 @@ exports[`"config" option should work Config - "string" with path directory: css 
 "
 `;
 
-exports[`"config" option should work Config - "string" with path directory: errors 1`] = `Array []`;
+exports[`"config" option should work "string" value (relative path): errors 1`] = `Array []`;
 
-exports[`"config" option should work Config - "string" with path directory: warnings 1`] = `Array []`;
-
-exports[`"config" option should work Config - "string" with relative path: css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work Config - "string" with relative path: errors 1`] = `Array []`;
-
-exports[`"config" option should work Config - "string" with relative path: warnings 1`] = `Array []`;
-
-exports[`"config" option should work Config - "string": css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work Config - "string": errors 1`] = `Array []`;
-
-exports[`"config" option should work Config - "string": warnings 1`] = `Array []`;
-
-exports[`"config" option should work Config - {Object}: css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work Config - {Object}: errors 1`] = `Array []`;
-
-exports[`"config" option should work Config - {Object}: warnings 1`] = `Array []`;
+exports[`"config" option should work "string" value (relative path): warnings 1`] = `Array []`;
 
 exports[`"config" option should work Config - Context - {Object}: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -83,19 +44,6 @@ exports[`"config" option should work Config - Context - {Object}: errors 1`] = `
 
 exports[`"config" option should work Config - Context - {Object}: warnings 1`] = `Array []`;
 
-exports[`"config" option should work Config - Object - path file: css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work Config - Object - path file: errors 1`] = `Array []`;
-
-exports[`"config" option should work Config - Object - path file: warnings 1`] = `Array []`;
-
 exports[`"config" option should work Config - Path - {String}: css 1`] = `
 "a { color: black }
 
@@ -109,20 +57,11 @@ exports[`"config" option should work Config - Path - {String}: errors 1`] = `Arr
 
 exports[`"config" option should work Config - Path - {String}: warnings 1`] = `Array []`;
 
-exports[`"config" option should work Config - false: css 1`] = `
-"a { color: black }
+exports[`"config" option should work Config – Context – Loader {Object}: errors 1`] = `Array []`;
 
-.foo {
-  float: right;
-}
-"
-`;
+exports[`"config" option should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
 
-exports[`"config" option should work Config - false: errors 1`] = `Array []`;
-
-exports[`"config" option should work Config - false: warnings 1`] = `Array []`;
-
-exports[`"config" option should work Config - true: css 1`] = `
+exports[`"config" option should work with "Object" value: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
@@ -131,66 +70,24 @@ exports[`"config" option should work Config - true: css 1`] = `
 "
 `;
 
-exports[`"config" option should work Config - true: errors 1`] = `Array []`;
+exports[`"config" option should work with "Object" value: errors 1`] = `Array []`;
 
-exports[`"config" option should work Config - true: warnings 1`] = `Array []`;
+exports[`"config" option should work with "Object" value: warnings 1`] = `Array []`;
 
-exports[`"config" option should work Config – Context – Loader {Object}: errors 1`] = `Array []`;
+exports[`"config" option should work with "false" value: css 1`] = `
+"a { color: black }
 
-exports[`"config" option should work Config – Context – Loader {Object}: warnings 1`] = `Array []`;
-
-exports[`"config" option should work if the "config" options is not specified: css 1`] = `
-"a {
-  color: black;
-}
-
-a {
-  color: red;
-}
-
-a {
-  color: green;
-}
-
-a {
-  color: blue;
-}
-
-.class {
-  -x-border-color: blue blue *;
-  -x-color: * #fafafa;
-}
-
-.class-foo {
-  -z-border-color: blue blue *;
-  -z-color: * #fafafa;
-}
-
-.phone {
-  &_title {
-    width: 500px;
-
-    @media (max-width: 500px) {
-      width: auto;
-    }
-
-    body.is_dark & {
-      color: white;
-    }
-  }
-
-  img {
-    display: block;
-  }
+.foo {
+  float: right;
 }
 "
 `;
 
-exports[`"config" option should work if the "config" options is not specified: errors 1`] = `Array []`;
+exports[`"config" option should work with "false" value: errors 1`] = `Array []`;
 
-exports[`"config" option should work if the "config" options is not specified: warnings 1`] = `Array []`;
+exports[`"config" option should work with "false" value: warnings 1`] = `Array []`;
 
-exports[`"config" option should work package.json - {Object} - Process CSS: css 1`] = `
+exports[`"config" option should work with "package.json": css 1`] = `
 ".import {
   color: red;
 }
@@ -201,11 +98,11 @@ exports[`"config" option should work package.json - {Object} - Process CSS: css 
 "
 `;
 
-exports[`"config" option should work package.json - {Object} - Process CSS: errors 1`] = `Array []`;
+exports[`"config" option should work with "package.json": errors 1`] = `Array []`;
 
-exports[`"config" option should work package.json - {Object} - Process CSS: warnings 1`] = `Array []`;
+exports[`"config" option should work with "package.json": warnings 1`] = `Array []`;
 
-exports[`"config" option should work postcss.config.js - {Array} - Process CSS: css 1`] = `
+exports[`"config" option should work with "postcss.config.js" and the array syntax of the "plugin" option: css 1`] = `
 ".import {
   color: red;
 }
@@ -216,11 +113,11 @@ exports[`"config" option should work postcss.config.js - {Array} - Process CSS: 
 "
 `;
 
-exports[`"config" option should work postcss.config.js - {Array} - Process CSS: errors 1`] = `Array []`;
+exports[`"config" option should work with "postcss.config.js" and the array syntax of the "plugin" option: errors 1`] = `Array []`;
 
-exports[`"config" option should work postcss.config.js - {Array} - Process CSS: warnings 1`] = `Array []`;
+exports[`"config" option should work with "postcss.config.js" and the array syntax of the "plugin" option: warnings 1`] = `Array []`;
 
-exports[`"config" option should work postcss.config.js - {Object} - Process CSS: css 1`] = `
+exports[`"config" option should work with "postcss.config.js" and the object syntax of the "plugin" option: css 1`] = `
 ".import {
   color: red;
 }
@@ -231,9 +128,60 @@ exports[`"config" option should work postcss.config.js - {Object} - Process CSS:
 "
 `;
 
-exports[`"config" option should work postcss.config.js - {Object} - Process CSS: errors 1`] = `Array []`;
+exports[`"config" option should work with "postcss.config.js" and the object syntax of the "plugin" option: errors 1`] = `Array []`;
 
-exports[`"config" option should work postcss.config.js - {Object} - Process CSS: warnings 1`] = `Array []`;
+exports[`"config" option should work with "postcss.config.js" and the object syntax of the "plugin" option: warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value (absolute path): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work with "string" value (absolute path): errors 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value (absolute path): warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value (path to directory with the configuration): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work with "string" value (path to directory with the configuration): errors 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value (path to directory with the configuration): warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value and respect all options: css 1`] = `
+"a {
+  color: black
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0FBREYiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxuICBjb2xvcjogYmxhY2tcbiJdfQ== */"
+`;
+
+exports[`"config" option should work with "string" value and respect all options: errors 1`] = `Array []`;
+
+exports[`"config" option should work with "string" value and respect all options: warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "true" value: css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work with "true" value: errors 1`] = `Array []`;
+
+exports[`"config" option should work with "true" value: warnings 1`] = `Array []`;
 
 exports[`"config" option should work with the "postcssOptions" option: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -250,3 +198,16 @@ exports[`"config" option should work with the "postcssOptions" option: css 1`] =
 exports[`"config" option should work with the "postcssOptions" option: errors 1`] = `Array []`;
 
 exports[`"config" option should work with the "postcssOptions" option: warnings 1`] = `Array []`;
+
+exports[`"config" option should work without the specified value: css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work without the specified value: errors 1`] = `Array []`;
+
+exports[`"config" option should work without the specified value: warnings 1`] = `Array []`;

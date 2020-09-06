@@ -4,7 +4,6 @@ import Module from 'module';
 import { cosmiconfig } from 'cosmiconfig';
 
 const parentModule = module;
-const moduleName = 'postcss';
 
 const stat = (inputFileSystem, filePath) =>
   new Promise((resolve, reject) => {
@@ -60,7 +59,7 @@ async function loadConfig(config, context, configPath, loaderContext) {
     throw new Error(`No PostCSS Config found in: ${searchPath}`);
   }
 
-  const explorer = cosmiconfig(moduleName);
+  const explorer = cosmiconfig('postcss');
 
   let result;
 
@@ -192,6 +191,7 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
 
   // No need them for processOptions
   delete processOptionsFromConfig.plugins;
+  delete processOptionsFromConfig.file;
 
   const processOptionsFromOptions = { ...normalizedPostcssOptions };
 

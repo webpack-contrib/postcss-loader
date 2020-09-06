@@ -11,7 +11,18 @@ import {
 const testDirectory = path.resolve(__dirname, '../fixtures', 'config-autoload');
 
 describe('"config" option', () => {
-  it('should work Config - false', async () => {
+  it('should work without the specified value', async () => {
+    const compiler = getCompiler('./config-scope/css/index.js');
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "false" value', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: false,
@@ -26,7 +37,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - true', async () => {
+  it('should work with "true" value', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: true,
@@ -41,7 +52,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - "string"', async () => {
+  it('should work with "string" value (absolute path)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -59,7 +70,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - "string" with relative path', async () => {
+  it('should work "string" value (relative path)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: 'test/fixtures/config-scope/css/custom.config.js',
@@ -74,7 +85,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - "string" with path directory', async () => {
+  it('should work with "string" value (path to directory with the configuration)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: 'test/fixtures/config-scope',
@@ -89,27 +100,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Config - Object - path file', async () => {
-    const compiler = getCompiler('./config-scope/css/index.js', {
-      postcssOptions: {
-        config: {
-          path: path.resolve(
-            __dirname,
-            '../fixtures/config-scope/css/custom.config.js'
-          ),
-        },
-      },
-    });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should work Config - {Object}', async () => {
+  it('should work with "Object" value', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {});
     const stats = await compile(compiler);
 
@@ -172,25 +163,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work postcss.config.js - {Object} - Process CSS', async () => {
-    const compiler = getCompiler('./config-autoload/js/object/index.js', {
-      postcssOptions: {
-        config: {
-          path: path.resolve(testDirectory, 'js/object'),
-          ctx: { parser: false, syntax: false },
-        },
-      },
-    });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('index.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should work postcss.config.js - {Array} - Process CSS', async () => {
+  it('should work with "postcss.config.js" and the array syntax of the "plugin" option', async () => {
     const compiler = getCompiler('./config-autoload/js/array/index.js', {
       postcssOptions: {
         config: {
@@ -208,7 +181,25 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work package.json - {Object} - Process CSS', async () => {
+  it('should work with "postcss.config.js" and the object syntax of the "plugin" option', async () => {
+    const compiler = getCompiler('./config-autoload/js/object/index.js', {
+      postcssOptions: {
+        config: {
+          path: path.resolve(testDirectory, 'js/object'),
+          ctx: { parser: false, syntax: false },
+        },
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('index.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "package.json"', async () => {
     const compiler = getCompiler('./config-autoload/pkg/index.js', {
       postcssOptions: {
         config: {
@@ -225,7 +216,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should throw an error when unresolved config ', async () => {
+  it('should throw an error on the unresolved config', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -240,7 +231,7 @@ describe('"config" option', () => {
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
-  it('should throw an error on the invalid config ', async () => {
+  it('should throw an error on the invalid config', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -255,17 +246,6 @@ describe('"config" option', () => {
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
-  it('should work if the "config" options is not specified', async () => {
-    const compiler = getCompiler('./css/index.js', {});
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
   it('should work with the "postcssOptions" option', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
@@ -276,6 +256,24 @@ describe('"config" option', () => {
     const stats = await compile(compiler);
 
     const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "string" value and respect all options', async () => {
+    const compiler = getCompiler('./sss/index.js', {
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          '../fixtures/config-scope/all-options/postcss.config.js'
+        ),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.sss', stats);
 
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
