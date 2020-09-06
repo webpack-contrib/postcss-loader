@@ -85,7 +85,7 @@ describe('Options Syntax', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit error Syntax', async () => {
+  it('should throw an error on "unresolved" syntax', async () => {
     const compiler = getCompiler(
       './sss/index.js',
       {},
@@ -103,7 +103,7 @@ describe('Options Syntax', () => {
                   loader: path.resolve(__dirname, '../../src'),
                   options: {
                     postcssOptions: {
-                      syntax: 'unresolve',
+                      syntax: 'unresolved',
                     },
                   },
                 },

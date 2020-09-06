@@ -57,7 +57,7 @@ describe('Options Stringifier', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit error Stringifier', async () => {
+  it('should throw an error on "unresolved" stringifier', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         stringifier: 'unresolved',

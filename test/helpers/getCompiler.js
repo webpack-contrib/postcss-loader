@@ -18,7 +18,7 @@ export default (fixture, loaderOptions = {}, config = {}) => {
     module: {
       rules: [
         {
-          test: /\.css$/i,
+          test: /\.(css|sss)$/i,
           use: [
             {
               loader: require.resolve('./testLoader'),
