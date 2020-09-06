@@ -6,7 +6,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('Options Syntax', () => {
   it('should work Syntax - {String}', async () => {
@@ -20,11 +20,11 @@ describe('Options Syntax', () => {
               test: /\.sss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       syntax: 'sugarss',
@@ -57,11 +57,11 @@ describe('Options Syntax', () => {
               test: /\.sss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       // eslint-disable-next-line global-require
@@ -96,11 +96,11 @@ describe('Options Syntax', () => {
               test: /\.sss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       syntax: 'unresolved',

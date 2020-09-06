@@ -4,7 +4,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('"postcssOptions" option', () => {
   it('should work with "from", "to" and "map" options', async () => {
@@ -61,7 +61,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });
@@ -79,7 +79,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });
@@ -96,7 +96,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });

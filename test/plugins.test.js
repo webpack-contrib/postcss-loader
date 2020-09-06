@@ -1,12 +1,14 @@
+import path from 'path';
+
 import {
   compile,
   getCompiler,
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
-import myPostcssPlugin from '../fixtures/plugin/plugin';
+import myPostcssPlugin from './fixtures/plugin/plugin';
 
 jest.setTimeout(30000);
 
@@ -46,7 +48,7 @@ describe('"plugins" option', () => {
               });
             },
           },
-          require.resolve('../fixtures/plugin/other-plugin'),
+          require.resolve('./fixtures/plugin/other-plugin'),
           myPostcssPlugin({ color: 'white', alpha: 0 }),
           { 'postcss-short': { prefix: 'z' } },
         ],
@@ -67,7 +69,7 @@ describe('"plugins" option', () => {
           'postcss-import': {},
           'postcss-nested': {},
           'postcss-short': { prefix: 'x' },
-          [require.resolve('../fixtures/plugin/other-plugin')]: {},
+          [require.resolve('./fixtures/plugin/other-plugin')]: {},
         },
       },
     });
@@ -110,10 +112,26 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
+  it('should work with "Array" and support disabling plugins from the configuration', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
+        plugins: [{ 'postcss-short': false }],
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
   it('should work with "Object" and support disabling plugins from the configuration', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
-        config: 'test/fixtures/css/plugins.config.js',
+        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
         plugins: {
           'postcss-short': false,
         },
@@ -168,7 +186,7 @@ describe('"plugins" option', () => {
   it('should work with "Array", and config, and override the previous plugin options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
-        config: 'test/fixtures/css/plugins.config.js',
+        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
         plugins: [['postcss-short', { prefix: 'z' }]],
       },
     });
@@ -203,7 +221,7 @@ describe('"plugins" option', () => {
   it('should work with "Object", and config, and override the previous plugin options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
-        config: 'test/fixtures/css/plugins.config.js',
+        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
         plugins: {
           'postcss-short': { prefix: 'z' },
         },

@@ -6,9 +6,9 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
-const testDirectory = path.resolve(__dirname, '../fixtures', 'config-autoload');
+const testDirectory = path.resolve(__dirname, './fixtures', 'config-autoload');
 
 describe('"config" option', () => {
   it('should work without the specified value', async () => {
@@ -57,7 +57,7 @@ describe('"config" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          '../fixtures/config-scope/css/custom.config.js'
+          './fixtures/config-scope/css/custom.config.js'
         ),
       },
     });
@@ -216,36 +216,6 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should throw an error on the unresolved config', async () => {
-    const compiler = getCompiler('./config-scope/css/index.js', {
-      postcssOptions: {
-        config: path.resolve(
-          __dirname,
-          '../fixtures/config-scope/css/unresolve.js'
-        ),
-      },
-    });
-    const stats = await compile(compiler);
-
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats, true)).toMatchSnapshot('errors');
-  });
-
-  it('should throw an error on the invalid config', async () => {
-    const compiler = getCompiler('./config-scope/css/index.js', {
-      postcssOptions: {
-        config: path.resolve(
-          __dirname,
-          '../fixtures/config-scope/css/invalid.config.js'
-        ),
-      },
-    });
-    const stats = await compile(compiler);
-
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats, true)).toMatchSnapshot('errors');
-  });
-
   it('should work with the "postcssOptions" option', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
@@ -267,7 +237,7 @@ describe('"config" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          '../fixtures/config-scope/all-options/postcss.config.js'
+          './fixtures/config-scope/all-options/postcss.config.js'
         ),
       },
     });
@@ -278,5 +248,35 @@ describe('"config" option', () => {
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should throw an error on the unresolved config', async () => {
+    const compiler = getCompiler('./config-scope/css/index.js', {
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          './fixtures/config-scope/css/unresolve.js'
+        ),
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
+  });
+
+  it('should throw an error on the invalid config', async () => {
+    const compiler = getCompiler('./config-scope/css/index.js', {
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          './fixtures/config-scope/css/invalid.config.js'
+        ),
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 });

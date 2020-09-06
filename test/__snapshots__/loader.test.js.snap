@@ -1,25 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`loader should emit Syntax Error: errors 1`] = `
-Array [
-  "ModuleBuildError: Module build failed (from \`replaced original path\`):
-SyntaxError
+exports[`loader should emit asset using the "messages" API: errors 1`] = `Array []`;
 
-(1:3) Unnecessary curly bracket
-
-> 1 | a {
-    |   ^
-  2 |   color: black;
-  3 | }
-",
-]
-`;
-
-exports[`loader should emit Syntax Error: warnings 1`] = `Array []`;
-
-exports[`loader should emit asset: errors 1`] = `Array []`;
-
-exports[`loader should emit asset: warnings 1`] = `Array []`;
+exports[`loader should emit asset using the "messages" API: warnings 1`] = `Array []`;
 
 exports[`loader should emit warning: css 1`] = `
 "a {
@@ -122,6 +105,23 @@ Warning
 (6:3) <Message>",
 ]
 `;
+
+exports[`loader should throw an error on invalid syntax: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+SyntaxError
+
+(1:3) Unnecessary curly bracket
+
+> 1 | a {
+    |   ^
+  2 |   color: black;
+  3 | }
+",
+]
+`;
+
+exports[`loader should throw an error on invalid syntax: warnings 1`] = `Array []`;
 
 exports[`loader should work: css 1`] = `
 "a {

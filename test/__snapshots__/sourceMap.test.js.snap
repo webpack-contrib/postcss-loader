@@ -27,7 +27,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "../style.scss",
+    "style.scss",
   ],
   "sourcesContent": Array [
     "a { color: coral }
@@ -54,7 +54,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "fixtures/less/style.less",
+    "less/style.less",
   ],
   "sourcesContent": Array [
     "a { color: coral }
@@ -80,7 +80,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "fixtures/scss/style.scss",
+    "scss/style.scss",
   ],
   "sourcesContent": Array [
     "a { color: coral }
@@ -148,7 +148,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "../style.css",
+    "style.css",
   ],
   "sourcesContent": Array [
     "a {
@@ -257,7 +257,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "fixtures/css/style.css",
+    "css/style.css",
   ],
   "sourcesContent": Array [
     "a {
@@ -366,7 +366,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "fixtures/css/style.css",
+    "css/style.css",
   ],
   "sourcesContent": Array [
     "a {
@@ -475,7 +475,7 @@ Object {
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
-    "fixtures/css/style.css",
+    "css/style.css",
   ],
   "sourcesContent": Array [
     "a {

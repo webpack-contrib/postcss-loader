@@ -66,6 +66,57 @@ exports[`"plugins" option should work with "Array" and override the previous plu
 
 exports[`"plugins" option should work with "Array" and override the previous plugin options: warnings 1`] = `Array []`;
 
+exports[`"plugins" option should work with "Array" and support disabling plugins from the configuration: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"plugins" option should work with "Array" and support disabling plugins from the configuration: errors 1`] = `Array []`;
+
+exports[`"plugins" option should work with "Array" and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+
 exports[`"plugins" option should work with "Array", and config, and override the previous plugin options: css 1`] = `
 "a {
   color: black;

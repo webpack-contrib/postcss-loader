@@ -11,7 +11,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('"sourceMap" option', () => {
   it('should generate source maps when value has "true" value and the "devtool" option has "false" value', async () => {
@@ -36,7 +36,7 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, '..'), source)
+        .relative(path.resolve(__dirname, './fixtures'), source)
         .replace(/\\/g, '/');
     });
 
@@ -68,7 +68,7 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, '..'), source)
+        .relative(path.resolve(__dirname, './fixtures'), source)
         .replace(/\\/g, '/');
     });
 
@@ -98,7 +98,7 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, '..'), source)
+        .relative(path.resolve(__dirname, './fixtures'), source)
         .replace(/\\/g, '/');
     });
 
@@ -133,12 +133,10 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(source).toBe(path.normalize(source));
       expect(
-        fs.existsSync(path.resolve(__dirname, '../fixtures/css', source))
+        fs.existsSync(path.resolve(__dirname, './fixtures/css', source))
       ).toBe(true);
 
-      return path
-        .relative(path.resolve(__dirname, '..'), source)
-        .replace(/\\/g, '/');
+      return source.replace(/\\/g, '/');
     });
 
     expect(css).toMatchSnapshot('css');
@@ -159,11 +157,11 @@ describe('"sourceMap" option', () => {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       map: true,
@@ -177,9 +175,9 @@ describe('"sourceMap" option', () => {
                     implementation: require('sass'),
                     sassOptions: {
                       sourceMap: true,
-                      outFile: path.join(
+                      outFile: path.resolve(
                         __dirname,
-                        '../fixtures/scss/style.css.map'
+                        './fixtures/scss/style.css.map'
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -214,11 +212,11 @@ describe('"sourceMap" option', () => {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       map: {
@@ -236,9 +234,9 @@ describe('"sourceMap" option', () => {
                     implementation: require('sass'),
                     sassOptions: {
                       sourceMap: true,
-                      outFile: path.join(
+                      outFile: path.resolve(
                         __dirname,
-                        '../fixtures/scss/style.css.map'
+                        './fixtures/scss/style.css.map'
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -259,12 +257,10 @@ describe('"sourceMap" option', () => {
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(
-        fs.existsSync(path.resolve(__dirname, '../fixtures/scss', source))
+        fs.existsSync(path.resolve(__dirname, './fixtures/scss', source))
       ).toBe(true);
 
-      return path
-        .relative(path.resolve(__dirname, '..'), source)
-        .replace(/\\/g, '/');
+      return source.replace(/\\/g, '/');
     });
 
     expect(css).toMatchSnapshot('css');
@@ -285,11 +281,11 @@ describe('"sourceMap" option', () => {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {},
                 },
                 {
@@ -317,7 +313,7 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, '..'), source)
+        .relative(path.resolve(__dirname, './fixtures'), source)
         .replace(/\\/g, '/');
     });
 
@@ -341,11 +337,11 @@ describe('"sourceMap" option', () => {
               test: /\.less$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                 },
                 {
                   loader: 'less-loader',
@@ -368,7 +364,7 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, '..'), source)
+        .relative(path.resolve(__dirname, './fixtures'), source)
         .replace(/\\/g, '/');
     });
 

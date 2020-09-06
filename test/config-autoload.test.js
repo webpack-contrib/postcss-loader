@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-
 import path from 'path';
 import fs from 'fs';
 

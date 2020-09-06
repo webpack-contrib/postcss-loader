@@ -4,7 +4,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('Options Stringifier', () => {
   it('should work Stringifier - {String}', async () => {

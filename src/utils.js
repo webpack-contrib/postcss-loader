@@ -126,7 +126,8 @@ function pluginFactory() {
         } else if (
           plugin &&
           Object.keys(plugin).length === 1 &&
-          typeof plugin[Object.keys(plugin)[0]] === 'object' &&
+          (typeof plugin[Object.keys(plugin)[0]] === 'object' ||
+            typeof plugin[Object.keys(plugin)[0]] === 'boolean') &&
           plugin[Object.keys(plugin)[0]] !== null
         ) {
           const [name] = Object.keys(plugin);

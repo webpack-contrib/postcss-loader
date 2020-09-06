@@ -47,7 +47,7 @@ describe('loader', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit Syntax Error', async () => {
+  it('should throw an error on invalid syntax', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         parser: 'sugarss',
@@ -59,7 +59,7 @@ describe('loader', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit asset', async () => {
+  it('should emit asset using the "messages" API', async () => {
     const plugin = () => (css, result) => {
       result.messages.push({
         type: 'asset',

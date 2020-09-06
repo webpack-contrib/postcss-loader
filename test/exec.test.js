@@ -6,7 +6,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('Options Exec', () => {
   it('should work Exec - {Boolean}', async () => {
@@ -20,11 +20,11 @@ describe('Options Exec', () => {
               test: /style\.(exec\.js|js)$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: { exec: true },
                 },
               ],
@@ -53,11 +53,11 @@ describe('Options Exec', () => {
               test: /style\.js$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       parser: 'postcss-js',
