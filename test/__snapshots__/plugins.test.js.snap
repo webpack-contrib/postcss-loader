@@ -9,11 +9,11 @@ Loading PostCSS Plugin failed: Cannot find module 'postcss-unresolved' from 'src
 
 exports[`"plugins" option should throw an error on the unresolved plugin: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array" and not throw an error on falsy plugin: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value and not throw an error on falsy plugin: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array" and not throw an error on falsy plugin: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value and not throw an error on falsy plugin: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array" and override the previous plugin options: css 1`] = `
+exports[`"plugins" option should work with "Array" value and override the previous plugin options: css 1`] = `
 "a {
   color: black;
 }
@@ -62,11 +62,62 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Array" and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value and override the previous plugin options: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array" and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value and override the previous plugin options: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array", and config, and override the previous plugin options: css 1`] = `
+exports[`"plugins" option should work with "Array" value and support disabling plugins from the configuration: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"plugins" option should work with "Array" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
+
+exports[`"plugins" option should work with "Array" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+
+exports[`"plugins" option should work with "Array" value, and config, and override the previous plugin options: css 1`] = `
 "a {
   color: black;
 }
@@ -115,11 +166,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Array", and config, and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array", and config, and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array": css 1`] = `
+exports[`"plugins" option should work with "Array" value: css 1`] = `
 "a {
   color: rgba(0, 0, 0, 1.0);
 }
@@ -169,11 +220,11 @@ body.is_dark .phone_title {
 "
 `;
 
-exports[`"plugins" option should work with "Array": errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Array": warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Array" value: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and only disabled plugins: css 1`] = `
+exports[`"plugins" option should work with "Object" value and only disabled plugins: css 1`] = `
 "a {
   color: black;
 }
@@ -220,11 +271,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Object" and only disabled plugins: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and only disabled plugins: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and only disabled plugins: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and only disabled plugins: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and override the previous plugin options: css 1`] = `
+exports[`"plugins" option should work with "Object" value and override the previous plugin options: css 1`] = `
 "a {
   color: black;
 }
@@ -273,11 +324,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Object" and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and override the previous plugin options: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and override the previous plugin options: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and support disabling plugins from the configuration: css 1`] = `
+exports[`"plugins" option should work with "Object" value and support disabling plugins from the configuration: css 1`] = `
 "a {
   color: black;
 }
@@ -324,11 +375,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Object" and support disabling plugins from the configuration: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object" and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object", and config, and override the previous plugin options: css 1`] = `
+exports[`"plugins" option should work with "Object" value, and config, and override the previous plugin options: css 1`] = `
 "a {
   color: black;
 }
@@ -377,11 +428,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with "Object", and config, and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object", and config, and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object": css 1`] = `
+exports[`"plugins" option should work with "Object" value: css 1`] = `
 "a {
   color: black;
 }
@@ -431,11 +482,11 @@ body.is_dark .phone_title {
 "
 `;
 
-exports[`"plugins" option should work with "Object": errors 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with "Object": warnings 1`] = `Array []`;
+exports[`"plugins" option should work with "Object" value: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with empty "Array": css 1`] = `
+exports[`"plugins" option should work with empty "Array" value: css 1`] = `
 "a {
   color: black;
 }
@@ -482,11 +533,11 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with empty "Array": errors 1`] = `Array []`;
+exports[`"plugins" option should work with empty "Array" value: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with empty "Array": warnings 1`] = `Array []`;
+exports[`"plugins" option should work with empty "Array" value: warnings 1`] = `Array []`;
 
-exports[`"plugins" option should work with empty "Object": css 1`] = `
+exports[`"plugins" option should work with empty "Object" value: css 1`] = `
 "a {
   color: black;
 }
@@ -533,6 +584,6 @@ a {
 "
 `;
 
-exports[`"plugins" option should work with empty "Object": errors 1`] = `Array []`;
+exports[`"plugins" option should work with empty "Object" value: errors 1`] = `Array []`;
 
-exports[`"plugins" option should work with empty "Object": warnings 1`] = `Array []`;
+exports[`"plugins" option should work with empty "Object" value: warnings 1`] = `Array []`;

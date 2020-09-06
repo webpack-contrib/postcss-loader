@@ -6,10 +6,10 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
-describe('Options Exec', () => {
-  it('should work Exec - {Boolean}', async () => {
+describe('"exec" option', () => {
+  it('should work with "Boolean" value', async () => {
     const compiler = getCompiler(
       './jss/exec/index.js',
       {},
@@ -20,12 +20,14 @@ describe('Options Exec', () => {
               test: /style\.(exec\.js|js)$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
-                  options: { exec: true },
+                  loader: path.resolve(__dirname, '../src'),
+                  options: {
+                    exec: true,
+                  },
                 },
               ],
             },
@@ -42,7 +44,7 @@ describe('Options Exec', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work JSS - {String}', async () => {
+  it('should work with "JSS" parser', async () => {
     const compiler = getCompiler(
       './jss/index.js',
       {},
@@ -53,11 +55,11 @@ describe('Options Exec', () => {
               test: /style\.js$/i,
               use: [
                 {
-                  loader: require.resolve('../helpers/testLoader'),
+                  loader: require.resolve('./helpers/testLoader'),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../../src'),
+                  loader: path.resolve(__dirname, '../src'),
                   options: {
                     postcssOptions: {
                       parser: 'postcss-js',

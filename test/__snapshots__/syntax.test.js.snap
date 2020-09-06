@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`"syntax" option should throw an error on "unresolved" syntax: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+TypeError: Cannot read property 'parse' of undefined",
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"unresolved\\" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"syntax" option should throw an error on "unresolved" syntax: warnings 1`] = `Array []`;
+
+exports[`"syntax" option should work with "Object" value: css 1`] = `
+"a
+  color: black
+"
+`;
+
+exports[`"syntax" option should work with "Object" value: errors 1`] = `Array []`;
+
+exports[`"syntax" option should work with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"syntax" option should work with "String" value: css 1`] = `
+"a
+  color: black
+"
+`;
+
+exports[`"syntax" option should work with "String" value: errors 1`] = `Array []`;
+
+exports[`"syntax" option should work with "String" value: warnings 1`] = `Array []`;

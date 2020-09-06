@@ -1,5 +1,5 @@
-module.exports = (ctx) => ({
+module.exports = () => ({
   plugins: [
-    ctx.options.plugin ? require('./plugin')() : false
+    require('./plugin')()
   ]
 });

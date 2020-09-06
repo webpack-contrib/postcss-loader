@@ -4,10 +4,10 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
-describe('Options Stringifier', () => {
-  it('should work Stringifier - {String}', async () => {
+describe('"stringifier" option', () => {
+  it('should work with "String" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         stringifier: 'sugarss',
@@ -22,7 +22,7 @@ describe('Options Stringifier', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Stringifier - {Object}', async () => {
+  it('should work "Object" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line global-require
@@ -38,7 +38,7 @@ describe('Options Stringifier', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Stringifier - {Function}', async () => {
+  it('should work "Function" value', async () => {
     // eslint-disable-next-line global-require
     const Midas = require('midas');
     const midas = new Midas();

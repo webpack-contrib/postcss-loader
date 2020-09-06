@@ -1,5 +1,3 @@
-import path from 'path';
-
 import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
@@ -38,6 +36,7 @@ export default async function loader(content, sourceMap) {
   });
 
   const callback = this.async();
+
   const configOption =
     typeof options.postcssOptions === 'undefined' ||
     typeof options.postcssOptions.config === 'undefined'
@@ -46,35 +45,8 @@ export default async function loader(content, sourceMap) {
   let loadedConfig = {};
 
   if (configOption) {
-    const dataForLoadConfig = {
-      path: path.dirname(this.resourcePath),
-      ctx: {
-        file: {
-          extname: path.extname(this.resourcePath),
-          dirname: path.dirname(this.resourcePath),
-          basename: path.basename(this.resourcePath),
-        },
-        options: {},
-      },
-    };
-
-    if (typeof configOption.path !== 'undefined') {
-      dataForLoadConfig.path = path.resolve(configOption.path);
-    }
-
-    if (typeof configOption.ctx !== 'undefined') {
-      dataForLoadConfig.ctx.options = configOption.ctx;
-    }
-
-    dataForLoadConfig.ctx.webpack = this;
-
     try {
-      loadedConfig = await loadConfig(
-        configOption,
-        dataForLoadConfig.ctx,
-        dataForLoadConfig.path,
-        this
-      );
+      loadedConfig = await loadConfig(this, configOption);
     } catch (error) {
       callback(error);
 

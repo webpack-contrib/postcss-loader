@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`"parser" option should throw an error on "unresolved" parser: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+TypeError: parser is not a function",
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"unresolved\\" parser failed: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"parser" option should throw an error on "unresolved" parser: warnings 1`] = `Array []`;
+
+exports[`"parser" option should work with "Function" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"parser" option should work with "Function" value: errors 1`] = `Array []`;
+
+exports[`"parser" option should work with "Function" value: warnings 1`] = `Array []`;
+
+exports[`"parser" option should work with "Object" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"parser" option should work with "Object" value: errors 1`] = `Array []`;
+
+exports[`"parser" option should work with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"parser" option should work with "String" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"parser" option should work with "String" value: errors 1`] = `Array []`;
+
+exports[`"parser" option should work with "String" value: warnings 1`] = `Array []`;

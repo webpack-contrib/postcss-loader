@@ -4,7 +4,7 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from '../helpers/index';
+} from './helpers';
 
 describe('"postcssOptions" option', () => {
   it('should work with "from", "to" and "map" options', async () => {
@@ -41,7 +41,7 @@ describe('"postcssOptions" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work the the "map" option and generate inlined source maps', async () => {
+  it('should work with the "map" option and generate inlined source maps', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         map: { inline: true, annotation: false },
@@ -56,12 +56,12 @@ describe('"postcssOptions" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work when the "postcssOptions" option is "Function"', async () => {
+  it('should work "Function" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });
@@ -74,12 +74,12 @@ describe('"postcssOptions" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work when the "postcssOptions" option is "Function" and the "plugins" option is "Array"', async () => {
+  it('should work "Function" value and with "Array" syntax of the "plugins" option', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });
@@ -91,12 +91,12 @@ describe('"postcssOptions" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work when the "postcssOptions" option is "Function" and the "plugins" option is "Object"', async () => {
+  it('should work "Function" value and with "Object" syntax of the "plugins" option', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: () => {
         return {
           // eslint-disable-next-line global-require
-          plugins: [require('../fixtures/config-scope/config/plugin')()],
+          plugins: [require('./fixtures/config-scope/config/plugin')()],
         };
       },
     });

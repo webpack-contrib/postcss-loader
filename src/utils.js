@@ -15,20 +15,6 @@ const stat = (inputFileSystem, filePath) =>
     });
   });
 
-const createContext = (context) => {
-  const result = {
-    cwd: process.cwd(),
-    env: process.env.NODE_ENV,
-    ...context,
-  };
-
-  if (!result.env) {
-    process.env.NODE_ENV = 'development';
-  }
-
-  return result;
-};
-
 function exec(code, loaderContext) {
   const { resource, context } = loaderContext;
 
@@ -44,12 +30,11 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-async function loadConfig(config, context, configPath, loaderContext) {
-  let searchPath = configPath ? path.resolve(configPath) : process.cwd();
-
-  if (typeof config === 'string') {
-    searchPath = path.resolve(config);
-  }
+async function loadConfig(loaderContext, config) {
+  const searchPath =
+    typeof config === 'string'
+      ? path.resolve(config)
+      : path.dirname(loaderContext.resourcePath);
 
   let stats;
 
@@ -77,17 +62,23 @@ async function loadConfig(config, context, configPath, loaderContext) {
     return {};
   }
 
-  const patchedContext = createContext(context);
-
   let resultConfig = result.config || {};
 
   if (typeof resultConfig === 'function') {
-    resultConfig = resultConfig(patchedContext);
+    const api = {
+      env: process.env.NODE_ENV,
+      mode: loaderContext.mode,
+      file: loaderContext.resourcePath,
+      // For complex use
+      webpackLoaderContext: loaderContext,
+    };
+
+    resultConfig = resultConfig(api);
   }
 
   resultConfig.file = result.filepath;
 
-  loaderContext.addDependency(result.filepath);
+  loaderContext.addDependency(resultConfig.file);
 
   return resultConfig;
 }
@@ -126,7 +117,8 @@ function pluginFactory() {
         } else if (
           plugin &&
           Object.keys(plugin).length === 1 &&
-          typeof plugin[Object.keys(plugin)[0]] === 'object' &&
+          (typeof plugin[Object.keys(plugin)[0]] === 'object' ||
+            typeof plugin[Object.keys(plugin)[0]] === 'boolean') &&
           plugin[Object.keys(plugin)[0]] !== null
         ) {
           const [name] = Object.keys(plugin);
