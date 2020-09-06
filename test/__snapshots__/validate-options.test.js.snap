@@ -43,11 +43,9 @@ exports[`validate options should throw an error on the "postcssOptions" option w
    -> Options to pass through to \`Postcss\`.
    Details:
     * options.postcssOptions.config should be one of these:
-      object { path?, ctx? } | string | boolean
+      string | boolean
       -> Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)
       Details:
-       * options.postcssOptions.config should be an object:
-         object { path?, ctx? }
        * options.postcssOptions.config should be a string.
          -> Allows to specify the path to the configuration file
        * options.postcssOptions.config should be a boolean.

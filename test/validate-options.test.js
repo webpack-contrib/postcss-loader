@@ -38,15 +38,10 @@ describe('validate options', () => {
         { config: false },
         { config: 'test/fixtures/config-scope/config/postcss.config.js' },
         {
-          config: {
-            path: 'test/fixtures/config-scope/config/postcss.config.js',
-          },
-        },
-        {
-          config: {
-            path: 'test/fixtures/config-scope/config/postcss.config.js',
-            ctx: { plugin: true },
-          },
+          config: path.resolve(
+            __dirname,
+            './fixtures/config-scope/config/postcss.config.js'
+          ),
         },
       ],
       failure: [

@@ -89,7 +89,7 @@ module.exports = {
 };
 ```
 
-The loader **automatically** searches for configuration files by default.
+The loader **automatically** searches for configuration files.
 
 **webpack.config.js**
 

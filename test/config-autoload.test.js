@@ -10,34 +10,27 @@ const loaderContext = {
   addDependency: () => true,
 };
 
-describe('config-autoload', () => {
-  const ctx = {
-    parser: true,
-    syntax: true,
-  };
-
-  it('.postcssrc - {Object} - Load Config', async () => {
+describe('autoload config', () => {
+  it('.postcssrc', async () => {
     const expected = (config) => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual('./test/rc/fixtures/index.css');
       expect(config.to).toEqual('./test/rc/expect/index.css');
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.plugins).length).toEqual(2);
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'rc', '.postcssrc')
       );
     };
 
     const config = await loadConfig(
-      true,
-      {},
-      path.resolve(testDirectory, 'rc'),
-      loaderContext
+      loaderContext,
+      path.resolve(testDirectory, 'rc')
     );
 
     expected(config);
   });
 
-  it('postcss.config.js - {Object} - Load Config', async () => {
+  it('postcss.config.js using the "object" syntax of plugins', async () => {
     const expected = (config) => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual(
@@ -46,23 +39,21 @@ describe('config-autoload', () => {
       expect(config.to).toEqual(
         './test/fixtures/config-autoload/js/object/expect/index.css'
       );
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.plugins).length).toEqual(2);
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/object', 'postcss.config.js')
       );
     };
 
     const config = await loadConfig(
-      true,
-      ctx,
-      path.resolve(testDirectory, 'js/object'),
-      loaderContext
+      loaderContext,
+      path.resolve(testDirectory, 'js/object')
     );
 
     expected(config);
   });
 
-  it('postcss.config.js - {Array} - Load Config', async () => {
+  it('postcss.config.js using the "array" syntax of plugins', async () => {
     const expected = (config) => {
       expect(config.map).toEqual(false);
       expect(config.from).toEqual(
@@ -71,17 +62,15 @@ describe('config-autoload', () => {
       expect(config.to).toEqual(
         './test/fixtures/config-autoload/js/object/expect/index.css'
       );
-      expect(Object.keys(config.plugins).length).toEqual(3);
+      expect(Object.keys(config.plugins).length).toEqual(2);
       expect(config.file).toEqual(
         path.resolve(testDirectory, 'js/array', 'postcss.config.js')
       );
     };
 
     const config = await loadConfig(
-      true,
-      ctx,
-      path.resolve(testDirectory, 'js/array'),
-      loaderContext
+      loaderContext,
+      path.resolve(testDirectory, 'js/array')
     );
 
     expected(config);
@@ -105,10 +94,8 @@ describe('config-autoload', () => {
     };
 
     const config = await loadConfig(
-      true,
-      {},
-      path.resolve(testDirectory, 'pkg'),
-      loaderContext
+      loaderContext,
+      path.resolve(testDirectory, 'pkg')
     );
 
     expected(config);
@@ -116,7 +103,7 @@ describe('config-autoload', () => {
 
   it('Loading Config - {Error}', async () => {
     try {
-      await loadConfig(true, {}, path.resolve('unresolved'), fs);
+      await loadConfig(loaderContext, path.resolve('unresolved'));
     } catch (error) {
       expect(error.message).toMatch(/^No PostCSS Config found in: (.*)$/);
     }
