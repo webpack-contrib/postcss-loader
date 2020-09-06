@@ -14,7 +14,7 @@ import {
 } from './helpers';
 
 describe('"sourceMap" option', () => {
-  it('should generate source maps when value has "true" value and the "devtool" option has "false" value', async () => {
+  it('should generate source maps with "true" value and the "devtool" with "false" value', async () => {
     const compiler = getCompiler(
       './css/index.js',
       {
@@ -46,7 +46,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when value has "true" value and the "devtool" option has "source-map" value', async () => {
+  it('should generate source maps with "true" value and the "devtool" option with "source-map" value', async () => {
     const compiler = getCompiler(
       './css/index.js',
       {
@@ -78,7 +78,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when value is not specified and the "devtool" option has "source-map" value', async () => {
+  it('should generate source maps when value is not specified and the "devtool" with "source-map" value', async () => {
     const compiler = getCompiler(
       './css/index.js',
       {},
@@ -108,7 +108,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps when value has "false" value, but the "postcssOptions.map" has values', async () => {
+  it('should generate source maps with "false" value, but the "postcssOptions.map" has values', async () => {
     const compiler = getCompiler(
       './css/index.js',
       {
@@ -145,7 +145,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps the "postcssOptions.map" has the "true" values and previous loader returns source maps ("sass-loader")', async () => {
+  it('should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
       './scss/index.js',
       {},
@@ -200,7 +200,7 @@ describe('"sourceMap" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should generate source maps the "postcssOptions.map" has values and previous loader returns source maps ("sass-loader")', async () => {
+  it('should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
       './scss/index.js',
       {},
@@ -265,6 +265,61 @@ describe('"sourceMap" option', () => {
 
     expect(css).toMatchSnapshot('css');
     expect(sourceMap).toMatchSnapshot('source map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should not generate source maps with "false" value and the "devtool" option with "false" value', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        sourceMap: false,
+      },
+      {
+        devtool: false,
+      }
+    );
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+
+    expect(css).toMatchSnapshot('css');
+    expect(sourceMap).toBeUndefined();
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should not generate source maps with "false" value and the "devtool" option with "source-map" value', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        sourceMap: false,
+      },
+      {
+        devtool: 'source-map',
+      }
+    );
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+
+    expect(css).toMatchSnapshot('css');
+    expect(sourceMap).toBeUndefined();
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should not generate source maps when value is not specified and the "devtool" option with "source-map" value', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {},
+      {
+        devtool: false,
+      }
+    );
+    const stats = await compile(compiler);
+    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+
+    expect(css).toMatchSnapshot('css');
+    expect(sourceMap).toBeUndefined();
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
@@ -370,61 +425,6 @@ describe('"sourceMap" option', () => {
 
     expect(css).toMatchSnapshot('css');
     expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should not generate source maps when value has "false" value and the "devtool" option has "false" value', async () => {
-    const compiler = getCompiler(
-      './css/index.js',
-      {
-        sourceMap: false,
-      },
-      {
-        devtool: false,
-      }
-    );
-    const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
-
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should not generate source maps when value has "false" value and the "devtool" option has "source-map" value', async () => {
-    const compiler = getCompiler(
-      './css/index.js',
-      {
-        sourceMap: false,
-      },
-      {
-        devtool: 'source-map',
-      }
-    );
-    const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
-
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should not generate source maps when value is not specified and the "devtool" option has "source-map" value', async () => {
-    const compiler = getCompiler(
-      './css/index.js',
-      {},
-      {
-        devtool: false,
-      }
-    );
-    const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
-
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toBeUndefined();
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });

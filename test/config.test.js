@@ -65,7 +65,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "string" value (absolute path)', async () => {
+  it('should work with "String" value (absolute path)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -83,7 +83,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work "string" value (relative path)', async () => {
+  it('should work "String" value (relative path)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: 'test/fixtures/config-scope/css/custom.config.js',
@@ -98,7 +98,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "string" value (path to directory with the configuration)', async () => {
+  it('should work with "String" value (with path to the directory with the configuration)', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: 'test/fixtures/config-scope',
@@ -113,7 +113,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "package.json"', async () => {
+  it('should work with "package.json" configuration', async () => {
     const compiler = getCompiler('./config-autoload/pkg/index.js', {
       postcssOptions: {
         config: path.resolve(testDirectory, 'pkg'),
@@ -144,7 +144,7 @@ describe('"config" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "string" value and respect all options', async () => {
+  it('should work with "String" value and respect all options', async () => {
     const compiler = getCompiler('./sss/index.js', {
       postcssOptions: {
         config: path.resolve(

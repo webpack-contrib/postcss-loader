@@ -8,8 +8,8 @@ import {
   getWarnings,
 } from './helpers';
 
-describe('Options Exec', () => {
-  it('should work Exec - {Boolean}', async () => {
+describe('"exec" option', () => {
+  it('should work with "Boolean" value', async () => {
     const compiler = getCompiler(
       './jss/exec/index.js',
       {},
@@ -25,7 +25,9 @@ describe('Options Exec', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../src'),
-                  options: { exec: true },
+                  options: {
+                    exec: true,
+                  },
                 },
               ],
             },
@@ -42,7 +44,7 @@ describe('Options Exec', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work JSS - {String}', async () => {
+  it('should work with "JSS" parser', async () => {
     const compiler = getCompiler(
       './jss/index.js',
       {},

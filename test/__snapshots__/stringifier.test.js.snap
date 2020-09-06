@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Options Stringifier should throw an error on "unresolved" stringifier: errors 1`] = `
+exports[`"stringifier" option should throw an error on "unresolved" stringifier: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: this.stringify is not a function",
@@ -9,9 +9,9 @@ Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresol
 ]
 `;
 
-exports[`Options Stringifier should throw an error on "unresolved" stringifier: warnings 1`] = `Array []`;
+exports[`"stringifier" option should throw an error on "unresolved" stringifier: warnings 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {Function}: css 1`] = `
+exports[`"stringifier" option should work "Function" value: css 1`] = `
 "<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
   <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span><span class=\\"midas__semicolon\\">;</span>
 <span class=\\"midas__brace\\">}</span>
@@ -58,11 +58,11 @@ exports[`Options Stringifier should work Stringifier - {Function}: css 1`] = `
 </code></pre>"
 `;
 
-exports[`Options Stringifier should work Stringifier - {Function}: errors 1`] = `Array []`;
+exports[`"stringifier" option should work "Function" value: errors 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {Function}: warnings 1`] = `Array []`;
+exports[`"stringifier" option should work "Function" value: warnings 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {Object}: css 1`] = `
+exports[`"stringifier" option should work "Object" value: css 1`] = `
 "a
   color: black
 
@@ -98,11 +98,11 @@ a
 "
 `;
 
-exports[`Options Stringifier should work Stringifier - {Object}: errors 1`] = `Array []`;
+exports[`"stringifier" option should work "Object" value: errors 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {Object}: warnings 1`] = `Array []`;
+exports[`"stringifier" option should work "Object" value: warnings 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {String}: css 1`] = `
+exports[`"stringifier" option should work with "String" value: css 1`] = `
 "a
   color: black
 
@@ -138,6 +138,6 @@ a
 "
 `;
 
-exports[`Options Stringifier should work Stringifier - {String}: errors 1`] = `Array []`;
+exports[`"stringifier" option should work with "String" value: errors 1`] = `Array []`;
 
-exports[`Options Stringifier should work Stringifier - {String}: warnings 1`] = `Array []`;
+exports[`"stringifier" option should work with "String" value: warnings 1`] = `Array []`;

@@ -13,7 +13,7 @@ import myPostcssPlugin from './fixtures/plugin/plugin';
 jest.setTimeout(30000);
 
 describe('"plugins" option', () => {
-  it('should work with "Array"', async () => {
+  it('should work with "Array" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: [
@@ -62,7 +62,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Object"', async () => {
+  it('should work with "Object" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: {
@@ -82,7 +82,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with empty "Array"', async () => {
+  it('should work with empty "Array" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: [],
@@ -97,7 +97,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with empty "Object"', async () => {
+  it('should work with empty "Object" value', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: {},
@@ -112,7 +112,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Array" and support disabling plugins from the configuration', async () => {
+  it('should work with "Array" value and support disabling plugins from the configuration', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
@@ -128,7 +128,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Object" and support disabling plugins from the configuration', async () => {
+  it('should work with "Object" value and support disabling plugins from the configuration', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
@@ -146,7 +146,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Object" and only disabled plugins', async () => {
+  it('should work with "Object" value and only disabled plugins', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: {
@@ -165,7 +165,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Array" and override the previous plugin options', async () => {
+  it('should work with "Array" value and override the previous plugin options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: [
@@ -183,23 +183,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Array", and config, and override the previous plugin options', async () => {
-    const compiler = getCompiler('./css/index.js', {
-      postcssOptions: {
-        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
-        plugins: [['postcss-short', { prefix: 'z' }]],
-      },
-    });
-    const stats = await compile(compiler);
-
-    const codeFromBundle = getCodeFromBundle('style.css', stats);
-
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should work with "Object" and override the previous plugin options', async () => {
+  it('should work with "Object" value and override the previous plugin options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         plugins: {
@@ -218,7 +202,23 @@ describe('"plugins" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Object", and config, and override the previous plugin options', async () => {
+  it('should work with "Array" value, and config, and override the previous plugin options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
+        plugins: [['postcss-short', { prefix: 'z' }]],
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with "Object" value, and config, and override the previous plugin options', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         config: path.resolve(__dirname, './fixtures/css/plugins.config.js'),
@@ -248,7 +248,7 @@ describe('"plugins" option', () => {
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
-  it('should work with "Array" and not throw an error on falsy plugin', async () => {
+  it('should work with "Array" value and not throw an error on falsy plugin', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         // eslint-disable-next-line no-undefined

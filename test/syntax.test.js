@@ -1,5 +1,3 @@
-import path from 'path';
-
 import {
   compile,
   getCompiler,
@@ -8,35 +6,13 @@ import {
   getWarnings,
 } from './helpers';
 
-describe('Options Syntax', () => {
-  it('should work Syntax - {String}', async () => {
-    const compiler = getCompiler(
-      './sss/index.js',
-      {},
-      {
-        module: {
-          rules: [
-            {
-              test: /\.sss$/i,
-              use: [
-                {
-                  loader: require.resolve('./helpers/testLoader'),
-                  options: {},
-                },
-                {
-                  loader: path.resolve(__dirname, '../src'),
-                  options: {
-                    postcssOptions: {
-                      syntax: 'sugarss',
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      }
-    );
+describe('"syntax" option', () => {
+  it('should work with "String" value', async () => {
+    const compiler = getCompiler('./sss/index.js', {
+      postcssOptions: {
+        syntax: 'sugarss',
+      },
+    });
     const stats = await compile(compiler);
 
     const codeFromBundle = getCodeFromBundle('style.sss', stats);
@@ -46,35 +22,13 @@ describe('Options Syntax', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work Syntax - {Object}', async () => {
-    const compiler = getCompiler(
-      './sss/index.js',
-      {},
-      {
-        module: {
-          rules: [
-            {
-              test: /\.sss$/i,
-              use: [
-                {
-                  loader: require.resolve('./helpers/testLoader'),
-                  options: {},
-                },
-                {
-                  loader: path.resolve(__dirname, '../src'),
-                  options: {
-                    postcssOptions: {
-                      // eslint-disable-next-line global-require
-                      syntax: require('sugarss'),
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      }
-    );
+  it('should work with "Object" value', async () => {
+    const compiler = getCompiler('./sss/index.js', {
+      postcssOptions: {
+        // eslint-disable-next-line global-require
+        syntax: require('sugarss'),
+      },
+    });
 
     const stats = await compile(compiler);
 
@@ -86,33 +40,11 @@ describe('Options Syntax', () => {
   });
 
   it('should throw an error on "unresolved" syntax', async () => {
-    const compiler = getCompiler(
-      './sss/index.js',
-      {},
-      {
-        module: {
-          rules: [
-            {
-              test: /\.sss$/i,
-              use: [
-                {
-                  loader: require.resolve('./helpers/testLoader'),
-                  options: {},
-                },
-                {
-                  loader: path.resolve(__dirname, '../src'),
-                  options: {
-                    postcssOptions: {
-                      syntax: 'unresolved',
-                    },
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      }
-    );
+    const compiler = getCompiler('./sss/index.js', {
+      postcssOptions: {
+        syntax: 'unresolved',
+      },
+    });
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot('warnings');

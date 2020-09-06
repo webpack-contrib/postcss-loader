@@ -18,7 +18,7 @@ Error: No PostCSS Config found in: /test/fixtures/config-scope/css/unresolve.js"
 
 exports[`"config" option should throw an error on the unresolved config: warnings 1`] = `Array []`;
 
-exports[`"config" option should work "string" value (relative path): css 1`] = `
+exports[`"config" option should work "String" value (relative path): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
 
 .foo {
@@ -27,9 +27,47 @@ exports[`"config" option should work "string" value (relative path): css 1`] = `
 "
 `;
 
-exports[`"config" option should work "string" value (relative path): errors 1`] = `Array []`;
+exports[`"config" option should work "String" value (relative path): errors 1`] = `Array []`;
 
-exports[`"config" option should work "string" value (relative path): warnings 1`] = `Array []`;
+exports[`"config" option should work "String" value (relative path): warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value (absolute path): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work with "String" value (absolute path): errors 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value (absolute path): warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value (with path to the directory with the configuration): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work with "String" value (with path to the directory with the configuration): errors 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value (with path to the directory with the configuration): warnings 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value and respect all options: css 1`] = `
+"a {
+  color: black
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0FBREYiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxuICBjb2xvcjogYmxhY2tcbiJdfQ== */"
+`;
+
+exports[`"config" option should work with "String" value and respect all options: errors 1`] = `Array []`;
+
+exports[`"config" option should work with "String" value and respect all options: warnings 1`] = `Array []`;
 
 exports[`"config" option should work with "false" value: css 1`] = `
 "a { color: black }
@@ -44,7 +82,7 @@ exports[`"config" option should work with "false" value: errors 1`] = `Array []`
 
 exports[`"config" option should work with "false" value: warnings 1`] = `Array []`;
 
-exports[`"config" option should work with "package.json": css 1`] = `
+exports[`"config" option should work with "package.json" configuration: css 1`] = `
 ".import {
   color: red;
 }
@@ -55,47 +93,9 @@ exports[`"config" option should work with "package.json": css 1`] = `
 "
 `;
 
-exports[`"config" option should work with "package.json": errors 1`] = `Array []`;
+exports[`"config" option should work with "package.json" configuration: errors 1`] = `Array []`;
 
-exports[`"config" option should work with "package.json": warnings 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value (absolute path): css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work with "string" value (absolute path): errors 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value (absolute path): warnings 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value (path to directory with the configuration): css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
-
-.foo {
-  float: right;
-}
-"
-`;
-
-exports[`"config" option should work with "string" value (path to directory with the configuration): errors 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value (path to directory with the configuration): warnings 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value and respect all options: css 1`] = `
-"a {
-  color: black
-}
-
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0FBREYiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxuICBjb2xvcjogYmxhY2tcbiJdfQ== */"
-`;
-
-exports[`"config" option should work with "string" value and respect all options: errors 1`] = `Array []`;
-
-exports[`"config" option should work with "string" value and respect all options: warnings 1`] = `Array []`;
+exports[`"config" option should work with "package.json" configuration: warnings 1`] = `Array []`;
 
 exports[`"config" option should work with "true" value: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }

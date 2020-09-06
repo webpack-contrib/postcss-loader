@@ -4,7 +4,7 @@ exports[`loader should emit asset using the "messages" API: errors 1`] = `Array 
 
 exports[`loader should emit asset using the "messages" API: warnings 1`] = `Array []`;
 
-exports[`loader should emit warning: css 1`] = `
+exports[`loader should emit warning using the "messages" API: css 1`] = `
 "a {
   color: black;
 }
@@ -51,9 +51,9 @@ a {
 "
 `;
 
-exports[`loader should emit warning: errors 1`] = `Array []`;
+exports[`loader should emit warning using the "messages" API: errors 1`] = `Array []`;
 
-exports[`loader should emit warning: warnings 1`] = `
+exports[`loader should emit warning using the "messages" API: warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning

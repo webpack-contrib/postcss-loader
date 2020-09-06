@@ -10,11 +10,7 @@ import {
 
 describe('loader', () => {
   it('should work', async () => {
-    const compiler = getCompiler('./css/index.js', {
-      postcssOptions: {
-        plugins: [],
-      },
-    });
+    const compiler = getCompiler('./css/index.js');
     const stats = await compile(compiler);
 
     const codeFromBundle = getCodeFromBundle('style.css', stats);
@@ -24,7 +20,19 @@ describe('loader', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit warning', async () => {
+  it('should throw an error on invalid syntax', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        parser: 'sugarss',
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should emit warning using the "messages" API', async () => {
     const plugin = () => (css, result) => {
       css.walkDecls((node) => {
         node.warn(result, '<Message>');
@@ -43,18 +51,6 @@ describe('loader', () => {
     const codeFromBundle = getCodeFromBundle('style.css', stats);
 
     expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
-  });
-
-  it('should throw an error on invalid syntax', async () => {
-    const compiler = getCompiler('./css/index.js', {
-      postcssOptions: {
-        parser: 'sugarss',
-      },
-    });
-    const stats = await compile(compiler);
-
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });

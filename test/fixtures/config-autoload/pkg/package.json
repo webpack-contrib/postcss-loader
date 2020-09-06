@@ -7,10 +7,9 @@
     "map": false,
     "from": "./test/fixtures/config-autoload/pkg/index.css",
     "to": "./test/fixtures/config-autoload/pkg/expected/index.css",
-    "plugins": {
-      "postcss-import": {},
-      "postcss-nested": {},
-      "cssnano": false
-    }
+    "plugins": [
+      "postcss-import",
+      ["postcss-nested", {}]
+    ]
   }
 }
