@@ -10,7 +10,7 @@ import {
 
 const testDirectory = path.resolve(__dirname, '../fixtures', 'config-autoload');
 
-describe('Config Options', () => {
+describe('"config" option', () => {
   it('should work Config - false', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
@@ -225,7 +225,7 @@ describe('Config Options', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should emit error when unresolved config ', async () => {
+  it('should throw an error when unresolved config ', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -240,7 +240,7 @@ describe('Config Options', () => {
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
-  it('should emit error when invalid config ', async () => {
+  it('should throw an error on the invalid config ', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: path.resolve(
@@ -255,7 +255,7 @@ describe('Config Options', () => {
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
 
-  it('should work if Config not found', async () => {
+  it('should work if the "config" options is not specified', async () => {
     const compiler = getCompiler('./css/index.js', {});
     const stats = await compile(compiler);
 
@@ -266,7 +266,7 @@ describe('Config Options', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work "config" and "postcssOptions" options', async () => {
+  it('should work with the "postcssOptions" option', async () => {
     const compiler = getCompiler('./config-scope/css/index.js', {
       postcssOptions: {
         config: true,

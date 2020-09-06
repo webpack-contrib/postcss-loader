@@ -115,8 +115,6 @@ export default async function loader(content, sourceMap) {
     processOptions.map.prev = sourceMap;
   }
 
-  console.log(processOptions);
-
   let result;
 
   try {
