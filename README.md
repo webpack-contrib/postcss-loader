@@ -1,15 +1,25 @@
 <div align="center">
-  <img width="180" height="180" hspace="10"
+  <img 
+    width="180" 
+    height="180" 
+    hspace="10"
     alt="PostCSS Logo"
     src="https://api.postcss.org/logo.svg">
   <a href="https://github.com/webpack/webpack">
-    <img width="200" height="200" hspace="10"
+    <img 
+      width="200" 
+      height="200" 
+      hspace="10"
       src="https://cdn.rawgit.com/webpack/media/e7485eb2/logo/icon.svg">
   </a>
   <div align="center">
     <a href="https://evilmartians.com/?utm_source=postcss">
-      <img src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
-        alt="Sponsored by Evil Martians" width="236" height="54" vspace="10">
+      <img 
+        src="https://evilmartians.com/badges/sponsored-by-evil-martians.svg"
+        alt="Sponsored by Evil Martians" 
+        width="236" 
+        height="54" 
+        vspace="10">
     </a>
   </div>
 </div>
@@ -20,6 +30,8 @@
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![chat][chat]][chat-url]
+[![chat-postcss][chat-postcss]][chat-postcss-url]
+[![size][size]][size-url]
 
 # postcss-loader
 
@@ -1079,11 +1091,15 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm-url]: https://npmjs.com/package/postcss-loader
 [node]: https://img.shields.io/node/v/postcss-loader.svg
 [node-url]: https://nodejs.org
-[deps]: https://david-dm.org/postcss/postcss-loader.svg
-[deps-url]: https://david-dm.org/postcss/postcss-loader
-[tests]: https://img.shields.io/travis/postcss/postcss-loader.svg
-[tests-url]: https://travis-ci.org/postcss/postcss-loader
-[cover]: https://coveralls.io/repos/github/postcss/postcss-loader/badge.svg
-[cover-url]: https://coveralls.io/github/postcss/postcss-loader
-[chat]: https://badges.gitter.im/postcss/postcss.svg
-[chat-url]: https://gitter.im/postcss/postcss
+[deps]: https://david-dm.org/webpack-contrib/postcss-loader.svg
+[deps-url]: https://david-dm.org/webpack-contrib/postcss-loader
+[tests]: https://github.com/webpack-contrib/postcss-loader/workflows/postcss-loader/badge.svg
+[tests-url]: https://github.com/webpack-contrib/postcss-loader/actions
+[cover]: https://codecov.io/gh/webpack-contrib/postcss-loader/branch/master/graph/badge.svg
+[cover-url]: https://codecov.io/gh/webpack-contrib/postcss-loader
+[chat]: https://badges.gitter.im/webpack/webpack.svg
+[chat-url]: https://gitter.im/webpack/webpack
+[chat-postcss]: https://badges.gitter.im/postcss/postcss.svg
+[chat-postcss-url]: https://gitter.im/postcss/postcss
+[size]: https://packagephobia.now.sh/badge?p=postcss-loader
+[size-url]: https://packagephobia.now.sh/result?p=postcss-loader
