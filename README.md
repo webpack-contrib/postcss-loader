@@ -35,7 +35,7 @@
 
 # postcss-loader
 
-Loader to process CSS with [`postcss`](https://github.com/postcss/postcss).
+Loader to process CSS with [`PostCSS`](https://github.com/postcss/postcss).
 
 ## Getting Started
 
@@ -125,7 +125,7 @@ And run `webpack` via your preferred method.
 |                Name                 |         Type         |                Default                | Description                                  |
 | :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
 |        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
-| [`postcssOptions`](#postcssOptions) | `{Object\/Function}` | `defaults values for Postcss.process` | Set `postcss` options and plugins            |
+| [`postcssOptions`](#postcssOptions) | `{Object\/Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
 
 ### `execute`
@@ -166,6 +166,11 @@ module.exports = {
 
 ### `postcssOptions`
 
+Type: `Object|Function`
+Default: `undefined`
+
+Allows to set [`PostCSS options`](http://api.postcss.org/global.html#processOptions) and plugins.
+
 |             Name              |                     Type                      |   Default   | Description                    |
 | :---------------------------: | :-------------------------------------------: | :---------: | :----------------------------- |
 |      [`config`](#config)      | `{Function\|Object\|Array<Function\|Object>}` |    `[]`     | Set PostCSS Plugins            |
@@ -173,11 +178,6 @@ module.exports = {
 |      [`parser`](#parser)      |         `{String\|Object\|Function}`          | `undefined` | Set custom PostCSS Parser      |
 |      [`syntax`](#syntax)      |              `{String\|Object}`               | `undefined` | Set custom PostCSS Syntax      |
 | [`stringifier`](#stringifier) |         `{String\|Object\|Function}`          | `undefined` | Set custom PostCSS Stringifier |
-
-Type: `Object|Function`
-Default: `undefined`
-
-Allows to set `postcss options`(http://api.postcss.org/global.html#processOptions) and plugins.
 
 #### `Object`
 
@@ -374,7 +374,6 @@ module.exports = {
           plugins: (loader) => [
             ['postcss-import', { root: loader.resourcePath }],
             'postcss-nested',
-            'cssnano',
           ],
         },
       },
@@ -397,7 +396,6 @@ module.exports = {
             plugins: (loader) => [
               require('postcss-import')({ root: loader.resourcePath }),
               require('postcss-preset-env')(),
-              require('cssnano')(),
             ],
           },
         },
@@ -966,7 +964,7 @@ module.exports = {
 
 ### Emit assets
 
-To write a asset from the postcss plugin to the webpack's output, need to add a message in `result.messages`.
+To write a asset from PostCSS plugin to the webpack, need to add a message in `result.messages`.
 
 The message should contain the following fields:
 
