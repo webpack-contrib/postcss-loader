@@ -1,6 +1,7 @@
 import path from 'path';
 import Module from 'module';
 
+import { klona } from 'klona/full';
 import { cosmiconfig } from 'cosmiconfig';
 
 const parentModule = module;
@@ -41,7 +42,7 @@ async function loadConfig(loaderContext, config) {
   try {
     stats = await stat(loaderContext.fs, searchPath);
   } catch (errorIgnore) {
-    throw new Error(`No PostCSS Config found in: ${searchPath}`);
+    throw new Error(`No PostCSS config found in: ${searchPath}`);
   }
 
   const explorer = cosmiconfig('postcss');
@@ -62,25 +63,26 @@ async function loadConfig(loaderContext, config) {
     return {};
   }
 
-  let resultConfig = result.config || {};
+  loaderContext.addDependency(result.filepath);
 
-  if (typeof resultConfig === 'function') {
+  if (result.isEmpty) {
+    return result;
+  }
+
+  if (typeof result.config === 'function') {
     const api = {
-      env: process.env.NODE_ENV,
       mode: loaderContext.mode,
       file: loaderContext.resourcePath,
       // For complex use
       webpackLoaderContext: loaderContext,
     };
 
-    resultConfig = resultConfig(api);
+    result.config = result.config(api);
   }
 
-  resultConfig.file = result.filepath;
+  result = klona(result);
 
-  loaderContext.addDependency(resultConfig.file);
-
-  return resultConfig;
+  return result;
 }
 
 function loadPlugin(plugin, options, file) {
@@ -160,7 +162,11 @@ function pluginFactory() {
   };
 }
 
-function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
+function getPostcssOptions(
+  loaderContext,
+  loadedConfig = {},
+  postcssOptions = {}
+) {
   const file = loaderContext.resourcePath;
 
   let normalizedPostcssOptions = postcssOptions;
@@ -174,7 +180,10 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
   try {
     const factory = pluginFactory();
 
-    factory(config.plugins);
+    if (loadedConfig.config && loadedConfig.config.plugins) {
+      factory(loadedConfig.config.plugins);
+    }
+
     factory(normalizedPostcssOptions.plugins);
 
     plugins = [...factory()].map((item) => {
@@ -190,27 +199,26 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
     loaderContext.emitError(error);
   }
 
-  const processOptionsFromConfig = { ...config };
+  const processOptionsFromConfig = loadedConfig.config || {};
 
   if (processOptionsFromConfig.from) {
     processOptionsFromConfig.from = path.resolve(
-      path.dirname(config.file),
+      path.dirname(loadedConfig.filepath),
       processOptionsFromConfig.from
     );
   }
 
   if (processOptionsFromConfig.to) {
     processOptionsFromConfig.to = path.resolve(
-      path.dirname(config.file),
+      path.dirname(loadedConfig.filepath),
       processOptionsFromConfig.to
     );
   }
 
   // No need them for processOptions
   delete processOptionsFromConfig.plugins;
-  delete processOptionsFromConfig.file;
 
-  const processOptionsFromOptions = { ...normalizedPostcssOptions };
+  const processOptionsFromOptions = klona(normalizedPostcssOptions);
 
   if (processOptionsFromOptions.from) {
     processOptionsFromOptions.from = path.resolve(
