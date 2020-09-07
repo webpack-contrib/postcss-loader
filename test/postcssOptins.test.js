@@ -7,7 +7,7 @@ import {
 } from './helpers';
 
 describe('"postcssOptions" option', () => {
-  it('should work with "from", "to" and "map" options', async () => {
+  it('should work with "from", "to" and "map" options (absolute paths)', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
         from: '/test/from.css',
@@ -16,25 +16,37 @@ describe('"postcssOptions" option', () => {
       },
     });
     const stats = await compile(compiler);
-
     const codeFromBundle = getCodeFromBundle('style.css', stats);
-    const notNormalizecodeFromBundle = getCodeFromBundle(
-      'style.css',
-      stats,
-      false
-    );
-
-    const toIsWork = notNormalizecodeFromBundle.sourceMap.file.endsWith(
-      'to.css'
-    );
+    const toIsWork = codeFromBundle.sourceMap.file.endsWith('to.css');
     const fromIsWork =
-      notNormalizecodeFromBundle.sourceMap.sources.filter((i) =>
-        i.endsWith('from.css')
-      ).length > 0;
+      codeFromBundle.sourceMap.sources.filter((i) => i.endsWith('from.css'))
+        .length > 0;
 
     expect(toIsWork).toBe(true);
     expect(fromIsWork).toBe(true);
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(codeFromBundle.map).toMatchSnapshot('map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 
+  it('should work with "from", "to" and "map" options (relative paths)', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        from: './css/style.css',
+        to: './css/style.css',
+        map: { inline: false, annotation: false },
+      },
+    });
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+    const toIsWork = codeFromBundle.sourceMap.file.endsWith('style.css');
+    const fromIsWork =
+      codeFromBundle.sourceMap.sources.filter((i) => i.endsWith('style.css'))
+        .length > 0;
+
+    expect(toIsWork).toBe(true);
+    expect(fromIsWork).toBe(true);
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(codeFromBundle.map).toMatchSnapshot('map');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');

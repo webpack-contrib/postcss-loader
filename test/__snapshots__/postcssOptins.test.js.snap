@@ -153,7 +153,7 @@ exports[`"postcssOptions" option should work "Function" value: errors 1`] = `Arr
 
 exports[`"postcssOptions" option should work "Function" value: warnings 1`] = `Array []`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options: css 1`] = `
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): css 1`] = `
 "a {
   color: black;
 }
@@ -200,11 +200,64 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): errors 1`] = `Array []`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options: map 1`] = `undefined`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): map 1`] = `undefined`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): map 1`] = `undefined`;
+
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): warnings 1`] = `Array []`;
 
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: css 1`] = `
 "a {

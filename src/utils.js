@@ -192,18 +192,45 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
 
   const processOptionsFromConfig = { ...config };
 
+  if (processOptionsFromConfig.from) {
+    processOptionsFromConfig.from = path.resolve(
+      path.dirname(config.file),
+      processOptionsFromConfig.from
+    );
+  }
+
+  if (processOptionsFromConfig.to) {
+    processOptionsFromConfig.to = path.resolve(
+      path.dirname(config.file),
+      processOptionsFromConfig.to
+    );
+  }
+
   // No need them for processOptions
   delete processOptionsFromConfig.plugins;
   delete processOptionsFromConfig.file;
 
   const processOptionsFromOptions = { ...normalizedPostcssOptions };
 
+  if (processOptionsFromOptions.from) {
+    processOptionsFromOptions.from = path.resolve(
+      loaderContext.rootContext,
+      processOptionsFromOptions.from
+    );
+  }
+
+  if (processOptionsFromOptions.to) {
+    processOptionsFromOptions.to = path.resolve(
+      loaderContext.rootContext,
+      processOptionsFromOptions.to
+    );
+  }
+
   // No need them for processOptions
   delete processOptionsFromOptions.config;
   delete processOptionsFromOptions.plugins;
 
   const processOptions = {
-    // TODO path.resolve
     from: file,
     to: file,
     map: false,
@@ -272,7 +299,7 @@ function getURLType(source) {
   return ABSOLUTE_SCHEME.test(source) ? 'absolute' : 'path-relative';
 }
 
-function normalizeSourceMap(map, resourcePath) {
+function normalizeSourceMap(map, resourceContext) {
   let newMap = map;
 
   // Some loader emit source map as string
@@ -298,7 +325,7 @@ function normalizeSourceMap(map, resourcePath) {
             ? path.resolve(sourceRoot, path.normalize(source))
             : path.normalize(source);
 
-        return path.relative(path.dirname(resourcePath), absoluteSource);
+        return path.relative(resourceContext, absoluteSource);
       }
 
       return source;
@@ -308,7 +335,7 @@ function normalizeSourceMap(map, resourcePath) {
   return newMap;
 }
 
-function normalizeSourceMapAfterPostcss(map, resourcePath) {
+function normalizeSourceMapAfterPostcss(map, resourceContext) {
   const newMap = map;
 
   // result.map.file is an optional property that provides the output filename.
@@ -329,9 +356,7 @@ function normalizeSourceMapAfterPostcss(map, resourcePath) {
 
     // Do no touch `scheme-relative`, `path-absolute` and `absolute` types
     if (sourceType === 'path-relative') {
-      const dirname = path.dirname(resourcePath);
-
-      return path.resolve(dirname, source);
+      return path.resolve(resourceContext, source);
     }
 
     return source;

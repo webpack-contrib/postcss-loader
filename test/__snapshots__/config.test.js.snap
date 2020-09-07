@@ -31,6 +31,40 @@ exports[`"config" option should work "String" value (relative path): errors 1`] 
 
 exports[`"config" option should work "String" value (relative path): warnings 1`] = `Array []`;
 
+exports[`"config" option should work resolve "from" and "to" options: css 1`] = `
+"a { color: black }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"config" option should work resolve "from" and "to" options: errors 1`] = `Array []`;
+
+exports[`"config" option should work resolve "from" and "to" options: source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": "AAAA,IAAI,aAAa;;AAEjB;EACE,YAAY;AACd",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "style.css",
+  ],
+  "sourcesContent": Array [
+    "a { color: black }
+
+.foo {
+  float: right;
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`"config" option should work resolve "from" and "to" options: warnings 1`] = `Array []`;
+
 exports[`"config" option should work with "String" value (absolute path): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
 

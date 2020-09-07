@@ -74,10 +74,7 @@ export default async function loader(content, sourceMap) {
     processOptions.map = { inline: false, annotation: false };
 
     if (sourceMap) {
-      processOptions.map.prev = normalizeSourceMap(
-        sourceMap,
-        this.resourcePath
-      );
+      processOptions.map.prev = normalizeSourceMap(sourceMap, this.context);
     }
   } else if (sourceMap && typeof processOptions.map !== 'undefined') {
     if (typeof processOptions.map === 'boolean') {
@@ -128,7 +125,7 @@ export default async function loader(content, sourceMap) {
   let map = result.map ? result.map.toJSON() : undefined;
 
   if (map && useSourceMap) {
-    map = normalizeSourceMapAfterPostcss(map, this.resourcePath);
+    map = normalizeSourceMapAfterPostcss(map, this.context);
   }
 
   const ast = {
