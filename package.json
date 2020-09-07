@@ -1,6 +1,6 @@
 {
   "name": "postcss-loader",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "description": "PostCSS loader for webpack",
   "license": "MIT",
   "repository": "webpack-contrib/postcss-loader",
@@ -32,8 +32,7 @@
     "test": "npm run test:coverage",
     "prepare": "npm run build",
     "release": "standard-version",
-    "defaults": "webpack-defaults",
-    "docs": "jsdoc2md src/*.js > docs/LOADER.md"
+    "defaults": "webpack-defaults"
   },
   "files": [
     "dist"
@@ -65,7 +64,7 @@
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
-    "husky": "^4.2.5",
+    "husky": "^4.3.0",
     "jest": "^26.4.2",
     "less": "^3.12.2",
     "less-loader": "^7.0.1",

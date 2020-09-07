@@ -1,6 +1,43 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [4.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v3.0.0...v4.0.0) (2020-09-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `Node.js` version is `10.13`
+* minimum supported `webpack` version is `4`
+* `postcss` was moved to `peerDependencies`, you need to install `postcss`
+* `PostCSS` (`plugins`/`syntax`/`parser`/`stringifier`) options was moved to the `postcssOptions` option, please look at [docs](https://github.com/webpack-contrib/postcss-loader#postcssoptions)
+* `sourceMap` default value depends on the `compiler.devtool` option
+* the `inline` value was removed for the `sourceMap` option, please use `{ map: { inline: true, annotation: false } }` to achieve this
+* source maps contain absolute paths in `sources`
+* loader output only CSS, so you need to use `css-loader`/`file-loader`/`raw-loader` to inject code inside bundle
+* `exec` option was renamed to the `execute` option
+* the `config` option doesn't support `Object` type anymore, `config.path` and `config.ctx` options were removed
+* argument in the config for `Function` notation (previously `config.ctx`) was changed, now it contains `{ file, mode, webpackLoaderContext }`
+* loader context in the config was renamed from `webpack` to `webpackLoaderContext`
+
+### Features
+
+* message API for emit assets ([#443](https://github.com/webpack-contrib/postcss-loader/issues/443)) ([e966ab9](https://github.com/webpack-contrib/postcss-loader/commit/e966ab965132ca812cb50e5eaf7df5fc2ad9c137))
+* reuse AST from other loaders ([#468](https://github.com/webpack-contrib/postcss-loader/issues/468)) ([9b75888](https://github.com/webpack-contrib/postcss-loader/commit/9b75888dff4957f2ef1e94eca871e329354a9f6d))
+* allows to use config and loader options together, options from the loader takes precedence over the config, the `plugins` option from the config and options are merged ([0eb5aaf](https://github.com/webpack-contrib/postcss-loader/commit/0eb5aaf3d49f6d5e570a3c3fdb6b201487e503c7))
+* `postcssOptions` options can be `Function`
+
+### Bug Fixes
+
+* compatibility with webpack@5 ([#437](https://github.com/webpack-contrib/postcss-loader/issues/437)) ([ed50491](https://github.com/webpack-contrib/postcss-loader/commit/ed504910b70b4d8b4d77084c19ad92330676433e))
+* `default` export for plugins ([#465](https://github.com/webpack-contrib/postcss-loader/issues/465)) ([3d32c35](https://github.com/webpack-contrib/postcss-loader/commit/3d32c35c5c911d6bd25dc0c4b5b3cd11408632d7))
+* avoid mutations of loader options and config ([#470](https://github.com/webpack-contrib/postcss-loader/issues/470)) ([cad6f07](https://github.com/webpack-contrib/postcss-loader/commit/cad6f07c7f4923e8ef69ecb402b10bbd08d09530))
+* respect the `map` option from loader options and config ([#458](https://github.com/webpack-contrib/postcss-loader/issues/458)) ([98441ff](https://github.com/webpack-contrib/postcss-loader/commit/98441ff87e51b58e9322d1bebb5eefc5ba417e24))
+
+### Notes
+
+* you don't need `ident` option for loader
+* `Object` syntax for the `plugin` option is soft deprecated, please migrate on `Array` syntax (`plugins: ['postcss-present-env', ['cssnano', options]]`)
 
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/postcss/postcss-loader/compare/v2.1.6...v3.0.0) (2018-08-08)
