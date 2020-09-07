@@ -133,7 +133,7 @@ And run `webpack` via your preferred method.
 Type: `Boolean`
 Default: `undefined`
 
-If you use JS styles the [`postcss-js`](https://github.com/postcss/postcss-js) parser, add the `exec` option.
+If you use JS styles the [`postcss-js`](https://github.com/postcss/postcss-js) parser, add the `execute` option.
 
 **webpack.config.js**
 
@@ -147,7 +147,6 @@ module.exports = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { importLoaders: 1 },
           },
           {
             loader: 'postcss-loader',
