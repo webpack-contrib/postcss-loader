@@ -124,16 +124,16 @@ And run `webpack` via your preferred method.
 
 |                Name                 |         Type         |                Default                | Description                                  |
 | :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
-|           [`exec`](#exec)           |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
+|        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
 | [`postcssOptions`](#postcssOptions) | `{Object\/Function}` | `defaults values for Postcss.process` | Set `postcss` options and plugins            |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
 
-### `exec`
+### `execute`
 
 Type: `Boolean`
 Default: `undefined`
 
-If you use JS styles without the [`postcss-js`][postcss-js] parser, add the `exec` option.
+If you use JS styles the [`postcss-js`](https://github.com/postcss/postcss-js) parser, add the `execute` option.
 
 **webpack.config.js**
 
@@ -147,13 +147,12 @@ module.exports = {
           'style-loader',
           {
             loader: 'css-loader',
-            options: { importLoaders: 1 },
           },
           {
             loader: 'postcss-loader',
             options: {
               postcssOptions: {
-                parser: 'sugarss',
+                parser: 'postcss-js',
               },
               exec: true,
             },
@@ -867,6 +866,7 @@ module.exports = {
               postcssOptions: {
                 parser: 'postcss-js',
               },
+              execute: true,
             },
           },
           'babel-loader',

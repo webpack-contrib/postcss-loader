@@ -8,7 +8,7 @@ import {
   getWarnings,
 } from './helpers';
 
-describe('"exec" option', () => {
+describe('"execute" option', () => {
   it('should work with "Boolean" value', async () => {
     const compiler = getCompiler(
       './jss/exec/index.js',
@@ -26,7 +26,7 @@ describe('"exec" option', () => {
                 {
                   loader: path.resolve(__dirname, '../src'),
                   options: {
-                    exec: true,
+                    execute: true,
                   },
                 },
               ],
@@ -44,9 +44,9 @@ describe('"exec" option', () => {
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
 
-  it('should work with "JSS" parser', async () => {
+  it('should work with "postcss-js" parser', async () => {
     const compiler = getCompiler(
-      './jss/index.js',
+      './jss/postcss-js/index.js',
       {},
       {
         module: {
@@ -64,6 +64,7 @@ describe('"exec" option', () => {
                     postcssOptions: {
                       parser: 'postcss-js',
                     },
+                    execute: true,
                   },
                 },
               ],

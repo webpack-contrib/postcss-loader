@@ -200,14 +200,7 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
     ...processOptionsFromOptions,
   };
 
-  let needExecute = false;
-
   if (typeof processOptions.parser === 'string') {
-    // TODO respect the `syntax` option too or remove this options
-    if (processOptions.parser === 'postcss-js') {
-      needExecute = true;
-    }
-
     try {
       // eslint-disable-next-line import/no-dynamic-require, global-require
       processOptions.parser = require(processOptions.parser);
@@ -246,7 +239,7 @@ function getPostcssOptions(loaderContext, config, postcssOptions = {}) {
     }
   }
 
-  return { plugins, processOptions, needExecute };
+  return { plugins, processOptions };
 }
 
 const IS_NATIVE_WIN32_PATH = /^[a-z]:[/\\]|^\\\\/i;
