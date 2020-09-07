@@ -260,4 +260,42 @@ describe('"plugins" option', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats, true)).toMatchSnapshot('errors');
   });
+
+  it('should work with the "default" property without options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        plugins: [
+          path.resolve(__dirname, './fixtures/plugin/default-other-plugin.js'),
+        ],
+      },
+    });
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should work with the "default" property with options', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        plugins: [
+          [
+            path.resolve(
+              __dirname,
+              './fixtures/plugin/default-other-plugin.js'
+            ),
+            { alpha: 0.5, color: 'red' },
+          ],
+        ],
+      },
+    });
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });
