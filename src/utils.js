@@ -84,18 +84,29 @@ async function loadConfig(loaderContext, config) {
 }
 
 function loadPlugin(plugin, options, file) {
-  // TODO defaults
   try {
     if (!options || Object.keys(options).length === 0) {
-      // eslint-disable-next-line global-require,import/no-dynamic-require
-      return require(plugin);
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      const loadedPlugin = require(plugin);
+
+      if (loadedPlugin.default) {
+        return loadedPlugin.default;
+      }
+
+      return loadedPlugin;
     }
 
-    // eslint-disable-next-line global-require,import/no-dynamic-require
-    return require(plugin)(options);
+    // eslint-disable-next-line global-require, import/no-dynamic-require
+    const loadedPlugin = require(plugin);
+
+    if (loadedPlugin.default) {
+      return loadedPlugin.default(options);
+    }
+
+    return loadedPlugin(options);
   } catch (error) {
     throw new Error(
-      `Loading PostCSS Plugin failed: ${error.message}\n\n(@${file})`
+      `Loading PostCSS "${plugin}" plugin failed: ${error.message}\n\n(@${file})`
     );
   }
 }
