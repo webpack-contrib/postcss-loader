@@ -2,6 +2,8 @@ import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 
 import postcss from 'postcss';
+import { satisfies } from 'semver';
+import postcssPackage from 'postcss/package.json';
 
 import Warning from './Warning';
 import SyntaxError from './Error';
@@ -23,11 +25,12 @@ import {
  *
  * @param {String} content Source
  * @param {Object} sourceMap Source Map
+ * @param {Object} meta Meta
  *
  * @return {callback} callback Result
  */
 
-export default async function loader(content, sourceMap) {
+export default async function loader(content, sourceMap, meta) {
   const options = getOptions(this);
 
   validateOptions(schema, options, {
@@ -65,11 +68,6 @@ export default async function loader(content, sourceMap) {
     options.postcssOptions
   );
 
-  if (options.execute) {
-    // eslint-disable-next-line no-param-reassign
-    content = exec(content, this);
-  }
-
   if (useSourceMap) {
     processOptions.map = { inline: false, annotation: false };
 
@@ -84,10 +82,27 @@ export default async function loader(content, sourceMap) {
     processOptions.map.prev = sourceMap;
   }
 
+  let root;
+
+  // Reuse PostCSS AST from other loaders
+  if (
+    meta &&
+    meta.ast &&
+    meta.ast.type === 'postcss' &&
+    satisfies(meta.ast.version, `^${postcssPackage.version}`)
+  ) {
+    ({ root } = meta.ast);
+  }
+
+  if (!root && options.execute) {
+    // eslint-disable-next-line no-param-reassign
+    content = exec(content, this);
+  }
+
   let result;
 
   try {
-    result = await postcss(plugins).process(content, processOptions);
+    result = await postcss(plugins).process(root || content, processOptions);
   } catch (error) {
     if (error.file) {
       this.addDependency(error.file);

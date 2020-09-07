@@ -106,6 +106,57 @@ Warning
 ]
 `;
 
+exports[`loader should reuse PostCSS AST: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`loader should reuse PostCSS AST: errors 1`] = `Array []`;
+
+exports[`loader should reuse PostCSS AST: warnings 1`] = `Array []`;
+
 exports[`loader should throw an error on invalid syntax: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
