@@ -44,26 +44,7 @@ describe('validate options', () => {
           ),
         },
       ],
-      failure: [
-        { parser: 1 },
-        { parser: true },
-        { parser: [] },
-        { syntax: 1 },
-        { syntax: true },
-        { syntax: [] },
-        { stringifier: 1 },
-        { stringifier: true },
-        { stringifier: [] },
-        { plugins: 1 },
-        { plugins: true },
-        { plugins: 'postcss-short' },
-        {
-          plugins: () => {
-            return [];
-          },
-        },
-        { config: [] },
-      ],
+      failure: [{ config: [] }, { config: /test/ }],
     },
     sourceMap: {
       success: [true, false],
