@@ -154,7 +154,7 @@ module.exports = {
               postcssOptions: {
                 parser: 'postcss-js',
               },
-              exec: true,
+              execute: true,
             },
           },
         ],
