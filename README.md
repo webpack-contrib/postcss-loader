@@ -728,6 +728,39 @@ module.exports = {
 
 ## Examples
 
+### SugarSS
+
+Using [`SugarSS`](https://github.com/postcss/sugarss) syntax.
+
+**webpack.config.js**
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.sss$/i,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: { importLoaders: 1 },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                parser: 'sugarss',
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
+};
+```
+
 ### Autoprefixer
 
 Add vendor prefixes to CSS rules using [`autoprefixer`](https://github.com/postcss/autoprefixer).
