@@ -23,7 +23,7 @@ exports[`"postcssOptions" option should throw an error with the "config" option 
 exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: No PostCSS Config found in: /test/fixtures/config-scope/css/unresolve.js",
+Error: No PostCSS config found in: /test/fixtures/config-scope/css/unresolve.js",
 ]
 `;
 

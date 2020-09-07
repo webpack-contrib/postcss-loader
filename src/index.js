@@ -45,7 +45,8 @@ export default async function loader(content, sourceMap, meta) {
     typeof options.postcssOptions.config === 'undefined'
       ? true
       : options.postcssOptions.config;
-  let loadedConfig = {};
+
+  let loadedConfig;
 
   if (configOption) {
     try {
