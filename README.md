@@ -29,9 +29,11 @@
 [![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
-[![chat][chat]][chat-url]
-[![chat-postcss][chat-postcss]][chat-postcss-url]
 [![size][size]][size-url]
+
+Webpack chat: [![chat][chat]][chat-url]
+
+PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
 # postcss-loader
 
