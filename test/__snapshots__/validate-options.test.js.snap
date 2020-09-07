@@ -3,37 +3,37 @@
 exports[`validate options should throw an error on the "execute" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "{"foo":"bar"}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "test" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS Parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#exec)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
 `;
 
 exports[`validate options should throw an error on the "postcssOptions" option with "{"config":[]}" value 1`] = `
