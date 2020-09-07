@@ -20,49 +20,6 @@
                   "type": "boolean"
                 }
               ]
-            },
-            "parser": {
-              "description": "Allows to specify custom Postcss Parser (https://github.com/postcss/postcss-loader#parser)",
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object"
-                },
-                {
-                  "instanceof": "Function"
-                }
-              ]
-            },
-            "syntax": {
-              "description": "Allows to specify custom Postcss Syntax (https://github.com/postcss/postcss-loader#syntax)",
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object"
-                }
-              ]
-            },
-            "stringifier": {
-              "description": "Allows to specify custom Postcss stringifier (https://github.com/postcss/postcss-loader#stringifier)",
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "object"
-                },
-                {
-                  "instanceof": "Function"
-                }
-              ]
-            },
-            "plugins": {
-              "description": "Sets PostCSS Plugins (https://github.com/postcss/postcss-loader#plugins)",
-              "anyOf": [{ "type": "array" }, { "type": "object" }]
             }
           }
         },
