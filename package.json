@@ -45,7 +45,8 @@
   "dependencies": {
     "cosmiconfig": "^7.0.0",
     "loader-utils": "^2.0.0",
-    "schema-utils": "^2.7.1"
+    "schema-utils": "^2.7.1",
+    "semver": "^7.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.6",

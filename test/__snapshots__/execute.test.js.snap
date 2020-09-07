@@ -1,5 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`"execute" option should reuse PostCSS AST with JS styles: css 1`] = `
+"a {
+    color: green
+}"
+`;
+
+exports[`"execute" option should reuse PostCSS AST with JS styles: errors 1`] = `Array []`;
+
+exports[`"execute" option should reuse PostCSS AST with JS styles: warnings 1`] = `Array []`;
+
 exports[`"execute" option should work with "Boolean" value: css 1`] = `
 "a {
     color: green

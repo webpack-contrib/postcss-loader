@@ -36,7 +36,6 @@ describe('"execute" option', () => {
       }
     );
     const stats = await compile(compiler);
-
     const codeFromBundle = getCodeFromBundle('style.exec.js', stats);
 
     expect(codeFromBundle.css).toMatchSnapshot('css');
@@ -73,11 +72,49 @@ describe('"execute" option', () => {
         },
       }
     );
-
     const stats = await compile(compiler);
-
     const codeFromBundle = getCodeFromBundle('style.js', stats);
 
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should reuse PostCSS AST with JS styles', async () => {
+    const spy = jest.fn();
+    const compiler = getCompiler(
+      './jss/exec/index.js',
+      {},
+      {
+        module: {
+          rules: [
+            {
+              test: /style\.(exec\.js|js)$/i,
+              use: [
+                {
+                  loader: require.resolve('./helpers/testLoader'),
+                  options: {},
+                },
+                {
+                  loader: path.resolve(__dirname, '../src'),
+                  options: {
+                    execute: true,
+                  },
+                },
+                {
+                  loader: require.resolve('./helpers/astLoader'),
+                  options: { spy, execute: true },
+                },
+              ],
+            },
+          ],
+        },
+      }
+    );
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle('style.exec.js', stats);
+
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(codeFromBundle.css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
