@@ -1,5 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+TypeError: Cannot read property 'parse' of undefined",
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"unresolved\\" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should throw an error with the "config" option on the invalid config: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: invalid postcss config",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with the "config" option on the invalid config: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: No PostCSS Config found in: /test/fixtures/config-scope/css/unresolve.js",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should throw an error with the "parser" option on the unresolved parser: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+TypeError: parser is not a function",
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"unresolved\\" parser failed: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with the "parser" option on the unresolved parser: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should throw an error with the "plugins" option on the unresolved plugin: errors 1`] = `
+Array [
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"postcss-unresolved\\" plugin failed: Cannot find module 'postcss-unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with the "plugins" option on the unresolved plugin: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should throw an error with the "stringifier" option on the unresolved stringifier: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+TypeError: this.stringify is not a function",
+  "ModuleError: Module Error (from \`replaced original path\`):
+Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"postcssOptions" option should throw an error with the "stringifier" option on the unresolved stringifier: warnings 1`] = `Array []`;
+
 exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: css 1`] = `
 "a {
   color: rgba(0, 0, 0, 1.0);
@@ -259,6 +319,148 @@ exports[`"postcssOptions" option should work with "from", "to" and "map" options
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): warnings 1`] = `Array []`;
 
+exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: css 1`] = `
+"a { color: black }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: source map 1`] = `
+Object {
+  "file": "style.css",
+  "mappings": "AAAA,IAAI,aAAa;;AAEjB;EACE,YAAY;AACd",
+  "names": Array [],
+  "sourceRoot": "",
+  "sources": Array [
+    "style.css",
+  ],
+  "sourcesContent": Array [
+    "a { color: black }
+
+.foo {
+  float: right;
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options and use plugins: css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+[dir=ltr] .foo { float: right;
+}
+
+[dir=rtl] .foo {
+  float: left;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options and use plugins: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options and use plugins: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: css 1`] = `
+"a {
+  color: black
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0FBREYiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxuICBjb2xvcjogYmxhY2tcbiJdfQ== */"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "false" value: css 1`] = `
+"a { color: black }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "false" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "false" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: css 1`] = `
+".import {
+  color: red;
+}
+
+.test {
+  color: blue;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "true" value: css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "config" options with "true" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "config" options with "true" value: warnings 1`] = `Array []`;
+
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: css 1`] = `
 "a {
   color: black;
@@ -312,3 +514,881 @@ exports[`"postcssOptions" option should work with the "map" option and generate 
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: map 1`] = `undefined`;
 
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Function" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Function" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Function" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Object" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Object" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "String" value: css 1`] = `
+"a {
+  color: black
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "String" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "parser" option with "String" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  border-top-color: blue;
+  border-right-color: blue;
+  border-left-color: blue;
+  background-color: #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  border-top-color: blue;
+  border-right-color: blue;
+  border-left-color: blue;
+  background-color: #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: css 1`] = `
+"a {
+  color: rgba(0, 0, 0, 1.0);
+}
+
+a {
+  color: rgba(255, 0, 0, 1.0);
+}
+
+a {
+  color: rgba(0, 255, 0, 1.0);
+}
+
+a {
+  color: rgba(0, 0, 255, 1.0);
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  border-top-color: rgba(0, 0, 255, 1.0);
+  border-right-color: rgba(0, 0, 255, 1.0);
+  border-left-color: rgba(0, 0, 255, 1.0);
+  background-color: #fafafa;
+}
+
+.phone_title {
+    width: 500px;
+  }
+
+@media (max-width: 500px) {
+
+.phone_title {
+      width: auto
+  }
+    }
+
+body.is_dark .phone_title {
+      color: rgba(0, 0, 0, 0);
+    }
+
+.phone img {
+    display: block;
+  }
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  border-top-color: blue;
+  border-right-color: blue;
+  border-left-color: blue;
+  background-color: #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  border-top-color: blue;
+  border-right-color: blue;
+  border-left-color: blue;
+  background-color: #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: rgba(0, 0, 255, 1.0);
+}
+
+.class {
+  border-top-color: rgba(0, 0, 255, 1.0);
+  border-right-color: rgba(0, 0, 255, 1.0);
+  border-left-color: rgba(0, 0, 255, 1.0);
+  background-color: #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone_title {
+    width: 500px;
+  }
+
+@media (max-width: 500px) {
+
+.phone_title {
+      width: auto
+  }
+    }
+
+body.is_dark .phone_title {
+      color: white;
+    }
+
+.phone img {
+    display: block;
+  }
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: rgba(0, 0, 255, 0.5);
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: rgba(0, 0, 255, 1.0);
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: css 1`] = `
+"<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">red</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">green</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">-x-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__property\\">-x-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class-foo</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__property\\">-z-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__property\\">-z-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
+<span class=\\"midas__brace\\">}</span>
+
+<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.phone</span></span> <span class=\\"midas__brace\\">{</span>
+  <span class=\\"midas__selector\\">_title</span> <span class=\\"midas__brace\\">{</span>
+    <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__number\\">500px</span></span><span class=\\"midas__semicolon\\">;</span>
+
+    <span class=\\"midas__at-rule\\"><span class=\\"midas__at-rule-name\\">@media</span> <span class=\\"midas__function\\"><span class=\\"midas__parenthesis\\">(</span><span class=\\"midas__property\\">max-width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__number\\">500px</span><span class=\\"midas__parenthesis\\">)</span></span></span> <span class=\\"midas__brace\\">{</span>
+      <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">auto</span></span><span class=\\"midas__semicolon\\">;</span>
+    <span class=\\"midas__brace\\">}</span>
+
+    <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">body</span><span class=\\"midas__class\\">.is_dark</span><span class=\\"midas__combinator\\"> </span></span> <span class=\\"midas__brace\\">{</span>
+      <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">white</span></span><span class=\\"midas__semicolon\\">;</span>
+    <span class=\\"midas__brace\\">}</span>
+  <span class=\\"midas__brace\\">}</span>
+
+  <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">img</span></span> <span class=\\"midas__brace\\">{</span>
+    <span class=\\"midas__property\\">display</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">block</span></span><span class=\\"midas__semicolon\\">;</span>
+  <span class=\\"midas__brace\\">}</span>
+<span class=\\"midas__brace\\">}</span>
+</code></pre>"
+`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: css 1`] = `
+"a
+  color: black
+
+a
+  color: red
+
+a
+  color: green
+
+a
+  color: blue
+
+.class
+  -x-border-color: blue blue *
+  -x-color: * #fafafa
+
+.class-foo
+  -z-border-color: blue blue *
+  -z-color: * #fafafa
+
+.phone
+  &_title
+    width: 500px
+
+    @media (max-width: 500px)
+      width: auto
+
+    body.is_dark &
+      color: white
+
+  img
+    display: block
+"
+`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: css 1`] = `
+"a
+  color: black
+
+a
+  color: red
+
+a
+  color: green
+
+a
+  color: blue
+
+.class
+  -x-border-color: blue blue *
+  -x-color: * #fafafa
+
+.class-foo
+  -z-border-color: blue blue *
+  -z-color: * #fafafa
+
+.phone
+  &_title
+    width: 500px
+
+    @media (max-width: 500px)
+      width: auto
+
+    body.is_dark &
+      color: white
+
+  img
+    display: block
+"
+`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: css 1`] = `
+"a
+  color: black
+"
+`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "String" value: css 1`] = `
+"a
+  color: black
+"
+`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "String" value: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work with the "syntax" option with "String" value: warnings 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: css 1`] = `
+"a { color: rgba(0, 0, 0, 1.0) }
+
+.foo {
+  float: right;
+}
+"
+`;
+
+exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: errors 1`] = `Array []`;
+
+exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: warnings 1`] = `Array []`;
