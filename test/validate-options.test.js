@@ -5,7 +5,7 @@ import { getCompiler, compile } from './helpers/index';
 
 describe('validate options', () => {
   const tests = {
-    exec: {
+    execute: {
       success: [false],
       failure: [1, 'test', /test/, [], {}, { foo: 'bar' }],
     },

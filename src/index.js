@@ -59,13 +59,13 @@ export default async function loader(content, sourceMap) {
       ? options.sourceMap
       : this.sourceMap;
 
-  const { plugins, processOptions, needExecute } = getPostcssOptions(
+  const { plugins, processOptions } = getPostcssOptions(
     this,
     loadedConfig,
     options.postcssOptions
   );
 
-  if (options.exec || needExecute) {
+  if (options.execute) {
     // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
   }
