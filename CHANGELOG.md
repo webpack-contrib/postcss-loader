@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [4.0.1](https://github.com/webpack-contrib/postcss-loader/compare/v4.0.0...v4.0.1) (2020-09-08)
+
+
+### Bug Fixes
+
+* source map generation with the `map` option for `postcss` ([#476](https://github.com/webpack-contrib/postcss-loader/issues/476)) ([6babeb1](https://github.com/webpack-contrib/postcss-loader/commit/6babeb1d64ca1e7d3d3651cb07881e1e291fa994))
+
 ## [4.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v3.0.0...v4.0.0) (2020-09-07)
 
 
