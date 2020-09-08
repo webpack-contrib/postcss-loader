@@ -175,6 +175,10 @@ describe('"sourceMap" option', () => {
                     implementation: require('sass'),
                     sassOptions: {
                       sourceMap: true,
+                      sourceMapRoot: path.resolve(
+                        __dirname,
+                        './fixtures/scss/'
+                      ),
                       outFile: path.resolve(
                         __dirname,
                         './fixtures/scss/style.css.map'
@@ -234,6 +238,10 @@ describe('"sourceMap" option', () => {
                     implementation: require('sass'),
                     sassOptions: {
                       sourceMap: true,
+                      sourceMapRoot: path.resolve(
+                        __dirname,
+                        './fixtures/scss/'
+                      ),
                       outFile: path.resolve(
                         __dirname,
                         './fixtures/scss/style.css.map'
@@ -337,11 +345,9 @@ describe('"sourceMap" option', () => {
               use: [
                 {
                   loader: require.resolve('./helpers/testLoader'),
-                  options: {},
                 },
                 {
                   loader: path.resolve(__dirname, '../src'),
-                  options: {},
                 },
                 {
                   loader: 'sass-loader',
@@ -425,6 +431,52 @@ describe('"sourceMap" option', () => {
 
     expect(css).toMatchSnapshot('css');
     expect(sourceMap).toMatchSnapshot('source map');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should generate inline source maps when the "devtool" is "false"', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        postcssOptions: {
+          map: {
+            inline: true,
+            annotation: false,
+          },
+        },
+      },
+      {
+        devtool: false,
+      }
+    );
+    const stats = await compile(compiler);
+    const { css } = getCodeFromBundle('style.css', stats);
+
+    expect(css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
+
+  it('should generate inline source maps when the "devtool" is "true"', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        postcssOptions: {
+          map: {
+            inline: true,
+            annotation: false,
+          },
+        },
+      },
+      {
+        devtool: 'source-map',
+      }
+    );
+    const stats = await compile(compiler);
+    const { css } = getCodeFromBundle('style.css', stats);
+
+    expect(css).toMatchSnapshot('css');
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });

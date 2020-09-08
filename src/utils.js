@@ -285,6 +285,11 @@ function getPostcssOptions(
     }
   }
 
+  if (processOptions.map === true) {
+    // https://github.com/postcss/postcss/blob/master/docs/source-maps.md
+    processOptions.map = { inline: true };
+  }
+
   return { plugins, processOptions };
 }
 
