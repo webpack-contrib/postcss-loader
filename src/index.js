@@ -70,17 +70,15 @@ export default async function loader(content, sourceMap, meta) {
   );
 
   if (useSourceMap) {
-    processOptions.map = { inline: false, annotation: false };
+    processOptions.map = {
+      inline: false,
+      annotation: false,
+      ...processOptions.map,
+    };
+  }
 
-    if (sourceMap) {
-      processOptions.map.prev = normalizeSourceMap(sourceMap, this.context);
-    }
-  } else if (sourceMap && typeof processOptions.map !== 'undefined') {
-    if (typeof processOptions.map === 'boolean') {
-      processOptions.map = { inline: true };
-    }
-
-    processOptions.map.prev = sourceMap;
+  if (sourceMap && processOptions.map) {
+    processOptions.map.prev = normalizeSourceMap(sourceMap, this.context);
   }
 
   let root;
