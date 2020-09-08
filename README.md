@@ -502,7 +502,9 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          config: false,
+          postcssOptions: {
+            config: false,
+          },
         },
       },
     ],
@@ -517,6 +519,8 @@ Allows to specify the path to the config file.
 **webpack.config.js**
 
 ```js
+const path = require('path');
+
 module.exports = {
   module: {
     rules: [
@@ -524,7 +528,9 @@ module.exports = {
         test: /\.css$/i,
         loader: 'postcss-loader',
         options: {
-          config: path.resolve(__dirname, 'custom.config.js'),
+          postcssOptions: {
+            config: path.resolve(__dirname, 'custom.config.js'),
+          },
         },
       },
     ],
@@ -948,6 +954,8 @@ module.exports = {
 **webpack.config.js**
 
 ```js
+const path = require('path');
+
 module.exports = {
   module: {
     rules: [
@@ -959,7 +967,9 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              config: 'path/to/postcss.config.js',
+              postcssOptions: {
+                config: path.resolve(__dirname, 'path/to/postcss.config.js'),
+              },
             },
           },
         ],
