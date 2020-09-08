@@ -428,4 +428,46 @@ describe('"sourceMap" option', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should generate inline source maps with "true" value nd the "devtool" with "false", but the "postcssOptions.map" has inline map values', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        sourceMap: true,
+        postcssOptions: {
+          sourceMap: true,
+          map: {
+            inline: true,
+            annotation: false,
+          },
+        },
+      },
+      {
+        devtool: false,
+      }
+    );
+    const stats = await compile(compiler);
+    const { css } = getCodeFromBundle('style.css', stats);
+    expect(css).toMatchSnapshot('css');
+  });
+
+  it('should generate inline source maps when value is not specified and the "devtool" with "source-map", but the "postcssOptions.map" has inline map values', async () => {
+    const compiler = getCompiler(
+      './css/index.js',
+      {
+        postcssOptions: {
+          map: {
+            inline: true,
+            annotation: false,
+          },
+        },
+      },
+      {
+        devtool: 'source-map',
+      }
+    );
+    const stats = await compile(compiler);
+    const { css } = getCodeFromBundle('style.css', stats);
+    expect(css).toMatchSnapshot('css');
+  });
 });

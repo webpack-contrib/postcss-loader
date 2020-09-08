@@ -1,10 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`"sourceMap" option should generate inline source maps when value is not specified and the "devtool" with "source-map", but the "postcssOptions.map" has inline map values: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLDRCQUE0QjtFQUM1QixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSw0QkFBNEI7RUFDNUIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0U7SUFDRSxZQUFZOztJQUVaO01BQ0UsV0FBVztJQUNiOztJQUVBO01BQ0UsWUFBWTtJQUNkO0VBQ0Y7O0VBRUE7SUFDRSxjQUFjO0VBQ2hCO0FBQ0YiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuYSB7XG4gIGNvbG9yOiByZWQ7XG59XG5cbmEge1xuICBjb2xvcjogZ3JlZW47XG59XG5cbmEge1xuICBjb2xvcjogYmx1ZTtcbn1cblxuLmNsYXNzIHtcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXgtY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLmNsYXNzLWZvbyB7XG4gIC16LWJvcmRlci1jb2xvcjogYmx1ZSBibHVlICo7XG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XG59XG5cbi5waG9uZSB7XG4gICZfdGl0bGUge1xuICAgIHdpZHRoOiA1MDBweDtcblxuICAgIEBtZWRpYSAobWF4LXdpZHRoOiA1MDBweCkge1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgfVxuXG4gICAgYm9keS5pc19kYXJrICYge1xuICAgICAgY29sb3I6IHdoaXRlO1xuICAgIH1cbiAgfVxuXG4gIGltZyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cbn1cbiJdfQ== */"
+`;
+
+exports[`"sourceMap" option should generate inline source maps with "true" value nd the "devtool" with "false", but the "postcssOptions.map" has inline map values: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFVBQVU7QUFDWjs7QUFFQTtFQUNFLFlBQVk7QUFDZDs7QUFFQTtFQUNFLFdBQVc7QUFDYjs7QUFFQTtFQUNFLDRCQUE0QjtFQUM1QixtQkFBbUI7QUFDckI7O0FBRUE7RUFDRSw0QkFBNEI7RUFDNUIsbUJBQW1CO0FBQ3JCOztBQUVBO0VBQ0U7SUFDRSxZQUFZOztJQUVaO01BQ0UsV0FBVztJQUNiOztJQUVBO01BQ0UsWUFBWTtJQUNkO0VBQ0Y7O0VBRUE7SUFDRSxjQUFjO0VBQ2hCO0FBQ0YiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XG4gIGNvbG9yOiBibGFjaztcbn1cblxuYSB7XG4gIGNvbG9yOiByZWQ7XG59XG5cbmEge1xuICBjb2xvcjogZ3JlZW47XG59XG5cbmEge1xuICBjb2xvcjogYmx1ZTtcbn1cblxuLmNsYXNzIHtcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXgtY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLmNsYXNzLWZvbyB7XG4gIC16LWJvcmRlci1jb2xvcjogYmx1ZSBibHVlICo7XG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XG59XG5cbi5waG9uZSB7XG4gICZfdGl0bGUge1xuICAgIHdpZHRoOiA1MDBweDtcblxuICAgIEBtZWRpYSAobWF4LXdpZHRoOiA1MDBweCkge1xuICAgICAgd2lkdGg6IGF1dG87XG4gICAgfVxuXG4gICAgYm9keS5pc19kYXJrICYge1xuICAgICAgY29sb3I6IHdoaXRlO1xuICAgIH1cbiAgfVxuXG4gIGltZyB7XG4gICAgZGlzcGxheTogYmxvY2s7XG4gIH1cbn1cbiJdfQ== */"
+`;
+
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
   color: coral;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBSSxZQUFBO0FBRUoiLCJmaWxlIjoic3R5bGUuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImEgeyBjb2xvcjogY29yYWwgfVxuIl19 */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSxZQUFZO0FBQ2QiLCJmaWxlIjoic3R5bGUuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImEge1xuICBjb2xvcjogY29yYWw7XG59Il19 */"
 `;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
@@ -23,15 +119,16 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): source map 1`] = `
 Object {
   "file": "style.scss",
-  "mappings": "AAAA;EAAI,YAAA;AAEJ",
+  "mappings": "AAAA;EACE,YAAY;AACd",
   "names": Array [],
   "sourceRoot": "",
   "sources": Array [
     "style.scss",
   ],
   "sourcesContent": Array [
-    "a { color: coral }
-",
+    "a {
+  color: coral;
+}",
   ],
   "version": 3,
 }
