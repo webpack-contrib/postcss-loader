@@ -435,7 +435,6 @@ describe('"sourceMap" option', () => {
       {
         sourceMap: true,
         postcssOptions: {
-          sourceMap: true,
           map: {
             inline: true,
             annotation: false,
