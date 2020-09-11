@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Notes
 
 * you don't need `ident` option for loader
-* `Object` syntax for the `plugin` option is soft deprecated, please migrate on `Array` syntax (`plugins: ['postcss-present-env', ['cssnano', options]]`)
+* `Object` syntax for the `plugin` option is soft deprecated, please migrate on `Array` syntax (`plugins: ['postcss-preset-env', ['cssnano', options]]`)
 
 <a name="3.0.0"></a>
 # [3.0.0](https://github.com/postcss/postcss-loader/compare/v2.1.6...v3.0.0) (2018-08-08)
