@@ -24,6 +24,7 @@ describe('loader', () => {
   it('should throw an error on invalid syntax', async () => {
     const compiler = getCompiler('./css/index.js', {
       postcssOptions: {
+        hideNothingWarning: true,
         parser: 'sugarss',
       },
     });
@@ -97,6 +98,9 @@ describe('loader', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../src'),
+                  options: {
+                    postcssOptions: { hideNothingWarning: true },
+                  },
                 },
                 {
                   loader: require.resolve('./helpers/astLoader'),
@@ -121,6 +125,7 @@ describe('loader', () => {
     const compiler = getCompiler('./sss/index.js', {
       postcssOptions: {
         parser: 'sugarss',
+        hideNothingWarning: true,
       },
     });
     const stats = await compile(compiler);
