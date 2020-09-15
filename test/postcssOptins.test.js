@@ -343,6 +343,8 @@ describe('"postcssOptions" option', () => {
           require.resolve('./fixtures/plugin/other-plugin'),
           myPostcssPlugin({ color: 'white', alpha: 0 }),
           { 'postcss-short': { prefix: 'z' } },
+          // New API
+          require.resolve('./fixtures/plugin/new-api.plugin'),
         ],
       },
     });
@@ -685,10 +687,10 @@ describe('"postcssOptions" option', () => {
   });
 
   it('should work with the "config" options and use plugins', async () => {
-    const compiler = getCompiler('./config-scope/css/index.js', {
+    const compiler = getCompiler('./config-scope/with-config/index.js', {
       postcssOptions: {
         config: true,
-        plugins: ['postcss-rtl'],
+        plugins: ['postcss-dark-theme-class'],
       },
     });
     const stats = await compile(compiler);

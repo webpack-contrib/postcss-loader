@@ -1,0 +1,19 @@
+a { color: black }
+
+.foo {
+  float: right;
+}
+
+.bar {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root { /* :root is <html> for HTML documents */
+    --text-color: white
+  }
+  body {
+    background: black
+  }
+}

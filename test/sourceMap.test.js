@@ -19,6 +19,7 @@ describe('"sourceMap" option', () => {
       './css/index.js',
       {
         sourceMap: true,
+        postcssOptions: { hideNothingWarning: true },
       },
       {
         devtool: false,
@@ -51,6 +52,7 @@ describe('"sourceMap" option', () => {
       './css/index.js',
       {
         sourceMap: true,
+        postcssOptions: { hideNothingWarning: true },
       },
       {
         devtool: 'source-map',
@@ -81,7 +83,9 @@ describe('"sourceMap" option', () => {
   it('should generate source maps when value is not specified and the "devtool" with "source-map" value', async () => {
     const compiler = getCompiler(
       './css/index.js',
-      {},
+      {
+        postcssOptions: { hideNothingWarning: true },
+      },
       {
         devtool: 'source-map',
       }
@@ -119,6 +123,7 @@ describe('"sourceMap" option', () => {
             prev: false,
             sourcesContent: true,
           },
+          hideNothingWarning: true,
         },
       },
       {
@@ -165,6 +170,7 @@ describe('"sourceMap" option', () => {
                   options: {
                     postcssOptions: {
                       map: true,
+                      hideNothingWarning: true,
                     },
                   },
                 },
@@ -228,6 +234,7 @@ describe('"sourceMap" option', () => {
                         sourcesContent: true,
                         annotation: true,
                       },
+                      hideNothingWarning: true,
                     },
                   },
                 },
@@ -282,6 +289,7 @@ describe('"sourceMap" option', () => {
       './css/index.js',
       {
         sourceMap: false,
+        postcssOptions: { hideNothingWarning: true },
       },
       {
         devtool: false,
@@ -301,6 +309,7 @@ describe('"sourceMap" option', () => {
       './css/index.js',
       {
         sourceMap: false,
+        postcssOptions: { hideNothingWarning: true },
       },
       {
         devtool: 'source-map',
@@ -318,7 +327,9 @@ describe('"sourceMap" option', () => {
   it('should not generate source maps when value is not specified and the "devtool" option with "source-map" value', async () => {
     const compiler = getCompiler(
       './css/index.js',
-      {},
+      {
+        postcssOptions: { hideNothingWarning: true },
+      },
       {
         devtool: false,
       }
@@ -348,6 +359,9 @@ describe('"sourceMap" option', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../src'),
+                  options: {
+                    postcssOptions: { hideNothingWarning: true },
+                  },
                 },
                 {
                   loader: 'sass-loader',
@@ -387,9 +401,7 @@ describe('"sourceMap" option', () => {
   it('should generate source maps when previous loader returns source maps ("less-loader")', async () => {
     const compiler = getCompiler(
       './less/index.js',
-      {
-        config: false,
-      },
+      {},
       {
         devtool: 'source-map',
         module: {
@@ -403,6 +415,9 @@ describe('"sourceMap" option', () => {
                 },
                 {
                   loader: path.resolve(__dirname, '../src'),
+                  options: {
+                    postcssOptions: { hideNothingWarning: true },
+                  },
                 },
                 {
                   loader: 'less-loader',
@@ -444,6 +459,7 @@ describe('"sourceMap" option', () => {
             inline: true,
             annotation: false,
           },
+          hideNothingWarning: true,
         },
       },
       {
@@ -467,6 +483,7 @@ describe('"sourceMap" option', () => {
             inline: true,
             annotation: false,
           },
+          hideNothingWarning: true,
         },
       },
       {
