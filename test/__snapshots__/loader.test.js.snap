@@ -58,51 +58,51 @@ Array [
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(10:3) <Message>",
+(10:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(14:3) <Message>",
+(14:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(18:3) <Message>",
+(18:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(19:3) <Message>",
+(19:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(23:3) <Message>",
+(23:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(24:3) <Message>",
+(24:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(29:5) <Message>",
+(29:5) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(2:3) <Message>",
+(2:3) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(32:7) <Message>",
+(32:7) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(36:7) <Message>",
+(36:7) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(41:5) <Message>",
+(41:5) postcss-plugin: <Message>",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
-(6:3) <Message>",
+(6:3) postcss-plugin: <Message>",
 ]
 `;
 
@@ -162,7 +162,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 SyntaxError
 
-(1:3) Unnecessary curly bracket
+(1:3) /test/fixtures/css/style.css Unnecessary curly bracket
 
 > 1 | a {
     |   ^
