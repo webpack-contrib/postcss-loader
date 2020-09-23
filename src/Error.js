@@ -12,7 +12,7 @@ class SyntaxError extends Error {
   constructor(error) {
     super(error);
 
-    const { line, column, reason } = error;
+    const { line, column, reason, plugin, file } = error;
 
     this.name = 'SyntaxError';
 
@@ -22,6 +22,8 @@ class SyntaxError extends Error {
       this.message += `(${line}:${column}) `;
     }
 
+    this.message += plugin ? `${plugin}: ` : '';
+    this.message += file ? `${file} ` : '<css input> ';
     this.message += `${reason}`;
 
     const code = error.showSourceCode();
