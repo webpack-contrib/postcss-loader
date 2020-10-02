@@ -12,7 +12,9 @@ module.exports = function (api) {
         {
           // Options
         }
-      ]
+      ],
+      require('postcss-nested'),
+      require('postcss-nested')({ /* Options */ }),
     ]
   }
 };

@@ -127,6 +127,8 @@ function pluginFactory() {
           const [name, options] = plugin;
 
           listOfPlugins.set(name, options);
+        } else if (plugin && typeof plugin === 'function') {
+          listOfPlugins.set(plugin);
         } else if (
           plugin &&
           Object.keys(plugin).length === 1 &&

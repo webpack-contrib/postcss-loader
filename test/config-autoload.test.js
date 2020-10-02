@@ -75,7 +75,7 @@ describe('autoload config', () => {
     expect(loadedConfig.config.to).toEqual(
       './test/fixtures/config-autoload/js/object/expect/index.css'
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, 'js/array', 'postcss.config.js')
     );
