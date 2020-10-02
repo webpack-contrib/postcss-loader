@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.0.3](https://github.com/webpack-contrib/postcss-loader/compare/v4.0.2...v4.0.3) (2020-10-02)
+
+
+### Bug Fixes
+
+* PostCSS 8 plugin loading ([e1b82fe](https://github.com/webpack-contrib/postcss-loader/commit/e1b82feb9cc27f55953b9237708800cb8c07724e))
+* error and warning messages ([#485](https://github.com/webpack-contrib/postcss-loader/issues/485)) ([4b44e01](https://github.com/webpack-contrib/postcss-loader/commit/4b44e01a323aa9d2c0965e92c1796158cb36ce5a))
+
 ### [4.0.2](https://github.com/webpack-contrib/postcss-loader/compare/v4.0.1...v4.0.2) (2020-09-15)
 
 
