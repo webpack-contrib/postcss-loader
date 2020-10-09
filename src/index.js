@@ -1,5 +1,5 @@
 import { getOptions } from 'loader-utils';
-import validateOptions from 'schema-utils';
+import { validate } from 'schema-utils';
 
 import postcss from 'postcss';
 import { satisfies } from 'semver';
@@ -33,7 +33,7 @@ import {
 export default async function loader(content, sourceMap, meta) {
   const options = getOptions(this);
 
-  validateOptions(schema, options, {
+  validate(schema, options, {
     name: 'PostCSS Loader',
     baseDataPath: 'options',
   });
