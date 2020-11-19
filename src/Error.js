@@ -14,16 +14,16 @@ class SyntaxError extends Error {
 
     const { line, column, reason, plugin, file } = error;
 
-    this.name = 'SyntaxError';
+    this.name = "SyntaxError";
 
     this.message = `${this.name}\n\n`;
 
-    if (typeof line !== 'undefined') {
+    if (typeof line !== "undefined") {
       this.message += `(${line}:${column}) `;
     }
 
-    this.message += plugin ? `${plugin}: ` : '';
-    this.message += file ? `${file} ` : '<css input> ';
+    this.message += plugin ? `${plugin}: ` : "";
+    this.message += file ? `${file} ` : "<css input> ";
     this.message += `${reason}`;
 
     const code = error.showSourceCode();

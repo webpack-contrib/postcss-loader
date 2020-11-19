@@ -2,8 +2,8 @@
  * @jest-environment node
  */
 
-import path from 'path';
-import fs from 'fs';
+import path from "path";
+import fs from "fs";
 
 import {
   compile,
@@ -11,12 +11,12 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from './helpers';
+} from "./helpers";
 
 describe('"sourceMap" option', () => {
   it('should generate source maps with "true" value and the "devtool" with "false" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         sourceMap: true,
         postcssOptions: { hideNothingWarning: true },
@@ -26,9 +26,9 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
@@ -37,31 +37,31 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, './fixtures'), source)
-        .replace(/\\/g, '/');
+        .relative(path.resolve(__dirname, "./fixtures"), source)
+        .replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps with "true" value and the "devtool" option with "source-map" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         sourceMap: true,
         postcssOptions: { hideNothingWarning: true },
       },
       {
-        devtool: 'source-map',
+        devtool: "source-map",
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
@@ -70,30 +70,30 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, './fixtures'), source)
-        .replace(/\\/g, '/');
+        .relative(path.resolve(__dirname, "./fixtures"), source)
+        .replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps when value is not specified and the "devtool" with "source-map" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         postcssOptions: { hideNothingWarning: true },
       },
       {
-        devtool: 'source-map',
+        devtool: "source-map",
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
@@ -102,19 +102,19 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, './fixtures'), source)
-        .replace(/\\/g, '/');
+        .relative(path.resolve(__dirname, "./fixtures"), source)
+        .replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps with "false" value, but the "postcssOptions.map" has values', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         postcssOptions: {
           map: {
@@ -131,28 +131,28 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(source).toBe(path.normalize(source));
       expect(
-        fs.existsSync(path.resolve(__dirname, './fixtures/css', source))
+        fs.existsSync(path.resolve(__dirname, "./fixtures/css", source))
       ).toBe(true);
 
-      return source.replace(/\\/g, '/');
+      return source.replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
-      './scss/index.js',
+      "./scss/index.js",
       {},
       {
         devtool: false,
@@ -162,11 +162,11 @@ describe('"sourceMap" option', () => {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     postcssOptions: {
                       map: true,
@@ -175,19 +175,19 @@ describe('"sourceMap" option', () => {
                   },
                 },
                 {
-                  loader: 'sass-loader',
+                  loader: "sass-loader",
                   options: {
                     // eslint-disable-next-line global-require
-                    implementation: require('sass'),
+                    implementation: require("sass"),
                     sassOptions: {
                       sourceMap: true,
                       sourceMapRoot: path.resolve(
                         __dirname,
-                        './fixtures/scss/'
+                        "./fixtures/scss/"
                       ),
                       outFile: path.resolve(
                         __dirname,
-                        './fixtures/scss/style.css.map'
+                        "./fixtures/scss/style.css.map"
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -202,17 +202,17 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.scss', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
 
-    expect(css).toMatchSnapshot('css');
+    expect(css).toMatchSnapshot("css");
     expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
-      './scss/index.js',
+      "./scss/index.js",
       {},
       {
         devtool: false,
@@ -222,11 +222,11 @@ describe('"sourceMap" option', () => {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     postcssOptions: {
                       map: {
@@ -239,19 +239,19 @@ describe('"sourceMap" option', () => {
                   },
                 },
                 {
-                  loader: 'sass-loader',
+                  loader: "sass-loader",
                   options: {
                     // eslint-disable-next-line global-require
-                    implementation: require('sass'),
+                    implementation: require("sass"),
                     sassOptions: {
                       sourceMap: true,
                       sourceMapRoot: path.resolve(
                         __dirname,
-                        './fixtures/scss/'
+                        "./fixtures/scss/"
                       ),
                       outFile: path.resolve(
                         __dirname,
-                        './fixtures/scss/style.css.map'
+                        "./fixtures/scss/style.css.map"
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -266,27 +266,27 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.scss', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(
-        fs.existsSync(path.resolve(__dirname, './fixtures/scss', source))
+        fs.existsSync(path.resolve(__dirname, "./fixtures/scss", source))
       ).toBe(true);
 
-      return source.replace(/\\/g, '/');
+      return source.replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should not generate source maps with "false" value and the "devtool" option with "false" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         sourceMap: false,
         postcssOptions: { hideNothingWarning: true },
@@ -296,37 +296,37 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    expect(css).toMatchSnapshot('css');
+    expect(css).toMatchSnapshot("css");
     expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should not generate source maps with "false" value and the "devtool" option with "source-map" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         sourceMap: false,
         postcssOptions: { hideNothingWarning: true },
       },
       {
-        devtool: 'source-map',
+        devtool: "source-map",
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    expect(css).toMatchSnapshot('css');
+    expect(css).toMatchSnapshot("css");
     expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should not generate source maps when value is not specified and the "devtool" option with "source-map" value', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         postcssOptions: { hideNothingWarning: true },
       },
@@ -335,39 +335,39 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.css', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.css", stats);
 
-    expect(css).toMatchSnapshot('css');
+    expect(css).toMatchSnapshot("css");
     expect(sourceMap).toBeUndefined();
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps when previous loader returns source maps ("sass-loader")', async () => {
     const compiler = getCompiler(
-      './scss/index.js',
+      "./scss/index.js",
       {},
       {
-        devtool: 'source-map',
+        devtool: "source-map",
         module: {
           rules: [
             {
               test: /\.scss$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     postcssOptions: { hideNothingWarning: true },
                   },
                 },
                 {
-                  loader: 'sass-loader',
+                  loader: "sass-loader",
                   options: {
                     // eslint-disable-next-line global-require
-                    implementation: require('sass'),
+                    implementation: require("sass"),
                   },
                 },
               ],
@@ -377,9 +377,9 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.scss', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
@@ -388,39 +388,39 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, './fixtures'), source)
-        .replace(/\\/g, '/');
+        .relative(path.resolve(__dirname, "./fixtures"), source)
+        .replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate source maps when previous loader returns source maps ("less-loader")', async () => {
     const compiler = getCompiler(
-      './less/index.js',
+      "./less/index.js",
       {},
       {
-        devtool: 'source-map',
+        devtool: "source-map",
         module: {
           rules: [
             {
               test: /\.less$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     postcssOptions: { hideNothingWarning: true },
                   },
                 },
                 {
-                  loader: 'less-loader',
+                  loader: "less-loader",
                 },
               ],
             },
@@ -429,9 +429,9 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css, sourceMap } = getCodeFromBundle('style.less', stats);
+    const { css, sourceMap } = getCodeFromBundle("style.less", stats);
 
-    sourceMap.sourceRoot = '';
+    sourceMap.sourceRoot = "";
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
@@ -440,19 +440,19 @@ describe('"sourceMap" option', () => {
       );
 
       return path
-        .relative(path.resolve(__dirname, './fixtures'), source)
-        .replace(/\\/g, '/');
+        .relative(path.resolve(__dirname, "./fixtures"), source)
+        .replace(/\\/g, "/");
     });
 
-    expect(css).toMatchSnapshot('css');
-    expect(sourceMap).toMatchSnapshot('source map');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(sourceMap).toMatchSnapshot("source map");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate inline source maps when the "devtool" is "false"', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         postcssOptions: {
           map: {
@@ -467,16 +467,16 @@ describe('"sourceMap" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const { css } = getCodeFromBundle('style.css', stats);
+    const { css } = getCodeFromBundle("style.css", stats);
 
-    expect(css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should generate inline source maps when the "devtool" is "true"', async () => {
     const compiler = getCompiler(
-      './css/index.js',
+      "./css/index.js",
       {
         postcssOptions: {
           map: {
@@ -487,14 +487,14 @@ describe('"sourceMap" option', () => {
         },
       },
       {
-        devtool: 'source-map',
+        devtool: "source-map",
       }
     );
     const stats = await compile(compiler);
-    const { css } = getCodeFromBundle('style.css', stats);
+    const { css } = getCodeFromBundle("style.css", stats);
 
-    expect(css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 });

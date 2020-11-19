@@ -1,20 +1,20 @@
-import { getOptions } from 'loader-utils';
-import { validate } from 'schema-utils';
+import { getOptions } from "loader-utils";
+import { validate } from "schema-utils";
 
-import postcss from 'postcss';
-import { satisfies } from 'semver';
-import postcssPackage from 'postcss/package.json';
+import postcss from "postcss";
+import { satisfies } from "semver";
+import postcssPackage from "postcss/package.json";
 
-import Warning from './Warning';
-import SyntaxError from './Error';
-import schema from './options.json';
+import Warning from "./Warning";
+import SyntaxError from "./Error";
+import schema from "./options.json";
 import {
   loadConfig,
   getPostcssOptions,
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
-} from './utils';
+} from "./utils";
 
 /**
  * **PostCSS Loader**
@@ -34,15 +34,15 @@ export default async function loader(content, sourceMap, meta) {
   const options = getOptions(this);
 
   validate(schema, options, {
-    name: 'PostCSS Loader',
-    baseDataPath: 'options',
+    name: "PostCSS Loader",
+    baseDataPath: "options",
   });
 
   const callback = this.async();
 
   const configOption =
-    typeof options.postcssOptions === 'undefined' ||
-    typeof options.postcssOptions.config === 'undefined'
+    typeof options.postcssOptions === "undefined" ||
+    typeof options.postcssOptions.config === "undefined"
       ? true
       : options.postcssOptions.config;
 
@@ -63,7 +63,7 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   const useSourceMap =
-    typeof options.sourceMap !== 'undefined'
+    typeof options.sourceMap !== "undefined"
       ? options.sourceMap
       : this.sourceMap;
 
@@ -91,7 +91,7 @@ export default async function loader(content, sourceMap, meta) {
   if (
     meta &&
     meta.ast &&
-    meta.ast.type === 'postcss' &&
+    meta.ast.type === "postcss" &&
     satisfies(meta.ast.version, `^${postcssPackage.version}`)
   ) {
     ({ root } = meta.ast);
@@ -111,7 +111,7 @@ export default async function loader(content, sourceMap, meta) {
       this.addDependency(error.file);
     }
 
-    if (error.name === 'CssSyntaxError') {
+    if (error.name === "CssSyntaxError") {
       callback(new SyntaxError(error));
     } else {
       callback(error);
@@ -125,11 +125,11 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const message of result.messages) {
-    if (message.type === 'dependency') {
+    if (message.type === "dependency") {
       this.addDependency(message.file);
     }
 
-    if (message.type === 'asset' && message.content && message.file) {
+    if (message.type === "asset" && message.content && message.file) {
       this.emitFile(
         message.file,
         message.content,
@@ -147,7 +147,7 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   const ast = {
-    type: 'postcss',
+    type: "postcss",
     version: result.processor.version,
     root: result.root,
   };
