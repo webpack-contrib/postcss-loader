@@ -776,4 +776,22 @@ describe('"postcssOptions" option', () => {
     expect(getWarnings(stats)).toMatchSnapshot('warnings');
     expect(getErrors(stats)).toMatchSnapshot('errors');
   });
+
+  it('should work and provide API for the configuration', async () => {
+    const compiler = getCompiler('./css/index.js', {
+      postcssOptions: {
+        config: path.resolve(
+          __dirname,
+          './fixtures/config-scope/api/postcss.config.js'
+        ),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle('style.css', stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot('css');
+    expect(getWarnings(stats)).toMatchSnapshot('warnings');
+    expect(getErrors(stats)).toMatchSnapshot('errors');
+  });
 });
