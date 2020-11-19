@@ -14,15 +14,15 @@ class Warning extends Error {
 
     const { text, line, column, plugin } = warning;
 
-    this.name = 'Warning';
+    this.name = "Warning";
 
     this.message = `${this.name}\n\n`;
 
-    if (typeof line !== 'undefined') {
+    if (typeof line !== "undefined") {
       this.message += `(${line}:${column}) `;
     }
 
-    this.message += plugin ? `${plugin}: ` : '';
+    this.message += plugin ? `${plugin}: ` : "";
     this.message += `${text}`;
 
     this.stack = false;

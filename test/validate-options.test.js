@@ -1,46 +1,46 @@
 /* eslint-disable global-require */
-import path from 'path';
+import path from "path";
 
-import { getCompiler, compile } from './helpers/index';
+import { getCompiler, compile } from "./helpers/index";
 
-describe('validate options', () => {
+describe("validate options", () => {
   const tests = {
     execute: {
       success: [false],
-      failure: [1, 'test', /test/, [], {}, { foo: 'bar' }],
+      failure: [1, "test", /test/, [], {}, { foo: "bar" }],
     },
     postcssOptions: {
       success: [
-        { parser: 'sugarss' },
-        { parser: require('sugarss') },
-        { parser: require('sugarss').parse },
-        { syntax: 'sugarss' },
-        { syntax: require('sugarss') },
-        { stringifier: 'sugarss' },
-        { stringifier: require('sugarss') },
-        { stringifier: require('sugarss').stringify },
+        { parser: "sugarss" },
+        { parser: require("sugarss") },
+        { parser: require("sugarss").parse },
+        { syntax: "sugarss" },
+        { syntax: require("sugarss") },
+        { stringifier: "sugarss" },
+        { stringifier: require("sugarss") },
+        { stringifier: require("sugarss").stringify },
         {
           plugins: [
-            require('./fixtures/plugin/plugin')(),
-            require('./fixtures/plugin/plugin'),
-            ['postcss-short', { prefix: 'x' }],
+            require("./fixtures/plugin/plugin")(),
+            require("./fixtures/plugin/plugin"),
+            ["postcss-short", { prefix: "x" }],
           ],
         },
         {
           plugins: [
-            require('./fixtures/plugin/plugin')(),
-            require('./fixtures/plugin/plugin'),
-            { 'postcss-short': { prefix: 'x' } },
+            require("./fixtures/plugin/plugin")(),
+            require("./fixtures/plugin/plugin"),
+            { "postcss-short": { prefix: "x" } },
           ],
         },
-        { plugins: { 'postcss-short': { prefix: 'x' } } },
+        { plugins: { "postcss-short": { prefix: "x" } } },
         { config: true },
         { config: false },
-        { config: 'test/fixtures/config-scope/config/postcss.config.js' },
+        { config: "test/fixtures/config-scope/config/postcss.config.js" },
         {
           config: path.resolve(
             __dirname,
-            './fixtures/config-scope/config/postcss.config.js'
+            "./fixtures/config-scope/config/postcss.config.js"
           ),
         },
       ],
@@ -48,14 +48,14 @@ describe('validate options', () => {
     },
     sourceMap: {
       success: [true, false],
-      failure: [1, /test/, [], {}, 'something'],
+      failure: [1, /test/, [], {}, "something"],
     },
   };
 
   function stringifyValue(value) {
     if (
       Array.isArray(value) ||
-      (value && typeof value === 'object' && value.constructor === Object)
+      (value && typeof value === "object" && value.constructor === Object)
     ) {
       return JSON.stringify(value);
     }
@@ -65,17 +65,17 @@ describe('validate options', () => {
 
   async function createTestCase(key, value, type) {
     it(`should ${
-      type === 'success' ? 'successfully validate' : 'throw an error on'
+      type === "success" ? "successfully validate" : "throw an error on"
     } the "${key}" option with "${stringifyValue(value)}" value`, async () => {
       let compiler;
 
       if (
-        key === 'postcssOptions' &&
+        key === "postcssOptions" &&
         // eslint-disable-next-line no-prototype-builtins
-        (value.hasOwnProperty('parser') || value.hasOwnProperty('syntax'))
+        (value.hasOwnProperty("parser") || value.hasOwnProperty("syntax"))
       ) {
         compiler = getCompiler(
-          './sss/index.js',
+          "./sss/index.js",
           {},
           {
             module: {
@@ -84,11 +84,11 @@ describe('validate options', () => {
                   test: /\.sss$/i,
                   use: [
                     {
-                      loader: require.resolve('./helpers/testLoader'),
+                      loader: require.resolve("./helpers/testLoader"),
                       options: {},
                     },
                     {
-                      loader: path.resolve(__dirname, '../src'),
+                      loader: path.resolve(__dirname, "../src"),
                       options: { [key]: value },
                     },
                   ],
@@ -98,7 +98,7 @@ describe('validate options', () => {
           }
         );
       } else {
-        compiler = getCompiler('./css/index.js', { [key]: value });
+        compiler = getCompiler("./css/index.js", { [key]: value });
       }
 
       let stats;
@@ -106,9 +106,9 @@ describe('validate options', () => {
       try {
         stats = await compile(compiler);
       } finally {
-        if (type === 'success') {
+        if (type === "success") {
           expect(stats.hasErrors()).toBe(false);
-        } else if (type === 'failure') {
+        } else if (type === "failure") {
           const {
             compilation: { errors },
           } = stats;

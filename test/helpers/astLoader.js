@@ -1,6 +1,6 @@
-import Module from 'module';
+import Module from "module";
 
-const postcss = require('postcss');
+const postcss = require("postcss");
 
 const parentModule = module;
 
@@ -32,12 +32,12 @@ module.exports = function astLoader(content) {
     .process(content)
     .then((result) => {
       const ast = {
-        type: 'postcss',
+        type: "postcss",
         version: result.processor.version,
         root: result.root,
       };
 
-      Object.defineProperty(ast, 'root', {
+      Object.defineProperty(ast, "root", {
         get: spy.mockReturnValue(result.root),
       });
 

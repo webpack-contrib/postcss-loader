@@ -1,4 +1,4 @@
-import path from 'path';
+import path from "path";
 
 import {
   compile,
@@ -6,12 +6,12 @@ import {
   getErrors,
   getCodeFromBundle,
   getWarnings,
-} from './helpers';
+} from "./helpers";
 
 describe('"execute" option', () => {
   it('should work with "Boolean" value', async () => {
     const compiler = getCompiler(
-      './jss/exec/index.js',
+      "./jss/exec/index.js",
       {},
       {
         module: {
@@ -20,11 +20,11 @@ describe('"execute" option', () => {
               test: /style\.(exec\.js|js)$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     execute: true,
                   },
@@ -36,16 +36,16 @@ describe('"execute" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const codeFromBundle = getCodeFromBundle('style.exec.js', stats);
+    const codeFromBundle = getCodeFromBundle("style.exec.js", stats);
 
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
   it('should work with "postcss-js" parser', async () => {
     const compiler = getCompiler(
-      './jss/postcss-js/index.js',
+      "./jss/postcss-js/index.js",
       {},
       {
         module: {
@@ -54,14 +54,14 @@ describe('"execute" option', () => {
               test: /style\.js$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     postcssOptions: {
-                      parser: 'postcss-js',
+                      parser: "postcss-js",
                     },
                     execute: true,
                   },
@@ -73,17 +73,17 @@ describe('"execute" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const codeFromBundle = getCodeFromBundle('style.js', stats);
+    const codeFromBundle = getCodeFromBundle("style.js", stats);
 
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
-  it('should reuse PostCSS AST with JS styles', async () => {
+  it("should reuse PostCSS AST with JS styles", async () => {
     const spy = jest.fn();
     const compiler = getCompiler(
-      './jss/exec/index.js',
+      "./jss/exec/index.js",
       {},
       {
         module: {
@@ -92,17 +92,17 @@ describe('"execute" option', () => {
               test: /style\.(exec\.js|js)$/i,
               use: [
                 {
-                  loader: require.resolve('./helpers/testLoader'),
+                  loader: require.resolve("./helpers/testLoader"),
                   options: {},
                 },
                 {
-                  loader: path.resolve(__dirname, '../src'),
+                  loader: path.resolve(__dirname, "../src"),
                   options: {
                     execute: true,
                   },
                 },
                 {
-                  loader: require.resolve('./helpers/astLoader'),
+                  loader: require.resolve("./helpers/astLoader"),
                   options: { spy, execute: true },
                 },
               ],
@@ -112,11 +112,11 @@ describe('"execute" option', () => {
       }
     );
     const stats = await compile(compiler);
-    const codeFromBundle = getCodeFromBundle('style.exec.js', stats);
+    const codeFromBundle = getCodeFromBundle("style.exec.js", stats);
 
     expect(spy).toHaveBeenCalledTimes(1);
-    expect(codeFromBundle.css).toMatchSnapshot('css');
-    expect(getWarnings(stats)).toMatchSnapshot('warnings');
-    expect(getErrors(stats)).toMatchSnapshot('errors');
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 });

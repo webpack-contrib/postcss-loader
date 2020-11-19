@@ -5,8 +5,8 @@ export default (id, stats) => {
 
   // eslint-disable-next-line no-underscore-dangle
   const code = (_source._value || _source._valueAsString).replace(
-    'module.exports = ',
-    ''
+    "module.exports = ",
+    ""
   );
 
   let result;
