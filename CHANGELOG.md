@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.0.4...v4.1.0) (2020-11-19)
+
+
+### Features
+
+* partial compatibility with `postcss-cli`, added `api.env` (alias for `api.mode`) and `api.options` (contains options from the `postcssOptions` options), please look at the [example](https://github.com/webpack-contrib/postcss-loader#examples-of-config-files) for more details ([#498](https://github.com/webpack-contrib/postcss-loader/issues/498)) ([84a9c46](https://github.com/webpack-contrib/postcss-loader/commit/84a9c46467086df0185519ceb93bf66893af4cf2))
+
 ### [4.0.4](https://github.com/webpack-contrib/postcss-loader/compare/v4.0.3...v4.0.4) (2020-10-09)
 
 ### Chore
