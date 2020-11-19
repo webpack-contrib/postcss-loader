@@ -31,7 +31,7 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
-async function loadConfig(loaderContext, config) {
+async function loadConfig(loaderContext, config, postcssOptions) {
   const searchPath =
     typeof config === 'string'
       ? path.resolve(config)
@@ -75,6 +75,9 @@ async function loadConfig(loaderContext, config) {
       file: loaderContext.resourcePath,
       // For complex use
       webpackLoaderContext: loaderContext,
+      // Partial compatibility with `postcss-cli`
+      env: loaderContext.mode,
+      options: postcssOptions || {},
     };
 
     result.config = result.config(api);

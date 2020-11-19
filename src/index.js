@@ -50,7 +50,11 @@ export default async function loader(content, sourceMap, meta) {
 
   if (configOption) {
     try {
-      loadedConfig = await loadConfig(this, configOption);
+      loadedConfig = await loadConfig(
+        this,
+        configOption,
+        options.postcssOptions
+      );
     } catch (error) {
       callback(error);
 
