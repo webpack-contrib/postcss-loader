@@ -26,6 +26,21 @@ describe("autoload config", () => {
     );
   });
 
+  it('should load ".postcssrc.js"', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "rc-js")
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual("./test/rc-js/fixtures/index.css");
+    expect(loadedConfig.config.to).toEqual("./test/rc-js/expect/index.css");
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "rc-js", ".postcssrc.js")
+    );
+  });
+
   it('should load "package.json"', async () => {
     const loadedConfig = await loadConfig(
       loaderContext,
