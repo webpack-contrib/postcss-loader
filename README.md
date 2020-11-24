@@ -370,7 +370,7 @@ The loader will search up the directory tree for configuration in the following 
 
 - a `postcss` property in `package.json`
 - a `.postcssrc` file in JSON or YAML format
-- a `.postcss.json`, `.postcss.yaml`, `.postcss.yml`, `.postcss.js`, or `.postcss.cjs` file
+- a `.postcssrc.json`, `.postcssrc.yaml`, `.postcssrc.yml`, `.postcssrc.js`, or `.postcssrc.cjs` file
 - a `postcss.config.js` or `postcss.config.cjs` CommonJS module exporting an object (**recommended**)
 
 ##### Examples of Config Files
