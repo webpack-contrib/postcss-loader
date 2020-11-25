@@ -173,7 +173,7 @@ module.exports = {
 Type: `Object|Function`
 Default: `undefined`
 
-Allows to set [`PostCSS options`](http://api.postcss.org/global.html#processOptions) and plugins.
+Allows to set [`PostCSS options`](https://postcss.org/api/#processoptions) and plugins.
 
 All `PostCSS` options are supported.
 There is the special `config` option for config files. How it works and how it can be configured is described below.
@@ -381,7 +381,7 @@ Using `Object` notation:
 
 ```js
 module.exports = {
-  // You can specify any options from http://api.postcss.org/global.html#processOptions here
+  // You can specify any options from https://postcss.org/api/#processoptions here
   // parser: 'sugarss',
   plugins: [
     // Plugins for PostCSS
@@ -405,7 +405,7 @@ module.exports = (api) => {
 
   if (/\.sss$/.test(api.file)) {
     return {
-      // You can specify any options from http://api.postcss.org/global.html#processOptions here
+      // You can specify any options from https://postcss.org/api/#processoptions here
       parser: "sugarss",
       plugins: [
         // Plugins for PostCSS
@@ -416,7 +416,7 @@ module.exports = (api) => {
   }
 
   return {
-    // You can specify any options from http://api.postcss.org/global.html#processOptions here
+    // You can specify any options from https://postcss.org/api/#processoptions here
     plugins: [
       // Plugins for PostCSS
       ["postcss-short", { prefix: "x" }],
@@ -430,7 +430,7 @@ module.exports = (api) => {
 
 ```js
 module.exports = {
-  // You can specify any options from http://api.postcss.org/global.html#processOptions here
+  // You can specify any options from https://postcss.org/api/#processoptions here
   // parser: 'sugarss',
   plugins: {
     // Plugins for PostCSS
