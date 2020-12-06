@@ -129,7 +129,7 @@ And run `webpack` via your preferred method.
 |                Name                 |         Type         |                Default                | Description                                  |
 | :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
 |        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
-| [`postcssOptions`](#postcssOptions) | `{Object\/Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
+| [`postcssOptions`](#postcssOptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
 
 ### `execute`
