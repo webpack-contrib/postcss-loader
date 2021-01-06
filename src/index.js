@@ -1,6 +1,3 @@
-import { getOptions } from "loader-utils";
-import { validate } from "schema-utils";
-
 import postcss from "postcss";
 import { satisfies } from "semver";
 import postcssPackage from "postcss/package.json";
@@ -31,15 +28,8 @@ import {
  */
 
 export default async function loader(content, sourceMap, meta) {
-  const options = getOptions(this);
-
-  validate(schema, options, {
-    name: "PostCSS Loader",
-    baseDataPath: "options",
-  });
-
+  const options = this.getOptions(schema);
   const callback = this.async();
-
   const configOption =
     typeof options.postcssOptions === "undefined" ||
     typeof options.postcssOptions.config === "undefined"
