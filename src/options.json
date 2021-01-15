@@ -35,6 +35,10 @@
     "sourceMap": {
       "description": "Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)",
       "type": "boolean"
+    },
+    "implementation": {
+      "description": "The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)",
+      "instanceof": "Function"
     }
   },
   "additionalProperties": false

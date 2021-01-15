@@ -46,6 +46,8 @@ export default async function loader(content, sourceMap, meta) {
       ? true
       : options.postcssOptions.config;
 
+  const postcssFactory = options.implementation || postcss;
+
   let loadedConfig;
 
   if (configOption) {
@@ -105,7 +107,10 @@ export default async function loader(content, sourceMap, meta) {
   let result;
 
   try {
-    result = await postcss(plugins).process(root || content, processOptions);
+    result = await postcssFactory(plugins).process(
+      root || content,
+      processOptions
+    );
   } catch (error) {
     if (error.file) {
       this.addDependency(error.file);
