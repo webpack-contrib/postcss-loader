@@ -816,8 +816,7 @@ a {
   }
 
 @media (max-width: 500px) {
-
-.phone_title {
+  .phone_title {
       width: 100px
   }
     }
@@ -1078,8 +1077,7 @@ a {
   }
 
 @media (max-width: 500px) {
-
-.phone_title {
+  .phone_title {
       width: auto
   }
     }
