@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.2.0...v5.0.0) (2021-02-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `webpack` version is `5`
+
 ## [4.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.1.0...v4.2.0) (2021-01-21)
 
 
