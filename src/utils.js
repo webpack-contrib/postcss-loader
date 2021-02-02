@@ -63,7 +63,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     return {};
   }
 
-  loaderContext.addDependency(result.filepath);
+  loaderContext.addBuildDependency(result.filepath);
 
   if (result.isEmpty) {
     return result;
