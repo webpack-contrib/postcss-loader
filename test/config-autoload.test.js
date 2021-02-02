@@ -7,7 +7,7 @@ const testDirectory = path.resolve(__dirname, "fixtures", "config-autoload");
 
 const loaderContext = {
   fs,
-  addDependency: () => true,
+  addBuildDependency: () => true,
 };
 
 describe("autoload config", () => {
