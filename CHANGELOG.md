@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v5.0.0...v5.1.0) (2021-03-05)
+
+
+### Features
+
+* added support for registering `context`, `build` and `missing` dependencies ([#518](https://github.com/webpack-contrib/postcss-loader/issues/518)) ([9ce4972](https://github.com/webpack-contrib/postcss-loader/commit/9ce4972c6740c8dd82463fff0934987695ccf7d2)), please read [docs](https://github.com/webpack-contrib/postcss-loader#add-dependencies-contextdependencies-builddependencies-missingdependencies)
+
 ## [5.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.2.0...v5.0.0) (2021-02-02)
 
 
