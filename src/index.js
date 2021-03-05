@@ -134,15 +134,15 @@ export default async function loader(content, sourceMap, meta) {
       case "context-dependency":
         this.addContextDependency(message.file);
         break;
-    }
-
-    if (message.type === "asset" && message.content && message.file) {
-      this.emitFile(
-        message.file,
-        message.content,
-        message.sourceMap,
-        message.info
-      );
+      case "asset":
+        if (message.content && message.file) {
+          this.emitFile(
+            message.file,
+            message.content,
+            message.sourceMap,
+            message.info
+          );
+        }
     }
   }
 
