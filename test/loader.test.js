@@ -1,6 +1,7 @@
 import path from "path";
 
 import postcss from "postcss";
+import { NormalModule } from "webpack";
 
 import {
   compile,
@@ -77,6 +78,54 @@ describe("loader", () => {
 
     // eslint-disable-next-line no-underscore-dangle
     expect(stats.compilation.assets["sprite.svg"]).toBeDefined();
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
+  it('should register dependencies using the "messages" API', async () => {
+    const plugin = () => (css, result) => {
+      result.messages.push({
+        type: "build-dependency",
+        file: "build-dep.html",
+        content: "",
+        plugin,
+      });
+    };
+
+    let actualBuildInfo = null;
+
+    const postcssPlugin = postcss.plugin("postcss-plugin", plugin);
+    const compiler = getCompiler(
+      "./css/index.js",
+      {
+        postcssOptions: {
+          plugins: [postcssPlugin()],
+        },
+      },
+      {
+        plugins: [
+          {
+            /** @param {import("webpack").Compiler} compiler */
+            apply(wpcompiler) {
+              wpcompiler.hooks.compilation.tap("plugin", (compilation) => {
+                NormalModule.getCompilationHooks(compilation).beforeLoaders.tap(
+                  "plugin",
+                  (_1, module) => {
+                    actualBuildInfo = module.buildInfo;
+                  }
+                );
+              });
+            },
+          },
+        ],
+      }
+    );
+
+    const stats = await compile(compiler);
+
+    const buildDependencies = [...actualBuildInfo.buildDependencies];
+    expect(buildDependencies).toContain("build-dep.html");
+
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });

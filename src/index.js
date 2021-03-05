@@ -124,6 +124,10 @@ export default async function loader(content, sourceMap, meta) {
       this.addDependency(message.file);
     }
 
+    if (message.type === "build-dependency") {
+      this.addBuildDependency(message.file);
+    }
+
     if (message.type === "asset" && message.content && message.file) {
       this.emitFile(
         message.file,
