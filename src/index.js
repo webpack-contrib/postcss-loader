@@ -120,12 +120,20 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const message of result.messages) {
-    if (message.type === "dependency") {
-      this.addDependency(message.file);
-    }
-
-    if (message.type === "build-dependency") {
-      this.addBuildDependency(message.file);
+    // eslint-disable-next-line default-case
+    switch (message.type) {
+      case "dependency":
+        this.addDependency(message.file);
+        break;
+      case "build-dependency":
+        this.addBuildDependency(message.file);
+        break;
+      case "missing-dependency":
+        this.addMissingDependency(message.file);
+        break;
+      case "context-dependency":
+        this.addContextDependency(message.file);
+        break;
     }
 
     if (message.type === "asset" && message.content && message.file) {
