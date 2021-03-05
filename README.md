@@ -934,7 +934,7 @@ module.exports = {
 };
 ```
 
-### Add dependencies
+### Add dependencies, contextDependencies, buildDependencies, missingDependencies
 
 The dependencies are necessary for webpack to understand when it needs to run recompilation on the changed files.
 
@@ -944,7 +944,7 @@ There are two way to add dependencies:
 
 The message should contain the following fields:
 
-- `type` = `dependency` - Message type (require, should be equal `dependency`)
+- `type` = `dependency` - Message type (require, should be equal `dependency`, `context-dependency`, `build-dependency` or `missing-dependency`)
 - `file` - absolute file path (require)
 
 **webpack.config.js**

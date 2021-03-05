@@ -120,21 +120,29 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const message of result.messages) {
-    if (message.type === "dependency") {
-      this.addDependency(message.file);
-    }
-
-    if (message.type === "build-dependency") {
-      this.addBuildDependency(message.file);
-    }
-
-    if (message.type === "asset" && message.content && message.file) {
-      this.emitFile(
-        message.file,
-        message.content,
-        message.sourceMap,
-        message.info
-      );
+    // eslint-disable-next-line default-case
+    switch (message.type) {
+      case "dependency":
+        this.addDependency(message.file);
+        break;
+      case "build-dependency":
+        this.addBuildDependency(message.file);
+        break;
+      case "missing-dependency":
+        this.addMissingDependency(message.file);
+        break;
+      case "context-dependency":
+        this.addContextDependency(message.file);
+        break;
+      case "asset":
+        if (message.content && message.file) {
+          this.emitFile(
+            message.file,
+            message.content,
+            message.sourceMap,
+            message.info
+          );
+        }
     }
   }
 
