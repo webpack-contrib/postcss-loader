@@ -170,6 +170,54 @@ describe('"postcssOptions" option', () => {
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
+  // TODO jest have not good support for ES modules for testing it, tested manually
+  it.skip('should work with the "parser" option with "Object" value with ESM', async () => {
+    const compiler = getCompiler("./sss/index.js", {
+      postcssOptions: {
+        parser: path.resolve(__dirname, "../fixtures/esparser/index.mjs"),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle("style.sss", stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
+  // TODO jest have not good support for ES modules for testing it, tested manually
+  it.skip('should work with the "stringifier" option with "Object" value with ESM', async () => {
+    const compiler = getCompiler("./sss/index.js", {
+      postcssOptions: {
+        stringifier: path.resolve(__dirname, "../fixtures/esparser/index.mjs"),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle("style.sss", stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
+  // TODO jest have not good support for ES modules for testing it, tested manually
+  it.skip('should work with the "syntax" option with "Object" value with ESM', async () => {
+    const compiler = getCompiler("./sss/index.js", {
+      postcssOptions: {
+        syntax: path.resolve(__dirname, "../fixtures/esparser/index.mjs"),
+      },
+    });
+    const stats = await compile(compiler);
+
+    const codeFromBundle = getCodeFromBundle("style.sss", stats);
+
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
   it('should work with the "parser" option with "Function" value', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {

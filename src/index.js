@@ -59,7 +59,7 @@ export default async function loader(content, sourceMap, meta) {
       ? options.sourceMap
       : this.sourceMap;
 
-  const { plugins, processOptions } = getPostcssOptions(
+  const { plugins, processOptions } = await getPostcssOptions(
     this,
     loadedConfig,
     options.postcssOptions

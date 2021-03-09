@@ -1,0 +1,11 @@
+{
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./index.js",
+      "import": "./index.mjs"
+    }
+  },
+  "name": "test",
+  "version": "1.0.0"
+}
