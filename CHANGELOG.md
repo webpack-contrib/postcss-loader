@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [5.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v5.1.0...v5.2.0) (2021-03-11)
+
+
+### Features
+
+* support `ecma` modules for the 'parser', 'stringifier' and 'syntax' options ([#519](https://github.com/webpack-contrib/postcss-loader/issues/519)) ([cc69754](https://github.com/webpack-contrib/postcss-loader/commit/cc69754383f6f9881ac5f02ec489eb89db2cfb0d))
+
 ## [5.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v5.0.0...v5.1.0) (2021-03-05)
 
 
