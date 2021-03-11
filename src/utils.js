@@ -167,23 +167,32 @@ function pluginFactory() {
   };
 }
 
-async function getImportEsm(module, requireError) {
-  let importESM;
+async function load(module) {
+  let exports;
 
   try {
-    // eslint-disable-next-line no-new-func
-    importESM = new Function("id", "return import(id);");
-  } catch (e) {
-    importESM = null;
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    exports = require(module);
+
+    return exports;
+  } catch (requireError) {
+    let importESM;
+
+    try {
+      // eslint-disable-next-line no-new-func
+      importESM = new Function("id", "return import(id);");
+    } catch (e) {
+      importESM = null;
+    }
+
+    if (requireError.code === "ERR_REQUIRE_ESM" && importESM) {
+      exports = await importESM(module);
+
+      return exports.default;
+    }
+
+    throw requireError;
   }
-
-  if (requireError.code === "ERR_REQUIRE_ESM" && importESM) {
-    const exports = await importESM(module);
-
-    return exports.default;
-  }
-
-  throw requireError;
 }
 
 async function getPostcssOptions(
@@ -272,61 +281,37 @@ async function getPostcssOptions(
 
   if (typeof processOptions.parser === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.parser = require(processOptions.parser);
-    } catch (requireError) {
-      try {
-        processOptions.parser = await getImportEsm(
-          processOptions.parser,
-          requireError
-        );
-      } catch (error) {
-        loaderContext.emitError(
-          new Error(
-            `Loading PostCSS "${processOptions.parser}" parser failed: ${error.message}\n\n(@${file})`
-          )
-        );
-      }
+      processOptions.parser = await load(processOptions.parser);
+    } catch (error) {
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS "${processOptions.parser}" parser failed: ${error.message}\n\n(@${file})`
+        )
+      );
     }
   }
 
   if (typeof processOptions.stringifier === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.stringifier = require(processOptions.stringifier);
-    } catch (requireError) {
-      try {
-        processOptions.stringifier = await getImportEsm(
-          processOptions.stringifier,
-          requireError
-        );
-      } catch (error) {
-        loaderContext.emitError(
-          new Error(
-            `Loading PostCSS "${processOptions.stringifier}" stringifier failed: ${error.message}\n\n(@${file})`
-          )
-        );
-      }
+      processOptions.stringifier = await load(processOptions.stringifier);
+    } catch (error) {
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS "${processOptions.stringifier}" stringifier failed: ${error.message}\n\n(@${file})`
+        )
+      );
     }
   }
 
   if (typeof processOptions.syntax === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.syntax = require(processOptions.syntax);
-    } catch (requireError) {
-      try {
-        processOptions.syntax = await getImportEsm(
-          processOptions.syntax,
-          requireError
-        );
-      } catch (error) {
-        loaderContext.emitError(
-          new Error(
-            `Loading PostCSS "${processOptions.syntax}" syntax failed: ${error.message}\n\n(@${file})`
-          )
-        );
-      }
+      processOptions.syntax = await load(processOptions.syntax);
+    } catch (error) {
+      loaderContext.emitError(
+        new Error(
+          `Loading PostCSS "${processOptions.syntax}" syntax failed: ${error.message}\n\n(@${file})`
+        )
+      );
     }
   }
 
