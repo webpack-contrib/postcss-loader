@@ -167,7 +167,35 @@ function pluginFactory() {
   };
 }
 
-function getPostcssOptions(
+async function load(module) {
+  let exports;
+
+  try {
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    exports = require(module);
+
+    return exports;
+  } catch (requireError) {
+    let importESM;
+
+    try {
+      // eslint-disable-next-line no-new-func
+      importESM = new Function("id", "return import(id);");
+    } catch (e) {
+      importESM = null;
+    }
+
+    if (requireError.code === "ERR_REQUIRE_ESM" && importESM) {
+      exports = await importESM(module);
+
+      return exports.default;
+    }
+
+    throw requireError;
+  }
+}
+
+async function getPostcssOptions(
   loaderContext,
   loadedConfig = {},
   postcssOptions = {}
@@ -253,8 +281,7 @@ function getPostcssOptions(
 
   if (typeof processOptions.parser === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.parser = require(processOptions.parser);
+      processOptions.parser = await load(processOptions.parser);
     } catch (error) {
       loaderContext.emitError(
         new Error(
@@ -266,8 +293,7 @@ function getPostcssOptions(
 
   if (typeof processOptions.stringifier === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.stringifier = require(processOptions.stringifier);
+      processOptions.stringifier = await load(processOptions.stringifier);
     } catch (error) {
       loaderContext.emitError(
         new Error(
@@ -279,8 +305,7 @@ function getPostcssOptions(
 
   if (typeof processOptions.syntax === "string") {
     try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      processOptions.syntax = require(processOptions.syntax);
+      processOptions.syntax = await load(processOptions.syntax);
     } catch (error) {
       loaderContext.emitError(
         new Error(
