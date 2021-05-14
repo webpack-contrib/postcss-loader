@@ -134,6 +134,9 @@ export default async function loader(content, sourceMap, meta) {
       case "context-dependency":
         this.addContextDependency(message.file);
         break;
+      case "dir-dependency":
+        this.addContextDependency(message.dir);
+        break;
       case "asset":
         if (message.content && message.file) {
           this.emitFile(

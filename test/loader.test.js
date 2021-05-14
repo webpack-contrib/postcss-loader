@@ -101,6 +101,12 @@ describe("loader", () => {
           file: path.resolve(__dirname, "fixtures", "deps"),
           content: "",
           plugin,
+        },
+        {
+          type: "dir-dependency",
+          dir: path.resolve(__dirname, "fixtures", "deps2"),
+          content: "",
+          plugin,
         }
       );
     };
@@ -121,6 +127,9 @@ describe("loader", () => {
 
     expect(contextDependencies).toContain(
       path.resolve(__dirname, "fixtures", "deps")
+    );
+    expect(contextDependencies).toContain(
+      path.resolve(__dirname, "fixtures", "deps2")
     );
     expect(missingDependencies).toContain(
       path.resolve(__dirname, "fixtures", "missing-dep.html")
