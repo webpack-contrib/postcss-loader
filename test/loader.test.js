@@ -122,11 +122,8 @@ describe("loader", () => {
     });
 
     const stats = await compile(compiler);
-    const {
-      contextDependencies,
-      missingDependencies,
-      buildDependencies,
-    } = stats.compilation;
+    const { contextDependencies, missingDependencies, buildDependencies } =
+      stats.compilation;
 
     expect(contextDependencies).toContain(
       path.resolve(__dirname, "fixtures", "deps")
