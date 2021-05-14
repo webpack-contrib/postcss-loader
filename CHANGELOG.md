@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [4.3.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.2.0...v4.3.0) (2021-05-14)
+
+
+### Features
+
+* add support for `dir-dependency` message type ([#525](https://github.com/webpack-contrib/postcss-loader/issues/525)) ([554802e](https://github.com/webpack-contrib/postcss-loader/commit/554802ece4069f92a962e7945145119cd2f83f18))
+
 ## [4.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v4.1.0...v4.2.0) (2021-01-21)
 
 
