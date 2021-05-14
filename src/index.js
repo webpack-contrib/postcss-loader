@@ -134,6 +134,10 @@ export default async function loader(content, sourceMap, meta) {
       this.addDependency(message.file);
     }
 
+    if (message.type === "dir-dependency") {
+      this.addContextDependency(message.dir);
+    }
+
     if (message.type === "asset" && message.content && message.file) {
       this.emitFile(
         message.file,
