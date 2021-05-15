@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`loader should emit a warning if postcss version is not explicitly specified when the loader is failed: warnings 1`] = `
+exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 (Emitted value instead of an instance of Error) Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use \`npm install postcss\` or \`yarn add postcss\`",

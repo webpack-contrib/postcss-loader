@@ -200,22 +200,38 @@ describe("loader", () => {
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });
+});
 
-  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
-    jest
-      .spyOn(utils, "readPackageJson")
-      .mockReturnValue({ dependencies: {}, devDependencies: {} });
-    const spy = jest.fn(postcss);
+describe("check postcss versions to avoid using PostCSS 7", async () => {
+  async function getStats() {
     const compiler = getCompiler("./css/index.js", {
       implementation: (...args) => {
-        const result = spy(...args);
+        const result = postcss(...args);
         result.version = "7.0.0";
         result.process = () =>
           Promise.reject(new Error("Something went wrong."));
         return result;
       },
     });
-    const stats = await compile(compiler);
+    return compile(compiler);
+  }
+
+  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
+    jest
+      .spyOn(utils, "readPackageJson")
+      .mockReturnValue({ dependencies: {}, devDependencies: {} });
+    const stats = await getStats();
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
+  });
+
+  it("disable checking when postcss version is explicitly defined", async () => {
+    jest
+      .spyOn(utils, "readPackageJson")
+      .mockReturnValue({
+        dependencies: {},
+        devDependencies: { postcss: "8.0.0" },
+      });
+    const stats = await getStats();
+    expect(stats.compilation.warnings.length).toBe(0);
   });
 });
