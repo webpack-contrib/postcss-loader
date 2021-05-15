@@ -11,6 +11,7 @@ import {
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
+  readPackageJson,
 } from "./utils";
 
 /**
@@ -27,6 +28,8 @@ import {
  * @return {callback} callback Result
  */
 
+let isCheckedPostCSSVersion = false;
+
 export default async function loader(content, sourceMap, meta) {
   const options = this.getOptions(schema);
   const callback = this.async();
@@ -37,6 +40,20 @@ export default async function loader(content, sourceMap, meta) {
       : options.postcssOptions.config;
 
   const postcssFactory = options.implementation || postcss;
+
+  // Check postcss versions to avoid using PostCSS 7
+  if (!isCheckedPostCSSVersion && postcss().version.startsWith("7.")) {
+    isCheckedPostCSSVersion = true;
+    const pkg = readPackageJson();
+    if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
+      callback(
+        new Error(
+          "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use `npm install postcss` or `yarn add postcss`"
+        )
+      );
+      return;
+    }
+  }
 
   let loadedConfig;
 

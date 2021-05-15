@@ -1,4 +1,5 @@
 import path from "path";
+import fs from "fs";
 import Module from "module";
 
 import { klona } from "klona/full";
@@ -408,10 +409,17 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
+function readPackageJson() {
+  return JSON.parse(
+    fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf8")
+  );
+}
+
 export {
   loadConfig,
   getPostcssOptions,
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
+  readPackageJson,
 };

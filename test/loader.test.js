@@ -197,4 +197,20 @@ describe("loader", () => {
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });
+
+  it("should throw an error if postcss version is not explicitly specified", async () => {
+    jest.mock("../src/utils", () => {
+      return {
+        readPackageJson: () => {
+          return { dependencies: {}, devDependencies: {} };
+        },
+      };
+    });
+    jest.mock("postcss", () => () => {
+      return { version: "7." };
+    });
+    const compiler = getCompiler("./css/index.js");
+    const stats = await compile(compiler);
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
 });
