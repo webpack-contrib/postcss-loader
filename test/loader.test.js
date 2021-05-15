@@ -2,6 +2,9 @@ import path from "path";
 
 import postcss from "postcss";
 
+// eslint-disable-next-line import/no-namespace
+import * as utils from "../src/utils";
+
 import {
   compile,
   getCompiler,
@@ -198,19 +201,21 @@ describe("loader", () => {
     expect(getErrors(stats)).toMatchSnapshot("errors");
   });
 
-  it("should throw an error if postcss version is not explicitly specified", async () => {
-    jest.mock("../src/utils", () => {
-      return {
-        readPackageJson: () => {
-          return { dependencies: {}, devDependencies: {} };
-        },
-      };
+  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
+    jest
+      .spyOn(utils, "readPackageJson")
+      .mockReturnValue({ dependencies: {}, devDependencies: {} });
+    const spy = jest.fn(postcss);
+    const compiler = getCompiler("./css/index.js", {
+      implementation: (...args) => {
+        const result = spy(...args);
+        result.version = "7.0.0";
+        result.process = () =>
+          Promise.reject(new Error("Something went wrong."));
+        return result;
+      },
     });
-    jest.mock("postcss", () => () => {
-      return { version: "7." };
-    });
-    const compiler = getCompiler("./css/index.js");
     const stats = await compile(compiler);
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
   });
 });
