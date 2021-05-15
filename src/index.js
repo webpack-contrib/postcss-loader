@@ -43,16 +43,17 @@ export default async function loader(content, sourceMap, meta) {
 
   // Check postcss versions to avoid using PostCSS 7
   if (!hasExplicitDependencyOnPostCSS && postcss().version.startsWith("7.")) {
-    const pkg = readPackageJson();
+    // For caching reasons, we use the Webpack readFileSync function, not the function from `fs` module.
+    const pkg = readPackageJson(this.fs.readFileSync);
     if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
       callback(
         new Error(
           "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use `npm install postcss` or `yarn add postcss`"
         )
       );
-    } else {
-      hasExplicitDependencyOnPostCSS = true;
+      return;
     }
+    hasExplicitDependencyOnPostCSS = true;
   }
 
   let loadedConfig;

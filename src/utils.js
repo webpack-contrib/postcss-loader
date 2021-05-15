@@ -409,9 +409,12 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
-function readPackageJson() {
+function readPackageJson(readFileSync) {
   return JSON.parse(
-    fs.readFileSync(path.resolve(process.cwd(), "package.json"), "utf8")
+    (readFileSync || fs.readFileSync)(
+      path.resolve(process.cwd(), "package.json"),
+      "utf8"
+    )
   );
 }
 
