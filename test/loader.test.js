@@ -218,19 +218,27 @@ describe("check postcss versions to avoid using PostCSS 7", async () => {
 
   it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
     jest
-      .spyOn(utils, "readPackageJson")
+      .spyOn(utils, "parsePackageJson")
       .mockReturnValue({ dependencies: {}, devDependencies: {} });
     const stats = await getStats();
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
   });
 
   it("disable checking when postcss version is explicitly defined", async () => {
-    jest
-      .spyOn(utils, "readPackageJson")
-      .mockReturnValue({
-        dependencies: {},
-        devDependencies: { postcss: "8.0.0" },
-      });
+    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
+      dependencies: {},
+      devDependencies: { postcss: "8.0.0" },
+    });
+    const stats = await getStats();
+    expect(stats.compilation.warnings.length).toBe(0);
+  });
+
+  it("disable checking when package.json doesn't exist", async () => {
+    jest.spyOn(utils, "isFileExists").mockReturnValue(false);
+    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
+      dependencies: {},
+      devDependencies: { postcss: "8.0.0" },
+    });
     const stats = await getStats();
     expect(stats.compilation.warnings.length).toBe(0);
   });

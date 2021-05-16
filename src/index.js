@@ -1,3 +1,5 @@
+import path from "path";
+
 import postcss from "postcss";
 import { satisfies } from "semver";
 import postcssPackage from "postcss/package.json";
@@ -11,10 +13,13 @@ import {
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
-  readPackageJson,
+  parsePackageJson,
+  isFileExists,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
+
+const PACKAGE_JSON_PATH = path.resolve(process.cwd(), "package.json");
 
 /**
  * **PostCSS Loader**
@@ -105,15 +110,18 @@ export default async function loader(content, sourceMap, meta) {
     );
   } catch (error) {
     // Check postcss versions to avoid using PostCSS 7.
+    // For caching reasons, we use the readFileSync and existsSync functions from the context,
+    // not the functions from the `fs` module.
     if (
       !hasExplicitDependencyOnPostCSS &&
+      isFileExists(PACKAGE_JSON_PATH, this.fs.existsSync) &&
       postcssFactory().version.startsWith("7.")
     ) {
-      // For caching reasons, we use the readFileSync function from the context, not the function from the `fs` module.
-      const pkg = readPackageJson(this.fs.readFileSync);
+      const pkg = parsePackageJson(PACKAGE_JSON_PATH, this.fs.readFileSync);
       if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
         this.emitWarning(
-          "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use `npm install postcss` or `yarn add postcss`"
+          "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +
+            "Use `npm install postcss` or `yarn add postcss`"
         );
       } else {
         hasExplicitDependencyOnPostCSS = true;

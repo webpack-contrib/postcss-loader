@@ -409,13 +409,16 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
-function readPackageJson(readFileSync) {
-  return JSON.parse(
-    (readFileSync || fs.readFileSync)(
-      path.resolve(process.cwd(), "package.json"),
-      "utf8"
-    )
-  );
+function isFileExists(filePath, existsSync = fs.existsSync) {
+  try {
+    return existsSync(filePath);
+  } catch (error) {
+    return false;
+  }
+}
+
+function parsePackageJson(filePath, readFileSync = fs.readFileSync) {
+  return JSON.parse(readFileSync(filePath, "utf8"));
 }
 
 export {
@@ -424,5 +427,6 @@ export {
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
-  readPackageJson,
+  parsePackageJson,
+  isFileExists,
 };
