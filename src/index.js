@@ -14,12 +14,11 @@ import {
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
   parsePackageJson,
-  isFileExists,
+  findPackageJsonDir,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
-
-const PACKAGE_JSON_PATH = path.resolve(process.cwd(), "package.json");
+let packageJsonDir;
 
 /**
  * **PostCSS Loader**
@@ -109,15 +108,22 @@ export default async function loader(content, sourceMap, meta) {
       processOptions
     );
   } catch (error) {
+    // The `findPackageJsonDir` function returns `string` or `null`.
+    // This is used to do for caching, that is, an explicit comparison with `undefined`
+    // is used to make the condition body run once.
+    if (packageJsonDir === undefined) {
+      packageJsonDir = findPackageJsonDir(process.cwd(), this.fs.statSync);
+    }
     // Check postcss versions to avoid using PostCSS 7.
     // For caching reasons, we use the readFileSync and existsSync functions from the context,
     // not the functions from the `fs` module.
     if (
       !hasExplicitDependencyOnPostCSS &&
       postcssFactory().version.startsWith("7.") &&
-      isFileExists(PACKAGE_JSON_PATH, this.fs.statSync)
+      packageJsonDir
     ) {
-      const pkg = parsePackageJson(PACKAGE_JSON_PATH, this.fs.readFileSync);
+      const filePath = path.resolve(packageJsonDir, "package.json");
+      const pkg = parsePackageJson(filePath, this.fs.readFileSync);
       if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
         this.emitWarning(
           "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +

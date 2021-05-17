@@ -408,16 +408,25 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
-function isFileExists(filePath, statSync) {
-  try {
-    return statSync(filePath).isFile();
-  } catch (error) {
-    return false;
-  }
-}
-
 function parsePackageJson(filePath, readFileSync) {
   return JSON.parse(readFileSync(filePath, "utf8"));
+}
+
+function findPackageJsonDir(cwd, statSync) {
+  let dir = cwd;
+  for (;;) {
+    try {
+      if (statSync(path.join(dir, "package.json")).isFile()) break;
+      // eslint-disable-next-line no-empty
+    } catch (error) {}
+    const parent = path.dirname(dir);
+    if (dir === parent) {
+      dir = null;
+      break;
+    }
+    dir = parent;
+  }
+  return dir;
 }
 
 export {
@@ -427,5 +436,5 @@ export {
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
   parsePackageJson,
-  isFileExists,
+  findPackageJsonDir,
 };
