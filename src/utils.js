@@ -1,5 +1,4 @@
 import path from "path";
-import fs from "fs";
 import Module from "module";
 
 import { klona } from "klona/full";
@@ -409,15 +408,15 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
-function isFileExists(filePath, existsSync = fs.existsSync) {
+function isFileExists(filePath, statSync) {
   try {
-    return existsSync(filePath);
+    return statSync(filePath).isFile();
   } catch (error) {
     return false;
   }
 }
 
-function parsePackageJson(filePath, readFileSync = fs.readFileSync) {
+function parsePackageJson(filePath, readFileSync) {
   return JSON.parse(readFileSync(filePath, "utf8"));
 }
 

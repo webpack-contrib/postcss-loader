@@ -114,8 +114,8 @@ export default async function loader(content, sourceMap, meta) {
     // not the functions from the `fs` module.
     if (
       !hasExplicitDependencyOnPostCSS &&
-      isFileExists(PACKAGE_JSON_PATH, this.fs.existsSync) &&
-      postcssFactory().version.startsWith("7.")
+      postcssFactory().version.startsWith("7.") &&
+      isFileExists(PACKAGE_JSON_PATH, this.fs.statSync)
     ) {
       const pkg = parsePackageJson(PACKAGE_JSON_PATH, this.fs.readFileSync);
       if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
