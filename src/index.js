@@ -1,6 +1,5 @@
 import path from "path";
 
-import postcss from "postcss";
 import { satisfies } from "semver";
 import postcssPackage from "postcss/package.json";
 
@@ -14,6 +13,7 @@ import {
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
+  getPostcssImplementation,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
@@ -40,7 +40,17 @@ export default async function loader(content, sourceMap, meta) {
       ? true
       : options.postcssOptions.config;
 
-  const postcssFactory = options.implementation || postcss;
+  const postcssFactory = getPostcssImplementation(this, options.implementation);
+
+  if (!postcssFactory) {
+    callback(
+      new Error(
+        `The Postcss implementation "${options.implementation}" not found`
+      )
+    );
+
+    return;
+  }
 
   let loadedConfig;
 

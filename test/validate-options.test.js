@@ -51,8 +51,8 @@ describe("validate options", () => {
       failure: [1, /test/, [], {}, "something"],
     },
     implementation: {
-      success: [require("postcss")],
-      failure: [1, /test/, [], {}, "something"],
+      success: [require("postcss"), "postcss"],
+      failure: [1, /test/, [], {}],
     },
   };
 

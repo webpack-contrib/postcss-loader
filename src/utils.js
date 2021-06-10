@@ -433,6 +433,27 @@ function findPackageJSONDir(cwd, statSync) {
   return dir;
 }
 
+function getPostcssImplementation(loaderContext, implementation) {
+  let resolvedImplementation = implementation;
+
+  if (!implementation || typeof implementation === "string") {
+    const postcssImplPkg = implementation || "postcss";
+
+    try {
+      // eslint-disable-next-line import/no-dynamic-require, global-require
+      resolvedImplementation = require(postcssImplPkg);
+    } catch (error) {
+      loaderContext.emitError(error);
+
+      // eslint-disable-next-line consistent-return
+      return;
+    }
+  }
+
+  // eslint-disable-next-line consistent-return
+  return resolvedImplementation;
+}
+
 export {
   loadConfig,
   getPostcssOptions,
@@ -440,4 +461,5 @@ export {
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
+  getPostcssImplementation,
 };

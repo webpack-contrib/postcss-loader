@@ -1,5 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`"implementation" option should throw error when unresolved package: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: The Postcss implementation \\"unresolved\\" not found
+    at Object.loader (/src/index.js:47:7)",
+  "ModuleError: Module Error (from \`replaced original path\`):
+(Emitted value instead of an instance of Error) Error: Cannot find module 'unresolved' from 'src/utils.js'",
+]
+`;
+
+exports[`"implementation" option should throw error when unresolved package: warnings 1`] = `Array []`;
+
 exports[`"implementation" option should work with a custom instance of PostCSS: css 1`] = `
 "a {
   color: black;
@@ -50,3 +62,54 @@ a {
 exports[`"implementation" option should work with a custom instance of PostCSS: errors 1`] = `Array []`;
 
 exports[`"implementation" option should work with a custom instance of PostCSS: warnings 1`] = `Array []`;
+
+exports[`"implementation" option should work with implementation is string: css 1`] = `
+"a {
+  color: black;
+}
+
+a {
+  color: red;
+}
+
+a {
+  color: green;
+}
+
+a {
+  color: blue;
+}
+
+.class {
+  -x-border-color: blue blue *;
+  -x-color: * #fafafa;
+}
+
+.class-foo {
+  -z-border-color: blue blue *;
+  -z-color: * #fafafa;
+}
+
+.phone {
+  &_title {
+    width: 500px;
+
+    @media (max-width: 500px) {
+      width: auto;
+    }
+
+    body.is_dark & {
+      color: white;
+    }
+  }
+
+  img {
+    display: block;
+  }
+}
+"
+`;
+
+exports[`"implementation" option should work with implementation is string: errors 1`] = `Array []`;
+
+exports[`"implementation" option should work with implementation is string: warnings 1`] = `Array []`;
