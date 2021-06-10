@@ -199,7 +199,7 @@ describe("loader", () => {
   });
 });
 
-describe("check postcss versions to avoid using PostCSS 7", async () => {
+describe("check postcss versions to avoid using PostCSS 7", () => {
   async function getStats() {
     const compiler = getCompiler("./css/index.js", {
       implementation: (...args) => {
@@ -210,6 +210,7 @@ describe("check postcss versions to avoid using PostCSS 7", async () => {
         return result;
       },
     });
+
     return compile(compiler);
   }
 
@@ -217,7 +218,9 @@ describe("check postcss versions to avoid using PostCSS 7", async () => {
     jest
       .spyOn(utils, "parsePackageJson")
       .mockReturnValue({ dependencies: {}, devDependencies: {} });
+
     const stats = await getStats();
+
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
   });
 
@@ -226,7 +229,9 @@ describe("check postcss versions to avoid using PostCSS 7", async () => {
       dependencies: {},
       devDependencies: { postcss: "8.0.0" },
     });
+
     const stats = await getStats();
+
     expect(stats.compilation.warnings.length).toBe(0);
   });
 
@@ -236,7 +241,9 @@ describe("check postcss versions to avoid using PostCSS 7", async () => {
       dependencies: {},
       devDependencies: { postcss: "8.0.0" },
     });
+
     const stats = await getStats();
+
     expect(stats.compilation.warnings.length).toBe(0);
   });
 });
