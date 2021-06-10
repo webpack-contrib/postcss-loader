@@ -41,6 +41,8 @@ Loader to process CSS with [`PostCSS`](https://github.com/postcss/postcss).
 
 ## Getting Started
 
+You need webpack v5 to use the latest version. For Webpack v4, you have to install postcss-loader v4.
+
 To begin, you'll need to install `postcss-loader` and `postcss`:
 
 ```console
