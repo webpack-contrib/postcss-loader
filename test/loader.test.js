@@ -2,6 +2,9 @@ import path from "path";
 
 import postcss from "postcss";
 
+// eslint-disable-next-line import/no-namespace
+import * as utils from "../src/utils";
+
 import {
   compile,
   getCompiler,
@@ -196,5 +199,47 @@ describe("loader", () => {
     expect(codeFromBundle.css).toMatchSnapshot("css");
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+});
+
+describe("check postcss versions to avoid using PostCSS 7", async () => {
+  async function getStats() {
+    const compiler = getCompiler("./css/index.js", {
+      implementation: (...args) => {
+        const result = postcss(...args);
+        result.version = "7.0.0";
+        result.process = () =>
+          Promise.reject(new Error("Something went wrong."));
+        return result;
+      },
+    });
+    return compile(compiler);
+  }
+
+  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
+    jest
+      .spyOn(utils, "parsePackageJson")
+      .mockReturnValue({ dependencies: {}, devDependencies: {} });
+    const stats = await getStats();
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+  });
+
+  it("should not show a warning if postcss version is explicitly defined", async () => {
+    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
+      dependencies: {},
+      devDependencies: { postcss: "8.0.0" },
+    });
+    const stats = await getStats();
+    expect(stats.compilation.warnings.length).toBe(0);
+  });
+
+  it("should not show a warning if the package.json file was not found", async () => {
+    jest.spyOn(utils, "findPackageJsonDir").mockReturnValue(null);
+    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
+      dependencies: {},
+      devDependencies: { postcss: "8.0.0" },
+    });
+    const stats = await getStats();
+    expect(stats.compilation.warnings.length).toBe(0);
   });
 });
