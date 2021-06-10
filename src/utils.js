@@ -408,24 +408,28 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
   return newMap;
 }
 
-function parsePackageJson(filePath, readFileSync) {
-  return JSON.parse(readFileSync(filePath, "utf8"));
-}
-
-function findPackageJsonDir(cwd, statSync) {
+function findPackageJSONDir(cwd, statSync) {
   let dir = cwd;
+
   for (;;) {
     try {
-      if (statSync(path.join(dir, "package.json")).isFile()) break;
-      // eslint-disable-next-line no-empty
-    } catch (error) {}
+      if (statSync(path.join(dir, "package.json")).isFile()) {
+        break;
+      }
+    } catch (error) {
+      // Nothing
+    }
+
     const parent = path.dirname(dir);
+
     if (dir === parent) {
       dir = null;
       break;
     }
+
     dir = parent;
   }
+
   return dir;
 }
 
@@ -435,6 +439,5 @@ export {
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
-  parsePackageJson,
-  findPackageJsonDir,
+  findPackageJSONDir,
 };

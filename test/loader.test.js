@@ -200,50 +200,113 @@ describe("loader", () => {
 });
 
 describe("check postcss versions to avoid using PostCSS 7", () => {
-  async function getStats() {
+  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
+    const spy = jest
+      .spyOn(utils, "findPackageJSONDir")
+      .mockReturnValue(
+        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss")
+      );
+
     const compiler = getCompiler("./css/index.js", {
       implementation: (...args) => {
         const result = postcss(...args);
+
         result.version = "7.0.0";
         result.process = () =>
           Promise.reject(new Error("Something went wrong."));
+
         return result;
       },
     });
-
-    return compile(compiler);
-  }
-
-  it("should emit a warning if postcss version is not explicitly specified when the loader is failed", async () => {
-    jest
-      .spyOn(utils, "parsePackageJson")
-      .mockReturnValue({ dependencies: {}, devDependencies: {} });
-
-    const stats = await getStats();
+    const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    spy.mockRestore();
   });
 
-  it("should not show a warning if postcss version is explicitly defined", async () => {
-    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
-      dependencies: {},
-      devDependencies: { postcss: "8.0.0" },
+  it("should not show a warning if 'postcss' version is explicitly defined in 'dependencies'", async () => {
+    const spy = jest
+      .spyOn(utils, "findPackageJSONDir")
+      .mockReturnValue(
+        path.resolve(
+          __dirname,
+          "./fixtures/package-json-files/postcss-v8-in-dependencies"
+        )
+      );
+
+    const compiler = getCompiler("./css/index.js", {
+      implementation: (...args) => {
+        const result = postcss(...args);
+
+        result.version = "7.0.0";
+        result.process = () =>
+          Promise.reject(new Error("Something went wrong."));
+
+        return result;
+      },
     });
+    const stats = await compile(compiler);
 
-    const stats = await getStats();
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
 
-    expect(stats.compilation.warnings.length).toBe(0);
+    spy.mockRestore();
   });
 
-  it("should not show a warning if the package.json file was not found", async () => {
-    jest.spyOn(utils, "findPackageJsonDir").mockReturnValue(null);
-    jest.spyOn(utils, "parsePackageJson").mockReturnValue({
-      dependencies: {},
-      devDependencies: { postcss: "8.0.0" },
+  it("should not show a warning if 'postcss' version is explicitly defined in 'devDependencies'", async () => {
+    const spy = jest
+      .spyOn(utils, "findPackageJSONDir")
+      .mockReturnValue(
+        path.resolve(
+          __dirname,
+          "./fixtures/package-json-files/postcss-v8-in-devDependencies"
+        )
+      );
+
+    const compiler = getCompiler("./css/index.js", {
+      implementation: (...args) => {
+        const result = postcss(...args);
+
+        result.version = "7.0.0";
+        result.process = () =>
+          Promise.reject(new Error("Something went wrong."));
+
+        return result;
+      },
     });
+    const stats = await compile(compiler);
 
-    const stats = await getStats();
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
 
-    expect(stats.compilation.warnings.length).toBe(0);
+    spy.mockRestore();
+  });
+
+  it("should not show a warning if 'package.json' file was not found", async () => {
+    const spy = jest
+      .spyOn(utils, "findPackageJSONDir")
+      .mockReturnValue(
+        path.resolve(__dirname, "./fixtures/package-json-files/unknown")
+      );
+
+    const compiler = getCompiler("./css/index.js", {
+      implementation: (...args) => {
+        const result = postcss(...args);
+
+        result.version = "7.0.0";
+        result.process = () =>
+          Promise.reject(new Error("Something went wrong."));
+
+        return result;
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    spy.mockRestore();
   });
 });
