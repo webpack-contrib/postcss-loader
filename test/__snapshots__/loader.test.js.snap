@@ -1,11 +1,53 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: Something went wrong.
+    at Processor.process (/test/loader.test.js:216:26)
+    at Object.loader (/src/index.js:106:30)",
+]
+`;
+
 exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: warnings 1`] = `
 Array [
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-(Emitted value instead of an instance of Error) Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use \`npm install postcss\` or \`yarn add postcss\`",
+Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use \`npm install postcss\` or \`yarn add postcss\`",
 ]
 `;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: Something went wrong.
+    at Processor.process (/test/loader.test.js:300:26)
+    at Object.loader (/src/index.js:106:30)",
+]
+`;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: warnings 1`] = `Array []`;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: Something went wrong.
+    at Processor.process (/test/loader.test.js:245:26)
+    at Object.loader (/src/index.js:106:30)",
+]
+`;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': warnings 1`] = `Array []`;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': errors 1`] = `
+Array [
+  "ModuleBuildError: Module build failed (from \`replaced original path\`):
+Error: Something went wrong.
+    at Processor.process (/test/loader.test.js:274:26)
+    at Object.loader (/src/index.js:106:30)",
+]
+`;
+
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': warnings 1`] = `Array []`;
 
 exports[`loader should emit asset using the "messages" API: errors 1`] = `Array []`;
 

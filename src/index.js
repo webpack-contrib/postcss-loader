@@ -13,12 +13,10 @@ import {
   exec,
   normalizeSourceMap,
   normalizeSourceMapAfterPostcss,
-  parsePackageJson,
-  findPackageJsonDir,
+  findPackageJSONDir,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
-let packageJsonDir;
 
 /**
  * **PostCSS Loader**
@@ -101,36 +99,58 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   let result;
+  let processor;
 
   try {
-    result = await postcssFactory(plugins).process(
-      root || content,
-      processOptions
-    );
+    processor = postcssFactory(plugins);
+    result = await processor.process(root || content, processOptions);
   } catch (error) {
-    // The `findPackageJsonDir` function returns `string` or `null`.
-    // This is used to do for caching, that is, an explicit comparison with `undefined`
-    // is used to make the condition body run once.
-    if (packageJsonDir === undefined) {
-      packageJsonDir = findPackageJsonDir(process.cwd(), this.fs.statSync);
-    }
     // Check postcss versions to avoid using PostCSS 7.
     // For caching reasons, we use the readFileSync and existsSync functions from the context,
     // not the functions from the `fs` module.
-    if (
-      !hasExplicitDependencyOnPostCSS &&
-      postcssFactory().version.startsWith("7.") &&
-      packageJsonDir
-    ) {
-      const filePath = path.resolve(packageJsonDir, "package.json");
-      const pkg = parsePackageJson(filePath, this.fs.readFileSync);
-      if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
-        this.emitWarning(
-          "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +
-            "Use `npm install postcss` or `yarn add postcss`"
-        );
-      } else {
-        hasExplicitDependencyOnPostCSS = true;
+    if (!hasExplicitDependencyOnPostCSS && processor.version.startsWith("7.")) {
+      // The `findPackageJsonDir` function returns `string` or `null`.
+      // This is used to do for caching, that is, an explicit comparison with `undefined`
+      // is used to make the condition body run once.
+      const packageJSONDir = findPackageJSONDir(
+        process.cwd(),
+        this.fs.statSync
+      );
+
+      if (packageJSONDir) {
+        let bufferOfPackageJSON;
+
+        try {
+          bufferOfPackageJSON = this.fs.readFileSync(
+            path.resolve(packageJSONDir, "package.json"),
+            "utf8"
+          );
+        } catch (_error) {
+          // Nothing
+        }
+
+        if (bufferOfPackageJSON) {
+          let pkg;
+
+          try {
+            pkg = JSON.parse(bufferOfPackageJSON);
+          } catch (_error) {
+            // Nothing
+          }
+
+          if (pkg) {
+            if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
+              this.emitWarning(
+                new Error(
+                  "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +
+                    "Use `npm install postcss` or `yarn add postcss`"
+                )
+              );
+            } else {
+              hasExplicitDependencyOnPostCSS = true;
+            }
+          }
+        }
       }
     }
 
