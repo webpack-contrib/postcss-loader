@@ -20,7 +20,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.process (/test/loader.test.js:294:28)
+    at Processor.process (/test/loader.test.js:300:26)
     at Object.loader (/src/index.js:106:30)",
 ]
 `;
@@ -31,7 +31,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.process (/test/loader.test.js:242:26)
+    at Processor.process (/test/loader.test.js:245:26)
     at Object.loader (/src/index.js:106:30)",
 ]
 `;
@@ -42,7 +42,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.process (/test/loader.test.js:268:28)
+    at Processor.process (/test/loader.test.js:274:26)
     at Object.loader (/src/index.js:106:30)",
 ]
 `;
