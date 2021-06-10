@@ -5,7 +5,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.process (/test/loader.test.js:216:26)
-    at Object.loader (/src/index.js:106:30)",
+    at Object.loader (/src/index.js:116:30)",
 ]
 `;
 
@@ -21,7 +21,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.process (/test/loader.test.js:300:26)
-    at Object.loader (/src/index.js:106:30)",
+    at Object.loader (/src/index.js:116:30)",
 ]
 `;
 
@@ -32,7 +32,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.process (/test/loader.test.js:245:26)
-    at Object.loader (/src/index.js:106:30)",
+    at Object.loader (/src/index.js:116:30)",
 ]
 `;
 
@@ -43,7 +43,7 @@ Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.process (/test/loader.test.js:274:26)
-    at Object.loader (/src/index.js:106:30)",
+    at Object.loader (/src/index.js:116:30)",
 ]
 `;
 

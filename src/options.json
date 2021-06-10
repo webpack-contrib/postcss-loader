@@ -39,7 +39,14 @@
     },
     "implementation": {
       "description": "The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)",
-      "instanceof": "Function"
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "instanceof": "Function"
+        }
+      ]
     }
   },
   "additionalProperties": false

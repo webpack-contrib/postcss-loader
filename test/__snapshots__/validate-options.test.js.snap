@@ -38,32 +38,42 @@ exports[`validate options should throw an error on the "execute" option with "te
 
 exports[`validate options should throw an error on the "implementation" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.implementation should be an instance of function.
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)"
+ - options.implementation should be one of these:
+   string | function
+   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   Details:
+    * options.implementation should be a string.
+    * options.implementation should be an instance of function."
 `;
 
 exports[`validate options should throw an error on the "implementation" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.implementation should be an instance of function.
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)"
+ - options.implementation should be one of these:
+   string | function
+   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   Details:
+    * options.implementation should be a string.
+    * options.implementation should be an instance of function."
 `;
 
 exports[`validate options should throw an error on the "implementation" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.implementation should be an instance of function.
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)"
+ - options.implementation should be one of these:
+   string | function
+   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   Details:
+    * options.implementation should be a string.
+    * options.implementation should be an instance of function."
 `;
 
 exports[`validate options should throw an error on the "implementation" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.implementation should be an instance of function.
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)"
-`;
-
-exports[`validate options should throw an error on the "implementation" option with "something" value 1`] = `
-"Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
- - options.implementation should be an instance of function.
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)"
+ - options.implementation should be one of these:
+   string | function
+   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   Details:
+    * options.implementation should be a string.
+    * options.implementation should be an instance of function."
 `;
 
 exports[`validate options should throw an error on the "postcssOptions" option with "{"config":[]}" value 1`] = `
