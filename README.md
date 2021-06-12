@@ -133,6 +133,7 @@ And run `webpack` via your preferred method.
 |        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
 | [`postcssOptions`](#postcssOptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
 |      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
+| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | Setup PostCSS implementation to use          |
 
 ### `execute`
 
@@ -598,6 +599,7 @@ module.exports = {
 ### `implementation`
 
 Type: `Function | String`
+Default: `postcss`
 
 The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
 
