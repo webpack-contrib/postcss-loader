@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [6.1.1](https://github.com/webpack-contrib/postcss-loader/compare/v6.1.0...v6.1.1) (2021-07-01)
+
+
+### Bug Fixes
+
+* do not swallow exception from postcss ([2eec42b](https://github.com/webpack-contrib/postcss-loader/commit/2eec42b1a61bbafa039627d3071ba2a1be03de9f))
+
 ## [6.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v6.0.0...v6.1.0) (2021-06-10)
 
 
