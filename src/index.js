@@ -118,7 +118,12 @@ export default async function loader(content, sourceMap, meta) {
     // Check postcss versions to avoid using PostCSS 7.
     // For caching reasons, we use the readFileSync and existsSync functions from the context,
     // not the functions from the `fs` module.
-    if (!hasExplicitDependencyOnPostCSS && processor.version.startsWith("7.")) {
+    if (
+      !hasExplicitDependencyOnPostCSS &&
+      processor &&
+      processor.version &&
+      processor.version.startsWith("7.")
+    ) {
       // The `findPackageJsonDir` function returns `string` or `null`.
       // This is used to do for caching, that is, an explicit comparison with `undefined`
       // is used to make the condition body run once.
