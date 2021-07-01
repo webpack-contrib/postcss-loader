@@ -309,4 +309,24 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
 
     spy.mockRestore();
   });
+
+  it("should work when 'processor' throw an error", async () => {
+    const spy = jest
+      .spyOn(utils, "findPackageJSONDir")
+      .mockReturnValue(
+        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss")
+      );
+
+    const compiler = getCompiler("./css/index.js", {
+      implementation: () => {
+        throw new Error("Error in implementation");
+      },
+    });
+    const stats = await compile(compiler);
+
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+
+    spy.mockRestore();
+  });
 });

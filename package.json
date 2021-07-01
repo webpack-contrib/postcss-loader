@@ -60,10 +60,10 @@
     "eslint": "^7.28.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
-    "husky": "^6.0.0",
+    "husky": "^7.0.0",
     "jest": "^27.0.4",
     "less": "^4.1.1",
-    "less-loader": "^9.1.0",
+    "less-loader": "^10.0.0",
     "lint-staged": "^11.0.0",
     "memfs": "^3.2.2",
     "midas": "^2.0.3",
@@ -79,7 +79,7 @@
     "sass-loader": "^12.1.0",
     "standard-version": "^9.3.0",
     "strip-ansi": "^6.0.0",
-    "sugarss": "^3.0.3",
+    "sugarss": "^4.0.1",
     "webpack": "^5.39.0"
   },
   "keywords": [
