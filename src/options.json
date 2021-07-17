@@ -4,13 +4,15 @@
   "properties": {
     "postcssOptions": {
       "description": "Options to pass through to `Postcss`.",
+      "link": "https://github.com/webpack-contrib/postcss-loader#postcssOptions",
       "anyOf": [
         {
           "type": "object",
           "additionalProperties": true,
           "properties": {
             "config": {
-              "description": "Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)",
+              "description": "Allows to specify PostCSS config path.",
+              "link": "https://github.com/webpack-contrib/postcss-loader#config",
               "anyOf": [
                 {
                   "description": "Allows to specify the path to the configuration file",
@@ -30,15 +32,18 @@
       ]
     },
     "execute": {
-      "description": "Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)",
+      "description": "Enables/Disables PostCSS parser support in 'CSS-in-JS'.",
+      "link": "https://github.com/webpack-contrib/postcss-loader#execute",
       "type": "boolean"
     },
     "sourceMap": {
-      "description": "Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)",
+      "description": "Enables/Disables generation of source maps.",
+      "link": "https://github.com/webpack-contrib/postcss-loader#sourcemap",
       "type": "boolean"
     },
     "implementation": {
-      "description": "The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)",
+      "description": "The implementation of postcss to use, instead of the locally installed version",
+      "link": "https://github.com/webpack-contrib/postcss-loader#implementation",
       "anyOf": [
         {
           "type": "string"

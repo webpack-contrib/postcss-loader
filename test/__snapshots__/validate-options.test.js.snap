@@ -3,44 +3,51 @@
 exports[`validate options should throw an error on the "execute" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "{"foo":"bar"}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "execute" option with "test" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.execute should be a boolean.
-   -> Enables/Disables PostCSS parser support in 'CSS-in-JS' (https://github.com/postcss/postcss-loader#execute)"
+   -> Enables/Disables PostCSS parser support in 'CSS-in-JS'.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#execute"
 `;
 
 exports[`validate options should throw an error on the "implementation" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.implementation should be one of these:
    string | function
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   -> The implementation of postcss to use, instead of the locally installed version
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an instance of function."
@@ -50,7 +57,8 @@ exports[`validate options should throw an error on the "implementation" option w
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.implementation should be one of these:
    string | function
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   -> The implementation of postcss to use, instead of the locally installed version
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an instance of function."
@@ -60,7 +68,8 @@ exports[`validate options should throw an error on the "implementation" option w
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.implementation should be one of these:
    string | function
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   -> The implementation of postcss to use, instead of the locally installed version
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an instance of function."
@@ -70,7 +79,8 @@ exports[`validate options should throw an error on the "implementation" option w
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.implementation should be one of these:
    string | function
-   -> The implementation of postcss to use, instead of the locally installed version (https://github.com/postcss/postcss-loader#implementation)
+   -> The implementation of postcss to use, instead of the locally installed version
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#implementation
    Details:
     * options.implementation should be a string.
     * options.implementation should be an instance of function."
@@ -81,10 +91,12 @@ exports[`validate options should throw an error on the "postcssOptions" option w
  - options.postcssOptions should be one of these:
    object { config?, … } | function
    -> Options to pass through to \`Postcss\`.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#postcssOptions
    Details:
     * options.postcssOptions.config should be one of these:
       string | boolean
-      -> Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)
+      -> Allows to specify PostCSS config path.
+      -> Read more at https://github.com/webpack-contrib/postcss-loader#config
       Details:
        * options.postcssOptions.config should be a string.
          -> Allows to specify the path to the configuration file
@@ -97,10 +109,12 @@ exports[`validate options should throw an error on the "postcssOptions" option w
  - options.postcssOptions should be one of these:
    object { config?, … } | function
    -> Options to pass through to \`Postcss\`.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#postcssOptions
    Details:
     * options.postcssOptions.config should be one of these:
       string | boolean
-      -> Allows to specify PostCSS Config Path (https://github.com/postcss/postcss-loader#config)
+      -> Allows to specify PostCSS config path.
+      -> Read more at https://github.com/webpack-contrib/postcss-loader#config
       Details:
        * options.postcssOptions.config should be a string.
          -> Allows to specify the path to the configuration file
@@ -111,29 +125,34 @@ exports[`validate options should throw an error on the "postcssOptions" option w
 exports[`validate options should throw an error on the "sourceMap" option with "/test/" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+   -> Enables/Disables generation of source maps.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#sourcemap"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "[]" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+   -> Enables/Disables generation of source maps.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#sourcemap"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "{}" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+   -> Enables/Disables generation of source maps.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#sourcemap"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "1" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+   -> Enables/Disables generation of source maps.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#sourcemap"
 `;
 
 exports[`validate options should throw an error on the "sourceMap" option with "something" value 1`] = `
 "Invalid options object. PostCSS Loader has been initialized using an options object that does not match the API schema.
  - options.sourceMap should be a boolean.
-   -> Enables/Disables generation of source maps (https://github.com/postcss/postcss-loader#sourcemap)"
+   -> Enables/Disables generation of source maps.
+   -> Read more at https://github.com/webpack-contrib/postcss-loader#sourcemap"
 `;
