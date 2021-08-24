@@ -3,7 +3,7 @@ name: ✨ Feature Request
 about: Suggest an idea for this project
 ---
 
-<!-- Please don't delete this template because we'll close your issue -->
+<!-- Please don't delete this template otherwise your issue will be closed immediately -->
 <!-- Before creating an issue please make sure you are using the latest version of webpack. -->
 
 ### Feature Proposal

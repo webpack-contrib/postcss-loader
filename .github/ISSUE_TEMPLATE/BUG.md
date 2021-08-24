@@ -3,7 +3,7 @@ name: 🐛 Bug Report
 about: Something went awry and you'd like to tell us about it.
 ---
 
-<!-- Please don't delete this template because we'll close your issue -->
+<!-- Please don't delete this template otherwise your issue will be closed immediately -->
 <!-- Before creating an issue please make sure you are using the latest version of webpack. -->
 
 ### Bug report
