@@ -4,5 +4,5 @@ about: 👉🏽 Need support, help, or advice? Don't open an issue! Head to Stac
 ---
 
 Hey there! If you need support, help, or advice then this is not the place to ask.
-Please visit [StackOverflow](https://stackoverflow.com/questions/tagged/webpack)
+Please visit [Discussions](https://github.com/webpack/webpack/discussions), [StackOverflow](https://stackoverflow.com/questions/tagged/webpack)
 or [the Webpack Gitter](https://gitter.im/webpack/webpack) instead.
