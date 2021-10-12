@@ -46,7 +46,7 @@ You need webpack v5 to use the latest version. For Webpack v4, you have to insta
 To begin, you'll need to install `postcss-loader` and `postcss`:
 
 ```console
-npm install --save-dev postcss-loader postcss
+npm install --save-dev postcss-loader postcss postcss-preset-env
 ```
 
 Then add the plugin to your `webpack` config. For example:
