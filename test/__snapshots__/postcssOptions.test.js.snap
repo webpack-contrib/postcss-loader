@@ -3,7 +3,7 @@
 exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: errors 1`] = `
 Array [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-TypeError: Cannot read property 'parse' of undefined",
+TypeError: Cannot read properties of undefined (reading 'parse')",
   "ModuleError: Module Error (from \`replaced original path\`):
 Loading PostCSS \\"unresolved\\" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
