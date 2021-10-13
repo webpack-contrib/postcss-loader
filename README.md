@@ -51,6 +51,8 @@ npm install --save-dev postcss-loader postcss
 
 Then add the plugin to your `webpack` config. For example:
 
+> In the following configuration the plugin [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) is used, which is not installed by default.
+
 **file.js**
 
 ```js
