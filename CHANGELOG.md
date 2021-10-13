@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [6.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v6.1.1...v6.2.0) (2021-10-13)
+
+
+### Features
+
+* add `link` field in schema ([#540](https://github.com/webpack-contrib/postcss-loader/issues/540)) ([1ae8212](https://github.com/webpack-contrib/postcss-loader/commit/1ae82129bce9039ac25f7254aa9ba8827ab79b3e))
+
 ### [6.1.1](https://github.com/webpack-contrib/postcss-loader/compare/v6.1.0...v6.1.1) (2021-07-01)
 
 
