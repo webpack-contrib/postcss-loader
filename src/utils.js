@@ -167,7 +167,7 @@ function pluginFactory() {
   };
 }
 
-async function load(module) {
+async function tryRequireThenImport(module) {
   let exports;
 
   try {
@@ -281,7 +281,7 @@ async function getPostcssOptions(
 
   if (typeof processOptions.parser === "string") {
     try {
-      processOptions.parser = await load(processOptions.parser);
+      processOptions.parser = await tryRequireThenImport(processOptions.parser);
     } catch (error) {
       loaderContext.emitError(
         new Error(
@@ -293,7 +293,9 @@ async function getPostcssOptions(
 
   if (typeof processOptions.stringifier === "string") {
     try {
-      processOptions.stringifier = await load(processOptions.stringifier);
+      processOptions.stringifier = await tryRequireThenImport(
+        processOptions.stringifier
+      );
     } catch (error) {
       loaderContext.emitError(
         new Error(
@@ -305,7 +307,7 @@ async function getPostcssOptions(
 
   if (typeof processOptions.syntax === "string") {
     try {
-      processOptions.syntax = await load(processOptions.syntax);
+      processOptions.syntax = await tryRequireThenImport(processOptions.syntax);
     } catch (error) {
       loaderContext.emitError(
         new Error(

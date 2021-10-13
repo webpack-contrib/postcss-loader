@@ -350,7 +350,13 @@ describe('"postcssOptions" option', () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats, true)).toMatchSnapshot("errors");
+    expect(
+      getErrors(stats, true).map((item) =>
+        item
+          .replace("property 'parse'", "properties")
+          .replace(/undefined$/, "undefined (reading 'parse')")
+      )
+    ).toMatchSnapshot("errors");
   });
 
   it('should work with the "plugins" option with "Array" value', async () => {
