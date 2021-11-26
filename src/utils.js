@@ -64,6 +64,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   }
 
   loaderContext.addBuildDependency(result.filepath);
+  loaderContext.addDependency(result.filepath);
 
   if (result.isEmpty) {
     return result;
