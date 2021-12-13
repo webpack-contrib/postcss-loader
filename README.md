@@ -936,15 +936,15 @@ The message should contain the following fields:
 ```js
 const postcssCustomPlugin = (opts = {}) => {
   return {
-    postcssPlugin : 'postcss-custom-plugin',
-    Once : (root, {result}) => {
+    postcssPlugin: "postcss-custom-plugin",
+    Once: (root, { result }) => {
       result.messages.push({
         type: "asset",
         file: "sprite.svg",
         content: "<svg>...</svg>",
       });
-    }
-  }
+    },
+  };
 };
 
 module.exports = {
@@ -990,14 +990,14 @@ const path = require("path");
 
 const postcssCustomPlugin = (opts = {}) => {
   return {
-    postcssPlugin : 'postcss-custom-plugin',
-    Once : (root, {result}) => {
+    postcssPlugin: "postcss-custom-plugin",
+    Once: (root, { result }) => {
       result.messages.push({
         type: "dependency",
         file: path.resolve(__dirname, "path", "to", "file"),
       });
-    }
-  }
+    },
+  };
 };
 
 module.exports = {
@@ -1074,13 +1074,13 @@ const path = require("path");
 
 const postcssCustomPlugin = (opts = {}) => {
   return {
-    postcssPlugin : 'postcss-custom-plugin',
-    Once : (root, {result}) => {
+    postcssPlugin: "postcss-custom-plugin",
+    Once: (root, { result }) => {
       opts.loaderContext.addDependency(
         path.resolve(__dirname, "path", "to", "file")
       );
-    }
-  }
+    },
+  };
 };
 
 postcssCustomPlugin.postcss = true;
