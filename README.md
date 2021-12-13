@@ -934,15 +934,18 @@ The message should contain the following fields:
 **webpack.config.js**
 
 ```js
-const customPlugin = () => (css, result) => {
-  result.messages.push({
-    type: "asset",
-    file: "sprite.svg",
-    content: "<svg>...</svg>",
-  });
+const postcssCustomPlugin = (opts = {}) => {
+  return {
+    postcssPlugin : 'postcss-custom-plugin',
+    Once : (root, {result}) => {
+      result.messages.push({
+        type: "asset",
+        file: "sprite.svg",
+        content: "<svg>...</svg>",
+      });
+    }
+  }
 };
-
-const postcssPlugin = postcss.plugin("postcss-assets", customPlugin);
 
 module.exports = {
   module: {
@@ -956,7 +959,7 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [postcssPlugin()],
+                plugins: [postcssCustomPlugin()],
               },
             },
           },
@@ -985,14 +988,17 @@ The message should contain the following fields:
 ```js
 const path = require("path");
 
-const customPlugin = () => (css, result) => {
-  result.messages.push({
-    type: "dependency",
-    file: path.resolve(__dirname, "path", "to", "file"),
-  });
+const postcssCustomPlugin = (opts = {}) => {
+  return {
+    postcssPlugin : 'postcss-custom-plugin',
+    Once : (root, {result}) => {
+      result.messages.push({
+        type: "dependency",
+        file: path.resolve(__dirname, "path", "to", "file"),
+      });
+    }
+  }
 };
-
-const postcssPlugin = postcss.plugin("postcss-assets", customPlugin);
 
 module.exports = {
   module: {
@@ -1006,7 +1012,7 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               postcssOptions: {
-                plugins: [postcssPlugin()],
+                plugins: [postcssCustomPlugin()],
               },
             },
           },
@@ -1016,6 +1022,8 @@ module.exports = {
   },
 };
 ```
+
+Or you can use ready-made plugin [postcss-add-dependencies](https://www.npmjs.com/package/postcss-add-dependencies).
 
 2. Pass `loaderContext` in plugin.
 
@@ -1052,25 +1060,31 @@ module.exports = {
 ```js
 module.exports = (api) => ({
   plugins: [
-    require("path/to/customPlugin")({
+    require("path/to/postcssCustomPlugin.js")({
       loaderContext: api.webpackLoaderContext,
     }),
   ],
 });
 ```
 
-**customPlugin.js**
+**postcssCustomPlugin.js**
 
 ```js
 const path = require("path");
 
-const customPlugin = (loaderContext) => (css, result) => {
-  loaderContext.webpack.addDependency(
-    path.resolve(__dirname, "path", "to", "file")
-  );
+const postcssCustomPlugin = (opts = {}) => {
+  return {
+    postcssPlugin : 'postcss-custom-plugin',
+    Once : (root, {result}) => {
+      opts.loaderContext.addDependency(
+        path.resolve(__dirname, "path", "to", "file")
+      );
+    }
+  }
 };
 
-module.exports = postcss.plugin("postcss-assets", customPlugin);
+postcssCustomPlugin.postcss = true;
+module.exports = postcssCustomPlugin;
 ```
 
 ## Contributing
