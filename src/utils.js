@@ -91,22 +91,15 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
 function loadPlugin(plugin, options, file) {
   try {
-    if (!options || Object.keys(options).length === 0) {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      const loadedPlugin = require(plugin);
-
-      if (loadedPlugin.default) {
-        return loadedPlugin.default;
-      }
-
-      return loadedPlugin;
-    }
-
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    const loadedPlugin = require(plugin);
+    let loadedPlugin = require(plugin);
 
     if (loadedPlugin.default) {
-      return loadedPlugin.default(options);
+      loadedPlugin = loadedPlugin.default;
+    }
+
+    if (!options || Object.keys(options).length === 0) {
+      return loadedPlugin;
     }
 
     return loadedPlugin(options);
