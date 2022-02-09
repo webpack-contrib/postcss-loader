@@ -142,18 +142,22 @@ And run `webpack` via your preferred method.
 
 ## Options
 
-|                Name                 |         Type         |                Default                | Description                                  |
-| :---------------------------------: | :------------------: | :-----------------------------------: | :------------------------------------------- |
-|        [`execute`](#execute)        |     `{Boolean}`      |              `undefined`              | Enable PostCSS Parser support in `CSS-in-JS` |
-| [`postcssOptions`](#postcssOptions) | `{Object\|Function}` | `defaults values for Postcss.process` | Set `PostCSS` options and plugins            |
-|      [`sourceMap`](#sourcemap)      |     `{Boolean}`      |          `compiler.devtool`           | Enables/Disables generation of source maps   |
-| [`implementation`](#implementation) | `{Function\|String}` |               `postcss`               | Setup PostCSS implementation to use          |
+- [`execute`](#execute)
+- [`postcssOptions`](#postcssOptions)
+- [`sourceMap`](#sourcemap)
+- [`implementation`](#implementation)
 
 ### `execute`
 
-Type: `Boolean`
+Type:
+
+```ts
+type execute = boolean;
+```
+
 Default: `undefined`
 
+Enable PostCSS Parser support in `CSS-in-JS`.
 If you use JS styles the [`postcss-js`](https://github.com/postcss/postcss-js) parser, add the `execute` option.
 
 **webpack.config.js**
@@ -187,7 +191,28 @@ module.exports = {
 
 ### `postcssOptions`
 
-Type: `Object|Function`
+Type:
+
+```ts
+type postcssOptions =
+  | {
+      from: string;
+      map: boolean | SourceMapOptions;
+      parser: string | object | (() => Parser);
+      stringifier: Stringifier | Syntax;
+      syntax: Syntax;
+      to: string;
+    }
+  | ((loaderContext: LoaderContext) => {
+      from: string;
+      map: boolean | SourceMapOptions;
+      parser: string | object | (() => Parser);
+      stringifier: Stringifier | Syntax;
+      syntax: Syntax;
+      to: string;
+    });
+```
+
 Default: `undefined`
 
 Allows to set [`PostCSS options`](https://postcss.org/api/#processoptions) and plugins.
@@ -198,7 +223,7 @@ There is the special `config` option for config files. How it works and how it c
 We recommend do not specify `from`, `to` and `map` options, because this can lead to wrong path in source maps.
 If you need source maps please use the [`sourcemap`](#sourcemap) option.
 
-#### `Object`
+#### `object`
 
 Setup `plugins`:
 
@@ -267,9 +292,9 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
-            // Can be `String`
+            // Can be `string`
             syntax: "sugarss",
-            // Can be `Object`
+            // Can be `object`
             syntax: require("sugarss"),
           },
         },
@@ -292,11 +317,11 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
-            // Can be `String`
+            // Can be `string`
             parser: "sugarss",
-            // Can be `Object`
+            // Can be `object`
             parser: require("sugarss"),
-            // Can be `Function`
+            // Can be `function`
             parser: require("sugarss").parse,
           },
         },
@@ -322,11 +347,11 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
-            // Can be `String`
+            // Can be `string`
             stringifier: "sugarss",
-            // Can be `Object`
+            // Can be `object`
             stringifier: require("sugarss"),
-            // Can be `Function`
+            // Can be `function`
             stringifier: midas.stringifier,
           },
         },
@@ -336,7 +361,7 @@ module.exports = {
 };
 ```
 
-#### `Function`
+#### `function`
 
 **webpack.config.js**
 
@@ -375,7 +400,12 @@ module.exports = {
 
 #### `config`
 
-Type: `Boolean|String`
+Type:
+
+```ts
+type config = boolean | string;
+```
+
 Default: `undefined`
 
 Allows to set options using config files.
@@ -392,7 +422,7 @@ The loader will search up the directory tree for configuration in the following 
 
 ##### Examples of Config Files
 
-Using `Object` notation:
+Using `object` notation:
 
 **postcss.config.js** (**recommend**)
 
@@ -408,7 +438,7 @@ module.exports = {
 };
 ```
 
-Using `Function` notation:
+Using `function` notation:
 
 **postcss.config.js** (**recommend**)
 
@@ -509,7 +539,7 @@ module.exports = {
 };
 ```
 
-#### Boolean
+#### `boolean`
 
 Enables/Disables autoloading config.
 
@@ -561,7 +591,12 @@ module.exports = {
 
 ### `sourceMap`
 
-Type: `Boolean`
+Type:
+
+```ts
+type sourceMap = boolean;
+```
+
 Default: depends on the `compiler.devtool` value
 
 By default generation of source maps depends on the [`devtool`](https://webpack.js.org/configuration/devtool/) option.
@@ -612,14 +647,21 @@ module.exports = {
 
 ### `implementation`
 
-Type: `Function | String`
+Type:
+
+```ts
+type implementation = object;
+```
+
+type of `implementation` should be the same as [postcss.d.ts](https://github.com/postcss/postcss/blob/main/lib/postcss.d.ts)
+
 Default: `postcss`
 
 The special `implementation` option determines which implementation of PostCSS to use. Overrides the locally installed `peerDependency` version of `postcss`.
 
 **This option is only really useful for downstream tooling authors to ease the PostCSS 7-to-8 transition.**
 
-#### Function
+#### `function`
 
 **webpack.config.js**
 
