@@ -650,8 +650,10 @@ module.exports = {
 Type:
 
 ```ts
-type implementation = require('postcss') | string
+type implementation = object;
 ```
+
+type of `implementation` should be the same as [postcss.d.ts](https://github.com/postcss/postcss/blob/main/lib/postcss.d.ts)
 
 Default: `postcss`
 
