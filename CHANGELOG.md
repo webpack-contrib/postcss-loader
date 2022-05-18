@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v6.2.1...v7.0.0) (2022-05-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported `Node.js` version is `14.15.0`
+
 ### [6.2.1](https://github.com/webpack-contrib/postcss-loader/compare/v6.2.0...v6.2.1) (2021-11-26)
 
 
