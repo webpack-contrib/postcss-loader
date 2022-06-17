@@ -797,7 +797,9 @@ module.exports = {
 };
 ```
 
-> :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset. More [information](https://github.com/csstools/postcss-preset-env#autoprefixer)
+> **Warning**
+>
+> [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset. More [information](https://github.com/csstools/postcss-preset-env#autoprefixer)
 
 ### PostCSS Preset Env
 
@@ -934,7 +936,9 @@ export default {
 };
 ```
 
-> :warning: If you are using Babel you need to do the following in order for the setup to work
+> **Warning**
+>
+> If you are using Babel you need to do the following in order for the setup to work
 
 > 1. Add [`babel-plugin-add-module-exports`](https://github.com/59naga/babel-plugin-add-module-exports) to your configuration.
 > 2. You need to have only one **default** export per style module.
