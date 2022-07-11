@@ -4,6 +4,8 @@ import Module from "module";
 import { klona } from "klona/full";
 import { cosmiconfig } from "cosmiconfig";
 
+import SyntaxError from "./Error";
+
 const parentModule = module;
 
 const stat = (inputFileSystem, filePath) =>
@@ -450,6 +452,18 @@ function getPostcssImplementation(loaderContext, implementation) {
   return resolvedImplementation;
 }
 
+function reportError(loaderContext, callback, error) {
+  if (error.file) {
+    loaderContext.addDependency(error.file);
+  }
+
+  if (error.name === "CssSyntaxError") {
+    callback(new SyntaxError(error));
+  } else {
+    callback(error);
+  }
+}
+
 export {
   loadConfig,
   getPostcssOptions,
@@ -458,4 +472,5 @@ export {
   normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
   getPostcssImplementation,
+  reportError,
 };

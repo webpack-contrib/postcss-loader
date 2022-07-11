@@ -4,7 +4,6 @@ import { satisfies } from "semver";
 import postcssPackage from "postcss/package.json";
 
 import Warning from "./Warning";
-import SyntaxError from "./Error";
 import schema from "./options.json";
 import {
   loadConfig,
@@ -14,6 +13,7 @@ import {
   normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
   getPostcssImplementation,
+  reportError,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
@@ -169,15 +169,7 @@ export default async function loader(content, sourceMap, meta) {
       }
     }
 
-    if (error.file) {
-      this.addDependency(error.file);
-    }
-
-    if (error.name === "CssSyntaxError") {
-      callback(new SyntaxError(error));
-    } else {
-      callback(error);
-    }
+    reportError(this, callback, error);
 
     return;
   }
@@ -223,11 +215,19 @@ export default async function loader(content, sourceMap, meta) {
     map = normalizeSourceMapAfterPostcss(map, this.context);
   }
 
-  const ast = {
-    type: "postcss",
-    version: result.processor.version,
-    root: result.root,
-  };
+  let ast;
+
+  try {
+    ast = {
+      type: "postcss",
+      version: result.processor.version,
+      root: result.root,
+    };
+  } catch (error) {
+    reportError(this, callback, error);
+
+    return;
+  }
 
   callback(null, result.css, map, { ast });
 }
