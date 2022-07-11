@@ -26,7 +26,6 @@
 
 [![npm][npm]][npm-url]
 [![node][node]][node-url]
-[![deps][deps]][deps-url]
 [![tests][tests]][tests-url]
 [![coverage][cover]][cover-url]
 [![size][size]][size-url]
@@ -798,7 +797,9 @@ module.exports = {
 };
 ```
 
-> :warning: [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset. More [information](https://github.com/csstools/postcss-preset-env#autoprefixer)
+> **Warning**
+>
+> [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset. More [information](https://github.com/csstools/postcss-preset-env#autoprefixer)
 
 ### PostCSS Preset Env
 
@@ -935,7 +936,9 @@ export default {
 };
 ```
 
-> :warning: If you are using Babel you need to do the following in order for the setup to work
+> **Warning**
+>
+> If you are using Babel you need to do the following in order for the setup to work
 
 > 1. Add [`babel-plugin-add-module-exports`](https://github.com/59naga/babel-plugin-add-module-exports) to your configuration.
 > 2. You need to have only one **default** export per style module.
@@ -1155,8 +1158,6 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [npm-url]: https://npmjs.com/package/postcss-loader
 [node]: https://img.shields.io/node/v/postcss-loader.svg
 [node-url]: https://nodejs.org
-[deps]: https://david-dm.org/webpack-contrib/postcss-loader.svg
-[deps-url]: https://david-dm.org/webpack-contrib/postcss-loader
 [tests]: https://github.com/webpack-contrib/postcss-loader/workflows/postcss-loader/badge.svg
 [tests-url]: https://github.com/webpack-contrib/postcss-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/postcss-loader/branch/master/graph/badge.svg
