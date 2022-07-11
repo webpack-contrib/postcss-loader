@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.1](https://github.com/webpack-contrib/postcss-loader/compare/v7.0.0...v7.0.1) (2022-07-11)
+
+
+### Bug Fixes
+
+* unexpected failing on CSS syntax error ([#593](https://github.com/webpack-contrib/postcss-loader/issues/593)) ([888d72e](https://github.com/webpack-contrib/postcss-loader/commit/888d72e340b6d176e95c15d5f96ca412af86a66a))
+
 ## [7.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v6.2.1...v7.0.0) (2022-05-18)
 
 
