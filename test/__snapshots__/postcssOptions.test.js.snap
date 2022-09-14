@@ -1,64 +1,64 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: Cannot read properties of undefined (reading 'parse')",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS \\"unresolved\\" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
+Loading PostCSS "unresolved" syntax failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with "syntax" option on the unresolved syntax: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should throw an error with the "config" option on the invalid config: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: invalid postcss config",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with the "config" option on the invalid config: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with the "config" option on the invalid config: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: No PostCSS config found in: /test/fixtures/config-scope/css/unresolve.js",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with the "config" option on the unresolved config: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should throw an error with the "parser" option on the unresolved parser: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: parser is not a function",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS \\"unresolved\\" parser failed: Cannot find module 'unresolved' from 'src/utils.js'",
+Loading PostCSS "unresolved" parser failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with the "parser" option on the unresolved parser: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with the "parser" option on the unresolved parser: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should throw an error with the "plugins" option on the unresolved plugin: errors 1`] = `
-Array [
+[
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS \\"postcss-unresolved\\" plugin failed: Cannot find module 'postcss-unresolved' from 'src/utils.js'",
+Loading PostCSS "postcss-unresolved" plugin failed: Cannot find module 'postcss-unresolved' from 'src/utils.js'",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with the "plugins" option on the unresolved plugin: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with the "plugins" option on the unresolved plugin: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should throw an error with the "stringifier" option on the unresolved stringifier: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 TypeError: this.stringify is not a function",
   "ModuleError: Module Error (from \`replaced original path\`):
-Loading PostCSS \\"unresolved\\" stringifier failed: Cannot find module 'unresolved' from 'src/utils.js'",
+Loading PostCSS "unresolved" stringifier failed: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
 `;
 
-exports[`"postcssOptions" option should throw an error with the "stringifier" option on the unresolved stringifier: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should throw an error with the "stringifier" option on the unresolved stringifier: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: css 1`] = `
 "a {
@@ -107,9 +107,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value and with "Array" syntax of the "plugins" option: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work "Function" value and with "Object" syntax of the "plugins" option: css 1`] = `
 "a {
@@ -158,9 +158,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work "Function" value and with "Object" syntax of the "plugins" option: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value and with "Object" syntax of the "plugins" option: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work "Function" value and with "Object" syntax of the "plugins" option: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value and with "Object" syntax of the "plugins" option: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work "Function" value: css 1`] = `
 "a {
@@ -209,9 +209,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work "Function" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work "Function" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work "Function" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work and provide API for the configuration: css 1`] = `
 "a {
@@ -262,9 +262,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work and provide API for the configuration: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work and provide API for the configuration: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work and provide API for the configuration: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work and provide API for the configuration: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): css 1`] = `
 "a {
@@ -313,11 +313,11 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): errors 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): map 1`] = `undefined`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (absolute paths): warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): css 1`] = `
 "a {
@@ -366,11 +366,11 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): errors 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): map 1`] = `undefined`;
 
-exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with "from", "to" and "map" options (relative paths): warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -381,9 +381,9 @@ exports[`"postcssOptions" option should work with the "config" options "String" 
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options "String" value (relative path): warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: css 1`] = `
 "a { color: black }
@@ -394,18 +394,18 @@ exports[`"postcssOptions" option should work with the "config" options and resol
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: errors 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: source map 1`] = `
-Object {
+{
   "file": "style.css",
   "mappings": "AAAA,IAAI,aAAa;;AAEjB;EACE,YAAY;AACd",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "style.css",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a { color: black }
 
 .foo {
@@ -417,7 +417,7 @@ Object {
 }
 `;
 
-exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options and resolve "from" and "to" options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options and use plugins: css 1`] = `
 "a { color: black }
@@ -451,9 +451,9 @@ html.is-dark body {
   }"
 `;
 
-exports[`"postcssOptions" option should work with the "config" options and use plugins: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options and use plugins: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options and use plugins: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options and use plugins: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -464,9 +464,9 @@ exports[`"postcssOptions" option should work with the "config" options with "Str
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value (absolute path): warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -477,21 +477,21 @@ exports[`"postcssOptions" option should work with the "config" options with "Str
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value (with path to the directory with the configuration): warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: css 1`] = `
 "a {
   color: black
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFO0FBREYiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxuICBjb2xvcjogYmxhY2tcbiJdfQ== */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNHO0FBREgiLCJmaWxlIjoic3R5bGUuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYVxyXG4gIGNvbG9yOiBibGFja1xyXG4iXX0= */"
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "String" value and respect all options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "false" value: css 1`] = `
 "a { color: black }
@@ -502,9 +502,9 @@ exports[`"postcssOptions" option should work with the "config" options with "fal
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "false" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "false" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "false" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "false" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: css 1`] = `
 ".import {
@@ -517,9 +517,9 @@ exports[`"postcssOptions" option should work with the "config" options with "pac
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "true" value: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -530,9 +530,9 @@ exports[`"postcssOptions" option should work with the "config" options with "tru
 "
 `;
 
-exports[`"postcssOptions" option should work with the "config" options with "true" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "true" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "config" options with "true" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "config" options with "true" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: css 1`] = `
 "a {
@@ -579,14 +579,14 @@ a {
   }
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG5hIHtcbiAgY29sb3I6IHJlZDtcbn1cblxuYSB7XG4gIGNvbG9yOiBncmVlbjtcbn1cblxuYSB7XG4gIGNvbG9yOiBibHVlO1xufVxuXG4uY2xhc3Mge1xuICAteC1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xuICAteC1jb2xvcjogKiAjZmFmYWZhO1xufVxuXG4uY2xhc3MtZm9vIHtcbiAgLXotYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXotY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLnBob25lIHtcbiAgJl90aXRsZSB7XG4gICAgd2lkdGg6IDUwMHB4O1xuXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICB9XG5cbiAgICBib2R5LmlzX2RhcmsgJiB7XG4gICAgICBjb2xvcjogd2hpdGU7XG4gICAgfVxuICB9XG5cbiAgaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxufVxuIl19 */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcclxuICBjb2xvcjogYmxhY2s7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiBncmVlbjtcclxufVxyXG5cclxuYSB7XHJcbiAgY29sb3I6IGJsdWU7XHJcbn1cclxuXHJcbi5jbGFzcyB7XHJcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcclxuICAteC1jb2xvcjogKiAjZmFmYWZhO1xyXG59XHJcblxyXG4uY2xhc3MtZm9vIHtcclxuICAtei1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xyXG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XHJcbn1cclxuXHJcbi5waG9uZSB7XHJcbiAgJl90aXRsZSB7XHJcbiAgICB3aWR0aDogNTAwcHg7XHJcblxyXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XHJcbiAgICAgIHdpZHRoOiBhdXRvO1xyXG4gICAgfVxyXG5cclxuICAgIGJvZHkuaXNfZGFyayAmIHtcclxuICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgaW1nIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gIH1cclxufVxyXG4iXX0= */"
 `;
 
-exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: errors 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: map 1`] = `undefined`;
 
-exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "map" option and generate inlined source maps: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "parser" option with "Function" value: css 1`] = `
 "a {
@@ -595,9 +595,9 @@ exports[`"postcssOptions" option should work with the "parser" option with "Func
 "
 `;
 
-exports[`"postcssOptions" option should work with the "parser" option with "Function" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "Function" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "parser" option with "Function" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "Function" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "parser" option with "Object" value: css 1`] = `
 "a {
@@ -606,9 +606,9 @@ exports[`"postcssOptions" option should work with the "parser" option with "Obje
 "
 `;
 
-exports[`"postcssOptions" option should work with the "parser" option with "Object" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "Object" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "parser" option with "Object" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "Object" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "parser" option with "String" value: css 1`] = `
 "a {
@@ -617,13 +617,13 @@ exports[`"postcssOptions" option should work with the "parser" option with "Stri
 "
 `;
 
-exports[`"postcssOptions" option should work with the "parser" option with "String" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "String" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "parser" option with "String" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "parser" option with "String" value: warnings 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and not throw an error on falsy plugin: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: css 1`] = `
 "a {
@@ -674,9 +674,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and override the previous plugin options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: css 1`] = `
 "a {
@@ -725,9 +725,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value and support disabling plugins from the configuration: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: css 1`] = `
 "a {
@@ -778,9 +778,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value, and config, and override the previous plugin options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: css 1`] = `
 "a {
@@ -832,9 +832,9 @@ body.is_dark .phone_title {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Array" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: css 1`] = `
 "a {
@@ -883,9 +883,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and only disabled plugins: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: css 1`] = `
 "a {
@@ -936,9 +936,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and override the previous plugin options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: css 1`] = `
 "a {
@@ -987,9 +987,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value and support disabling plugins from the configuration: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: css 1`] = `
 "a {
@@ -1040,9 +1040,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value, and config, and override the previous plugin options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: css 1`] = `
 "a {
@@ -1094,9 +1094,9 @@ body.is_dark .phone_title {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with "Object" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: css 1`] = `
 "a {
@@ -1145,9 +1145,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Array" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: css 1`] = `
 "a {
@@ -1196,9 +1196,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with empty "Object" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: css 1`] = `
 "a {
@@ -1247,9 +1247,9 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property with options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: css 1`] = `
 "a {
@@ -1298,60 +1298,60 @@ a {
 "
 `;
 
-exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "plugins" option with the "default" property without options: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: css 1`] = `
-"<pre class=\\"midas\\"><code><span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">black</span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+"<pre class="midas"><code><span class="midas__selector"><span class="midas__tag">a</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">black</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">red</span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+<span class="midas__selector"><span class="midas__tag">a</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">red</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">green</span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+<span class="midas__selector"><span class="midas__tag">a</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">green</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__tag\\">a</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+<span class="midas__selector"><span class="midas__tag">a</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">blue</span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">-x-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
-  <span class=\\"midas__property\\">-x-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+<span class="midas__selector"><span class="midas__class">.class</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">-x-border-color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">blue</span> <span class="midas__word">blue</span> <span class="midas__word">*</span></span><span class="midas__semicolon">;</span>
+  <span class="midas__property">-x-color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">*</span> <span class="midas__hex-color">#<span class="midas__hex-value">fafafa</span></span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.class-foo</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__property\\">-z-border-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">blue</span> <span class=\\"midas__word\\">*</span></span><span class=\\"midas__semicolon\\">;</span>
-  <span class=\\"midas__property\\">-z-color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">*</span> <span class=\\"midas__hex-color\\">#<span class=\\"midas__hex-value\\">fafafa</span></span></span><span class=\\"midas__semicolon\\">;</span>
-<span class=\\"midas__brace\\">}</span>
+<span class="midas__selector"><span class="midas__class">.class-foo</span></span> <span class="midas__brace">{</span>
+  <span class="midas__property">-z-border-color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">blue</span> <span class="midas__word">blue</span> <span class="midas__word">*</span></span><span class="midas__semicolon">;</span>
+  <span class="midas__property">-z-color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">*</span> <span class="midas__hex-color">#<span class="midas__hex-value">fafafa</span></span></span><span class="midas__semicolon">;</span>
+<span class="midas__brace">}</span>
 
-<span class=\\"midas__selector\\"><span class=\\"midas__class\\">.phone</span></span> <span class=\\"midas__brace\\">{</span>
-  <span class=\\"midas__selector\\">_title</span> <span class=\\"midas__brace\\">{</span>
-    <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__number\\">500px</span></span><span class=\\"midas__semicolon\\">;</span>
+<span class="midas__selector"><span class="midas__class">.phone</span></span> <span class="midas__brace">{</span>
+  <span class="midas__selector">_title</span> <span class="midas__brace">{</span>
+    <span class="midas__property">width</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__number">500px</span></span><span class="midas__semicolon">;</span>
 
-    <span class=\\"midas__at-rule\\"><span class=\\"midas__at-rule-name\\">@media</span> <span class=\\"midas__function\\"><span class=\\"midas__parenthesis\\">(</span><span class=\\"midas__property\\">max-width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__number\\">500px</span><span class=\\"midas__parenthesis\\">)</span></span></span> <span class=\\"midas__brace\\">{</span>
-      <span class=\\"midas__property\\">width</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">auto</span></span><span class=\\"midas__semicolon\\">;</span>
-    <span class=\\"midas__brace\\">}</span>
+    <span class="midas__at-rule"><span class="midas__at-rule-name">@media</span> <span class="midas__function"><span class="midas__parenthesis">(</span><span class="midas__property">max-width</span><span class="midas__colon">: </span><span class="midas__number">500px</span><span class="midas__parenthesis">)</span></span></span> <span class="midas__brace">{</span>
+      <span class="midas__property">width</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">auto</span></span><span class="midas__semicolon">;</span>
+    <span class="midas__brace">}</span>
 
-    <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">body</span><span class=\\"midas__class\\">.is_dark</span><span class=\\"midas__combinator\\"> </span></span> <span class=\\"midas__brace\\">{</span>
-      <span class=\\"midas__property\\">color</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">white</span></span><span class=\\"midas__semicolon\\">;</span>
-    <span class=\\"midas__brace\\">}</span>
-  <span class=\\"midas__brace\\">}</span>
+    <span class="midas__selector"><span class="midas__tag">body</span><span class="midas__class">.is_dark</span><span class="midas__combinator"> </span></span> <span class="midas__brace">{</span>
+      <span class="midas__property">color</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">white</span></span><span class="midas__semicolon">;</span>
+    <span class="midas__brace">}</span>
+  <span class="midas__brace">}</span>
 
-  <span class=\\"midas__selector\\"><span class=\\"midas__tag\\">img</span></span> <span class=\\"midas__brace\\">{</span>
-    <span class=\\"midas__property\\">display</span><span class=\\"midas__colon\\">: </span><span class=\\"midas__value\\"><span class=\\"midas__word\\">block</span></span><span class=\\"midas__semicolon\\">;</span>
-  <span class=\\"midas__brace\\">}</span>
-<span class=\\"midas__brace\\">}</span>
+  <span class="midas__selector"><span class="midas__tag">img</span></span> <span class="midas__brace">{</span>
+    <span class="midas__property">display</span><span class="midas__colon">: </span><span class="midas__value"><span class="midas__word">block</span></span><span class="midas__semicolon">;</span>
+  <span class="midas__brace">}</span>
+<span class="midas__brace">}</span>
 </code></pre>"
 `;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "Function" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: css 1`] = `
 "a
@@ -1389,9 +1389,9 @@ a
 "
 `;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "Object" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: css 1`] = `
 "a
@@ -1429,9 +1429,9 @@ a
 "
 `;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "stringifier" option with "String" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: css 1`] = `
 "a
@@ -1439,9 +1439,9 @@ exports[`"postcssOptions" option should work with the "syntax" option with "Obje
 "
 `;
 
-exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "syntax" option with "Object" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "syntax" option with "String" value: css 1`] = `
 "a
@@ -1449,9 +1449,9 @@ exports[`"postcssOptions" option should work with the "syntax" option with "Stri
 "
 `;
 
-exports[`"postcssOptions" option should work with the "syntax" option with "String" value: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "syntax" option with "String" value: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work with the "syntax" option with "String" value: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work with the "syntax" option with "String" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: css 1`] = `
 "a { color: rgba(0, 0, 0, 1.0) }
@@ -1462,6 +1462,6 @@ exports[`"postcssOptions" option should work without the specified values in the
 "
 `;
 
-exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: errors 1`] = `Array []`;
+exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: errors 1`] = `[]`;
 
-exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: warnings 1`] = `Array []`;
+exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: warnings 1`] = `[]`;

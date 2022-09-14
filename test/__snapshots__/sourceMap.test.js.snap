@@ -45,12 +45,12 @@ a {
   }
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG5hIHtcbiAgY29sb3I6IHJlZDtcbn1cblxuYSB7XG4gIGNvbG9yOiBncmVlbjtcbn1cblxuYSB7XG4gIGNvbG9yOiBibHVlO1xufVxuXG4uY2xhc3Mge1xuICAteC1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xuICAteC1jb2xvcjogKiAjZmFmYWZhO1xufVxuXG4uY2xhc3MtZm9vIHtcbiAgLXotYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXotY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLnBob25lIHtcbiAgJl90aXRsZSB7XG4gICAgd2lkdGg6IDUwMHB4O1xuXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICB9XG5cbiAgICBib2R5LmlzX2RhcmsgJiB7XG4gICAgICBjb2xvcjogd2hpdGU7XG4gICAgfVxuICB9XG5cbiAgaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxufVxuIl19 */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcclxuICBjb2xvcjogYmxhY2s7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiBncmVlbjtcclxufVxyXG5cclxuYSB7XHJcbiAgY29sb3I6IGJsdWU7XHJcbn1cclxuXHJcbi5jbGFzcyB7XHJcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcclxuICAteC1jb2xvcjogKiAjZmFmYWZhO1xyXG59XHJcblxyXG4uY2xhc3MtZm9vIHtcclxuICAtei1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xyXG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XHJcbn1cclxuXHJcbi5waG9uZSB7XHJcbiAgJl90aXRsZSB7XHJcbiAgICB3aWR0aDogNTAwcHg7XHJcblxyXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XHJcbiAgICAgIHdpZHRoOiBhdXRvO1xyXG4gICAgfVxyXG5cclxuICAgIGJvZHkuaXNfZGFyayAmIHtcclxuICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgaW1nIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gIH1cclxufVxyXG4iXX0= */"
 `;
 
-exports[`"sourceMap" option should generate inline source maps when the "devtool" is "false": errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate inline source maps when the "devtool" is "false": errors 1`] = `[]`;
 
-exports[`"sourceMap" option should generate inline source maps when the "devtool" is "false": warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate inline source maps when the "devtool" is "false": warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate inline source maps when the "devtool" is "true": css 1`] = `
 "a {
@@ -97,12 +97,12 @@ a {
   }
 }
 
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcbiAgY29sb3I6IGJsYWNrO1xufVxuXG5hIHtcbiAgY29sb3I6IHJlZDtcbn1cblxuYSB7XG4gIGNvbG9yOiBncmVlbjtcbn1cblxuYSB7XG4gIGNvbG9yOiBibHVlO1xufVxuXG4uY2xhc3Mge1xuICAteC1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xuICAteC1jb2xvcjogKiAjZmFmYWZhO1xufVxuXG4uY2xhc3MtZm9vIHtcbiAgLXotYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcbiAgLXotY29sb3I6ICogI2ZhZmFmYTtcbn1cblxuLnBob25lIHtcbiAgJl90aXRsZSB7XG4gICAgd2lkdGg6IDUwMHB4O1xuXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XG4gICAgICB3aWR0aDogYXV0bztcbiAgICB9XG5cbiAgICBib2R5LmlzX2RhcmsgJiB7XG4gICAgICBjb2xvcjogd2hpdGU7XG4gICAgfVxuICB9XG5cbiAgaW1nIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxufVxuIl19 */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSIsImZpbGUiOiJzdHlsZS5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJhIHtcclxuICBjb2xvcjogYmxhY2s7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbmEge1xyXG4gIGNvbG9yOiBncmVlbjtcclxufVxyXG5cclxuYSB7XHJcbiAgY29sb3I6IGJsdWU7XHJcbn1cclxuXHJcbi5jbGFzcyB7XHJcbiAgLXgtYm9yZGVyLWNvbG9yOiBibHVlIGJsdWUgKjtcclxuICAteC1jb2xvcjogKiAjZmFmYWZhO1xyXG59XHJcblxyXG4uY2xhc3MtZm9vIHtcclxuICAtei1ib3JkZXItY29sb3I6IGJsdWUgYmx1ZSAqO1xyXG4gIC16LWNvbG9yOiAqICNmYWZhZmE7XHJcbn1cclxuXHJcbi5waG9uZSB7XHJcbiAgJl90aXRsZSB7XHJcbiAgICB3aWR0aDogNTAwcHg7XHJcblxyXG4gICAgQG1lZGlhIChtYXgtd2lkdGg6IDUwMHB4KSB7XHJcbiAgICAgIHdpZHRoOiBhdXRvO1xyXG4gICAgfVxyXG5cclxuICAgIGJvZHkuaXNfZGFyayAmIHtcclxuICAgICAgY29sb3I6IHdoaXRlO1xyXG4gICAgfVxyXG4gIH1cclxuXHJcbiAgaW1nIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gIH1cclxufVxyXG4iXX0= */"
 `;
 
-exports[`"sourceMap" option should generate inline source maps when the "devtool" is "true": errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate inline source maps when the "devtool" is "true": errors 1`] = `[]`;
 
-exports[`"sourceMap" option should generate inline source maps when the "devtool" is "true": warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate inline source maps when the "devtool" is "true": warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
@@ -111,9 +111,9 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 /*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBSSIsImZpbGUiOiJzdHlsZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XG4gIGNvbG9yOiBjb3JhbDtcbn0iXX0= */"
 `;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): errors 1`] = `[]`;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
@@ -122,18 +122,18 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 /*# sourceMappingURL=style.scss.map */"
 `;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): source map 1`] = `
-Object {
+{
   "file": "style.scss",
   "mappings": "AAAA;EAAI",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "style.scss",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: coral;
 }",
@@ -142,7 +142,7 @@ Object {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): css 1`] = `
 "a {
@@ -151,17 +151,17 @@ exports[`"sourceMap" option should generate source maps when previous loader ret
 "
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): source map 1`] = `
-Object {
+{
   "mappings": "AAAA;EAAI,YAAA",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "less/style.less",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: coral;
 }
@@ -171,7 +171,7 @@ Object {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
@@ -179,17 +179,17 @@ exports[`"sourceMap" option should generate source maps when previous loader ret
 }"
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): source map 1`] = `
-Object {
+{
   "mappings": "AAAA;EAAI",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "scss/style.scss",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: coral;
 }",
@@ -198,7 +198,7 @@ Object {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: css 1`] = `
 "a {
@@ -247,17 +247,17 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: source map 1`] = `
-Object {
+{
   "mappings": "AAAA",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "css/style.css",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: black;
 }
@@ -307,7 +307,7 @@ a {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: css 1`] = `
 "a {
@@ -356,18 +356,18 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: source map 1`] = `
-Object {
+{
   "file": "style.css",
   "mappings": "AAAA",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "style.css",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: black;
 }
@@ -417,7 +417,7 @@ a {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: css 1`] = `
 "a {
@@ -466,17 +466,17 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: source map 1`] = `
-Object {
+{
   "mappings": "AAAA",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "css/style.css",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: black;
 }
@@ -526,7 +526,7 @@ a {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: css 1`] = `
 "a {
@@ -575,17 +575,17 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: errors 1`] = `[]`;
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: source map 1`] = `
-Object {
+{
   "mappings": "AAAA",
-  "names": Array [],
+  "names": [],
   "sourceRoot": "",
-  "sources": Array [
+  "sources": [
     "css/style.css",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "a {
   color: black;
 }
@@ -635,7 +635,7 @@ a {
 }
 `;
 
-exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should not generate source maps when value is not specified and the "devtool" option with "source-map" value: css 1`] = `
 "a {
@@ -684,9 +684,9 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should not generate source maps when value is not specified and the "devtool" option with "source-map" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps when value is not specified and the "devtool" option with "source-map" value: errors 1`] = `[]`;
 
-exports[`"sourceMap" option should not generate source maps when value is not specified and the "devtool" option with "source-map" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps when value is not specified and the "devtool" option with "source-map" value: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "false" value: css 1`] = `
 "a {
@@ -735,9 +735,9 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "false" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "false" value: errors 1`] = `[]`;
 
-exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "false" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "false" value: warnings 1`] = `[]`;
 
 exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "source-map" value: css 1`] = `
 "a {
@@ -786,6 +786,6 @@ a {
 "
 `;
 
-exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "source-map" value: errors 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "source-map" value: errors 1`] = `[]`;
 
-exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "source-map" value: warnings 1`] = `Array []`;
+exports[`"sourceMap" option should not generate source maps with "false" value and the "devtool" option with "source-map" value: warnings 1`] = `[]`;
