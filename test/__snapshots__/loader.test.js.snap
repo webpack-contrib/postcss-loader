@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.result.process (/test/loader.test.js:216:26)
@@ -10,14 +10,14 @@ Error: Something went wrong.
 `;
 
 exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: warnings 1`] = `
-Array [
+[
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. Use \`npm install postcss\` or \`yarn add postcss\`",
 ]
 `;
 
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.result.process (/test/loader.test.js:300:26)
@@ -25,10 +25,10 @@ Error: Something went wrong.
 ]
 `;
 
-exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: warnings 1`] = `Array []`;
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: warnings 1`] = `[]`;
 
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.result.process (/test/loader.test.js:245:26)
@@ -36,10 +36,10 @@ Error: Something went wrong.
 ]
 `;
 
-exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': warnings 1`] = `Array []`;
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': warnings 1`] = `[]`;
 
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
     at Processor.result.process (/test/loader.test.js:274:26)
@@ -47,10 +47,10 @@ Error: Something went wrong.
 ]
 `;
 
-exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': warnings 1`] = `Array []`;
+exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': warnings 1`] = `[]`;
 
 exports[`check postcss versions to avoid using PostCSS 7 should work when 'processor' throw an error: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Error in implementation
     at implementation (/test/loader.test.js:322:15)
@@ -58,11 +58,11 @@ Error: Error in implementation
 ]
 `;
 
-exports[`check postcss versions to avoid using PostCSS 7 should work when 'processor' throw an error: warnings 1`] = `Array []`;
+exports[`check postcss versions to avoid using PostCSS 7 should work when 'processor' throw an error: warnings 1`] = `[]`;
 
-exports[`loader should emit asset using the "messages" API: errors 1`] = `Array []`;
+exports[`loader should emit asset using the "messages" API: errors 1`] = `[]`;
 
-exports[`loader should emit asset using the "messages" API: warnings 1`] = `Array []`;
+exports[`loader should emit asset using the "messages" API: warnings 1`] = `[]`;
 
 exports[`loader should emit warning using the "messages" API: css 1`] = `
 "a {
@@ -111,10 +111,10 @@ a {
 "
 `;
 
-exports[`loader should emit warning using the "messages" API: errors 1`] = `Array []`;
+exports[`loader should emit warning using the "messages" API: errors 1`] = `[]`;
 
 exports[`loader should emit warning using the "messages" API: warnings 1`] = `
-Array [
+[
   "ModuleWarning: Module Warning (from \`replaced original path\`):
 Warning
 
@@ -166,9 +166,9 @@ Warning
 ]
 `;
 
-exports[`loader should register dependencies using the "messages" API: errors 1`] = `Array []`;
+exports[`loader should register dependencies using the "messages" API: errors 1`] = `[]`;
 
-exports[`loader should register dependencies using the "messages" API: warnings 1`] = `Array []`;
+exports[`loader should register dependencies using the "messages" API: warnings 1`] = `[]`;
 
 exports[`loader should reuse PostCSS AST: css 1`] = `
 "a {
@@ -217,12 +217,12 @@ a {
 "
 `;
 
-exports[`loader should reuse PostCSS AST: errors 1`] = `Array []`;
+exports[`loader should reuse PostCSS AST: errors 1`] = `[]`;
 
-exports[`loader should reuse PostCSS AST: warnings 1`] = `Array []`;
+exports[`loader should reuse PostCSS AST: warnings 1`] = `[]`;
 
 exports[`loader should throw an error on invalid syntax: errors 1`] = `
-Array [
+[
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 SyntaxError
 
@@ -236,7 +236,7 @@ SyntaxError
 ]
 `;
 
-exports[`loader should throw an error on invalid syntax: warnings 1`] = `Array []`;
+exports[`loader should throw an error on invalid syntax: warnings 1`] = `[]`;
 
 exports[`loader should work with SugarSS: css 1`] = `
 "a {
@@ -245,9 +245,9 @@ exports[`loader should work with SugarSS: css 1`] = `
 "
 `;
 
-exports[`loader should work with SugarSS: errors 1`] = `Array []`;
+exports[`loader should work with SugarSS: errors 1`] = `[]`;
 
-exports[`loader should work with SugarSS: warnings 1`] = `Array []`;
+exports[`loader should work with SugarSS: warnings 1`] = `[]`;
 
 exports[`loader should work: css 1`] = `
 "a {
@@ -296,6 +296,6 @@ a {
 "
 `;
 
-exports[`loader should work: errors 1`] = `Array []`;
+exports[`loader should work: errors 1`] = `[]`;
 
-exports[`loader should work: warnings 1`] = `Array []`;
+exports[`loader should work: warnings 1`] = `[]`;
