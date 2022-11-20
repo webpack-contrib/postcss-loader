@@ -1,0 +1,25 @@
+{
+  "version": "0.2",
+  "language": "en,en-gb",
+  "words": [
+    "stringifier",
+    "sugarss",
+    "unresolve",
+    "esparser",
+    "memfs",
+    "postcssrc",
+    "XSSI",
+    "klona",
+    "hspace",
+    "vspace",
+    "commitlint"
+  ],
+
+  "ignorePaths": [
+    "CHANGELOG.md",
+    "package.json",
+    "dist/**",
+    "**/__snapshots__/**",
+    "package-lock.json"
+  ]
+}
