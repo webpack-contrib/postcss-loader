@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.0.2](https://github.com/webpack-contrib/postcss-loader/compare/v7.0.1...v7.0.2) (2022-11-29)
+
+
+### Bug Fixes
+
+* support ESM version of `postcss.config.js` and `postcss.config.mjs` ([#614](https://github.com/webpack-contrib/postcss-loader/issues/614)) ([955085f](https://github.com/webpack-contrib/postcss-loader/commit/955085f04f5d12bb89d660d88159169b80d5eb99))
+
 ### [7.0.1](https://github.com/webpack-contrib/postcss-loader/compare/v7.0.0...v7.0.1) (2022-07-11)
 
 
