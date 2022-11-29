@@ -1,8 +1,9 @@
 import path from "path";
+import url from "url";
 import Module from "module";
 
 import { klona } from "klona/full";
-import { cosmiconfig } from "cosmiconfig";
+import { cosmiconfig, defaultLoaders } from "cosmiconfig";
 
 import SyntaxError from "./Error";
 
@@ -47,7 +48,80 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     throw new Error(`No PostCSS config found in: ${searchPath}`);
   }
 
-  const explorer = cosmiconfig("postcss");
+  const moduleName = "postcss";
+  const explorer = cosmiconfig(moduleName, {
+    searchPlaces: [
+      "package.json",
+      `.${moduleName}rc`,
+      `.${moduleName}rc.json`,
+      `.${moduleName}rc.yaml`,
+      `.${moduleName}rc.yml`,
+      `.${moduleName}rc.js`,
+      `.${moduleName}rc.mjs`,
+      `.${moduleName}rc.cjs`,
+      `.config/${moduleName}rc`,
+      `.config/${moduleName}rc.json`,
+      `.config/${moduleName}rc.yaml`,
+      `.config/${moduleName}rc.yml`,
+      `.config/${moduleName}rc.js`,
+      `.config/${moduleName}rc.mjs`,
+      `.config/${moduleName}rc.cjs`,
+      `${moduleName}.config.js`,
+      `${moduleName}.config.mjs`,
+      `${moduleName}.config.cjs`,
+    ],
+    loaders: {
+      ".js": async (...args) => {
+        let result;
+
+        try {
+          result = defaultLoaders[".js"](...args);
+        } catch (error) {
+          let importESM;
+
+          try {
+            // eslint-disable-next-line no-new-func
+            importESM = new Function("id", "return import(id);");
+          } catch (e) {
+            importESM = null;
+          }
+
+          if (
+            error.code === "ERR_REQUIRE_ESM" &&
+            url.pathToFileURL &&
+            importESM
+          ) {
+            const urlForConfig = url.pathToFileURL(args[0]);
+
+            result = await importESM(urlForConfig);
+          } else {
+            throw new Error("ESM is not supported");
+          }
+        }
+
+        return result;
+      },
+      ".mjs": async (...args) => {
+        let result;
+        let importESM;
+
+        try {
+          // eslint-disable-next-line no-new-func
+          importESM = new Function("id", "return import(id);");
+        } catch (e) {
+          importESM = null;
+        }
+
+        if (url.pathToFileURL && importESM) {
+          const urlForConfig = url.pathToFileURL(args[0]);
+
+          result = await importESM(urlForConfig);
+        }
+
+        return result;
+      },
+    },
+  });
 
   let result;
 
