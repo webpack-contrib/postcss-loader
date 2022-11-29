@@ -95,7 +95,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
             result = await importESM(urlForConfig);
           } else {
-            throw new Error("ESM is not supported");
+            throw error;
           }
         }
 
@@ -116,6 +116,8 @@ async function loadConfig(loaderContext, config, postcssOptions) {
           const urlForConfig = url.pathToFileURL(args[0]);
 
           result = await importESM(urlForConfig);
+        } else {
+          throw new Error("ESM is not supported");
         }
 
         return result;
