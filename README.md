@@ -222,6 +222,10 @@ There is the special `config` option for config files. How it works and how it c
 We recommend do not specify `from`, `to` and `map` options, because this can lead to wrong path in source maps.
 If you need source maps please use the [`sourcemap`](#sourcemap) option.
 
+For large projects, to optimize performance of the loader, it is better to provide `postcssOptions` in loader
+config and specify `config: false`. This approach removes the need to lookup and load external config files multiple
+times during compilation.
+
 #### `object`
 
 Setup `plugins`:
@@ -405,7 +409,7 @@ Type:
 type config = boolean | string;
 ```
 
-Default: `undefined`
+Default: `true`
 
 Allows to set options using config files.
 Options specified in the config file are combined with options passed to the loader, the loader options overwrite options from config.
