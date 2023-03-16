@@ -222,8 +222,9 @@ There is the special `config` option for config files. How it works and how it c
 We recommend do not specify `from`, `to` and `map` options, because this can lead to wrong path in source maps.
 If you need source maps please use the [`sourcemap`](#sourcemap) option.
 
-To optimize performance of the loader, it is better to provide `postcssOptions` in loader config and specify `config: false`.
-This approach removes the need to lookup and load external config files multiple times during compilation.
+For large projects, to optimize performance of the loader, it is better to provide `postcssOptions` in loader
+config and specify `config: false`. This approach removes the need to lookup and load external config files multiple
+times during compilation.
 
 #### `object`
 
