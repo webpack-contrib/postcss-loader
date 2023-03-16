@@ -1,6 +1,6 @@
 {
   "name": "postcss-loader",
-  "version": "7.0.2",
+  "version": "7.1.0",
   "description": "PostCSS loader for webpack",
   "license": "MIT",
   "repository": "webpack-contrib/postcss-loader",
