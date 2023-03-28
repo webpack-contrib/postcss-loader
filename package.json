@@ -1,7 +1,7 @@
 {
   "name": "postcss-loader",
   "version": "7.1.0",
-  "description": "PostCSS loader for webpack",
+  "description": "PostCSS loader for webpack test",
   "license": "MIT",
   "repository": "webpack-contrib/postcss-loader",
   "author": "Andrey Sitnik <andrey@sitnik.ru>",
