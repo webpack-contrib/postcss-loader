@@ -1,7 +1,19 @@
 import type { Config as PostCSSConfig } from 'postcss-load-config';
-import { Configuration as WebpackConfig } from 'webpack';
+import type { LoaderContext } from 'webpack';
 
-const config = function (api: WebpackConfig): PostCSSConfig {
+type PostCSSLoaderContext = LoaderContext<PostCSSConfig>;
+
+interface PostCSSLoaderAPI {
+    mode: PostCSSLoaderContext['mode'];
+    file: PostCSSLoaderContext['resourcePath'];
+    webpackLoaderContext: PostCSSLoaderContext;
+    env: PostCSSLoaderContext['mode'];
+    options: PostCSSConfig;
+}
+
+type PostCSSLoaderOptions = PostCSSConfig | ((api: PostCSSLoaderAPI) => PostCSSConfig);
+
+const config: PostCSSLoaderOptions = function (api) {
   return {
     parser: 'sugarss',
     syntax: 'sugarss',
