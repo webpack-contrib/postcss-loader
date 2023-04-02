@@ -78,6 +78,25 @@ describe("autoload config", () => {
     );
   });
 
+  it('should load "postcss.config.cts" with "Object" syntax of plugins', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "ts/object")
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual(
+      "./test/fixtures/config-autoload/ts/object/index.css"
+    );
+    expect(loadedConfig.config.to).toEqual(
+      "./test/fixtures/config-autoload/ts/object/expect/index.css"
+    );
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "ts/object", "postcss.config.cts")
+    );
+  });
+
   it('should load "postcss.config.js" with "Array" syntax of plugins', async () => {
     const loadedConfig = await loadConfig(
       loaderContext,
@@ -94,6 +113,25 @@ describe("autoload config", () => {
     expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "js/array", "postcss.config.js")
+    );
+  });
+
+  it('should load "postcss.config.ts" with "Array" syntax of plugins', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "ts/array")
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual(
+      "./test/fixtures/config-autoload/ts/object/index.css"
+    );
+    expect(loadedConfig.config.to).toEqual(
+      "./test/fixtures/config-autoload/ts/object/expect/index.css"
+    );
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "ts/array", "postcss.config.ts")
     );
   });
 

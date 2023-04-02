@@ -4,6 +4,7 @@ import Module from "module";
 
 import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
+import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 import SyntaxError from "./Error";
 
@@ -131,6 +132,9 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
         return result;
       },
+      ".cts": TypeScriptLoader(),
+      ".mts": TypeScriptLoader(),
+      ".ts": TypeScriptLoader(),
     },
   });
 
