@@ -1,10 +1,10 @@
-import type { Config } from 'postcss-load-config';
+import type { Config as PostCSSConfig } from 'postcss-load-config';
+import { Configuration as WebpackConfig } from 'webpack';
 
-module.exports = function (api: Config) {
+module.exports = function (api: WebpackConfig): PostCSSConfig {
   return {
     parser: 'sugarss',
     syntax: 'sugarss',
-    // FIXME: To confirm. Apparently there's no longer an available option `mode`?
     map: api.mode === 'development' ? 'inline' : false,
     from: './test/fixtures/config-autoload/js/object/index.css',
     to: './test/fixtures/config-autoload/js/object/expect/index.css',
