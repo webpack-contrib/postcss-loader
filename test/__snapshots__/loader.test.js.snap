@@ -3,9 +3,7 @@
 exports[`check postcss versions to avoid using PostCSS 7 should emit a warning if postcss version is not explicitly specified when the loader is failed: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:168:47)
-    at Object.loader (/src/index.js:78:30)",
+Error: Something went wrong.",
 ]
 `;
 
@@ -19,9 +17,7 @@ Add postcss as project dependency. postcss is not a peer dependency for postcss-
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'package.json' file was not found: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:213:47)
-    at Object.loader (/src/index.js:78:30)",
+Error: Something went wrong.",
 ]
 `;
 
@@ -30,9 +26,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'dependencies': errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:183:47)
-    at Object.loader (/src/index.js:78:30)",
+Error: Something went wrong.",
 ]
 `;
 
@@ -41,9 +35,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 exports[`check postcss versions to avoid using PostCSS 7 should not show a warning if 'postcss' version is explicitly defined in 'devDependencies': errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:198:47)
-    at Object.loader (/src/index.js:78:30)",
+Error: Something went wrong.",
 ]
 `;
 
@@ -52,9 +44,7 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 exports[`check postcss versions to avoid using PostCSS 7 should work when 'processor' throw an error: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: Error in implementation
-    at implementation (/test/loader.test.js:226:15)
-    at Object.loader (/src/index.js:77:17)",
+Error: Error in implementation",
 ]
 `;
 

@@ -221,7 +221,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
 
     spy.mockRestore();
   });
@@ -250,7 +250,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
 
     spy.mockRestore();
   });
@@ -279,7 +279,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
 
     spy.mockRestore();
   });
@@ -305,7 +305,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
 
     spy.mockRestore();
   });
@@ -325,7 +325,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
 
     spy.mockRestore();
   });
