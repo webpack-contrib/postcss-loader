@@ -93,7 +93,7 @@ describe("autoload config", () => {
     );
     expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
     expect(loadedConfig.filepath).toEqual(
-      path.resolve(testDirectory, "ts/object", "postcss.config.cts")
+      path.resolve(testDirectory, "ts/object", "postcss.config.ts")
     );
   });
 
