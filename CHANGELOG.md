@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.2.2](https://github.com/webpack-contrib/postcss-loader/compare/v7.2.1...v7.2.2) (2023-04-03)
+
+
+### Bug Fixes
+
+* cannot find module 'ts-node' ([#639](https://github.com/webpack-contrib/postcss-loader/issues/639)) ([ab4d16a](https://github.com/webpack-contrib/postcss-loader/commit/ab4d16a55b3539cc2b160727b426c6deef75ace9))
+
 ### [7.2.1](https://github.com/webpack-contrib/postcss-loader/compare/v7.2.0...v7.2.1) (2023-04-03)
 
 
