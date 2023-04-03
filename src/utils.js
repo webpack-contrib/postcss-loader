@@ -49,70 +49,76 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     throw new Error(`No PostCSS config found in: ${searchPath}`);
   }
 
+  let isTsNodeInstalled = false;
+
+  try {
+    // eslint-disable-next-line import/no-extraneous-dependencies, global-require
+    require("ts-node");
+
+    isTsNodeInstalled = true;
+  } catch (_) {
+    // Nothing
+  }
+
   const moduleName = "postcss";
-  const explorer = cosmiconfig(moduleName, {
-    searchPlaces: [
-      "package.json",
-      `.${moduleName}rc`,
-      `.${moduleName}rc.json`,
-      `.${moduleName}rc.yaml`,
-      `.${moduleName}rc.yml`,
-      `.${moduleName}rc.js`,
-      `.${moduleName}rc.mjs`,
-      `.${moduleName}rc.cjs`,
-      `.${moduleName}rc.ts`,
-      `.${moduleName}rc.mts`,
-      `.${moduleName}rc.cts`,
-      `.config/${moduleName}rc`,
-      `.config/${moduleName}rc.json`,
-      `.config/${moduleName}rc.yaml`,
-      `.config/${moduleName}rc.yml`,
-      `.config/${moduleName}rc.js`,
-      `.config/${moduleName}rc.mjs`,
-      `.config/${moduleName}rc.cjs`,
-      `.config/${moduleName}rc.ts`,
-      `.config/${moduleName}rc.mts`,
-      `.config/${moduleName}rc.cts`,
-      `${moduleName}.config.js`,
-      `${moduleName}.config.mjs`,
-      `${moduleName}.config.cjs`,
-      `${moduleName}.config.ts`,
-      `${moduleName}.config.mts`,
-      `${moduleName}.config.cts`,
-    ],
-    loaders: {
-      ".js": async (...args) => {
-        let result;
+  const searchPlaces = isTsNodeInstalled
+    ? [
+        "package.json",
+        `.${moduleName}rc`,
+        `.${moduleName}rc.json`,
+        `.${moduleName}rc.yaml`,
+        `.${moduleName}rc.yml`,
+        `.${moduleName}rc.js`,
+        `.${moduleName}rc.mjs`,
+        `.${moduleName}rc.cjs`,
+        `.${moduleName}rc.ts`,
+        `.${moduleName}rc.mts`,
+        `.${moduleName}rc.cts`,
+        `.config/${moduleName}rc`,
+        `.config/${moduleName}rc.json`,
+        `.config/${moduleName}rc.yaml`,
+        `.config/${moduleName}rc.yml`,
+        `.config/${moduleName}rc.js`,
+        `.config/${moduleName}rc.mjs`,
+        `.config/${moduleName}rc.cjs`,
+        `.config/${moduleName}rc.ts`,
+        `.config/${moduleName}rc.mts`,
+        `.config/${moduleName}rc.cts`,
+        `${moduleName}.config.js`,
+        `${moduleName}.config.mjs`,
+        `${moduleName}.config.cjs`,
+        `${moduleName}.config.ts`,
+        `${moduleName}.config.mts`,
+        `${moduleName}.config.cts`,
+      ]
+    : [
+        "package.json",
+        `.${moduleName}rc`,
+        `.${moduleName}rc.json`,
+        `.${moduleName}rc.yaml`,
+        `.${moduleName}rc.yml`,
+        `.${moduleName}rc.js`,
+        `.${moduleName}rc.mjs`,
+        `.${moduleName}rc.cjs`,
+        `.config/${moduleName}rc`,
+        `.config/${moduleName}rc.json`,
+        `.config/${moduleName}rc.yaml`,
+        `.config/${moduleName}rc.yml`,
+        `.config/${moduleName}rc.js`,
+        `.config/${moduleName}rc.mjs`,
+        `.config/${moduleName}rc.cjs`,
+        `${moduleName}.config.js`,
+        `${moduleName}.config.mjs`,
+        `${moduleName}.config.cjs`,
+      ];
 
-        try {
-          result = defaultLoaders[".js"](...args);
-        } catch (error) {
-          let importESM;
+  const loaders = {
+    ".js": async (...args) => {
+      let result;
 
-          try {
-            // eslint-disable-next-line no-new-func
-            importESM = new Function("id", "return import(id);");
-          } catch (e) {
-            importESM = null;
-          }
-
-          if (
-            error.code === "ERR_REQUIRE_ESM" &&
-            url.pathToFileURL &&
-            importESM
-          ) {
-            const urlForConfig = url.pathToFileURL(args[0]);
-
-            result = await importESM(urlForConfig);
-          } else {
-            throw error;
-          }
-        }
-
-        return result;
-      },
-      ".mjs": async (...args) => {
-        let result;
+      try {
+        result = defaultLoaders[".js"](...args);
+      } catch (error) {
         let importESM;
 
         try {
@@ -122,20 +128,53 @@ async function loadConfig(loaderContext, config, postcssOptions) {
           importESM = null;
         }
 
-        if (url.pathToFileURL && importESM) {
+        if (
+          error.code === "ERR_REQUIRE_ESM" &&
+          url.pathToFileURL &&
+          importESM
+        ) {
           const urlForConfig = url.pathToFileURL(args[0]);
 
           result = await importESM(urlForConfig);
         } else {
-          throw new Error("ESM is not supported");
+          throw error;
         }
+      }
 
-        return result;
-      },
-      ".cts": TypeScriptLoader(),
-      ".mts": TypeScriptLoader(),
-      ".ts": TypeScriptLoader(),
+      return result;
     },
+    ".mjs": async (...args) => {
+      let result;
+      let importESM;
+
+      try {
+        // eslint-disable-next-line no-new-func
+        importESM = new Function("id", "return import(id);");
+      } catch (e) {
+        importESM = null;
+      }
+
+      if (url.pathToFileURL && importESM) {
+        const urlForConfig = url.pathToFileURL(args[0]);
+
+        result = await importESM(urlForConfig);
+      } else {
+        throw new Error("ESM is not supported");
+      }
+
+      return result;
+    },
+  };
+
+  if (isTsNodeInstalled) {
+    loaders[".cts"] = TypeScriptLoader();
+    loaders[".mts"] = TypeScriptLoader();
+    loaders[".ts"] = TypeScriptLoader();
+  }
+
+  const explorer = cosmiconfig(moduleName, {
+    searchPlaces,
+    loaders,
   });
 
   let result;
