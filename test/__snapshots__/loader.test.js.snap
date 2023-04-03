@@ -4,8 +4,8 @@ exports[`check postcss versions to avoid using PostCSS 7 should emit a warning i
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:216:26)
-    at Object.process (/src/index.js:116:30)",
+    at Processor.result.process (/test/loader.test.js:168:47)
+    at Object.loader (/src/index.js:78:30)",
 ]
 `;
 
@@ -20,8 +20,8 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:300:26)
-    at Object.process (/src/index.js:116:30)",
+    at Processor.result.process (/test/loader.test.js:213:47)
+    at Object.loader (/src/index.js:78:30)",
 ]
 `;
 
@@ -31,8 +31,8 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:245:26)
-    at Object.process (/src/index.js:116:30)",
+    at Processor.result.process (/test/loader.test.js:183:47)
+    at Object.loader (/src/index.js:78:30)",
 ]
 `;
 
@@ -42,8 +42,8 @@ exports[`check postcss versions to avoid using PostCSS 7 should not show a warni
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Something went wrong.
-    at Processor.result.process (/test/loader.test.js:274:26)
-    at Object.process (/src/index.js:116:30)",
+    at Processor.result.process (/test/loader.test.js:198:47)
+    at Object.loader (/src/index.js:78:30)",
 ]
 `;
 
@@ -53,8 +53,8 @@ exports[`check postcss versions to avoid using PostCSS 7 should work when 'proce
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
 Error: Error in implementation
-    at implementation (/test/loader.test.js:322:15)
-    at Object.postcssFactory (/src/index.js:115:17)",
+    at implementation (/test/loader.test.js:226:15)
+    at Object.loader (/src/index.js:77:17)",
 ]
 `;
 
