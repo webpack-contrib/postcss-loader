@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [7.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v7.1.0...v7.2.0) (2023-04-03)
+
+
+### Features
+
+* add support for TypeScript based configs ([#632](https://github.com/webpack-contrib/postcss-loader/issues/632)) ([c6b5def](https://github.com/webpack-contrib/postcss-loader/commit/c6b5def4459df0492d4d9175748823e89fa8f3ed))
+
 ## [7.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v7.0.2...v7.1.0) (2023-03-16)
 
 
