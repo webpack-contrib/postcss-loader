@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.2.1](https://github.com/webpack-contrib/postcss-loader/compare/v7.2.0...v7.2.1) (2023-04-03)
+
+
+### Bug Fixes
+
+* cosmiconfig typescript loader ([#635](https://github.com/webpack-contrib/postcss-loader/issues/635)) ([129f5be](https://github.com/webpack-contrib/postcss-loader/commit/129f5be42ead5c5a2b0f654631bcb94fa3d76a95))
+
 ## [7.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v7.1.0...v7.2.0) (2023-04-03)
 
 
