@@ -4,6 +4,7 @@ import Module from "module";
 
 import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
+import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 import SyntaxError from "./Error";
 
@@ -59,6 +60,9 @@ async function loadConfig(loaderContext, config, postcssOptions) {
       `.${moduleName}rc.js`,
       `.${moduleName}rc.mjs`,
       `.${moduleName}rc.cjs`,
+      `.${moduleName}rc.ts`,
+      `.${moduleName}rc.mts`,
+      `.${moduleName}rc.cts`,
       `.config/${moduleName}rc`,
       `.config/${moduleName}rc.json`,
       `.config/${moduleName}rc.yaml`,
@@ -66,9 +70,15 @@ async function loadConfig(loaderContext, config, postcssOptions) {
       `.config/${moduleName}rc.js`,
       `.config/${moduleName}rc.mjs`,
       `.config/${moduleName}rc.cjs`,
+      `.config/${moduleName}rc.ts`,
+      `.config/${moduleName}rc.mts`,
+      `.config/${moduleName}rc.cts`,
       `${moduleName}.config.js`,
       `${moduleName}.config.mjs`,
       `${moduleName}.config.cjs`,
+      `${moduleName}.config.ts`,
+      `${moduleName}.config.mts`,
+      `${moduleName}.config.cts`,
     ],
     loaders: {
       ".js": async (...args) => {
@@ -122,6 +132,9 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
         return result;
       },
+      ".cts": TypeScriptLoader(),
+      ".mts": TypeScriptLoader(),
+      ".ts": TypeScriptLoader(),
     },
   });
 

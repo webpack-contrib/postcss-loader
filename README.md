@@ -190,26 +190,27 @@ module.exports = {
 
 ### `postcssOptions`
 
+See the file [`./src/config.d.ts`](./src/config.d.ts).
+
 Type:
 
 ```ts
-type postcssOptions =
-  | {
-      from: string;
-      map: boolean | SourceMapOptions;
-      parser: string | object | (() => Parser);
-      stringifier: Stringifier | Syntax;
-      syntax: Syntax;
-      to: string;
-    }
-  | ((loaderContext: LoaderContext) => {
-      from: string;
-      map: boolean | SourceMapOptions;
-      parser: string | object | (() => Parser);
-      stringifier: Stringifier | Syntax;
-      syntax: Syntax;
-      to: string;
-    });
+import type { Config as PostCSSConfig } from "postcss-load-config";
+import type { LoaderContext } from "webpack";
+
+type PostCSSLoaderContext = LoaderContext<PostCSSConfig>;
+
+interface PostCSSLoaderAPI {
+  mode: PostCSSLoaderContext["mode"];
+  file: PostCSSLoaderContext["resourcePath"];
+  webpackLoaderContext: PostCSSLoaderContext;
+  env: PostCSSLoaderContext["mode"];
+  options: PostCSSConfig;
+}
+
+export type PostCSSLoaderOptions =
+  | PostCSSConfig
+  | ((api: PostCSSLoaderAPI) => PostCSSConfig);
 ```
 
 Default: `undefined`
