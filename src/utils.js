@@ -4,7 +4,6 @@ import Module from "module";
 
 import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
-import { TypeScriptLoader } from "cosmiconfig-typescript-loader";
 
 import SyntaxError from "./Error";
 
@@ -167,9 +166,13 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   };
 
   if (isTsNodeInstalled) {
-    loaders[".cts"] = TypeScriptLoader();
-    loaders[".mts"] = TypeScriptLoader();
-    loaders[".ts"] = TypeScriptLoader();
+    // eslint-disable-next-line global-require
+    const { TypeScriptLoader } = require("cosmiconfig-typescript-loader");
+    const loader = TypeScriptLoader();
+
+    loaders[".cts"] = loader;
+    loaders[".mts"] = loader;
+    loaders[".ts"] = loader;
   }
 
   const explorer = cosmiconfig(moduleName, {
