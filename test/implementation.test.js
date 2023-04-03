@@ -28,7 +28,7 @@ describe('"implementation" option', () => {
     const stats = await compile(compiler);
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
-    expect(getErrors(stats)).toMatchSnapshot("errors");
+    expect(getErrors(stats, true)).toMatchSnapshot("errors");
   });
 
   it("should work with a custom instance of PostCSS", async () => {

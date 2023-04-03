@@ -3,8 +3,7 @@
 exports[`"implementation" option should throw error when unresolved package: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
-Error: The Postcss implementation "unresolved" not found
-    at Object.loader (/src/index.js:47:7)",
+Error: The Postcss implementation "unresolved" not found",
   "ModuleError: Module Error (from \`replaced original path\`):
 (Emitted value instead of an instance of Error) Error: Cannot find module 'unresolved' from 'src/utils.js'",
 ]
