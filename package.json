@@ -39,7 +39,17 @@
   ],
   "peerDependencies": {
     "postcss": "^7.0.0 || ^8.0.1",
-    "webpack": "^5.0.0"
+    "webpack": "^5.0.0",
+    "ts-node": ">=10",
+    "typescript": ">=4"
+  },
+  "peerDependenciesMeta": {
+    "ts-node": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
   },
   "dependencies": {
     "cosmiconfig": "^8.1.3",
