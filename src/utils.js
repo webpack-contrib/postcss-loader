@@ -34,6 +34,8 @@ function exec(code, loaderContext) {
   return module.exports;
 }
 
+let tsLoader;
+
 async function loadConfig(loaderContext, config, postcssOptions) {
   const searchPath =
     typeof config === "string"
@@ -166,13 +168,16 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   };
 
   if (isTsNodeInstalled) {
-    // eslint-disable-next-line global-require
-    const { TypeScriptLoader } = require("cosmiconfig-typescript-loader");
-    const loader = TypeScriptLoader();
+    if (!tsLoader) {
+      // eslint-disable-next-line global-require
+      const { TypeScriptLoader } = require("cosmiconfig-typescript-loader");
 
-    loaders[".cts"] = loader;
-    loaders[".mts"] = loader;
-    loaders[".ts"] = loader;
+      tsLoader = TypeScriptLoader();
+    }
+
+    loaders[".cts"] = tsLoader;
+    loaders[".mts"] = tsLoader;
+    loaders[".ts"] = tsLoader;
   }
 
   const explorer = cosmiconfig(moduleName, {
