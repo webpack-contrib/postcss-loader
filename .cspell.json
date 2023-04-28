@@ -12,7 +12,8 @@
     "klona",
     "hspace",
     "vspace",
-    "commitlint"
+    "commitlint",
+    "jiti"
   ],
 
   "ignorePaths": [
