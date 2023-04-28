@@ -135,6 +135,25 @@ describe("autoload config", () => {
     );
   });
 
+  it('should load "postcss.config.mts" with "Array" syntax of plugins', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "ts/array-mts")
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual(
+      "./test/fixtures/config-autoload/ts/object/index.css"
+    );
+    expect(loadedConfig.config.to).toEqual(
+      "./test/fixtures/config-autoload/ts/object/expect/index.css"
+    );
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "ts/array-mts", "postcss.config.mts")
+    );
+  });
+
   it('should load empty ".postcssrc"', async () => {
     const loadedConfig = await loadConfig(
       loaderContext,

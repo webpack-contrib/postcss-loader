@@ -50,68 +50,37 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     throw new Error(`No PostCSS config found in: ${searchPath}`);
   }
 
-  let isTsNodeInstalled = false;
-
-  try {
-    // eslint-disable-next-line import/no-extraneous-dependencies, global-require
-    require("ts-node");
-
-    isTsNodeInstalled = true;
-  } catch (_) {
-    // Nothing
-  }
-
   const moduleName = "postcss";
-  const searchPlaces = isTsNodeInstalled
-    ? [
-        "package.json",
-        `.${moduleName}rc`,
-        `.${moduleName}rc.json`,
-        `.${moduleName}rc.yaml`,
-        `.${moduleName}rc.yml`,
-        `.${moduleName}rc.js`,
-        `.${moduleName}rc.mjs`,
-        `.${moduleName}rc.cjs`,
-        `.${moduleName}rc.ts`,
-        `.${moduleName}rc.mts`,
-        `.${moduleName}rc.cts`,
-        `.config/${moduleName}rc`,
-        `.config/${moduleName}rc.json`,
-        `.config/${moduleName}rc.yaml`,
-        `.config/${moduleName}rc.yml`,
-        `.config/${moduleName}rc.js`,
-        `.config/${moduleName}rc.mjs`,
-        `.config/${moduleName}rc.cjs`,
-        `.config/${moduleName}rc.ts`,
-        `.config/${moduleName}rc.mts`,
-        `.config/${moduleName}rc.cts`,
-        `${moduleName}.config.js`,
-        `${moduleName}.config.mjs`,
-        `${moduleName}.config.cjs`,
-        `${moduleName}.config.ts`,
-        `${moduleName}.config.mts`,
-        `${moduleName}.config.cts`,
-      ]
-    : [
-        "package.json",
-        `.${moduleName}rc`,
-        `.${moduleName}rc.json`,
-        `.${moduleName}rc.yaml`,
-        `.${moduleName}rc.yml`,
-        `.${moduleName}rc.js`,
-        `.${moduleName}rc.mjs`,
-        `.${moduleName}rc.cjs`,
-        `.config/${moduleName}rc`,
-        `.config/${moduleName}rc.json`,
-        `.config/${moduleName}rc.yaml`,
-        `.config/${moduleName}rc.yml`,
-        `.config/${moduleName}rc.js`,
-        `.config/${moduleName}rc.mjs`,
-        `.config/${moduleName}rc.cjs`,
-        `${moduleName}.config.js`,
-        `${moduleName}.config.mjs`,
-        `${moduleName}.config.cjs`,
-      ];
+  const searchPlaces = [
+    // Prefer popular format
+    "package.json",
+    `${moduleName}.config.js`,
+    `${moduleName}.config.mjs`,
+    `${moduleName}.config.cjs`,
+    `${moduleName}.config.ts`,
+    `${moduleName}.config.mts`,
+    `${moduleName}.config.cts`,
+    `.${moduleName}rc`,
+    `.${moduleName}rc.json`,
+    `.${moduleName}rc.js`,
+    `.${moduleName}rc.mjs`,
+    `.${moduleName}rc.cjs`,
+    `.${moduleName}rc.ts`,
+    `.${moduleName}rc.mts`,
+    `.${moduleName}rc.cts`,
+    `.${moduleName}rc.yaml`,
+    `.${moduleName}rc.yml`,
+    `.config/${moduleName}rc`,
+    `.config/${moduleName}rc.json`,
+    `.config/${moduleName}rc.yaml`,
+    `.config/${moduleName}rc.yml`,
+    `.config/${moduleName}rc.js`,
+    `.config/${moduleName}rc.mjs`,
+    `.config/${moduleName}rc.cjs`,
+    `.config/${moduleName}rc.ts`,
+    `.config/${moduleName}rc.mts`,
+    `.config/${moduleName}rc.cts`,
+  ];
 
   const loaders = {
     ".js": async (...args) => {
@@ -167,18 +136,17 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     },
   };
 
-  if (isTsNodeInstalled) {
-    if (!tsLoader) {
-      // eslint-disable-next-line global-require
-      const { TypeScriptLoader } = require("cosmiconfig-typescript-loader");
+  if (!tsLoader) {
+    const opts = { interopDefault: true };
+    // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+    const jiti = require("jiti")(__filename, opts);
 
-      tsLoader = TypeScriptLoader();
-    }
-
-    loaders[".cts"] = tsLoader;
-    loaders[".mts"] = tsLoader;
-    loaders[".ts"] = tsLoader;
+    tsLoader = (filepath) => jiti(filepath);
   }
+
+  loaders[".cts"] = tsLoader;
+  loaders[".mts"] = tsLoader;
+  loaders[".ts"] = tsLoader;
 
   const explorer = cosmiconfig(moduleName, {
     searchPlaces,
