@@ -30,7 +30,7 @@
 [![coverage][cover]][cover-url]
 [![size][size]][size-url]
 
-Webpack chat: [![chat][chat]][chat-url]
+Webpack discussion: [![discussion][discussion]][discussion-url]
 
 PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
