@@ -30,7 +30,7 @@
 [![coverage][cover]][cover-url]
 [![size][size]][size-url]
 
-Webpack chat: [![chat][chat]][chat-url]
+Webpack discussion: [![discussion][discussion]][discussion-url]
 
 PostCSS chat: [![chat-postcss][chat-postcss]][chat-postcss-url]
 
@@ -1167,8 +1167,8 @@ Please take a moment to read our contributing guidelines if you haven't yet done
 [tests-url]: https://github.com/webpack-contrib/postcss-loader/actions
 [cover]: https://codecov.io/gh/webpack-contrib/postcss-loader/branch/master/graph/badge.svg
 [cover-url]: https://codecov.io/gh/webpack-contrib/postcss-loader
-[chat]: https://badges.gitter.im/webpack/webpack.svg
-[chat-url]: https://gitter.im/webpack/webpack
+[discussion]: https://img.shields.io/github/discussions/webpack/webpack
+[discussion-url]: https://github.com/webpack/webpack/discussions
 [chat-postcss]: https://badges.gitter.im/postcss/postcss.svg
 [chat-postcss-url]: https://gitter.im/postcss/postcss
 [size]: https://packagephobia.now.sh/badge?p=postcss-loader
