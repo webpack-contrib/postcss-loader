@@ -106,53 +106,77 @@ exports[`loader should emit warning using the "messages" API: errors 1`] = `[]`;
 exports[`loader should emit warning using the "messages" API: warnings 1`] = `
 [
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(10:3) from "postcss-plugin" plugin: <Message>
 
-(10:3) postcss-plugin: <Message>",
+Code:
+  color: green
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(14:3) from "postcss-plugin" plugin: <Message>
 
-(14:3) postcss-plugin: <Message>",
+Code:
+  color: blue
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(18:3) from "postcss-plugin" plugin: <Message>
 
-(18:3) postcss-plugin: <Message>",
+Code:
+  -x-border-color: blue blue *
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(19:3) from "postcss-plugin" plugin: <Message>
 
-(19:3) postcss-plugin: <Message>",
+Code:
+  -x-color: * #fafafa
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(23:3) from "postcss-plugin" plugin: <Message>
 
-(23:3) postcss-plugin: <Message>",
+Code:
+  -z-border-color: blue blue *
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(24:3) from "postcss-plugin" plugin: <Message>
 
-(24:3) postcss-plugin: <Message>",
+Code:
+  -z-color: * #fafafa
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(29:5) from "postcss-plugin" plugin: <Message>
 
-(29:5) postcss-plugin: <Message>",
+Code:
+  width: 500px
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(2:3) from "postcss-plugin" plugin: <Message>
 
-(2:3) postcss-plugin: <Message>",
+Code:
+  color: black
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(32:7) from "postcss-plugin" plugin: <Message>
 
-(32:7) postcss-plugin: <Message>",
+Code:
+  width: auto
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(36:7) from "postcss-plugin" plugin: <Message>
 
-(36:7) postcss-plugin: <Message>",
+Code:
+  color: white
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(41:5) from "postcss-plugin" plugin: <Message>
 
-(41:5) postcss-plugin: <Message>",
+Code:
+  display: block
+",
   "ModuleWarning: Module Warning (from \`replaced original path\`):
-Warning
+(6:3) from "postcss-plugin" plugin: <Message>
 
-(6:3) postcss-plugin: <Message>",
+Code:
+  color: red
+",
 ]
 `;
 
@@ -214,6 +238,7 @@ exports[`loader should reuse PostCSS AST: warnings 1`] = `[]`;
 exports[`loader should throw an error on invalid syntax: errors 1`] = `
 [
   "ModuleBuildError: Module build failed (from \`replaced original path\`):
+
 SyntaxError
 
 (1:3) /test/fixtures/css/style.css Unnecessary curly bracket

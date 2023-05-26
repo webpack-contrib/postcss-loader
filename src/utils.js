@@ -5,8 +5,6 @@ import Module from "module";
 import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
 
-import SyntaxError from "./Error";
-
 const parentModule = module;
 
 const stat = (inputFileSystem, filePath) =>
@@ -541,15 +539,8 @@ function getPostcssImplementation(loaderContext, implementation) {
   if (!implementation || typeof implementation === "string") {
     const postcssImplPkg = implementation || "postcss";
 
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      resolvedImplementation = require(postcssImplPkg);
-    } catch (error) {
-      loaderContext.emitError(error);
-
-      // eslint-disable-next-line consistent-return
-      return;
-    }
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    resolvedImplementation = require(postcssImplPkg);
   }
 
   // eslint-disable-next-line consistent-return
@@ -562,10 +553,61 @@ function reportError(loaderContext, callback, error) {
   }
 
   if (error.name === "CssSyntaxError") {
-    callback(new SyntaxError(error));
+    callback(syntaxErrorFactory(error));
   } else {
     callback(error);
   }
+}
+
+function warningFactory(obj) {
+  let message = "";
+
+  if (typeof obj.line !== "undefined") {
+    message += `(${obj.line}:${obj.column}) `;
+  }
+
+  if (typeof obj.plugin !== "undefined") {
+    message += `from "${obj.plugin}" plugin: `;
+  }
+
+  message += obj.text;
+
+  if (obj.node) {
+    message += `\n\nCode:\n  ${obj.node.toString()}\n`;
+  }
+
+  const warning = new Error(message);
+
+  warning.stack = null;
+
+  return warning;
+}
+
+function syntaxErrorFactory(obj) {
+  let message = "\nSyntaxError\n\n";
+
+  if (typeof obj.line !== "undefined") {
+    message += `(${obj.line}:${obj.column}) `;
+  }
+
+  if (typeof obj.plugin !== "undefined") {
+    message += `from "${obj.plugin}" plugin: `;
+  }
+
+  message += obj.file ? `${obj.file} ` : "<css input> ";
+  message += `${obj.reason}`;
+
+  const code = obj.showSourceCode();
+
+  if (code) {
+    message += `\n\n${code}\n`;
+  }
+
+  const error = new Error(message);
+
+  error.stack = null;
+
+  return error;
 }
 
 export {
@@ -577,4 +619,5 @@ export {
   findPackageJSONDir,
   getPostcssImplementation,
   reportError,
+  warningFactory,
 };
