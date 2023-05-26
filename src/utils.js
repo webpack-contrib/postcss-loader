@@ -541,15 +541,8 @@ function getPostcssImplementation(loaderContext, implementation) {
   if (!implementation || typeof implementation === "string") {
     const postcssImplPkg = implementation || "postcss";
 
-    try {
-      // eslint-disable-next-line import/no-dynamic-require, global-require
-      resolvedImplementation = require(postcssImplPkg);
-    } catch (error) {
-      loaderContext.emitError(error);
-
-      // eslint-disable-next-line consistent-return
-      return;
-    }
+    // eslint-disable-next-line import/no-dynamic-require, global-require
+    resolvedImplementation = require(postcssImplPkg);
   }
 
   // eslint-disable-next-line consistent-return
@@ -568,6 +561,30 @@ function reportError(loaderContext, callback, error) {
   }
 }
 
+function warningFactor(obj) {
+  let message = "\nWARNING ";
+
+  if (typeof obj.line !== "undefined") {
+    message += `(${obj.line}:${obj.column}) `;
+  }
+
+  if (typeof obj.plugin !== "undefined") {
+    message += `from "${obj.plugin}" plugin: `;
+  }
+
+  message += obj.text;
+
+  if (obj.node) {
+    message += `\n\nCode:\n  ${obj.node.toString()}\n`;
+  }
+
+  const warning = new Error(message);
+
+  warning.stack = null;
+
+  return warning;
+}
+
 export {
   loadConfig,
   getPostcssOptions,
@@ -577,4 +594,5 @@ export {
   findPackageJSONDir,
   getPostcssImplementation,
   reportError,
+  warningFactor,
 };

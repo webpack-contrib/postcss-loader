@@ -1,9 +1,7 @@
 import path from "path";
 
-import { satisfies } from "semver";
 import postcssPackage from "postcss/package.json";
 
-import Warning from "./Warning";
 import schema from "./options.json";
 import {
   loadConfig,
@@ -14,6 +12,7 @@ import {
   findPackageJSONDir,
   getPostcssImplementation,
   reportError,
+  warningFactor,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
@@ -40,9 +39,17 @@ export default async function loader(content, sourceMap, meta) {
       ? true
       : options.postcssOptions.config;
 
-  const postcssFactory = getPostcssImplementation(this, options.implementation);
+  let implementation;
 
-  if (!postcssFactory) {
+  try {
+    implementation = getPostcssImplementation(this, options.implementation);
+  } catch (error) {
+    callback(error);
+
+    return;
+  }
+
+  if (!implementation) {
     callback(
       new Error(
         `The Postcss implementation "${options.implementation}" not found`
@@ -98,7 +105,8 @@ export default async function loader(content, sourceMap, meta) {
     meta &&
     meta.ast &&
     meta.ast.type === "postcss" &&
-    satisfies(meta.ast.version, `^${postcssPackage.version}`)
+    // eslint-disable-next-line global-require
+    require("semver").satisfies(meta.ast.version, `^${postcssPackage.version}`)
   ) {
     ({ root } = meta.ast);
   }
@@ -112,7 +120,7 @@ export default async function loader(content, sourceMap, meta) {
   let processor;
 
   try {
-    processor = postcssFactory(plugins);
+    processor = implementation(plugins);
     result = await processor.process(root || content, processOptions);
   } catch (error) {
     // Check postcss versions to avoid using PostCSS 7.
@@ -175,7 +183,7 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const warning of result.warnings()) {
-    this.emitWarning(new Warning(warning));
+    this.emitWarning(warningFactor(warning));
   }
 
   for (const message of result.messages) {
