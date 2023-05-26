@@ -5,8 +5,6 @@ import Module from "module";
 import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
 
-import SyntaxError from "./Error";
-
 const parentModule = module;
 
 const stat = (inputFileSystem, filePath) =>
@@ -555,14 +553,14 @@ function reportError(loaderContext, callback, error) {
   }
 
   if (error.name === "CssSyntaxError") {
-    callback(new SyntaxError(error));
+    callback(syntaxErrorFactory(error));
   } else {
     callback(error);
   }
 }
 
-function warningFactor(obj) {
-  let message = "\nWARNING ";
+function warningFactory(obj) {
+  let message = "\nWarning ";
 
   if (typeof obj.line !== "undefined") {
     message += `(${obj.line}:${obj.column}) `;
@@ -585,6 +583,33 @@ function warningFactor(obj) {
   return warning;
 }
 
+function syntaxErrorFactory(obj) {
+  let message = "\nSyntaxError ";
+
+  if (typeof obj.line !== "undefined") {
+    message += `(${obj.line}:${obj.column}) `;
+  }
+
+  if (typeof obj.plugin !== "undefined") {
+    message += `from "${obj.plugin}" plugin: `;
+  }
+
+  message += obj.file ? `${obj.file} ` : "<css input> ";
+  message += `${obj.reason}`;
+
+  const code = obj.showSourceCode();
+
+  if (code) {
+    message += `\n\n${code}\n`;
+  }
+
+  const error = new Error(message);
+
+  error.stack = null;
+
+  return error;
+}
+
 export {
   loadConfig,
   getPostcssOptions,
@@ -594,5 +619,5 @@ export {
   findPackageJSONDir,
   getPostcssImplementation,
   reportError,
-  warningFactor,
+  warningFactory,
 };

@@ -12,7 +12,7 @@ import {
   findPackageJSONDir,
   getPostcssImplementation,
   reportError,
-  warningFactor,
+  warningFactory,
 } from "./utils";
 
 let hasExplicitDependencyOnPostCSS = false;
@@ -183,7 +183,7 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const warning of result.warnings()) {
-    this.emitWarning(warningFactor(warning));
+    this.emitWarning(warningFactory(warning));
   }
 
   for (const message of result.messages) {
