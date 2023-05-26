@@ -560,7 +560,7 @@ function reportError(loaderContext, callback, error) {
 }
 
 function warningFactory(obj) {
-  let message = "\nWarning ";
+  let message = "";
 
   if (typeof obj.line !== "undefined") {
     message += `(${obj.line}:${obj.column}) `;
@@ -584,7 +584,7 @@ function warningFactory(obj) {
 }
 
 function syntaxErrorFactory(obj) {
-  let message = "\nSyntaxError ";
+  let message = "\nSyntaxError\n\n";
 
   if (typeof obj.line !== "undefined") {
     message += `(${obj.line}:${obj.column}) `;
