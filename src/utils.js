@@ -2,7 +2,6 @@ import path from "path";
 import url from "url";
 import Module from "module";
 
-import { klona } from "klona/full";
 import { cosmiconfig, defaultLoaders } from "cosmiconfig";
 
 const parentModule = module;
@@ -185,10 +184,8 @@ async function loadConfig(loaderContext, config, postcssOptions) {
       options: postcssOptions || {},
     };
 
-    result.config = result.config(api);
+    return { ...result, config: result.config(api) };
   }
-
-  result = klona(result);
 
   return result;
 }
@@ -330,7 +327,7 @@ async function getPostcssOptions(
     loaderContext.emitError(error);
   }
 
-  const processOptionsFromConfig = loadedConfig.config || {};
+  const processOptionsFromConfig = { ...loadedConfig.config } || {};
 
   if (processOptionsFromConfig.from) {
     processOptionsFromConfig.from = path.resolve(
@@ -346,10 +343,7 @@ async function getPostcssOptions(
     );
   }
 
-  // No need them for processOptions
-  delete processOptionsFromConfig.plugins;
-
-  const processOptionsFromOptions = klona(normalizedPostcssOptions);
+  const processOptionsFromOptions = { ...normalizedPostcssOptions };
 
   if (processOptionsFromOptions.from) {
     processOptionsFromOptions.from = path.resolve(
@@ -365,16 +359,20 @@ async function getPostcssOptions(
     );
   }
 
-  // No need them for processOptions
-  delete processOptionsFromOptions.config;
-  delete processOptionsFromOptions.plugins;
+  // No need `plugins` and `config` for processOptions
+  const { plugins: __plugins, ...optionsFromConfig } = processOptionsFromConfig;
+  const {
+    config: _config,
+    plugins: _plugins,
+    ...optionsFromOptions
+  } = processOptionsFromOptions;
 
   const processOptions = {
     from: file,
     to: file,
     map: false,
-    ...processOptionsFromConfig,
-    ...processOptionsFromOptions,
+    ...optionsFromConfig,
+    ...optionsFromOptions,
   };
 
   if (typeof processOptions.parser === "string") {

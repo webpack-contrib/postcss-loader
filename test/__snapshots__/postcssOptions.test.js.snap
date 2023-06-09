@@ -213,6 +213,20 @@ exports[`"postcssOptions" option should work "Function" value: errors 1`] = `[]`
 
 exports[`"postcssOptions" option should work "Function" value: warnings 1`] = `[]`;
 
+exports[`"postcssOptions" option should work and don't modify postcss options: css 1`] = `
+"a { color: black }
+
+.foo {
+  float: right;
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImZyb20uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLElBQUksYUFBYTs7QUFFakI7RUFDRSxZQUFZO0FBQ2QiLCJmaWxlIjoidG8uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7IGNvbG9yOiBibGFjayB9XG5cbi5mb28ge1xuICBmbG9hdDogcmlnaHQ7XG59XG4iXX0= */"
+`;
+
+exports[`"postcssOptions" option should work and don't modify postcss options: errors 1`] = `[]`;
+
+exports[`"postcssOptions" option should work and don't modify postcss options: warnings 1`] = `[]`;
+
 exports[`"postcssOptions" option should work and provide API for the configuration: css 1`] = `
 "a {
   color: black;

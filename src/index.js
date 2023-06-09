@@ -75,16 +75,16 @@ export default async function loader(content, sourceMap, meta) {
     }
   }
 
-  const useSourceMap =
-    typeof options.sourceMap !== "undefined"
-      ? options.sourceMap
-      : this.sourceMap;
-
   const { plugins, processOptions } = await getPostcssOptions(
     this,
     loadedConfig,
     options.postcssOptions
   );
+
+  const useSourceMap =
+    typeof options.sourceMap !== "undefined"
+      ? options.sourceMap
+      : this.sourceMap;
 
   if (useSourceMap) {
     processOptions.map = {

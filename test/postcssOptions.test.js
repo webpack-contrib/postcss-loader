@@ -841,9 +841,48 @@ describe('"postcssOptions" option', () => {
       },
     });
     const stats = await compile(compiler);
-
     const codeFromBundle = getCodeFromBundle("style.css", stats);
 
+    expect(codeFromBundle.css).toMatchSnapshot("css");
+    expect(getWarnings(stats)).toMatchSnapshot("warnings");
+    expect(getErrors(stats)).toMatchSnapshot("errors");
+  });
+
+  it("should work and don't modify postcss options", async () => {
+    const postcssOptions = {
+      config: path.resolve(__dirname, "./fixtures/css/plugins.config.js"),
+      from: "from.css",
+      map: {
+        inline: true,
+      },
+      parser: "postcss/lib/parse",
+      stringifier: "postcss/lib/stringify",
+      to: "to.css",
+      plugins: [require.resolve("./fixtures/plugin/new-api.plugin")],
+    };
+    const compiler = getCompiler(
+      "./config-scope/css/index.js",
+      {
+        postcssOptions,
+      },
+      {
+        devtool: "source-map",
+      }
+    );
+    const stats = await compile(compiler);
+    const codeFromBundle = getCodeFromBundle("style.css", stats);
+
+    expect(postcssOptions).toEqual({
+      config: path.resolve(__dirname, "./fixtures/css/plugins.config.js"),
+      from: "from.css",
+      map: {
+        inline: true,
+      },
+      parser: "postcss/lib/parse",
+      stringifier: "postcss/lib/stringify",
+      to: "to.css",
+      plugins: [require.resolve("./fixtures/plugin/new-api.plugin")],
+    });
     expect(codeFromBundle.css).toMatchSnapshot("css");
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");
