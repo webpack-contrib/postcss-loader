@@ -343,9 +343,6 @@ async function getPostcssOptions(
     );
   }
 
-  // No need them for processOptions
-  const { plugins: __plugins, ...optionsFromConfig } = processOptionsFromConfig;
-
   const processOptionsFromOptions = { ...normalizedPostcssOptions };
 
   if (processOptionsFromOptions.from) {
@@ -362,7 +359,8 @@ async function getPostcssOptions(
     );
   }
 
-  // No need them for processOptions
+  // No need `plugins` and `config` for processOptions
+  const { plugins: __plugins, ...optionsFromConfig } = processOptionsFromConfig;
   const {
     config: _config,
     plugins: _plugins,
