@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.3.3](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.2...v7.3.3) (2023-06-10)
+
+
+### Bug Fixes
+
+* **perf:** avoid using `klona` for postcss options ([#658](https://github.com/webpack-contrib/postcss-loader/issues/658)) ([e754c3f](https://github.com/webpack-contrib/postcss-loader/commit/e754c3f8451a09ea633674af90fb3b6b1c073460))
+* bug with loading configurations after updating `cosmiconfig` to version 8.2 ([684d265](https://github.com/webpack-contrib/postcss-loader/commit/684d2654393d225bbbcc443ffc9494ab54fe8112))
+
 ### [7.3.2](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.1...v7.3.2) (2023-05-28)
 
 
