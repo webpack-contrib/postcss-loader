@@ -2,7 +2,7 @@ import path from "path";
 import url from "url";
 import Module from "module";
 
-import { cosmiconfig, defaultLoaders } from "cosmiconfig";
+import { cosmiconfig, defaultLoadersSync } from "cosmiconfig";
 
 const parentModule = module;
 
@@ -84,7 +84,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
       let result;
 
       try {
-        result = defaultLoaders[".js"](...args);
+        result = defaultLoadersSync[".js"](...args);
       } catch (error) {
         let importESM;
 
@@ -110,6 +110,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
       return result;
     },
+    ".cjs": defaultLoadersSync[".cjs"],
     ".mjs": async (...args) => {
       let result;
       let importESM;
