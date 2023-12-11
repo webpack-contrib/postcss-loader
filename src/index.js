@@ -162,7 +162,9 @@ export default async function loader(content, sourceMap, meta) {
           }
 
           if (pkg) {
-            if (!pkg.dependencies.postcss && !pkg.devDependencies.postcss) {
+            const { dependencies = {}, devDependencies = {} } = pkg;
+
+            if (!dependencies.postcss && !devDependencies.postcss) {
               this.emitWarning(
                 new Error(
                   "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +
