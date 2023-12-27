@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [7.3.4](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.3...v7.3.4) (2023-12-27)
+
+
+### Bug Fixes
+
+* do not crash if pkg.(d|devD)ependencies unset ([#667](https://github.com/webpack-contrib/postcss-loader/issues/667)) ([8ef0c7e](https://github.com/webpack-contrib/postcss-loader/commit/8ef0c7e5c6c4eb76073b4ea92306fc399014e462))
+
 ### [7.3.3](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.2...v7.3.3) (2023-06-10)
 
 
