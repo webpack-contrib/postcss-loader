@@ -110,7 +110,7 @@ describe("loader", () => {
           dir: path.resolve(__dirname, "fixtures", "deps2"),
           content: "",
           plugin,
-        }
+        },
       );
     };
 
@@ -126,16 +126,16 @@ describe("loader", () => {
       stats.compilation;
 
     expect(contextDependencies).toContain(
-      path.resolve(__dirname, "fixtures", "deps")
+      path.resolve(__dirname, "fixtures", "deps"),
     );
     expect(contextDependencies).toContain(
-      path.resolve(__dirname, "fixtures", "deps2")
+      path.resolve(__dirname, "fixtures", "deps2"),
     );
     expect(missingDependencies).toContain(
-      path.resolve(__dirname, "fixtures", "missing-dep.html")
+      path.resolve(__dirname, "fixtures", "missing-dep.html"),
     );
     expect(buildDependencies).toContain(
-      path.resolve(__dirname, "fixtures", "build-dep.html")
+      path.resolve(__dirname, "fixtures", "build-dep.html"),
     );
 
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
@@ -171,7 +171,7 @@ describe("loader", () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.css", stats);
@@ -204,7 +204,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const spy = jest
       .spyOn(utils, "findPackageJSONDir")
       .mockReturnValue(
-        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss")
+        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss"),
       );
 
     const compiler = getCompiler("./css/index.js", {
@@ -232,8 +232,8 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
       .mockReturnValue(
         path.resolve(
           __dirname,
-          "./fixtures/package-json-files/postcss-v8-in-dependencies"
-        )
+          "./fixtures/package-json-files/postcss-v8-in-dependencies",
+        ),
       );
 
     const compiler = getCompiler("./css/index.js", {
@@ -261,8 +261,8 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
       .mockReturnValue(
         path.resolve(
           __dirname,
-          "./fixtures/package-json-files/postcss-v8-in-devDependencies"
-        )
+          "./fixtures/package-json-files/postcss-v8-in-devDependencies",
+        ),
       );
 
     const compiler = getCompiler("./css/index.js", {
@@ -288,7 +288,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const spy = jest
       .spyOn(utils, "findPackageJSONDir")
       .mockReturnValue(
-        path.resolve(__dirname, "./fixtures/package-json-files/unknown")
+        path.resolve(__dirname, "./fixtures/package-json-files/unknown"),
       );
 
     const compiler = getCompiler("./css/index.js", {
@@ -314,7 +314,7 @@ describe("check postcss versions to avoid using PostCSS 7", () => {
     const spy = jest
       .spyOn(utils, "findPackageJSONDir")
       .mockReturnValue(
-        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss")
+        path.resolve(__dirname, "./fixtures/package-json-files/no-postcss"),
       );
 
     const compiler = getCompiler("./css/index.js", {

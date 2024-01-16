@@ -354,8 +354,8 @@ describe('"postcssOptions" option', () => {
       getErrors(stats, true).map((item) =>
         item
           .replace("property 'parse'", "properties")
-          .replace(/undefined$/, "undefined (reading 'parse')")
-      )
+          .replace(/undefined$/, "undefined (reading 'parse')"),
+      ),
     ).toMatchSnapshot("errors");
   });
 
@@ -632,7 +632,7 @@ describe('"postcssOptions" option', () => {
           [
             path.resolve(
               __dirname,
-              "./fixtures/plugin/default-other-plugin.js"
+              "./fixtures/plugin/default-other-plugin.js",
             ),
             { alpha: 0.5, color: "red" },
           ],
@@ -682,7 +682,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/css/custom.config.js"
+          "./fixtures/config-scope/css/custom.config.js",
         ),
       },
     });
@@ -761,7 +761,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/all-options/postcss.config.js"
+          "./fixtures/config-scope/all-options/postcss.config.js",
         ),
       },
     });
@@ -779,7 +779,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/css/unresolve.js"
+          "./fixtures/config-scope/css/unresolve.js",
         ),
       },
     });
@@ -794,7 +794,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/css/invalid.config.js"
+          "./fixtures/config-scope/css/invalid.config.js",
         ),
       },
     });
@@ -809,7 +809,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/from-to/postcss.config.js"
+          "./fixtures/config-scope/from-to/postcss.config.js",
         ),
       },
     });
@@ -836,7 +836,7 @@ describe('"postcssOptions" option', () => {
       postcssOptions: {
         config: path.resolve(
           __dirname,
-          "./fixtures/config-scope/api/postcss.config.js"
+          "./fixtures/config-scope/api/postcss.config.js",
         ),
       },
     });
@@ -867,7 +867,7 @@ describe('"postcssOptions" option', () => {
       },
       {
         devtool: "source-map",
-      }
+      },
     );
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.css", stats);

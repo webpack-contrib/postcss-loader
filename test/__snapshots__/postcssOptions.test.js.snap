@@ -536,7 +536,7 @@ exports[`"postcssOptions" option should work with the "config" options with "pac
 exports[`"postcssOptions" option should work with the "config" options with "package.json" configuration: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work with the "config" options with "true" value: css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
+"a { color: black }
 
 .foo {
   float: right;
@@ -1468,7 +1468,7 @@ exports[`"postcssOptions" option should work with the "syntax" option with "Stri
 exports[`"postcssOptions" option should work with the "syntax" option with "String" value: warnings 1`] = `[]`;
 
 exports[`"postcssOptions" option should work without the specified values in the "postcssOptions" option: css 1`] = `
-"a { color: rgba(0, 0, 0, 1.0) }
+"a { color: black }
 
 .foo {
   float: right;

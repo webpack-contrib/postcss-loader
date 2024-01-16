@@ -33,7 +33,7 @@ describe('"execute" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.exec.js", stats);
@@ -70,7 +70,7 @@ describe('"execute" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.js", stats);
@@ -109,7 +109,7 @@ describe('"execute" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.exec.js", stats);

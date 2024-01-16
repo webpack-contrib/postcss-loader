@@ -23,7 +23,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: false,
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -33,7 +33,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
       expect(fs.existsSync(path.resolve(sourceMap.sourceRoot, source))).toBe(
-        true
+        true,
       );
 
       return path
@@ -56,7 +56,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: "source-map",
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -66,7 +66,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
       expect(fs.existsSync(path.resolve(sourceMap.sourceRoot, source))).toBe(
-        true
+        true,
       );
 
       return path
@@ -88,7 +88,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: "source-map",
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -98,7 +98,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
       expect(fs.existsSync(path.resolve(sourceMap.sourceRoot, source))).toBe(
-        true
+        true,
       );
 
       return path
@@ -128,7 +128,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: false,
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -138,7 +138,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(source).toBe(path.normalize(source));
       expect(
-        fs.existsSync(path.resolve(__dirname, "./fixtures/css", source))
+        fs.existsSync(path.resolve(__dirname, "./fixtures/css", source)),
       ).toBe(true);
 
       return source.replace(/\\/g, "/");
@@ -183,11 +183,11 @@ describe('"sourceMap" option', () => {
                       sourceMap: true,
                       sourceMapRoot: path.resolve(
                         __dirname,
-                        "./fixtures/scss/"
+                        "./fixtures/scss/",
                       ),
                       outFile: path.resolve(
                         __dirname,
-                        "./fixtures/scss/style.css.map"
+                        "./fixtures/scss/style.css.map",
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -199,7 +199,7 @@ describe('"sourceMap" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
@@ -247,11 +247,11 @@ describe('"sourceMap" option', () => {
                       sourceMap: true,
                       sourceMapRoot: path.resolve(
                         __dirname,
-                        "./fixtures/scss/"
+                        "./fixtures/scss/",
                       ),
                       outFile: path.resolve(
                         __dirname,
-                        "./fixtures/scss/style.css.map"
+                        "./fixtures/scss/style.css.map",
                       ),
                       sourceMapContents: true,
                       omitSourceMapUrl: true,
@@ -263,7 +263,7 @@ describe('"sourceMap" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
@@ -272,7 +272,7 @@ describe('"sourceMap" option', () => {
     sourceMap.sources = sourceMap.sources.map((source) => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(
-        fs.existsSync(path.resolve(__dirname, "./fixtures/scss", source))
+        fs.existsSync(path.resolve(__dirname, "./fixtures/scss", source)),
       ).toBe(true);
 
       return source.replace(/\\/g, "/");
@@ -293,7 +293,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: false,
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -313,7 +313,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: "source-map",
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -332,7 +332,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: false,
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.css", stats);
@@ -374,7 +374,7 @@ describe('"sourceMap" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.scss", stats);
@@ -384,7 +384,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
       expect(fs.existsSync(path.resolve(sourceMap.sourceRoot, source))).toBe(
-        true
+        true,
       );
 
       return path
@@ -426,7 +426,7 @@ describe('"sourceMap" option', () => {
             },
           ],
         },
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css, sourceMap } = getCodeFromBundle("style.less", stats);
@@ -436,7 +436,7 @@ describe('"sourceMap" option', () => {
       expect(path.isAbsolute(source)).toBe(true);
       expect(source).toBe(path.normalize(source));
       expect(fs.existsSync(path.resolve(sourceMap.sourceRoot, source))).toBe(
-        true
+        true,
       );
 
       return path
@@ -464,7 +464,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: false,
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css } = getCodeFromBundle("style.css", stats);
@@ -488,7 +488,7 @@ describe('"sourceMap" option', () => {
       },
       {
         devtool: "source-map",
-      }
+      },
     );
     const stats = await compile(compiler);
     const { css } = getCodeFromBundle("style.css", stats);

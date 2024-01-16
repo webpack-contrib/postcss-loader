@@ -52,8 +52,8 @@ export default async function loader(content, sourceMap, meta) {
   if (!implementation) {
     callback(
       new Error(
-        `The Postcss implementation "${options.implementation}" not found`
-      )
+        `The Postcss implementation "${options.implementation}" not found`,
+      ),
     );
 
     return;
@@ -66,7 +66,7 @@ export default async function loader(content, sourceMap, meta) {
       loadedConfig = await loadConfig(
         this,
         configOption,
-        options.postcssOptions
+        options.postcssOptions,
       );
     } catch (error) {
       callback(error);
@@ -78,7 +78,7 @@ export default async function loader(content, sourceMap, meta) {
   const { plugins, processOptions } = await getPostcssOptions(
     this,
     loadedConfig,
-    options.postcssOptions
+    options.postcssOptions,
   );
 
   const useSourceMap =
@@ -137,7 +137,7 @@ export default async function loader(content, sourceMap, meta) {
       // is used to make the condition body run once.
       const packageJSONDir = findPackageJSONDir(
         process.cwd(),
-        this.fs.statSync
+        this.fs.statSync,
       );
 
       if (packageJSONDir) {
@@ -146,7 +146,7 @@ export default async function loader(content, sourceMap, meta) {
         try {
           bufferOfPackageJSON = this.fs.readFileSync(
             path.resolve(packageJSONDir, "package.json"),
-            "utf8"
+            "utf8",
           );
         } catch (_error) {
           // Nothing
@@ -168,8 +168,8 @@ export default async function loader(content, sourceMap, meta) {
               this.emitWarning(
                 new Error(
                   "Add postcss as project dependency. postcss is not a peer dependency for postcss-loader. " +
-                    "Use `npm install postcss` or `yarn add postcss`"
-                )
+                    "Use `npm install postcss` or `yarn add postcss`",
+                ),
               );
             } else {
               hasExplicitDependencyOnPostCSS = true;
@@ -212,7 +212,7 @@ export default async function loader(content, sourceMap, meta) {
             message.file,
             message.content,
             message.sourceMap,
-            message.info
+            message.info,
           );
         }
     }
