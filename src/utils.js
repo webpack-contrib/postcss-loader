@@ -147,6 +147,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   loaders[".ts"] = tsLoader;
 
   const explorer = cosmiconfig(moduleName, {
+    searchStrategy: "global",
     searchPlaces,
     loaders,
   });
