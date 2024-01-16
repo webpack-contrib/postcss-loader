@@ -448,19 +448,19 @@ exports[`"postcssOptions" option should work with the "config" options and use p
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not(.is-light) { /* :root is <html> for HTML documents */
+  :root:where(:not(.is-light)) { /* :root is <html> for HTML documents */
     --text-color: white
   }
-  html:not(.is-light) body {
+  :where(html:not(.is-light)) body {
     background: black
   }
 }
 
-:root.is-dark { /* :root is <html> for HTML documents */
+:root:where(.is-dark) { /* :root is <html> for HTML documents */
     --text-color: white
   }
 
-html.is-dark body {
+:where(html.is-dark) body {
     background: black
   }"
 `;
