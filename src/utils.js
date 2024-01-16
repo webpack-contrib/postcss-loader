@@ -147,6 +147,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   loaders[".ts"] = tsLoader;
 
   const explorer = cosmiconfig(moduleName, {
+    searchStrategy: "global",
     searchPlaces,
     loaders,
   });
@@ -207,7 +208,7 @@ function loadPlugin(plugin, options, file) {
     return loadedPlugin(options);
   } catch (error) {
     throw new Error(
-      `Loading PostCSS "${plugin}" plugin failed: ${error.message}\n\n(@${file})`
+      `Loading PostCSS "${plugin}" plugin failed: ${error.message}\n\n(@${file})`,
     );
   }
 }
@@ -294,7 +295,7 @@ async function tryRequireThenImport(module) {
 async function getPostcssOptions(
   loaderContext,
   loadedConfig = {},
-  postcssOptions = {}
+  postcssOptions = {},
 ) {
   const file = loaderContext.resourcePath;
 
@@ -333,14 +334,14 @@ async function getPostcssOptions(
   if (processOptionsFromConfig.from) {
     processOptionsFromConfig.from = path.resolve(
       path.dirname(loadedConfig.filepath),
-      processOptionsFromConfig.from
+      processOptionsFromConfig.from,
     );
   }
 
   if (processOptionsFromConfig.to) {
     processOptionsFromConfig.to = path.resolve(
       path.dirname(loadedConfig.filepath),
-      processOptionsFromConfig.to
+      processOptionsFromConfig.to,
     );
   }
 
@@ -349,14 +350,14 @@ async function getPostcssOptions(
   if (processOptionsFromOptions.from) {
     processOptionsFromOptions.from = path.resolve(
       loaderContext.rootContext,
-      processOptionsFromOptions.from
+      processOptionsFromOptions.from,
     );
   }
 
   if (processOptionsFromOptions.to) {
     processOptionsFromOptions.to = path.resolve(
       loaderContext.rootContext,
-      processOptionsFromOptions.to
+      processOptionsFromOptions.to,
     );
   }
 
@@ -382,8 +383,8 @@ async function getPostcssOptions(
     } catch (error) {
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS "${processOptions.parser}" parser failed: ${error.message}\n\n(@${file})`
-        )
+          `Loading PostCSS "${processOptions.parser}" parser failed: ${error.message}\n\n(@${file})`,
+        ),
       );
     }
   }
@@ -391,13 +392,13 @@ async function getPostcssOptions(
   if (typeof processOptions.stringifier === "string") {
     try {
       processOptions.stringifier = await tryRequireThenImport(
-        processOptions.stringifier
+        processOptions.stringifier,
       );
     } catch (error) {
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS "${processOptions.stringifier}" stringifier failed: ${error.message}\n\n(@${file})`
-        )
+          `Loading PostCSS "${processOptions.stringifier}" stringifier failed: ${error.message}\n\n(@${file})`,
+        ),
       );
     }
   }
@@ -408,8 +409,8 @@ async function getPostcssOptions(
     } catch (error) {
       loaderContext.emitError(
         new Error(
-          `Loading PostCSS "${processOptions.syntax}" syntax failed: ${error.message}\n\n(@${file})`
-        )
+          `Loading PostCSS "${processOptions.syntax}" syntax failed: ${error.message}\n\n(@${file})`,
+        ),
       );
     }
   }

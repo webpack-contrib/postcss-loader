@@ -1139,7 +1139,7 @@ const postcssCustomPlugin = (opts = {}) => {
     postcssPlugin: "postcss-custom-plugin",
     Once: (root, { result }) => {
       opts.loaderContext.addDependency(
-        path.resolve(__dirname, "path", "to", "file")
+        path.resolve(__dirname, "path", "to", "file"),
       );
     },
   };

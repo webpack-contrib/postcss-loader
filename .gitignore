@@ -4,6 +4,7 @@ npm-debug.log
 yarn-error.log
 npm-debug.log*
 .eslintcache
+.cspellcache
 
 dmd
 jest

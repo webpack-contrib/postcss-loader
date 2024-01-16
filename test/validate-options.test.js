@@ -40,7 +40,7 @@ describe("validate options", () => {
         {
           config: path.resolve(
             __dirname,
-            "./fixtures/config-scope/config/postcss.config.js"
+            "./fixtures/config-scope/config/postcss.config.js",
           ),
         },
       ],
@@ -99,7 +99,7 @@ describe("validate options", () => {
                 },
               ],
             },
-          }
+          },
         );
       } else {
         compiler = getCompiler("./css/index.js", { [key]: value });

@@ -8,14 +8,14 @@ export default (code) => {
   const module = new Module(resource, parentModule);
   // eslint-disable-next-line no-underscore-dangle
   module.paths = Module._nodeModulePaths(
-    path.resolve(__dirname, "../fixtures")
+    path.resolve(__dirname, "../fixtures"),
   );
   module.filename = resource;
 
   // eslint-disable-next-line no-underscore-dangle
   module._compile(
     `let __export__;${code};module.exports = __export__;`,
-    resource
+    resource,
   );
 
   return module.exports;
