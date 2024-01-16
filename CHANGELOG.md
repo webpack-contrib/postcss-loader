@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.4...v8.0.0) (2024-01-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* minimum supported Node.js version is `18.12.0` ([#677](https://github.com/webpack-contrib/postcss-loader/issues/677)) ([8dd0315](https://github.com/webpack-contrib/postcss-loader/commit/8dd0315c03e0f608b6a9a4c6a58e9e7a64775e56))
+
 ### [7.3.4](https://github.com/webpack-contrib/postcss-loader/compare/v7.3.3...v7.3.4) (2023-12-27)
 
 
