@@ -41,8 +41,17 @@
     "dist"
   ],
   "peerDependencies": {
+    "@rspack/core": "0.x || 1.x",
     "postcss": "^7.0.0 || ^8.0.1",
     "webpack": "^5.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@rspack/core": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
   },
   "dependencies": {
     "cosmiconfig": "^9.0.0",
