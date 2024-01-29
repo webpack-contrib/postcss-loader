@@ -108,7 +108,7 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 "a {
   color: coral;
 }
-/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBSSIsImZpbGUiOiJzdHlsZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYSB7XG4gIGNvbG9yOiBjb3JhbDtcbn0iXX0= */"
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0eWxlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFBSSxZQUFBO0FBRUoiLCJmaWxlIjoic3R5bGUuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImEgeyBjb2xvcjogY29yYWwgfVxuIl19 */"
 `;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): errors 1`] = `[]`;
@@ -251,7 +251,7 @@ exports[`"sourceMap" option should generate source maps when value is not specif
 
 exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: source map 1`] = `
 {
-  "mappings": "AAAA",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -361,7 +361,7 @@ exports[`"sourceMap" option should generate source maps with "false" value, but 
 exports[`"sourceMap" option should generate source maps with "false" value, but the "postcssOptions.map" has values: source map 1`] = `
 {
   "file": "style.css",
-  "mappings": "AAAA",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -470,7 +470,7 @@ exports[`"sourceMap" option should generate source maps with "true" value and th
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" option with "source-map" value: source map 1`] = `
 {
-  "mappings": "AAAA",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": [],
   "sourceRoot": "",
   "sources": [
@@ -579,7 +579,7 @@ exports[`"sourceMap" option should generate source maps with "true" value and th
 
 exports[`"sourceMap" option should generate source maps with "true" value and the "devtool" with "false" value: source map 1`] = `
 {
-  "mappings": "AAAA",
+  "mappings": "AAAA;EACE,YAAY;AACd;;AAEA;EACE,UAAU;AACZ;;AAEA;EACE,YAAY;AACd;;AAEA;EACE,WAAW;AACb;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE,4BAA4B;EAC5B,mBAAmB;AACrB;;AAEA;EACE;IACE,YAAY;;IAEZ;MACE,WAAW;IACb;;IAEA;MACE,YAAY;IACd;EACF;;EAEA;IACE,cAAc;EAChB;AACF",
   "names": [],
   "sourceRoot": "",
   "sources": [

@@ -13,13 +13,24 @@ import {
   getWarnings,
 } from "./helpers";
 
+const noopPlugin = () => {
+  return {
+    postcssPlugin: "noop-plugin",
+    Rule() {
+      // do nothing
+    },
+  };
+};
+
+noopPlugin.postcss = true;
+
 describe('"sourceMap" option', () => {
   it('should generate source maps with "true" value and the "devtool" with "false" value', async () => {
     const compiler = getCompiler(
       "./css/index.js",
       {
         sourceMap: true,
-        postcssOptions: { hideNothingWarning: true },
+        postcssOptions: { hideNothingWarning: true, plugins: [noopPlugin] },
       },
       {
         devtool: false,
@@ -52,7 +63,7 @@ describe('"sourceMap" option', () => {
       "./css/index.js",
       {
         sourceMap: true,
-        postcssOptions: { hideNothingWarning: true },
+        postcssOptions: { hideNothingWarning: true, plugins: [noopPlugin] },
       },
       {
         devtool: "source-map",
@@ -84,7 +95,7 @@ describe('"sourceMap" option', () => {
     const compiler = getCompiler(
       "./css/index.js",
       {
-        postcssOptions: { hideNothingWarning: true },
+        postcssOptions: { hideNothingWarning: true, plugins: [noopPlugin] },
       },
       {
         devtool: "source-map",
@@ -124,6 +135,7 @@ describe('"sourceMap" option', () => {
             sourcesContent: true,
           },
           hideNothingWarning: true,
+          plugins: [noopPlugin],
         },
       },
       {
@@ -171,6 +183,7 @@ describe('"sourceMap" option', () => {
                     postcssOptions: {
                       map: true,
                       hideNothingWarning: true,
+                      plugins: [noopPlugin],
                     },
                   },
                 },
