@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [8.1.1](https://github.com/webpack-contrib/postcss-loader/compare/v8.1.0...v8.1.1) (2024-02-28)
+
+
+### Bug Fixes
+
+* respect `default` when loading postcss esm configs ([52d8050](https://github.com/webpack-contrib/postcss-loader/commit/52d8050335ca803572e9cc9eae9583c2bb505612))
+
 ## [8.1.0](https://github.com/webpack-contrib/postcss-loader/compare/v8.0.0...v8.1.0) (2024-01-30)
 
 
