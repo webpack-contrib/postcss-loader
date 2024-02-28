@@ -108,6 +108,10 @@ async function loadConfig(loaderContext, config, postcssOptions) {
         }
       }
 
+      if (result.default) {
+        return result.default;
+      }
+
       return result;
     },
     ".cjs": defaultLoadersSync[".cjs"],
@@ -128,6 +132,10 @@ async function loadConfig(loaderContext, config, postcssOptions) {
         result = await importESM(urlForConfig);
       } else {
         throw new Error("ESM is not supported");
+      }
+
+      if (result.default) {
+        return result.default;
       }
 
       return result;
