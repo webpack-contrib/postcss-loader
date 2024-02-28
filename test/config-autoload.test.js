@@ -116,6 +116,45 @@ describe("autoload config", () => {
     );
   });
 
+  it('should load ESM version of "postcss.config.js" with "Array" syntax of plugins', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "js/array-esm-js"),
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual(
+      "./test/fixtures/config-autoload/js/object/index.css",
+    );
+    expect(loadedConfig.config.to).toEqual(
+      "./test/fixtures/config-autoload/js/object/expect/index.css",
+    );
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "js/array-esm-js", "postcss.config.js"),
+    );
+  });
+
+  // TODO Test manually with NODE_OPTIONS=--experimental-vm-modules to enable ESM support in jest
+  it.skip('should load "postcss.config.mjs" with "Array" syntax of plugins', async () => {
+    const loadedConfig = await loadConfig(
+      loaderContext,
+      path.resolve(testDirectory, "js/array-mjs"),
+    );
+
+    expect(loadedConfig.config.map).toEqual(false);
+    expect(loadedConfig.config.from).toEqual(
+      "./test/fixtures/config-autoload/js/object/index.css",
+    );
+    expect(loadedConfig.config.to).toEqual(
+      "./test/fixtures/config-autoload/js/object/expect/index.css",
+    );
+    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(loadedConfig.filepath).toEqual(
+      path.resolve(testDirectory, "js/array-mjs", "postcss.config.mjs"),
+    );
+  });
+
   it('should load "postcss.config.ts" with "Array" syntax of plugins', async () => {
     const loadedConfig = await loadConfig(
       loaderContext,
