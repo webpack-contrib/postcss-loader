@@ -802,7 +802,7 @@ module.exports = {
 };
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > [`postcss-preset-env`](https://github.com/csstools/postcss-preset-env) includes [`autoprefixer`](https://github.com/postcss/autoprefixer), so adding it separately is not necessary if you already use the preset. More [information](https://github.com/csstools/postcss-preset-env#autoprefixer)
 
@@ -941,7 +941,7 @@ export default {
 };
 ```
 
-> **Warning**
+> [!WARNING]
 >
 > If you are using Babel you need to do the following in order for the setup to work
 
