@@ -5,10 +5,4 @@ export default defineConfig([
   {
     extends: [configs["recommended-dirty"]],
   },
-  {
-    files: ["readme-examples.js"],
-    rules: {
-      "no-dupe-keys": "off",
-    },
-  },
 ]);
