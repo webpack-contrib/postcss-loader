@@ -1,13 +1,13 @@
-import path from "path";
+import path from "node:path";
 
+import myPostcssPlugin from "./fixtures/plugin/plugin";
 import {
   compile,
+  getCodeFromBundle,
   getCompiler,
   getErrors,
-  getCodeFromBundle,
   getWarnings,
 } from "./helpers";
-import myPostcssPlugin from "./fixtures/plugin/plugin";
 
 jest.setTimeout(30000);
 
@@ -36,9 +36,9 @@ describe('"postcssOptions" option', () => {
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.css", stats);
     const toIsWork = codeFromBundle.sourceMap.file.endsWith("to.css");
-    const fromIsWork =
-      codeFromBundle.sourceMap.sources.filter((i) => i.endsWith("from.css"))
-        .length > 0;
+    const fromIsWork = codeFromBundle.sourceMap.sources.some((i) =>
+      i.endsWith("from.css"),
+    );
 
     expect(toIsWork).toBe(true);
     expect(fromIsWork).toBe(true);
@@ -59,9 +59,9 @@ describe('"postcssOptions" option', () => {
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.css", stats);
     const toIsWork = codeFromBundle.sourceMap.file.endsWith("style.css");
-    const fromIsWork =
-      codeFromBundle.sourceMap.sources.filter((i) => i.endsWith("style.css"))
-        .length > 0;
+    const fromIsWork = codeFromBundle.sourceMap.sources.some((i) =>
+      i.endsWith("style.css"),
+    );
 
     expect(toIsWork).toBe(true);
     expect(fromIsWork).toBe(true);
@@ -88,12 +88,9 @@ describe('"postcssOptions" option', () => {
 
   it('should work "Function" value', async () => {
     const compiler = getCompiler("./css/index.js", {
-      postcssOptions: () => {
-        return {
-          // eslint-disable-next-line global-require
-          plugins: [require("./fixtures/config-scope/config/plugin")()],
-        };
-      },
+      postcssOptions: () => ({
+        plugins: [require("./fixtures/config-scope/config/plugin")()],
+      }),
     });
     const stats = await compile(compiler);
 
@@ -106,12 +103,9 @@ describe('"postcssOptions" option', () => {
 
   it('should work "Function" value and with "Array" syntax of the "plugins" option', async () => {
     const compiler = getCompiler("./css/index.js", {
-      postcssOptions: () => {
-        return {
-          // eslint-disable-next-line global-require
-          plugins: [require("./fixtures/config-scope/config/plugin")()],
-        };
-      },
+      postcssOptions: () => ({
+        plugins: [require("./fixtures/config-scope/config/plugin")()],
+      }),
     });
     const stats = await compile(compiler);
     const codeFromBundle = getCodeFromBundle("style.css", stats);
@@ -123,12 +117,9 @@ describe('"postcssOptions" option', () => {
 
   it('should work "Function" value and with "Object" syntax of the "plugins" option', async () => {
     const compiler = getCompiler("./css/index.js", {
-      postcssOptions: () => {
-        return {
-          // eslint-disable-next-line global-require
-          plugins: [require("./fixtures/config-scope/config/plugin")()],
-        };
-      },
+      postcssOptions: () => ({
+        plugins: [require("./fixtures/config-scope/config/plugin")()],
+      }),
     });
     const stats = await compile(compiler);
 
@@ -157,7 +148,6 @@ describe('"postcssOptions" option', () => {
   it('should work with the "parser" option with "Object" value', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
-        // eslint-disable-next-line global-require,import/no-dynamic-require
         parser: require("sugarss"),
       },
     });
@@ -171,6 +161,7 @@ describe('"postcssOptions" option', () => {
   });
 
   // TODO jest have not good support for ES modules for testing it, tested manually
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should work with the "parser" option with "Object" value with ESM', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
@@ -187,6 +178,7 @@ describe('"postcssOptions" option', () => {
   });
 
   // TODO jest have not good support for ES modules for testing it, tested manually
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should work with the "stringifier" option with "Object" value with ESM', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
@@ -203,6 +195,7 @@ describe('"postcssOptions" option', () => {
   });
 
   // TODO jest have not good support for ES modules for testing it, tested manually
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should work with the "syntax" option with "Object" value with ESM', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
@@ -221,7 +214,6 @@ describe('"postcssOptions" option', () => {
   it('should work with the "parser" option with "Function" value', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
-        // eslint-disable-next-line global-require,import/no-dynamic-require
         parser: require("sugarss").parse,
       },
     });
@@ -265,7 +257,6 @@ describe('"postcssOptions" option', () => {
   it('should work with the "stringifier" option with "Object" value', async () => {
     const compiler = getCompiler("./css/index.js", {
       postcssOptions: {
-        // eslint-disable-next-line global-require
         stringifier: require("sugarss"),
       },
     });
@@ -279,8 +270,8 @@ describe('"postcssOptions" option', () => {
   });
 
   it('should work with the "stringifier" option with "Function" value', async () => {
-    // eslint-disable-next-line global-require
     const Midas = require("midas");
+
     const midas = new Midas();
 
     const compiler = getCompiler("./css/index.js", {
@@ -327,7 +318,6 @@ describe('"postcssOptions" option', () => {
   it('should work with the "syntax" option with "Object" value', async () => {
     const compiler = getCompiler("./sss/index.js", {
       postcssOptions: {
-        // eslint-disable-next-line global-require
         syntax: require("sugarss"),
       },
     });
@@ -375,7 +365,6 @@ describe('"postcssOptions" option', () => {
           (root) => {
             root.walkDecls((decl) => {
               if (decl.value === "red") {
-                // eslint-disable-next-line no-param-reassign
                 decl.value = "rgba(255, 0, 0, 1.0)";
               }
             });
@@ -388,7 +377,6 @@ describe('"postcssOptions" option', () => {
             postcss: (root) => {
               root.walkDecls((decl) => {
                 if (decl.value === "green") {
-                  // eslint-disable-next-line no-param-reassign
                   decl.value = "rgba(0, 255, 0, 1.0)";
                 }
               });
@@ -599,7 +587,6 @@ describe('"postcssOptions" option', () => {
   it('should work with the "plugins" option with "Array" value and not throw an error on falsy plugin', async () => {
     const compiler = getCompiler("./css/index.js", {
       postcssOptions: {
-        // eslint-disable-next-line no-undefined
         plugins: [undefined, null, "", 0],
       },
     });
@@ -822,7 +809,7 @@ describe('"postcssOptions" option', () => {
       expect(path.isAbsolute(source)).toBe(false);
       expect(source).toBe(path.normalize(source));
 
-      return source.replace(/\\/g, "/");
+      return source.replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");

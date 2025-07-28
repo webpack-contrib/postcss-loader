@@ -2,9 +2,9 @@ import postcss from "postcss";
 
 import {
   compile,
+  getCodeFromBundle,
   getCompiler,
   getErrors,
-  getCodeFromBundle,
   getWarnings,
 } from "./helpers";
 

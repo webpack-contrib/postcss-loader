@@ -1,4 +1,4 @@
-import Module from "module";
+import Module from "node:module";
 
 const postcss = require("postcss");
 
@@ -9,11 +9,9 @@ function exec(code, loaderContext) {
 
   const module = new Module(resource, parentModule);
 
-  // eslint-disable-next-line no-underscore-dangle
   module.paths = Module._nodeModulePaths(context);
   module.filename = resource;
 
-  // eslint-disable-next-line no-underscore-dangle
   module._compile(code, resource);
 
   return module.exports;
@@ -21,10 +19,9 @@ function exec(code, loaderContext) {
 
 module.exports = function astLoader(content) {
   const callback = this.async();
-  const { spy = jest.fn(), execute } = this.query;
+  const { spy = globalThis.jest.fn(), execute } = this.query;
 
   if (execute) {
-    // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
   }
 

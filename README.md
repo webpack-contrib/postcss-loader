@@ -169,15 +169,11 @@ module.exports = {
         test: /\.style.js$/,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-          },
+          { loader: "css-loader" },
           {
             loader: "postcss-loader",
             options: {
-              postcssOptions: {
-                parser: "postcss-js",
-              },
+              postcssOptions: { parser: "postcss-js" },
               execute: true,
             },
           },
@@ -195,8 +191,8 @@ See the file [`./src/config.d.ts`](./src/config.d.ts).
 Type:
 
 ```ts
-import type { Config as PostCSSConfig } from "postcss-load-config";
-import type { LoaderContext } from "webpack";
+import { type Config as PostCSSConfig } from "postcss-load-config";
+import { type LoaderContext } from "webpack";
 
 type PostCSSLoaderContext = LoaderContext<PostCSSConfig>;
 
@@ -270,10 +266,7 @@ module.exports = {
         loader: "postcss-loader",
         options: {
           postcssOptions: {
-            plugins: {
-              "postcss-import": {},
-              "postcss-short": { prefix: "x" },
-            },
+            plugins: { "postcss-import": {}, "postcss-short": { prefix: "x" } },
           },
         },
       },
@@ -285,6 +278,8 @@ module.exports = {
 Setup `syntax`:
 
 **webpack.config.js**
+
+<!-- eslint-skip -->
 
 ```js
 module.exports = {
@@ -310,6 +305,8 @@ module.exports = {
 Setup `parser`:
 
 **webpack.config.js**
+
+<!-- eslint-skip -->
 
 ```js
 module.exports = {
@@ -337,6 +334,8 @@ module.exports = {
 Setup `stringifier`:
 
 **webpack.config.js**
+
+<!-- eslint-skip -->
 
 ```js
 const Midas = require("midas");
@@ -528,12 +527,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 1,
-            },
-          },
+          { loader: "css-loader", options: { importLoaders: 1 } },
           "postcss-loader",
         ],
       },
@@ -555,11 +549,7 @@ module.exports = {
       {
         test: /\.css$/i,
         loader: "postcss-loader",
-        options: {
-          postcssOptions: {
-            config: false,
-          },
-        },
+        options: { postcssOptions: { config: false } },
       },
     ],
   },
@@ -573,7 +563,7 @@ Allows to specify the path to the config file.
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require("node:path");
 
 module.exports = {
   module: {
@@ -738,17 +728,10 @@ module.exports = {
         test: /\.sss$/i,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-            options: { importLoaders: 1 },
-          },
+          { loader: "css-loader", options: { importLoaders: 1 } },
           {
             loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                parser: "sugarss",
-              },
-            },
+            options: { postcssOptions: { parser: "sugarss" } },
           },
         ],
       },
@@ -777,10 +760,7 @@ module.exports = {
         test: /\.css$/i,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-            options: { importLoaders: 1 },
-          },
+          { loader: "css-loader", options: { importLoaders: 1 } },
           {
             loader: "postcss-loader",
             options: {
@@ -825,10 +805,7 @@ module.exports = {
         test: /\.css$/i,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-            options: { importLoaders: 1 },
-          },
+          { loader: "css-loader", options: { importLoaders: 1 } },
           {
             loader: "postcss-loader",
             options: {
@@ -870,10 +847,7 @@ module.exports = {
           "style-loader",
           {
             loader: "css-loader",
-            options: {
-              modules: true,
-              importLoaders: 1,
-            },
+            options: { modules: true, importLoaders: 1 },
           },
           "postcss-loader",
         ],
@@ -905,18 +879,11 @@ module.exports = {
         test: /\.style.js$/,
         use: [
           "style-loader",
-          {
-            loader: "css-loader",
-            options: {
-              importLoaders: 2,
-            },
-          },
+          { loader: "css-loader", options: { importLoaders: 2 } },
           {
             loader: "postcss-loader",
             options: {
-              postcssOptions: {
-                parser: "postcss-js",
-              },
+              postcssOptions: { parser: "postcss-js" },
               execute: true,
             },
           },
@@ -934,13 +901,7 @@ As result you will be able to write styles in the following way:
 import colors from "./styles/colors";
 
 export default {
-  ".menu": {
-    color: colors.main,
-    height: 25,
-    "&_link": {
-      color: "white",
-    },
-  },
+  ".menu": { color: colors.main, height: 25, "&_link": { color: "white" } },
 };
 ```
 
@@ -1001,18 +962,16 @@ The message should contain the following fields:
 **webpack.config.js**
 
 ```js
-const postcssCustomPlugin = (opts = {}) => {
-  return {
-    postcssPlugin: "postcss-custom-plugin",
-    Once: (root, { result }) => {
-      result.messages.push({
-        type: "asset",
-        file: "sprite.svg",
-        content: "<svg>...</svg>",
-      });
-    },
-  };
-};
+const postcssCustomPlugin = (opts = {}) => ({
+  postcssPlugin: "postcss-custom-plugin",
+  Once: (root, { result }) => {
+    result.messages.push({
+      type: "asset",
+      file: "sprite.svg",
+      content: "<svg>...</svg>",
+    });
+  },
+});
 
 module.exports = {
   module: {
@@ -1024,11 +983,7 @@ module.exports = {
           "css-loader",
           {
             loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [postcssCustomPlugin()],
-              },
-            },
+            options: { postcssOptions: { plugins: [postcssCustomPlugin()] } },
           },
         ],
       },
@@ -1055,19 +1010,17 @@ The message should contain the following fields:
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require("node:path");
 
-const postcssCustomPlugin = (opts = {}) => {
-  return {
-    postcssPlugin: "postcss-custom-plugin",
-    Once: (root, { result }) => {
-      result.messages.push({
-        type: "dependency",
-        file: path.resolve(__dirname, "path", "to", "file"),
-      });
-    },
-  };
-};
+const postcssCustomPlugin = (opts = {}) => ({
+  postcssPlugin: "postcss-custom-plugin",
+  Once: (root, { result }) => {
+    result.messages.push({
+      type: "dependency",
+      file: path.resolve(__dirname, "path", "to", "file"),
+    });
+  },
+});
 
 module.exports = {
   module: {
@@ -1079,11 +1032,7 @@ module.exports = {
           "css-loader",
           {
             loader: "postcss-loader",
-            options: {
-              postcssOptions: {
-                plugins: [postcssCustomPlugin()],
-              },
-            },
+            options: { postcssOptions: { plugins: [postcssCustomPlugin()] } },
           },
         ],
       },
@@ -1099,7 +1048,7 @@ module.exports = {
 **webpack.config.js**
 
 ```js
-const path = require("path");
+const path = require("node:path");
 
 module.exports = {
   module: {
@@ -1145,20 +1094,19 @@ module.exports = (api) => ({
 Register a file dependency using `loaderContext.addDependency`:
 
 ```js
-const path = require("path");
+const path = require("node:path");
 
-const postcssCustomPlugin = (opts = {}) => {
-  return {
-    postcssPlugin: "postcss-custom-plugin",
-    Once: (root, { result }) => {
-      opts.loaderContext.addDependency(
-        path.resolve(__dirname, "path", "to", "file"),
-      );
-    },
-  };
-};
+const postcssCustomPlugin = (opts = {}) => ({
+  postcssPlugin: "postcss-custom-plugin",
+  Once: (root, { result }) => {
+    opts.loaderContext.addDependency(
+      path.resolve(__dirname, "path", "to", "file"),
+    );
+  },
+});
 
 postcssCustomPlugin.postcss = true;
+
 module.exports = postcssCustomPlugin;
 ```
 

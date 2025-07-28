@@ -1,7 +1,6 @@
-/* eslint-disable global-require */
-import path from "path";
+import path from "node:path";
 
-import { getCompiler, compile } from "./helpers/index";
+import { compile, getCompiler } from "./helpers/index";
 
 describe("validate options", () => {
   const tests = {

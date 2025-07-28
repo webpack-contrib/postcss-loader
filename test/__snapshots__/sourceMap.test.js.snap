@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`"sourceMap" option should generate inline source maps when the "devtool" is "false": css 1`] = `
 "a {
@@ -113,7 +113,14 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): errors 1`] = `[]`;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with "true" value and previous loader returns source maps ("sass-loader"): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from \`replaced original path\`):
+Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api",
+]
+`;
 
 exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): css 1`] = `
 "a {
@@ -142,7 +149,14 @@ exports[`"sourceMap" option should generate source maps using the "postcssOption
 }
 `;
 
-exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
+exports[`"sourceMap" option should generate source maps using the "postcssOptions.map" option with values and previous loader returns source maps ("sass-loader"): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from \`replaced original path\`):
+Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api",
+]
+`;
 
 exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("less-loader"): css 1`] = `
 "a {
@@ -198,7 +212,14 @@ exports[`"sourceMap" option should generate source maps when previous loader ret
 }
 `;
 
-exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): warnings 1`] = `[]`;
+exports[`"sourceMap" option should generate source maps when previous loader returns source maps ("sass-loader"): warnings 1`] = `
+[
+  "ModuleWarning: Module Warning (from \`replaced original path\`):
+Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+
+More info: https://sass-lang.com/d/legacy-js-api",
+]
+`;
 
 exports[`"sourceMap" option should generate source maps when value is not specified and the "devtool" with "source-map" value: css 1`] = `
 "a {

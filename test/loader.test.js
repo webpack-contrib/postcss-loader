@@ -1,15 +1,14 @@
-import path from "path";
+import path from "node:path";
 
 import postcss from "postcss";
 
-// eslint-disable-next-line import/no-namespace
 import * as utils from "../src/utils";
 
 import {
   compile,
+  getCodeFromBundle,
   getCompiler,
   getErrors,
-  getCodeFromBundle,
   getWarnings,
 } from "./helpers/index";
 
@@ -78,7 +77,6 @@ describe("loader", () => {
     });
     const stats = await compile(compiler);
 
-    // eslint-disable-next-line no-underscore-dangle
     expect(stats.compilation.assets["sprite.svg"]).toBeDefined();
     expect(getWarnings(stats)).toMatchSnapshot("warnings");
     expect(getErrors(stats)).toMatchSnapshot("errors");

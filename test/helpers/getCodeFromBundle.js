@@ -3,7 +3,6 @@ export default (id, stats) => {
   const module = modules.find((m) => m.id.endsWith(id));
   const { _source } = module;
 
-  // eslint-disable-next-line no-underscore-dangle
   const code = (_source._value || _source._valueAsString).replace(
     "module.exports = ",
     "",
@@ -13,7 +12,7 @@ export default (id, stats) => {
 
   try {
     result = JSON.parse(code);
-  } catch (error) {
+  } catch {
     result = { css: code };
   }
 

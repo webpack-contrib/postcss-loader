@@ -1,6 +1,6 @@
-import path from "path";
-import url from "url";
-import Module from "module";
+import Module from "node:module";
+import path from "node:path";
+import url from "node:url";
 
 import { cosmiconfig, defaultLoadersSync } from "cosmiconfig";
 
@@ -21,11 +21,9 @@ function exec(code, loaderContext) {
 
   const module = new Module(resource, parentModule);
 
-  // eslint-disable-next-line no-underscore-dangle
   module.paths = Module._nodeModulePaths(context);
   module.filename = resource;
 
-  // eslint-disable-next-line no-underscore-dangle
   module._compile(code, resource);
 
   return module.exports;
@@ -43,7 +41,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
   try {
     stats = await stat(loaderContext.fs, searchPath);
-  } catch (errorIgnore) {
+  } catch {
     throw new Error(`No PostCSS config found in: ${searchPath}`);
   }
 
@@ -91,7 +89,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
         try {
           // eslint-disable-next-line no-new-func
           importESM = new Function("id", "return import(id);");
-        } catch (e) {
+        } catch {
           importESM = null;
         }
 
@@ -122,7 +120,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
       try {
         // eslint-disable-next-line no-new-func
         importESM = new Function("id", "return import(id);");
-      } catch (e) {
+      } catch {
         importESM = null;
       }
 
@@ -144,7 +142,7 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
   if (!tsLoader) {
     const opts = { interopDefault: true };
-    // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+
     const jiti = require("jiti")(__filename, opts);
 
     tsLoader = (filepath) => jiti(filepath);
@@ -160,17 +158,9 @@ async function loadConfig(loaderContext, config, postcssOptions) {
     loaders,
   });
 
-  let result;
-
-  try {
-    if (stats.isFile()) {
-      result = await explorer.load(searchPath);
-    } else {
-      result = await explorer.search(searchPath);
-    }
-  } catch (error) {
-    throw error;
-  }
+  const result = await (stats.isFile()
+    ? explorer.load(searchPath)
+    : explorer.search(searchPath));
 
   if (!result) {
     return {};
@@ -202,7 +192,6 @@ async function loadConfig(loaderContext, config, postcssOptions) {
 
 function loadPlugin(plugin, options, file) {
   try {
-    // eslint-disable-next-line global-require, import/no-dynamic-require
     let loadedPlugin = require(plugin);
 
     if (loadedPlugin.default) {
@@ -276,27 +265,26 @@ async function tryRequireThenImport(module) {
   let exports;
 
   try {
-    // eslint-disable-next-line import/no-dynamic-require, global-require
     exports = require(module);
 
     return exports;
-  } catch (requireError) {
+  } catch (err) {
     let importESM;
 
     try {
       // eslint-disable-next-line no-new-func
       importESM = new Function("id", "return import(id);");
-    } catch (e) {
+    } catch {
       importESM = null;
     }
 
-    if (requireError.code === "ERR_REQUIRE_ESM" && importESM) {
+    if (err.code === "ERR_REQUIRE_ESM" && importESM) {
       exports = await importESM(module);
 
       return exports.default;
     }
 
-    throw requireError;
+    throw err;
   }
 }
 
@@ -337,7 +325,7 @@ async function getPostcssOptions(
     loaderContext.emitError(error);
   }
 
-  const processOptionsFromConfig = { ...loadedConfig.config } || {};
+  const processOptionsFromConfig = { ...loadedConfig.config };
 
   if (processOptionsFromConfig.from) {
     processOptionsFromConfig.from = path.resolve(
@@ -491,13 +479,11 @@ function normalizeSourceMapAfterPostcss(map, resourceContext) {
 
   // result.map.file is an optional property that provides the output filename.
   // Since we don't know the final filename in the webpack build chain yet, it makes no sense to have it.
-  // eslint-disable-next-line no-param-reassign
+
   delete newMap.file;
 
-  // eslint-disable-next-line no-param-reassign
   newMap.sourceRoot = "";
 
-  // eslint-disable-next-line no-param-reassign
   newMap.sources = newMap.sources.map((source) => {
     if (source.indexOf("<") === 0) {
       return source;
@@ -524,7 +510,7 @@ function findPackageJSONDir(cwd, statSync) {
       if (statSync(path.join(dir, "package.json")).isFile()) {
         break;
       }
-    } catch (error) {
+    } catch {
       // Nothing
     }
 
@@ -547,12 +533,37 @@ function getPostcssImplementation(loaderContext, implementation) {
   if (!implementation || typeof implementation === "string") {
     const postcssImplPkg = implementation || "postcss";
 
-    // eslint-disable-next-line import/no-dynamic-require, global-require
     resolvedImplementation = require(postcssImplPkg);
   }
 
-  // eslint-disable-next-line consistent-return
   return resolvedImplementation;
+}
+
+function syntaxErrorFactory(error) {
+  let message = "\nSyntaxError\n\n";
+
+  if (typeof error.line !== "undefined") {
+    message += `(${error.line}:${error.column}) `;
+  }
+
+  if (typeof error.plugin !== "undefined") {
+    message += `from "${error.plugin}" plugin: `;
+  }
+
+  message += error.file ? `${error.file} ` : "<css input> ";
+  message += `${error.reason}`;
+
+  const code = error.showSourceCode();
+
+  if (code) {
+    message += `\n\n${code}\n`;
+  }
+
+  const obj = new Error(message, { cause: error });
+
+  obj.stack = null;
+
+  return obj;
 }
 
 function reportError(loaderContext, callback, error) {
@@ -591,41 +602,14 @@ function warningFactory(warning) {
   return obj;
 }
 
-function syntaxErrorFactory(error) {
-  let message = "\nSyntaxError\n\n";
-
-  if (typeof error.line !== "undefined") {
-    message += `(${error.line}:${error.column}) `;
-  }
-
-  if (typeof error.plugin !== "undefined") {
-    message += `from "${error.plugin}" plugin: `;
-  }
-
-  message += error.file ? `${error.file} ` : "<css input> ";
-  message += `${error.reason}`;
-
-  const code = error.showSourceCode();
-
-  if (code) {
-    message += `\n\n${code}\n`;
-  }
-
-  const obj = new Error(message, { cause: error });
-
-  obj.stack = null;
-
-  return obj;
-}
-
 export {
-  loadConfig,
-  getPostcssOptions,
   exec,
-  normalizeSourceMap,
-  normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
   getPostcssImplementation,
+  getPostcssOptions,
+  loadConfig,
+  normalizeSourceMap,
+  normalizeSourceMapAfterPostcss,
   reportError,
   warningFactory,
 };
