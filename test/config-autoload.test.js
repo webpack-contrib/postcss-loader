@@ -1,5 +1,5 @@
-import path from "path";
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 
 import { loadConfig } from "../src/utils";
 
@@ -18,10 +18,10 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "rc"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual("./test/rc/fixtures/index.css");
-    expect(loadedConfig.config.to).toEqual("./test/rc/expect/index.css");
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe("./test/rc/fixtures/index.css");
+    expect(loadedConfig.config.to).toBe("./test/rc/expect/index.css");
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(2);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "rc", ".postcssrc"),
     );
@@ -33,10 +33,10 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "rc-js"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual("./test/rc-js/fixtures/index.css");
-    expect(loadedConfig.config.to).toEqual("./test/rc-js/expect/index.css");
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe("./test/rc-js/fixtures/index.css");
+    expect(loadedConfig.config.to).toBe("./test/rc-js/expect/index.css");
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(2);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "rc-js", ".postcssrc.js"),
     );
@@ -48,12 +48,12 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "pkg"),
     );
 
-    expect(loadedConfig.config.parser).toEqual(false);
-    expect(loadedConfig.config.syntax).toEqual(false);
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual("./index.css");
-    expect(loadedConfig.config.to).toEqual("./index.css");
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(loadedConfig.config.parser).toBe(false);
+    expect(loadedConfig.config.syntax).toBe(false);
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe("./index.css");
+    expect(loadedConfig.config.to).toBe("./index.css");
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(2);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "pkg", "package.json"),
     );
@@ -65,14 +65,14 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "js/object"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/js/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/js/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(2);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "js/object", "postcss.config.js"),
     );
@@ -84,14 +84,14 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "ts/object"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/ts/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/ts/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(2);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(2);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "ts/object", "postcss.config.ts"),
     );
@@ -103,14 +103,14 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "js/array"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/js/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/js/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "js/array", "postcss.config.js"),
     );
@@ -122,34 +122,35 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "js/array-esm-js"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/js/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/js/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "js/array-esm-js", "postcss.config.js"),
     );
   });
 
   // TODO Test manually with NODE_OPTIONS=--experimental-vm-modules to enable ESM support in jest
+  // eslint-disable-next-line jest/no-disabled-tests
   it.skip('should load "postcss.config.mjs" with "Array" syntax of plugins', async () => {
     const loadedConfig = await loadConfig(
       loaderContext,
       path.resolve(testDirectory, "js/array-mjs"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/js/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/js/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "js/array-mjs", "postcss.config.mjs"),
     );
@@ -161,14 +162,14 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "ts/array"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/ts/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/ts/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "ts/array", "postcss.config.ts"),
     );
@@ -180,14 +181,14 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "ts/array-mts"),
     );
 
-    expect(loadedConfig.config.map).toEqual(false);
-    expect(loadedConfig.config.from).toEqual(
+    expect(loadedConfig.config.map).toBe(false);
+    expect(loadedConfig.config.from).toBe(
       "./test/fixtures/config-autoload/ts/object/index.css",
     );
-    expect(loadedConfig.config.to).toEqual(
+    expect(loadedConfig.config.to).toBe(
       "./test/fixtures/config-autoload/ts/object/expect/index.css",
     );
-    expect(Object.keys(loadedConfig.config.plugins).length).toEqual(4);
+    expect(Object.keys(loadedConfig.config.plugins)).toHaveLength(4);
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "ts/array-mts", "postcss.config.mts"),
     );
@@ -199,8 +200,7 @@ describe("autoload config", () => {
       path.resolve(testDirectory, "empty/.postcssrc"),
     );
 
-    // eslint-disable-next-line no-undefined
-    expect(loadedConfig.config).toEqual(undefined);
+    expect(loadedConfig.config).toBeUndefined();
     expect(loadedConfig.filepath).toEqual(
       path.resolve(testDirectory, "empty/.postcssrc"),
     );

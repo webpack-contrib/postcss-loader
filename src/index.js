@@ -1,16 +1,16 @@
-import path from "path";
+import path from "node:path";
 
 import postcssPackage from "postcss/package.json";
 
 import schema from "./options.json";
 import {
-  loadConfig,
-  getPostcssOptions,
   exec,
-  normalizeSourceMap,
-  normalizeSourceMapAfterPostcss,
   findPackageJSONDir,
   getPostcssImplementation,
+  getPostcssOptions,
+  loadConfig,
+  normalizeSourceMap,
+  normalizeSourceMapAfterPostcss,
   reportError,
   warningFactory,
 } from "./utils";
@@ -105,14 +105,12 @@ export default async function loader(content, sourceMap, meta) {
     meta &&
     meta.ast &&
     meta.ast.type === "postcss" &&
-    // eslint-disable-next-line global-require
     require("semver").satisfies(meta.ast.version, `^${postcssPackage.version}`)
   ) {
     ({ root } = meta.ast);
   }
 
   if (!root && options.execute) {
-    // eslint-disable-next-line no-param-reassign
     content = exec(content, this);
   }
 
@@ -148,7 +146,7 @@ export default async function loader(content, sourceMap, meta) {
             path.resolve(packageJSONDir, "package.json"),
             "utf8",
           );
-        } catch (_error) {
+        } catch {
           // Nothing
         }
 
@@ -157,7 +155,7 @@ export default async function loader(content, sourceMap, meta) {
 
           try {
             pkg = JSON.parse(bufferOfPackageJSON);
-          } catch (_error) {
+          } catch {
             // Nothing
           }
 
@@ -189,7 +187,6 @@ export default async function loader(content, sourceMap, meta) {
   }
 
   for (const message of result.messages) {
-    // eslint-disable-next-line default-case
     switch (message.type) {
       case "dependency":
         this.addDependency(message.file);
@@ -218,7 +215,6 @@ export default async function loader(content, sourceMap, meta) {
     }
   }
 
-  // eslint-disable-next-line no-undefined
   let map = result.map ? result.map.toJSON() : undefined;
 
   if (map && useSourceMap) {

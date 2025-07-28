@@ -2,14 +2,14 @@
  * @jest-environment node
  */
 
-import path from "path";
-import fs from "fs";
+import fs from "node:fs";
+import path from "node:path";
 
 import {
   compile,
+  getCodeFromBundle,
   getCompiler,
   getErrors,
-  getCodeFromBundle,
   getWarnings,
 } from "./helpers";
 
@@ -38,7 +38,7 @@ describe('"sourceMap" option', () => {
 
       return path
         .relative(path.resolve(__dirname, "./fixtures"), source)
-        .replace(/\\/g, "/");
+        .replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -71,7 +71,7 @@ describe('"sourceMap" option', () => {
 
       return path
         .relative(path.resolve(__dirname, "./fixtures"), source)
-        .replace(/\\/g, "/");
+        .replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -103,7 +103,7 @@ describe('"sourceMap" option', () => {
 
       return path
         .relative(path.resolve(__dirname, "./fixtures"), source)
-        .replace(/\\/g, "/");
+        .replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -141,7 +141,7 @@ describe('"sourceMap" option', () => {
         fs.existsSync(path.resolve(__dirname, "./fixtures/css", source)),
       ).toBe(true);
 
-      return source.replace(/\\/g, "/");
+      return source.replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -177,7 +177,6 @@ describe('"sourceMap" option', () => {
                 {
                   loader: "sass-loader",
                   options: {
-                    // eslint-disable-next-line global-require
                     implementation: require("sass"),
                     sassOptions: {
                       sourceMap: true,
@@ -241,7 +240,6 @@ describe('"sourceMap" option', () => {
                 {
                   loader: "sass-loader",
                   options: {
-                    // eslint-disable-next-line global-require
                     implementation: require("sass"),
                     sassOptions: {
                       sourceMap: true,
@@ -275,7 +273,7 @@ describe('"sourceMap" option', () => {
         fs.existsSync(path.resolve(__dirname, "./fixtures/scss", source)),
       ).toBe(true);
 
-      return source.replace(/\\/g, "/");
+      return source.replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -366,7 +364,6 @@ describe('"sourceMap" option', () => {
                 {
                   loader: "sass-loader",
                   options: {
-                    // eslint-disable-next-line global-require
                     implementation: require("sass"),
                   },
                 },
@@ -389,7 +386,7 @@ describe('"sourceMap" option', () => {
 
       return path
         .relative(path.resolve(__dirname, "./fixtures"), source)
-        .replace(/\\/g, "/");
+        .replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");
@@ -441,7 +438,7 @@ describe('"sourceMap" option', () => {
 
       return path
         .relative(path.resolve(__dirname, "./fixtures"), source)
-        .replace(/\\/g, "/");
+        .replaceAll("\\", "/");
     });
 
     expect(css).toMatchSnapshot("css");

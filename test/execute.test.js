@@ -1,10 +1,10 @@
-import path from "path";
+import path from "node:path";
 
 import {
   compile,
+  getCodeFromBundle,
   getCompiler,
   getErrors,
-  getCodeFromBundle,
   getWarnings,
 } from "./helpers";
 
