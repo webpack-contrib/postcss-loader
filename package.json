@@ -46,7 +46,7 @@
   },
   "dependencies": {
     "cosmiconfig": "^9.0.0",
-    "jiti": "^1.21.6",
+    "jiti": "^2.5.1",
     "semver": "^7.6.2"
   },
   "devDependencies": {

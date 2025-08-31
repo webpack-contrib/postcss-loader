@@ -143,9 +143,11 @@ async function loadConfig(loaderContext, config, postcssOptions) {
   if (!tsLoader) {
     const opts = { interopDefault: true };
 
-    const jiti = require("jiti")(__filename, opts);
+    const { createJiti } = require("jiti");
 
-    tsLoader = (filepath) => jiti(filepath);
+    const jiti = createJiti(__filename, opts);
+
+    tsLoader = (filepath) => jiti.import(filepath, { default: true });
   }
 
   loaders[".cts"] = tsLoader;
