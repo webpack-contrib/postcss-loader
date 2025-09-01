@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.2.0](https://github.com/webpack-contrib/postcss-loader/compare/v8.1.1...v8.2.0) (2025-09-01)
+
+
+### Features
+
+* update `jiti` from v1 to v2 ([9c74974](https://github.com/webpack-contrib/postcss-loader/commit/9c749746df8ddadbac3af60387dc562242350c9a))
+
 ### [8.1.1](https://github.com/webpack-contrib/postcss-loader/compare/v8.1.0...v8.1.1) (2024-02-28)
 
 
